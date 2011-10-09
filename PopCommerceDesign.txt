@@ -1,0 +1,39 @@
+
+h1. POP Commerce - Plain-Old-Product Commerce
+*Commerce that Pops*
+
+h2. Design Goal
+
+The goal for POP Commerce is to be a simple ecommerce application for the sale
+of basic products. It is not meant to feature more advanced ecommerce
+functionality such as configurable products, products with selectable variants,
+and so on.
+
+While meant to be a usable and functional, the primary purpose is to be a easy
+to customize starting point for custom ecommerce sites and a demonstration of
+the use of Moqui Framework and Mantle entities and services for building
+ecommerce applications.
+
+The initial design is meant to be simple in every way, and that involves
+various constraints including one credit card, address, and phone number per
+customer (all of which can be modified on the fly in the cart).
+
+POP Commerce is based on the Moqui Framework and the Mantle UDM and USL
+projects, with requirements inspired by Mantle UBPL.
+
+h2. Screen Outline
+
+* Customer
+** Login
+*** Login Form
+*** Simple New Account Form
+** Profile
+*** Info (name, CC, address, phone)
+*** Order History (summary of each order, no separate order detail screen)
+* Product
+** Category Listing
+** Product Detail
+* Checkout
+** Cart
+** One Page Checkout
+** Order Confirmation
