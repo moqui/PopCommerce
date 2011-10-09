@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.0.xsd"
+        include-child-content="true" screen-theme-type-enum-id="STT_POP_COMMERCE" standalone="true"
+        require-authentication="false" login-path="/popc/Customer/Login">
+    <subscreens default-item="TODO"/>
+    <widgets>
+        <render-mode>
+            <text type="html" location="component://webroot/screen/includes/Header.html.ftl"/>
+        </render-mode>
+
+        <container-panel id="apps-container">
+            <panel-header>
+                <container id="header-logo"><label text="Welcome to POP Commerce" type="h1"/></container>
+                <section name="headerUser">
+                    <condition><compare field="ec.user.userId" operator="not-empty"/></condition>
+                    <widgets>
+                        <container id="header-user">
+                            <label text="${ec.user.userAccount?.userFullName}"/>
+                            <link text="Logout" url="/ipad/Login/logout"/>
+                        </container>
+                    </widgets>
+                </section>
+            </panel-header>
+            <panel-center>
+                <!-- the messages -->
+                <section-iterate name="headerMessages" list="ec.message.messages" entry="message">
+                    <widgets><container style="message"><label text="${message}"/></container></widgets>
+                </section-iterate>
+                <section-iterate name="headerErrors" list="ec.message.errors" entry="errorMessage">
+                    <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
+                </section-iterate>
+
+                <!-- the subscreen goes here -->
+                <subscreens-active id="pop-commerce-root"/>
+            </panel-center>
+            <panel-footer>
+                <render-mode><text type="html"><![CDATA[<h6>Built on <a href="http://www.moqui.org/">Moqui</a></h6>]]></text></render-mode>
+                <render-mode><text type="html"><![CDATA[<div><a href="http://sourceforge.net/"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=302949&type=10" alt="SourceForge.net" width="80" height="15"></a></div>]]></text></render-mode>
+            </panel-footer>
+        </container-panel>
+
+        <render-mode>
+            <text type="html"><![CDATA[</body></html>]]></text>
+        </render-mode>
+    </widgets>
+</screen>

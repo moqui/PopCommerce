@@ -1,8 +1,9 @@
 
-h1. POP Commerce - Plain-Old-Product Commerce
-*Commerce that Pops*
+POP (Plain-Old-Product) Commerce
+"Commerce that Pops"
 
-h2. Design Goal
+========== ========== ========== ==========
+Design Goals
 
 The goal for POP Commerce is to be a simple ecommerce application for the sale
 of basic products. It is not meant to feature more advanced ecommerce
@@ -21,19 +22,31 @@ customer (all of which can be modified on the fly in the cart).
 POP Commerce is based on the Moqui Framework and the Mantle UDM and USL
 projects, with requirements inspired by Mantle UBPL.
 
-h2. Screen Outline
+========== ========== ========== ==========
+Installation
+
+To install you need a copy of Moqui Framework with Mantle included (there will
+be a runtime/mantle directory).
+
+Just put the PopCommerce directory in the
+"runtime/component" directory, load the seed data, and run moqui.
+
+To access PopCommerce go to something like "http://localhost:8080/popc" in a
+web browser.
+
+========== ========== ========== ==========
+Screen Outline
 
 * Customer
 ** Login
 *** Login Form
 *** Simple New Account Form
-** Profile
-*** Info (name, CC, address, phone)
-*** Order History (summary of each order, no separate order detail screen)
+** Profile (name, CC, address, phone)
+** Order History (summary of each order, no separate order detail screen)
 * Product
 ** Category Listing
 ** Product Detail
-* Checkout
+* Order
 ** Cart
-** One Page Checkout
-** Order Confirmation
+** Checkout (One Page)
+** Confirmation
