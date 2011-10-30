@@ -13,8 +13,8 @@ This Work includes contributions authored by David E. Jones, not as a
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.0.xsd"
         include-child-content="true" screen-theme-type-enum-id="STT_POP_COMMERCE" standalone="true"
-        require-authentication="false" login-path="/popc/Customer/Login">
-    <subscreens default-item="TODO"/>
+        require-authentication="false" login-path="/popc/Login">
+    <subscreens default-item="Home"/>
     <widgets>
         <render-mode>
             <text type="html" location="component://webroot/screen/includes/Header.html.ftl"/>
@@ -22,7 +22,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
         <container-panel id="apps-container">
             <panel-header>
-                <container id="header-logo"><label text="Welcome to POP Commerce" type="h1"/></container>
+                <container id="header-logo"><label text="POP Store" type="h1"/></container>
                 <section name="headerUser">
                     <condition><compare field="ec.user.userId" operator="not-empty"/></condition>
                     <widgets>

@@ -14,6 +14,6 @@ This Work includes contributions authored by David E. Jones, not as a
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.0.xsd"
         require-authentication="false">
     <widgets>
-        <label text="Shopping Cart" type="h1"/>
+        <label text="POP Commerce Home Page" type="h1"/>
     </widgets>
 </screen>
