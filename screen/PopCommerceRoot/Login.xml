@@ -21,7 +21,7 @@ This Work includes contributions authored by David E. Jones, not as a
     </transition>
     <transition name="logout">
         <actions><script>ec.user.logoutUser()</script></actions>
-        <default-response url="/"/>
+        <default-response url="/popc"/>
         <error-response url="."/>
     </transition>
     <transition name="resetPassword">
@@ -29,10 +29,8 @@ This Work includes contributions authored by David E. Jones, not as a
         <default-response url="."/>
     </transition>
     <transition name="createAccount">
-        <actions>
-
-        </actions>
-        <default-response url="../Login"/>
+        <service-call name="mantle.party.CustomerServices.create#Account"/>
+        <default-response type="screen-last"/>
         <error-response url="."/>
     </transition>
 
@@ -79,9 +77,13 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="contactNumber"><default-field title=""><text-line size="8" maxlength="8"/></default-field></field>
                     -->
 
-                    <field name="emailAddress"><default-field><text-line size="30"/></default-field></field>
-                    <field name="newPassword"><default-field><password size="15"/></default-field></field>
-                    <field name="newPasswordVerify"><default-field><password size="15"/></default-field></field>
+                    <field name="emailAddress"><default-field><text-line size="45"/></default-field></field>
+                    <field name="newPassword"><default-field title="Password"><password size="15"/></default-field></field>
+                    <field name="newPasswordVerify"><default-field title="Password Verify"><password size="15"/></default-field></field>
+
+                    <field name="currencyUomId"><default-field><hidden default-value="USD"/></default-field></field>
+                    <field name="locale"><default-field><hidden default-value="en_US"/></default-field></field>
+
                     <field name="submit"><default-field title="Create"><submit/></default-field></field>
 
                     <field-layout>
@@ -94,7 +96,8 @@ This Work includes contributions authored by David E. Jones, not as a
                         <field-row><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
                         -->
 
-                        <field-ref name="emailAddress"/><field-ref name="newPassword"/><field-ref name="newPasswordVerify"/>
+                        <field-ref name="emailAddress"/>
+                        <field-row><field-ref name="newPassword"/><field-ref name="newPasswordVerify"/></field-row>
 
                         <field-ref name="submit"/>
                     </field-layout>
@@ -102,10 +105,9 @@ This Work includes contributions authored by David E. Jones, not as a
             </container-dialog>
         </container>
 
-        <!-- TODO create test customer account, change this to that username/password -->
         <!-- TODO remove this link when moving away from more of a testing mode, very convenient for now -->
-        <link url="login" text="Test Login (John Doe)">
-            <parameter name="username" value="john.doe"/>
+        <link url="login" text="Test Login (Joe Q Public)">
+            <parameter name="username" value="joe@public.com"/>
             <parameter name="password" value="moqui"/>
         </link>
     </widgets>
