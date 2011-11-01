@@ -37,16 +37,19 @@ web browser.
 ========== ========== ========== ==========
 Screen Outline
 
+* Login Screen
+** Login Form
+** Simple New Account Form
 * Customer
-** Login
-*** Login Form
-*** Simple New Account Form
 ** Profile (name, CC, address, phone)
 ** Order History (summary of each order, no separate order detail screen)
 * Product
+** Search Results
 ** Category Listing
 ** Product Detail
 * Order
 ** Cart
 ** Checkout (One Page)
 ** Confirmation
+
+TODO: on failure from popup window (like New Account) reopen popup, repopulate form

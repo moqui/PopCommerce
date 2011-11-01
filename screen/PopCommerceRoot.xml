@@ -14,7 +14,13 @@ This Work includes contributions authored by David E. Jones, not as a
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.0.xsd"
         include-child-content="true" screen-theme-type-enum-id="STT_POP_COMMERCE" standalone="true"
         require-authentication="false" login-path="/popc/Login">
+
+    <transition name="search">
+        <default-response url="/popc/Product/Search"/>
+    </transition>
+
     <subscreens default-item="Home"/>
+
     <widgets>
         <render-mode>
             <text type="html" location="component://webroot/screen/includes/Header.html.ftl"/>
@@ -22,16 +28,41 @@ This Work includes contributions authored by David E. Jones, not as a
 
         <container-panel id="apps-container">
             <panel-header>
-                <container id="header-logo"><label text="My POP Store" type="h1"/></container>
-                <section name="headerUser">
-                    <condition><compare field="ec.user.userId" operator="not-empty"/></condition>
-                    <widgets>
-                        <container id="header-user">
-                            <label text="${ec.user.userAccount?.userFullName}"/>
-                            <link text="Logout" url="/popc/Login/logout"/>
-                        </container>
-                    </widgets>
-                </section>
+                <container>
+                    <container id="header-logo"><label text="My POP Store" type="h1"/></container>
+                    <container id="header-user">
+                        <section name="headerUser">
+                            <condition><compare field="ec.user.userId" operator="not-empty"/></condition>
+                            <widgets>
+                                <label text="Welcome ${ec.user.userAccount?.userFullName}!"/>
+                                <link text="Logout" url="/popc/Login/logout"/>
+                            </widgets>
+                        </section>
+                        <link text="Profile" url="/popc/Customer/Profile"/>
+                        <link text="Orders" url="/popc/Customer/OrderHistory"/>
+                    </container>
+                </container>
+                <container>
+                    <form-single name="HeaderSearch" focus-field="keywords" transition="search">
+                        <field name="category"><default-field title="Search">
+                            <drop-down>
+                                <!-- TODO: make this more constrained, use a view-entity to get sub-categories of a root cat -->
+                                <entity-options key="productCategoryId" text="${categoryName}">
+                                    <entity-find entity-name="ProductCategory">
+                                        <!-- <econdition field-name=""/> -->
+                                        <order-by field-name="categoryName"/>
+                                    </entity-find>
+                                </entity-options> 
+                            </drop-down>
+                        </default-field></field>
+                        <field name="keywords"><default-field title=""><text-line size="40"/></default-field></field>
+                        <field name="submit"><default-field title="Go"><submit/></default-field></field>
+
+                        <field-layout>
+                            <field-row><field-ref name="category"/><field-ref name="keywords"/><field-ref name="submit"/></field-row>
+                        </field-layout>
+                    </form-single>
+                </container>
             </panel-header>
             <panel-center>
                 <!-- the messages -->
