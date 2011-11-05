@@ -29,7 +29,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <container-panel id="apps-container">
             <panel-header>
                 <container>
-                    <container id="header-logo"><label text="My POP Store" type="h1"/></container>
+                    <container id="header-logo"><link text="My POP Store" url="/popc" link-type="anchor"/></container>
                     <container id="header-user">
                         <section name="headerUser">
                             <condition><compare field="ec.user.userId" operator="not-empty"/></condition>
@@ -44,7 +44,7 @@ This Work includes contributions authored by David E. Jones, not as a
                 </container>
                 <container>
                     <form-single name="HeaderSearch" focus-field="keywords" transition="search">
-                        <field name="category"><default-field title="Search">
+                        <field name="category"><default-field title="">
                             <drop-down>
                                 <!-- TODO: make this more constrained, use a view-entity to get sub-categories of a root cat -->
                                 <entity-options key="productCategoryId" text="${categoryName}">
@@ -56,10 +56,15 @@ This Work includes contributions authored by David E. Jones, not as a
                             </drop-down>
                         </default-field></field>
                         <field name="keywords"><default-field title=""><text-line size="40"/></default-field></field>
-                        <field name="submit"><default-field title="Go"><submit/></default-field></field>
+                        <field name="submit"><default-field title="Search"><submit/></default-field></field>
+
+                        <!-- TODO: change to show # of items in cart -->
+                        <field name="cart"><default-field title=""><link text="Cart" url="/popc/Order/Cart"/></default-field></field>
+                        <field name="checkout"><default-field title=""><link text="Checkout" url="/popc/Order/Checkout"/></default-field></field>
 
                         <field-layout>
-                            <field-row><field-ref name="category"/><field-ref name="keywords"/><field-ref name="submit"/></field-row>
+                            <field-row><field-ref name="category"/><field-ref name="keywords"/><field-ref name="submit"/>
+                                <field-ref name="cart"/><field-ref name="checkout"/></field-row>
                         </field-layout>
                     </form-single>
                 </container>
