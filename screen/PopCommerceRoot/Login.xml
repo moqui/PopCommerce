@@ -53,30 +53,6 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="middleName"><default-field title=""><text-line size="2"/></default-field></field>
                     <field name="lastName"><default-field title=""><text-line size="15"/></default-field></field>
 
-                    <!-- on second though, no address or phone required for new account, leave to use in checkout/profile:
-                    <field name="countryGeoId"><default-field title="Country">
-                        <drop-down allow-empty="false">
-                            <entity-options key="geoId" text="${geoName} (${geoCodeAlpha3})">
-                                <entity-find entity-name="Geo" cache="true">
-                                    <econdition field-name="geoTypeEnumId" value="GEOT_COUNTRY"/>
-                                    <order-by field-name="geoName"/>
-                                </entity-find>
-                            </entity-options>
-                        </drop-down>
-                    </default-field></field>
-                    <field name="address1"><default-field><text-line size="20"/></default-field></field>
-                    <field name="address2"><default-field><text-line size="20"/></default-field></field>
-                    <field name="city"><default-field><text-line size="20"/></default-field></field>
-                    <field name="stateProvinceGeoId"><default-field title="State">
-                        <!- - TODO: add states to mantle, change to drop-down - ->
-                        <text-line size="20"/>
-                    </default-field></field>
-                    <field name="postalCode"><default-field><text-line size="10"/></default-field></field>
-
-                    <field name="areaCode"><default-field title="Phone"><text-line size="3" maxlength="3"/></default-field></field>
-                    <field name="contactNumber"><default-field title=""><text-line size="8" maxlength="8"/></default-field></field>
-                    -->
-
                     <field name="emailAddress"><default-field><text-line size="45"/></default-field></field>
                     <field name="newPassword"><default-field title="Password"><password size="15"/></default-field></field>
                     <field name="newPasswordVerify"><default-field title="Password Verify"><password size="15"/></default-field></field>
@@ -88,13 +64,6 @@ This Work includes contributions authored by David E. Jones, not as a
 
                     <field-layout>
                         <field-row><field-ref name="firstName"/><field-ref name="middleName"/><field-ref name="lastName"/></field-row>
-
-                        <!--
-                        <field-ref name="countryGeoId"/><field-ref name="address1"/><field-ref name="address2"/>
-                        <field-row><field-ref name="city"/><field-ref name="stateProvinceGeoId"/><field-ref name="postalCode"/></field-row>
-
-                        <field-row><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
-                        -->
 
                         <field-ref name="emailAddress"/>
                         <field-row><field-ref name="newPassword"/><field-ref name="newPasswordVerify"/></field-row>
