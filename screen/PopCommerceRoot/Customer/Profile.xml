@@ -148,7 +148,7 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="firstNameOnCard"><default-field><text-line size="20"/></default-field></field>
                     <field name="lastNameOnCard"><default-field><text-line size="20"/></default-field></field>
 
-                    <field name="creditCardTypeEnumId"><default-field>
+                    <field name="creditCardTypeEnumId"><default-field title="Card Type">
                         <drop-down><entity-options key="${enumId}" text="${description}">
                             <entity-find entity-name="Enumeration">
                                 <econdition field-name="enumTypeId" value="CreditCardType"/>
@@ -158,12 +158,12 @@ This Work includes contributions authored by David E. Jones, not as a
                     </default-field></field>
                     <field name="cardNumber"><default-field><text-line size="20"/></default-field></field>
                     <!-- <field name="expireDate"><default-field><text-line size="7"/></default-field></field> -->
-                    <field name="expireMonth"><default-field><drop-down>
+                    <field name="expireMonth"><default-field title="Expire Date"><drop-down>
                         <option key="01"/><option key="02"/><option key="03"/><option key="04"/><option key="05"/>
                         <option key="06"/><option key="07"/><option key="08"/><option key="09"/><option key="10"/>
                         <option key="11"/><option key="12"/>
                     </drop-down></default-field></field>
-                    <field name="expireYear"><default-field><drop-down>
+                    <field name="expireYear"><default-field title=""><drop-down>
                         <option key="2011"/><option key="2012"/><option key="2013"/><option key="2014"/><option key="2015"/>
                         <option key="2016"/><option key="2017"/><option key="2018"/>
                     </drop-down></default-field></field>
@@ -195,7 +195,7 @@ This Work includes contributions authored by David E. Jones, not as a
                         <field-ref name="paymentMethodId"/>
                         <field-ref name="firstNameOnCard"/><field-ref name="lastNameOnCard"/>
                         <field-ref name="creditCardTypeEnumId"/><field-ref name="cardNumber"/>
-                        <field-ref name="expireMonth"/><field-ref name="expireYear"/>
+                        <field-row><field-ref name="expireMonth"/><field-ref name="expireYear"/></field-row>
 
                         <field-ref name="postalContactMechId"/>
                         <field-ref name="countryGeoId"/><field-ref name="address1"/><field-ref name="address2"/>

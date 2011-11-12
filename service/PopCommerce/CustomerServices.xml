@@ -75,11 +75,14 @@ This Work includes contributions authored by David E. Jones, not as a
 
             <parameter name="firstNameOnCard" type="String" required="true"/>
             <parameter name="lastNameOnCard" type="String" required="true"/>
+            <parameter name="toName" type="String" default-value="${firstNameOnCard} ${lastNameOnCard}"/>
 
             <parameter name="creditCardTypeEnumId" type="String" required="false"/>
             <parameter name="cardNumber" type="String" required="true"><credit-card/></parameter>
             <parameter name="expireMonth" type="String" required="true"/>
             <parameter name="expireYear" type="String" required="true"/>
+            <parameter name="expireDate" type="String" default-value="${expireMonth}/${expireYear}">
+                <time-range after="now" format="MM/yyyy"/></parameter>
 
             <parameter name="postalContactMechId" type="String" required="false"/>
 
@@ -100,9 +103,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <parameter name="telecomContactMechId" type="String" required="true"/>
         </out-parameters>
         <actions>
-            <!-- set a couple of fields that are combined from the parameters: -->
-            <set field="toName" value="${firstNameOnCard} ${lastNameOnCard}"/>
-            <set field="expireDate" value="${expireMonth}/${expireYear}"/>
+            <log level="warn" message="expireDate=${expireDate}, toName=${toName}"/>
 
             <if condition="postalContactMechId">
                 <service-call name="mantle.party.ContactServices.update#PartyPostalAddress" in-map="context" out-map="paOut">
