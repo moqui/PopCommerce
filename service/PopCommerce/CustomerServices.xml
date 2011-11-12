@@ -12,7 +12,7 @@ This Work includes contributions authored by David E. Jones, not as a
 -->
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-1.0.xsd">
 
-    <service verb="update" noun="ShippingInfo" type="inline" authenticate="true">
+    <service verb="store" noun="ShippingInfo" type="inline" authenticate="true">
         <in-parameters>
             <parameter name="postalContactMechId" type="String" required="false"/>
 
@@ -24,11 +24,11 @@ This Work includes contributions authored by David E. Jones, not as a
             <parameter name="address2" type="String" required="false"/>
             <parameter name="city" type="String" required="true"/>
             <parameter name="stateProvinceGeoId" type="String" required="false"/>
-            <parameter name="postalCode" type="String" required="true"/>
+            <parameter name="postalCode" type="String" required="true"><text-digits/></parameter>
 
             <parameter name="telecomContactMechId" type="String" required="false"/>
-            <parameter name="areaCode" type="String" required="true"/>
-            <parameter name="contactNumber" type="String" required="true"/>
+            <parameter name="areaCode" type="String" required="true"><text-digits/></parameter>
+            <parameter name="contactNumber" type="String" required="true"><text-digits/></parameter>
         </in-parameters>
         <out-parameters>
             <parameter name="postalContactMechId" type="String" required="true"/>
@@ -66,6 +66,92 @@ This Work includes contributions authored by David E. Jones, not as a
                 </else>
             </if>
             <set field="result.telecomContactMechId" from="tnOut?.contactMechId ?: telecomContactMechId"/>
+        </actions>
+    </service>
+
+    <service verb="store" noun="BillingInfo" type="inline" authenticate="true">
+        <in-parameters>
+            <parameter name="paymentMethodId" type="String" required="false"/>
+
+            <parameter name="firstNameOnCard" type="String" required="true"/>
+            <parameter name="lastNameOnCard" type="String" required="true"/>
+
+            <parameter name="creditCardTypeEnumId" type="String" required="false"/>
+            <parameter name="cardNumber" type="String" required="true"><credit-card/></parameter>
+            <parameter name="expireMonth" type="String" required="true"/>
+            <parameter name="expireYear" type="String" required="true"/>
+
+            <parameter name="postalContactMechId" type="String" required="false"/>
+
+            <parameter name="countryGeoId" type="String" required="false"/>
+            <parameter name="address1" type="String" required="true"/>
+            <parameter name="address2" type="String" required="false"/>
+            <parameter name="city" type="String" required="true"/>
+            <parameter name="stateProvinceGeoId" type="String" required="false"/>
+            <parameter name="postalCode" type="String" required="true"><text-digits/></parameter>
+
+            <parameter name="telecomContactMechId" type="String" required="false"/>
+            <parameter name="areaCode" type="String" required="true"><text-digits/></parameter>
+            <parameter name="contactNumber" type="String" required="true"><text-digits/></parameter>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="paymentMethodId" type="String" required="true"/>
+            <parameter name="postalContactMechId" type="String" required="true"/>
+            <parameter name="telecomContactMechId" type="String" required="true"/>
+        </out-parameters>
+        <actions>
+            <!-- set a couple of fields that are combined from the parameters: -->
+            <set field="toName" value="${firstNameOnCard} ${lastNameOnCard}"/>
+            <set field="expireDate" value="${expireMonth}/${expireYear}"/>
+
+            <if condition="postalContactMechId">
+                <service-call name="mantle.party.ContactServices.update#PartyPostalAddress" in-map="context" out-map="paOut">
+                    <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
+                    <field-map field-name="contactMechId" from="postalContactMechId"/>
+                    <field-map field-name="contactMechPurposeId" value="BILLING_LOCATION"/>
+                </service-call>
+
+                <else>
+                    <service-call name="mantle.party.ContactServices.create#PostalAddress" in-map="context" out-map="paOut">
+                        <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
+                        <field-map field-name="contactMechPurposeId" value="BILLING_LOCATION"/>
+                    </service-call>
+                </else>
+            </if>
+            <set field="result.postalContactMechId" from="paOut?.contactMechId ?: postalContactMechId"/>
+
+            <if condition="telecomContactMechId">
+                <service-call name="mantle.party.ContactServices.update#PartyTelecomNumber" in-map="context" out-map="tnOut">
+                    <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
+                    <field-map field-name="contactMechId" from="telecomContactMechId"/>
+                    <field-map field-name="contactMechPurposeId" value="PHONE_BILLING"/>
+                </service-call>
+
+                <else>
+                    <service-call name="mantle.party.ContactServices.create#TelecomNumber" in-map="context" out-map="tnOut">
+                        <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
+                        <field-map field-name="contactMechPurposeId" value="PHONE_BILLING"/>
+                    </service-call>
+                </else>
+            </if>
+            <set field="result.telecomContactMechId" from="tnOut?.contactMechId ?: telecomContactMechId"/>
+
+            <!-- update PaymentMethod last so we know new postalContactMechId and telecomContactMechId updates (if applicable) -->
+            <if condition="paymentMethodId">
+                <service-call name="mantle.accounting.AccountServices.update#CreditCard" in-map="context" out-map="ccOut">
+                    <field-map field-name="postalContactMechId" from="result.postalContactMechId"/>
+                    <field-map field-name="telecomContactMechId" from="result.telecomContactMechId"/>
+                </service-call>
+
+                <else>
+                    <service-call name="mantle.accounting.AccountServices.create#CreditCard" in-map="context" out-map="ccOut">
+                        <field-map field-name="ownerPartyId" from="ec.user.userAccount.partyId"/>
+                        <field-map field-name="postalContactMechId" from="result.postalContactMechId"/>
+                        <field-map field-name="telecomContactMechId" from="result.telecomContactMechId"/>
+                    </service-call>
+                </else>
+            </if>
+            <set field="result.paymentMethodId" from="ccOut?.paymentMethodId ?: paymentMethodId"/>
         </actions>
     </service>
 </services>
