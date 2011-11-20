@@ -15,6 +15,13 @@ This Work includes contributions authored by David E. Jones, not as a
         subscreenName="popc" userId="_NA_" subscreenLocation="component://PopCommerce/screen/PopCommerceRoot.xml"
         menuTitle="POP Commerce" menuIndex="9" menuInclude="N"/>
 
+    <!-- authz/permission for ALL users -->
+    <moqui.security.ArtifactGroup artifactGroupId="POPC" description="POP Commerce App (via root screen)"/>
+    <moqui.security.ArtifactGroupMember artifactGroupId="POPC" artifactName="component://PopCommerce/screen/PopCommerceRoot.xml"
+        artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
+    <moqui.security.ArtifactAuthz artifactAuthzId="POPC_ALL" userGroupId="ALL_USERS" artifactGroupId="POPC"
+        authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
+
     <!-- Theme Type and Default Theme -->
     <moqui.basic.Enumeration description="POP Commerce Theme Type" enumId="STT_POP_COMMERCE" enumTypeId="ScreenThemeType"/>
     <moqui.screen.ScreenTheme screenThemeId="POPC_DEFAULT" screenThemeTypeEnumId="STT_POP_COMMERCE"
