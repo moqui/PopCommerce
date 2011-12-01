@@ -43,4 +43,8 @@ This Work includes contributions authored by David E. Jones, not as a
                          resourceValue="/js/jquery-validate-1.7-100644.js"/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="99" resourceTypeEnumId="STRT_SHORTCUT_ICON"
                          resourceValue="/moqui.ico"/>
+
+    <!-- Default Root Browse Category -->
+    <ProductCategory productCategoryId="POPC_BROWSE_ROOT" productCategoryTypeEnumId="CATALOG_CATEGORY"
+                     categoryName="POP Commerce Browse Root"/>
 </entity-facade-xml>

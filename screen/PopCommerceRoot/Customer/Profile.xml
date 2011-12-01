@@ -100,7 +100,7 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="areaCode"><default-field title="Phone"><text-line size="3" maxlength="3"/></default-field></field>
                     <field name="contactNumber"><default-field title=""><text-line size="8" maxlength="8"/></default-field></field>
 
-                    <field name="submit"><default-field title="${postalContactMechId ? 'Update' : 'Create'}"><submit/></default-field></field>
+                    <field name="submitButton"><default-field title="${postalContactMechId ? 'Update' : 'Create'}"><submit/></default-field></field>
 
                     <field-layout>
                         <field-ref name="postalContactMechId"/><field-ref name="toName"/><field-ref name="attnName"/>
@@ -111,7 +111,7 @@ This Work includes contributions authored by David E. Jones, not as a
                         <field-ref name="telecomContactMechId"/>
                         <field-row><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
 
-                        <field-ref name="submit"/>
+                        <field-ref name="submitButton"/>
                     </field-layout>
                 </form-single>
             </widgets>
@@ -189,7 +189,7 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="areaCode"><default-field title="Phone"><text-line size="3" maxlength="3"/></default-field></field>
                     <field name="contactNumber"><default-field title=""><text-line size="8" maxlength="8"/></default-field></field>
 
-                    <field name="submit"><default-field title="${paymentMethodId ? 'Update' : 'Create'}"><submit/></default-field></field>
+                    <field name="submitButton"><default-field title="${paymentMethodId ? 'Update' : 'Create'}"><submit/></default-field></field>
 
                     <field-layout>
                         <field-ref name="paymentMethodId"/>
@@ -204,7 +204,7 @@ This Work includes contributions authored by David E. Jones, not as a
                         <field-ref name="telecomContactMechId"/>
                         <field-row><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
 
-                        <field-ref name="submit"/>
+                        <field-ref name="submitButton"/>
                     </field-layout>
                 </form-single>
             </widgets>

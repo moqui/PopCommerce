@@ -45,25 +45,26 @@ This Work includes contributions authored by David E. Jones, not as a
                 <container>
                     <form-single name="HeaderSearch" focus-field="keywords" transition="search">
                         <field name="category"><default-field title="">
-                            <drop-down>
-                                <!-- TODO: make this more constrained, use a view-entity to get sub-categories of a root cat -->
-                                <entity-options key="productCategoryId" text="${categoryName}">
-                                    <entity-find entity-name="ProductCategory">
-                                        <!-- <econdition field-name=""/> -->
+                            <drop-down allow-empty="true">
+                                <entity-options key="${productCategoryId}" text="${categoryName}">
+                                    <entity-find entity-name="ProductCategoryChildren" cache="true">
+                                        <date-filter/>
+                                        <econdition field-name="parentProductCategoryId" value="POPC_BROWSE_ROOT"/>
+                                        <order-by field-name="sequenceNum"/>
                                         <order-by field-name="categoryName"/>
                                     </entity-find>
                                 </entity-options> 
                             </drop-down>
                         </default-field></field>
                         <field name="keywords"><default-field title=""><text-line size="40"/></default-field></field>
-                        <field name="submit"><default-field title="Search"><submit/></default-field></field>
+                        <field name="submitButton"><default-field title="Search"><submit/></default-field></field>
 
                         <!-- TODO: change to show # of items in cart -->
                         <field name="cart"><default-field title=""><link text="Cart" url="/popc/Order/Cart"/></default-field></field>
                         <field name="checkout"><default-field title=""><link text="Checkout" url="/popc/Order/Checkout"/></default-field></field>
 
                         <field-layout>
-                            <field-row><field-ref name="category"/><field-ref name="keywords"/><field-ref name="submit"/>
+                            <field-row><field-ref name="category"/><field-ref name="keywords"/><field-ref name="submitButton"/>
                                 <field-ref name="cart"/><field-ref name="checkout"/></field-row>
                         </field-layout>
                     </form-single>
