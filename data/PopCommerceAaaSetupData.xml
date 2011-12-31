@@ -47,4 +47,7 @@ This Work includes contributions authored by David E. Jones, not as a
     <!-- Default Root Browse Category -->
     <ProductCategory productCategoryId="POPC_BROWSE_ROOT" productCategoryTypeEnumId="CATALOG_CATEGORY"
                      categoryName="POP Commerce Browse Root"/>
+    <!-- Default Home Page Category -->
+    <ProductCategory productCategoryId="POPC_HOME" productCategoryTypeEnumId="CATALOG_CATEGORY"
+                     categoryName="POP Commerce Home Page"/>
 </entity-facade-xml>

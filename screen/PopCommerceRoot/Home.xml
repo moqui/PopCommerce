@@ -13,7 +13,34 @@ This Work includes contributions authored by David E. Jones, not as a
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.0.xsd"
         require-authentication="false">
+
+    <transition name="addToCart">
+
+        <default-response url="../Order/Cart"/>
+    </transition>
+
+    <actions>
+        <entity-find entity-name="ProductCategoryMemberProduct" list="pcmpList" cache="true">
+            <date-filter/>
+            <econdition field-name="productCategoryId" value="POPC_HOME"/>
+            <order-by field-name="sequenceNum"/>
+            <order-by field-name="productName"/>
+        </entity-find>
+    </actions>
     <widgets>
         <label text="POP Commerce Home Page" type="h1"/>
+        <section-iterate name="HomeProductList" list="pcmpList" entry="pcmp">
+            <widgets>
+                <container style="product-list-multi-column">
+                    <label text="${pcmp.productName}" type="p"/>
+                    <!-- TODO: calculate and show price -->
+                    <form-single name="ProductAddToCart" transition="addToCart" map="pcmp">
+                        <field name="productId"><default-field><hidden/></default-field></field>
+                        <field name="quantity"><default-field><text-line size="2"/></default-field></field>
+                        <field name="add"><default-field title="Add to Cart"><submit/></default-field></field>
+                    </form-single>
+                </container>
+            </widgets>
+        </section-iterate>
     </widgets>
 </screen>

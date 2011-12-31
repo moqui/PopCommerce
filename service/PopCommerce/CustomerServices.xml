@@ -137,13 +137,13 @@ This Work includes contributions authored by David E. Jones, not as a
 
             <!-- update PaymentMethod last so we know new postalContactMechId and telecomContactMechId updates (if applicable) -->
             <if condition="paymentMethodId">
-                <service-call name="mantle.accounting.AccountServices.update#CreditCard" in-map="context" out-map="ccOut">
+                <service-call name="mantle.accounting.PaymentMethodServices.update#CreditCard" in-map="context" out-map="ccOut">
                     <field-map field-name="postalContactMechId" from="result.postalContactMechId"/>
                     <field-map field-name="telecomContactMechId" from="result.telecomContactMechId"/>
                 </service-call>
 
                 <else>
-                    <service-call name="mantle.accounting.AccountServices.create#CreditCard" in-map="context" out-map="ccOut">
+                    <service-call name="mantle.accounting.PaymentMethodServices.create#CreditCard" in-map="context" out-map="ccOut">
                         <field-map field-name="ownerPartyId" from="ec.user.userAccount.partyId"/>
                         <field-map field-name="postalContactMechId" from="result.postalContactMechId"/>
                         <field-map field-name="telecomContactMechId" from="result.telecomContactMechId"/>

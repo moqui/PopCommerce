@@ -31,7 +31,7 @@ This Work includes contributions authored by David E. Jones, not as a
     <widgets>
         <label text="Profile" type="h1"/>
         <form-single name="PersonalInfo">
-            <field name="name"><default-field><label text="${person.firstName} ${person.middleName} ${person.lastName}"/></default-field></field>
+            <field name="name"><default-field><label text="${person?.firstName} ${person?.middleName?:''} ${person?.lastName}"/></default-field></field>
         </form-single>
 
         <section name="ShippingSection">
