@@ -28,7 +28,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
         <container-panel id="apps-container">
             <panel-header>
-                <container>
+                <container style="ui-helper-clearfix">
                     <container id="header-logo"><link text="My POP Store" url="/popc" link-type="anchor"/></container>
                     <container id="header-user">
                         <section name="headerUser">
@@ -56,7 +56,7 @@ This Work includes contributions authored by David E. Jones, not as a
                                 </entity-options> 
                             </drop-down>
                         </default-field></field>
-                        <field name="keywords"><default-field title=""><text-line size="40"/></default-field></field>
+                        <field name="keywords"><default-field title=""><text-line size="30"/></default-field></field>
                         <field name="submitButton"><default-field title="Search"><submit/></default-field></field>
 
                         <!-- TODO: change to show # of items in cart -->
