@@ -12,7 +12,7 @@ This Work includes contributions authored by David E. Jones, not as a
 -->
 <entity-facade-xml type="seed">
     <moqui.screen.SubscreensItem screenLocation="component://webroot/screen/webroot.xml"
-        subscreenName="popc" userId="_NA_" subscreenLocation="component://PopCommerce/screen/PopCommerceRoot.xml"
+        subscreenName="popc" userGroupId="ALL_USERS" subscreenLocation="component://PopCommerce/screen/PopCommerceRoot.xml"
         menuTitle="POP Commerce" menuIndex="9" menuInclude="N"/>
 
     <!-- authz/permission for ALL users -->
