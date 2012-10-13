@@ -36,7 +36,7 @@ This Work includes contributions authored by David E. Jones, not as a
                     <!-- TODO: calculate and show price -->
                     <form-single name="ProductAddToCart" transition="addToCart" map="pcmp">
                         <field name="productId"><default-field><hidden/></default-field></field>
-                        <field name="quantity"><default-field title=""><text-line size="2"/></default-field></field>
+                        <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>
                         <field name="add"><default-field title="Add to Cart"><submit/></default-field></field>
                         <field-layout>
                             <field-row><field-ref name="quantity"/><field-ref name="add"/></field-row>
