@@ -24,23 +24,23 @@ This Work includes contributions authored by David E. Jones, not as a
 
     <!-- Demo Categories -->
     <ProductCategory productCategoryId="DEMO_ONE" productCategoryTypeEnumId="CATALOG_CATEGORY"
-                     categoryName="Demo One" description=""/>
+                     categoryName="Demo Category One" description=""/>
     <ProductCategoryRollup productCategoryId="DEMO_ONE" parentProductCategoryId="POPC_BROWSE_ROOT"
                            fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
 
     <ProductCategory productCategoryId="DEMO_TWO" productCategoryTypeEnumId="CATALOG_CATEGORY"
-                     categoryName="Demo Two" description=""/>
+                     categoryName="Demo Category Two" description=""/>
     <ProductCategoryRollup productCategoryId="DEMO_TWO" parentProductCategoryId="POPC_BROWSE_ROOT"
                            fromDate="2010-02-03 00:00:00.0" sequenceNum="2"/>
 
     <ProductCategory productCategoryId="DEMO_THREE" productCategoryTypeEnumId="CATALOG_CATEGORY"
-                     categoryName="Demo Three" description=""/>
+                     categoryName="Demo Category Three" description=""/>
     <ProductCategoryRollup productCategoryId="DEMO_THREE" parentProductCategoryId="POPC_BROWSE_ROOT"
                            fromDate="2010-02-03 00:00:00.0" sequenceNum="3"/>
 
     <!-- Demo Products -->
     <Product productId="DEMO_1_1" productTypeEnumId="FINISHED_GOOD"
-             productName="Demo One-One" description=""
+             productName="Demo Product One-One" description=""
              chargeShipping="Y" returnable="Y"/>
     <ProductPrice productPriceId="DEMO_1_1_L" productId="DEMO_1_1" productStoreId="" pricePurposeEnumId="PPP_PURCHASE"
                   priceTypeEnumId="LIST_PRICE"  fromDate="2010-02-03 00:00:00.0" minQuantity="1"
@@ -50,7 +50,7 @@ This Work includes contributions authored by David E. Jones, not as a
                   price="16.99" priceUomId="USD"/>
     <ProductCategoryMember productCategoryId="DEMO_ONE" productId="DEMO_1_1" fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
     <Product productId="DEMO_1_2" productTypeEnumId="FINISHED_GOOD"
-             productName="Demo One-Two" description=""
+             productName="Demo Product One-Two" description=""
              chargeShipping="Y" returnable="Y"/>
     <ProductPrice productPriceId="DEMO_1_2_C" productId="DEMO_1_1" productStoreId="" pricePurposeEnumId="PPP_PURCHASE"
                   priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0" thruDate="" minQuantity="1"
@@ -59,7 +59,7 @@ This Work includes contributions authored by David E. Jones, not as a
     <ProductCategoryMember productCategoryId="POPC_HOME" productId="DEMO_1_2" fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
 
     <Product productId="DEMO_2_1" productTypeEnumId="FINISHED_GOOD"
-             productName="Demo Two-One" description=""
+             productName="Demo Product Two-One" description=""
              chargeShipping="Y" returnable="Y"/>
     <ProductPrice productPriceId="DEMO_2_1_C" productId="DEMO_2_1" productStoreId="" pricePurposeEnumId="PPP_PURCHASE"
                   priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0" minQuantity="1"
@@ -68,7 +68,7 @@ This Work includes contributions authored by David E. Jones, not as a
     <ProductCategoryMember productCategoryId="POPC_HOME" productId="DEMO_2_1" fromDate="2010-02-03 00:00:00.0" sequenceNum="2"/>
 
     <Product productId="DEMO_3_1" productTypeEnumId="FINISHED_GOOD"
-             productName="Demo Three-One" description=""
+             productName="Demo Product Three-One" description=""
              chargeShipping="Y" returnable="Y"/>
     <ProductPrice productPriceId="DEMO_3_1_C" productId="DEMO_3_1" productStoreId="" pricePurposeEnumId="PPP_PURCHASE"
                   priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0" minQuantity="1"
