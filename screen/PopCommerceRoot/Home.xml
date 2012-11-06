@@ -15,11 +15,17 @@ This Work includes contributions authored by David E. Jones, not as a
         require-authentication="false">
 
     <transition name="addToCart">
-
+        <actions>
+            <service-call name="mantle.order.OrderServices.add#OrderProductQuantity" in-map="true" out-map="addOut"/>
+            <set field="ec.web.sessionAttributes.cartOrderId" from="addOut.orderId"/>
+        </actions>
         <default-response url="../Order/Cart"/>
+        <error-response url="."/>
     </transition>
 
     <actions>
+        <set field="orderId" from="ec.web.sessionAttributes.cartOrderId"/>
+
         <entity-find entity-name="ProductCategoryMemberProduct" list="pcmpList" cache="true">
             <date-filter/>
             <econdition field-name="productCategoryId" value="POPC_HOME"/>
@@ -29,21 +35,12 @@ This Work includes contributions authored by David E. Jones, not as a
     </actions>
     <widgets>
         <label text="POP Commerce Home Page" type="h1"/>
-        <section-iterate name="HomeProductList" list="pcmpList" entry="pcmp">
-            <widgets>
-                <container style="product-list-multi-column">
-                    <label text="${pcmp.productName}" type="p"/>
-                    <!-- TODO: calculate and show price -->
-                    <form-single name="ProductAddToCart" transition="addToCart" map="pcmp">
-                        <field name="productId"><default-field><hidden/></default-field></field>
-                        <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>
-                        <field name="add"><default-field title="Add to Cart"><submit/></default-field></field>
-                        <field-layout>
-                            <field-row><field-ref name="quantity"/><field-ref name="add"/></field-row>
-                        </field-layout>
-                    </form-single>
-                </container>
-            </widgets>
-        </section-iterate>
+        <form-list name="HomeProductList" list="pcmpList" transition="addToCart">
+            <field name="orderId"><default-field><hidden/></default-field></field>
+            <field name="productId"><default-field><hidden/></default-field></field>
+            <field name="productName"><default-field title=""><display also-hidden="false"/></default-field></field>
+            <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>
+            <field name="add"><default-field title="Add to Cart"><submit/></default-field></field>
+        </form-list>
     </widgets>
 </screen>

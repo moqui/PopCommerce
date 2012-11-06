@@ -15,5 +15,7 @@ This Work includes contributions authored by David E. Jones, not as a
         require-authentication="true">
     <widgets>
         <label text="Checkout" type="h1"/>
+
+        <!-- TODO: show billing and shipping info with container-dialogs to add or update the info -->
     </widgets>
 </screen>

@@ -13,7 +13,34 @@ This Work includes contributions authored by David E. Jones, not as a
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.2.xsd"
         require-authentication="false">
+
+    <transition name="updateCartItems">
+        <service-call name="mantle.order.OrderServices.update#OrderProductQuantity"/>
+        <default-response url="."/>
+    </transition>
+
+    <actions>
+        <set field="orderId" from="ec.web.sessionAttributes.cartOrderId"/>
+        <entity-find-one entity-name="OrderHeader" value-field="orderHeader"/>
+        <entity-find entity-name="OrderItem" list="orderItemList">
+            <econdition field-name="orderId"/>
+            <order-by field-name="orderItemSeqId"/>
+        </entity-find>
+    </actions>
     <widgets>
-        <label text="Shopping Cart" type="h1"/>
+        <label text="Shopping Cart${orderId?' for Order '+orderId:''}" type="h1"/>
+
+        <form-list name="CartItems" list="orderItemList" multi="true" transition="updateCartItems">
+            <field name="orderId"><default-field><hidden/></default-field></field>
+            <field name="orderItemSeqId"><default-field><hidden/></default-field></field>
+            <field name="productId"><default-field title="Product">
+                <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/>
+            </default-field></field>
+            <field name="unitPrice"><default-field>
+                <display currency-unit-field="orderHeader.currencyUomId"/>
+            </default-field></field>
+            <field name="quantity"><default-field><text-line size="4"/></default-field></field>
+            <field name="updateCartButton"><default-field title="Update Cart"><submit/></default-field></field>
+        </form-list>
     </widgets>
 </screen>
