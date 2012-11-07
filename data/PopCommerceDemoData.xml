@@ -52,7 +52,7 @@ This Work includes contributions authored by David E. Jones, not as a
     <Product productId="DEMO_1_2" productTypeEnumId="FINISHED_GOOD"
              productName="Demo Product One-Two" description=""
              chargeShipping="Y" returnable="Y"/>
-    <ProductPrice productPriceId="DEMO_1_2_C" productId="DEMO_1_1" productStoreId="" pricePurposeEnumId="PPP_PURCHASE"
+    <ProductPrice productPriceId="DEMO_1_2_C" productId="DEMO_1_2" productStoreId="" pricePurposeEnumId="PPP_PURCHASE"
                   priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0" thruDate="" minQuantity="1"
                   price="9.99" priceUomId="USD"/>
     <ProductCategoryMember productCategoryId="DEMO_ONE" productId="DEMO_1_2" fromDate="2010-02-03 00:00:00.0" sequenceNum="2"/>
