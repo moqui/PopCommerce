@@ -16,6 +16,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
     <transition name="addToCart">
         <actions>
+            <set field="orderId" from="ec.web.sessionAttributes.cartOrderId"/>
             <service-call name="mantle.order.OrderServices.add#OrderProductQuantity" in-map="true" out-map="addOut"/>
             <set field="ec.web.sessionAttributes.cartOrderId" from="addOut.orderId"/>
         </actions>
@@ -24,8 +25,6 @@ This Work includes contributions authored by David E. Jones, not as a
     </transition>
 
     <actions>
-        <set field="orderId" from="ec.web.sessionAttributes.cartOrderId"/>
-
         <entity-find entity-name="ProductCategoryMemberProduct" list="pcmpList" cache="true">
             <date-filter/>
             <econdition field-name="productCategoryId" value="POPC_HOME"/>
@@ -43,7 +42,6 @@ This Work includes contributions authored by David E. Jones, not as a
                 <set field="priceUomId" from="priceMap?.priceUomId"/>
             </row-actions>
             
-            <field name="orderId"><default-field><hidden/></default-field></field>
             <field name="productId"><default-field><hidden/></default-field></field>
             <field name="productName"><default-field title=""><display also-hidden="false"/></default-field></field>
             <field name="price"><default-field title=""><display also-hidden="false" currency-unit-field="priceUomId"/></default-field></field>

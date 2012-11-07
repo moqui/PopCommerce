@@ -15,7 +15,44 @@ This Work includes contributions authored by David E. Jones, not as a
         default-menu-include="false" require-authentication="false">
 
     <transition name="login">
-        <actions><script>ec.user.loginUser(username, password, null)</script></actions>
+        <actions>
+            <script>ec.user.loginUser(username, password, null)</script>
+            <if condition="ec.user.userAccount">
+                <!-- see if there is an open order for user and get that ID into session -->
+                <entity-find entity-name="OrderHeaderAndPart" list="existingOrderList">
+                    <econdition field-name="statusId" value="ORDER_OPEN"/>
+                    <econdition field-name="customerPartyId" from="ec.user.userAccount.partyId"/>
+                    <select-field field-name="orderId"/><select-field field-name="orderPartSeqId"/>
+                    <order-by field-name="-entryDate"/><!-- get most recent open order -->
+                </entity-find>
+                <!-- TODO: how to get around the authz error -->
+                <!-- TODO: why are we getting a list back even if there was an authz error? -->
+                <log level="warn" message="============= existingOrderList=${existingOrderList}"/>
+                <if condition="existingOrderList">
+                    <if condition="ec.web.sessionAttributes.cartOrderId">
+                        <!-- if a cartOrderId is in the session, merge its items into the existing order -->
+                        <service-call name="mantle.order.OrderServices.merge#OrderItems"
+                                      in-map="[orderId:existingOrderList[0].orderId, fromOrderId:ec.web.sessionAttributes.cartOrderId]"/>
+                    </if>
+                    <!-- whether there was one in the session or not always set the existing orderId there -->
+                    <set field="ec.web.sessionAttributes.cartOrderId" from="existingOrderList[0].orderId"/>
+
+                    <else>
+                        <!-- no existing open order, if a cartOrderId is in the session, set the logged in user as the customer -->
+                        <if condition="ec.web.sessionAttributes.cartOrderId">
+                            <entity-find entity-name="OrderPart" list="orderPartList">
+                                <econdition field-name="orderId" from="ec.web.sessionAttributes.cartOrderId"/>
+                            </entity-find>
+                            <if condition="orderPartList">
+                                <set field="orderPart" from="orderPartList[0]"/>
+                                <set field="orderPart.customerPartyId" from="ec.user.userAccount.partyId"/>
+                                <entity-update value-field="orderPart"/>
+                            </if>
+                        </if>
+                    </else>
+                </if>
+            </if>
+        </actions>
         <default-response type="screen-last"/>
         <error-response url="."/>
     </transition>
