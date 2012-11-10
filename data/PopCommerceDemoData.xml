@@ -60,10 +60,10 @@ This Work includes contributions authored by David E. Jones, not as a
     <Product productId="DEMO_1_1" productTypeEnumId="FINISHED_GOOD"
             productName="Demo Product One-One" description=""
             chargeShipping="Y" returnable="Y"/>
-    <ProductPrice productPriceId="DEMO_1_1_L" productId="DEMO_1_1" productStoreId="" pricePurposeEnumId="PPP_PURCHASE"
+    <ProductPrice productPriceId="DEMO_1_1_L" productId="DEMO_1_1" productStoreId="POPC" pricePurposeEnumId="PPP_PURCHASE"
             priceTypeEnumId="LIST_PRICE"  fromDate="2010-02-03 00:00:00.0" minQuantity="1"
             price="19.99" priceUomId="USD"/>
-    <ProductPrice productPriceId="DEMO_1_1_C" productId="DEMO_1_1" productStoreId="" pricePurposeEnumId="PPP_PURCHASE"
+    <ProductPrice productPriceId="DEMO_1_1_C" productId="DEMO_1_1" productStoreId="POPC" pricePurposeEnumId="PPP_PURCHASE"
             priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0" minQuantity="1"
             price="16.99" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_ONE" productId="DEMO_1_1"
@@ -71,7 +71,7 @@ This Work includes contributions authored by David E. Jones, not as a
     <Product productId="DEMO_1_2" productTypeEnumId="FINISHED_GOOD"
             productName="Demo Product One-Two" description=""
             chargeShipping="Y" returnable="Y"/>
-    <ProductPrice productPriceId="DEMO_1_2_C" productId="DEMO_1_2" productStoreId="" pricePurposeEnumId="PPP_PURCHASE"
+    <ProductPrice productPriceId="DEMO_1_2_C" productId="DEMO_1_2" productStoreId="POPC" pricePurposeEnumId="PPP_PURCHASE"
             priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0" thruDate="" minQuantity="1"
             price="9.99" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_ONE" productId="DEMO_1_2"
@@ -82,7 +82,7 @@ This Work includes contributions authored by David E. Jones, not as a
     <Product productId="DEMO_2_1" productTypeEnumId="FINISHED_GOOD"
             productName="Demo Product Two-One" description=""
             chargeShipping="Y" returnable="Y"/>
-    <ProductPrice productPriceId="DEMO_2_1_C" productId="DEMO_2_1" productStoreId="" pricePurposeEnumId="PPP_PURCHASE"
+    <ProductPrice productPriceId="DEMO_2_1_C" productId="DEMO_2_1" productStoreId="POPC" pricePurposeEnumId="PPP_PURCHASE"
             priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0" minQuantity="1"
             price="12.12" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_TWO" productId="DEMO_2_1"
@@ -93,7 +93,7 @@ This Work includes contributions authored by David E. Jones, not as a
     <Product productId="DEMO_3_1" productTypeEnumId="FINISHED_GOOD"
             productName="Demo Product Three-One" description=""
             chargeShipping="Y" returnable="Y"/>
-    <ProductPrice productPriceId="DEMO_3_1_C" productId="DEMO_3_1" productStoreId="" pricePurposeEnumId="PPP_PURCHASE"
+    <ProductPrice productPriceId="DEMO_3_1_C" productId="DEMO_3_1" productStoreId="POPC" pricePurposeEnumId="PPP_PURCHASE"
             priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0" minQuantity="1"
             price="7.77" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_THREE" productId="DEMO_3_1"
