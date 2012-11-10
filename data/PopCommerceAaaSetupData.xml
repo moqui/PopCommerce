@@ -34,10 +34,6 @@ This Work includes contributions authored by David E. Jones, not as a
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="99" resourceTypeEnumId="STRT_SHORTCUT_ICON"
                          resourceValue="/moqui.ico"/>
 
-    <!-- Default Root Browse Category -->
-    <ProductCategory productCategoryId="POPC_BROWSE_ROOT" productCategoryTypeEnumId="CATALOG_CATEGORY"
-                     categoryName="POP Commerce Browse Root"/>
-    <!-- Default Home Page Category -->
-    <ProductCategory productCategoryId="POPC_HOME" productCategoryTypeEnumId="CATALOG_CATEGORY"
-                     categoryName="POP Commerce Home Page"/>
+    <!-- A skeleton record for the default store -->
+    <mantle.product.store.ProductStore productStoreId="POPC" defaultLocale="en_US" defaultCurrencyUomId="USD"/>
 </entity-facade-xml>

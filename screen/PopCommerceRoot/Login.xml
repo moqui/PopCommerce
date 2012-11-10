@@ -12,12 +12,13 @@ This Work includes contributions authored by David E. Jones, not as a
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.2.xsd"
-        default-menu-include="false" require-authentication="false">
+        default-menu-include="false" require-authentication="anonymous-view">
 
     <transition name="login">
         <actions>
             <script>ec.user.loginUser(username, password, null)</script>
             <if condition="ec.user.userAccount">
+                <!-- TODO: move this to a service so that screen.@require-authentication can be false instead of anonymous-view (slightly tighter security) -->
                 <!-- see if there is an open order for user and get that ID into session -->
                 <entity-find entity-name="OrderHeaderAndPart" list="existingOrderList">
                     <econdition field-name="statusId" value="ORDER_OPEN"/>
@@ -25,9 +26,6 @@ This Work includes contributions authored by David E. Jones, not as a
                     <select-field field-name="orderId"/><select-field field-name="orderPartSeqId"/>
                     <order-by field-name="-entryDate"/><!-- get most recent open order -->
                 </entity-find>
-                <!-- TODO: how to get around the authz error -->
-                <!-- TODO: why are we getting a list back even if there was an authz error? -->
-                <log level="warn" message="============= existingOrderList=${existingOrderList}"/>
                 <if condition="existingOrderList">
                     <if condition="ec.web.sessionAttributes.cartOrderId">
                         <!-- if a cartOrderId is in the session, merge its items into the existing order -->
@@ -111,8 +109,9 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="newPassword"><default-field title="Password"><password size="15"/></default-field></field>
                     <field name="newPasswordVerify"><default-field title="Password Verify"><password size="15"/></default-field></field>
 
-                    <field name="currencyUomId"><default-field><hidden default-value="USD"/></default-field></field>
-                    <field name="locale"><default-field><hidden default-value="en_US"/></default-field></field>
+                    <!-- these hidden fields are set in PopCommerceRoot.xml based on the store settings -->
+                    <field name="currencyUomId"><default-field><hidden default-value="${currencyUomId?:'USD'}"/></default-field></field>
+                    <field name="locale"><default-field><hidden default-value="${defaultLocale?:'en_US'}"/></default-field></field>
 
                     <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
 

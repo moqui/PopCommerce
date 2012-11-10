@@ -13,7 +13,7 @@ This Work includes contributions authored by David E. Jones, not as a
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.2.xsd"
         include-child-content="true" screen-theme-type-enum-id="STT_POP_COMMERCE" standalone="true"
-        require-authentication="false" login-path="/popc/Login">
+        require-authentication="anonymous-view" login-path="/popc/Login">
 
     <transition name="search">
         <default-response url="/popc/Product/Search"/>
@@ -24,6 +24,19 @@ This Work includes contributions authored by David E. Jones, not as a
     <pre-actions>
         <set field="html_scripts" from="['/js/jquery-1.8.2.min.js', '/js/jquery-ui-1.9.0.min.js',
             '/js/jquery-ui-timepicker-addon-1.0.0.js', '/js/jquery-ui-combobox.js', '/js/jquery-validate-1.9.0.min.js']"/>
+
+        <!-- get the ProductStore using the default ID -->
+        <set field="productStoreId" value="POPC"/>
+        <entity-find-one entity-name="ProductStore" value-field="productStore"/>
+        <set field="currencyUomId" from="productStore?.defaultCurrencyUomId"/>
+        <set field="priceUomId" from="productStore?.defaultCurrencyUomId"/>
+        <set field="defaultLocale" from="productStore?.defaultLocale"/>
+        <set field="organizationPartyId" from="productStore?.organizationPartyId"/>
+        <set field="vendorPartyId" from="productStore?.organizationPartyId"/>
+
+        <!-- some settings used when adding to cart, etc -->
+        <set field="orderId" from="ec.web.sessionAttributes.cartOrderId"/>
+        <set field="customerPartyId" from="ec.user.userAccount?.partyId"/>
     </pre-actions>
     <widgets>
         <render-mode>
