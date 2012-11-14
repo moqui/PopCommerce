@@ -24,9 +24,8 @@ This Work includes contributions authored by David E. Jones, not as a
     </transition>
 
     <actions>
-        <entity-find-one entity-name="Person" value-field="person">
-            <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
-        </entity-find-one>
+        <set field="partyId" from="ec.user.userAccount.partyId"/>
+        <entity-find-one entity-name="Person" value-field="person"/>
     </actions>
     <widgets>
         <label text="Profile" type="h1"/>
@@ -34,108 +33,10 @@ This Work includes contributions authored by David E. Jones, not as a
             <field name="name"><default-field><label text="${person?.firstName} ${person?.middleName?:''} ${person?.lastName}"/></default-field></field>
         </form-single>
 
-        <section name="ShippingSection">
-            <actions>
-                <entity-find entity-name="PartyContactMech" list="postalPcmList">
-                    <date-filter/>
-                    <econdition field-name="partyId" from="ec.user.userAccount.partyId"/>
-                    <econdition field-name="contactMechPurposeId" value="SHIPPING_DESTINATION"/>
-                </entity-find>
-                <if condition="postalPcmList">
-                    <set field="postalContactMechId" from="postalPcmList[0].contactMechId"/>
-                    <entity-find-one entity-name="PostalAddress" value-field="postalAddress">
-                        <field-map field-name="contactMechId" from="postalContactMechId"/>
-                    </entity-find-one>
-                </if>
-
-                <entity-find entity-name="PartyContactMech" list="telecomPcmList">
-                    <date-filter/>
-                    <econdition field-name="partyId" from="ec.user.userAccount.partyId"/>
-                    <econdition field-name="contactMechPurposeId" value="PHONE_SHIP_DEST"/>
-                </entity-find>
-                <if condition="telecomPcmList">
-                    <set field="telecomContactMechId" from="telecomPcmList[0].contactMechId"/>
-                    <entity-find-one entity-name="TelecomNumber" value-field="telecomNumber">
-                        <field-map field-name="contactMechId" from="telecomContactMechId"/>
-                    </entity-find-one>
-                </if>
-
-                <set field="fieldValues" from="[:] + (postalAddress ?: [:]) + (telecomNumber ?: [:])"/>
-            </actions>
-            <widgets>
-                <label text="Shipping Information" type="h3"/>
-                <form-single name="ShippingInfo" transition="storeShippingInfo">
-                    <field name="postalContactMechId"><default-field><hidden/></default-field></field>
-
-                    <field name="toName"><default-field><text-line size="30"/></default-field></field>
-                    <field name="attnName"><default-field title="Attention"><text-line size="30"/></default-field></field>
-
-                    <!-- TODO: list countries, when one selected populate state drop-down below
-                    <field name="countryGeoId"><default-field title="Country">
-                        <drop-down allow-empty="false" no-current-selected-key="USA">
-                            <entity-options key="geoId" text="${geoName} (${geoCodeAlpha3})">
-                                <entity-find entity-name="Geo" cache="true">
-                                    <econdition field-name="geoTypeEnumId" value="GEOT_COUNTRY"/>
-                                    <order-by field-name="geoName"/>
-                                </entity-find>
-                            </entity-options>
-                        </drop-down>
-                    </default-field></field> -->
-                    <field name="countryGeoId"><default-field title="Country"><hidden default-value="USA"/></default-field></field>
-                    <field name="address1"><default-field title="Address Line 1"><text-line size="30"/></default-field></field>
-                    <field name="address2"><default-field title="Address Line 2"><text-line size="30"/></default-field></field>
-                    <field name="city"><default-field title="City/State/Zip"><text-line size="16"/></default-field></field>
-                    <field name="stateProvinceGeoId"><default-field title="">
-                        <drop-down><entity-options key="${toGeoId}" text="${geoName}">
-                            <entity-find entity-name="GeoAssocAndToDetail">
-                                <econdition field-name="geoId" value="USA"/>
-                                <econdition field-name="geoAssocTypeEnumId" value="GAT_REGIONS"/>
-                                <order-by field-name="geoName"/>
-                            </entity-find>
-                        </entity-options></drop-down>
-                    </default-field></field>
-                    <field name="postalCode"><default-field title=""><text-line size="10"/></default-field></field>
-
-                    <field name="telecomContactMechId"><default-field><hidden/></default-field></field>
-                    <field name="areaCode"><default-field title="Phone"><text-line size="3" maxlength="3"/></default-field></field>
-                    <field name="contactNumber"><default-field title=""><text-line size="8" maxlength="8"/></default-field></field>
-
-                    <field name="submitButton"><default-field title="${postalContactMechId ? 'Update' : 'Create'}"><submit/></default-field></field>
-
-                    <field-layout>
-                        <field-ref name="postalContactMechId"/><field-ref name="toName"/><field-ref name="attnName"/>
-
-                        <field-ref name="countryGeoId"/><field-ref name="address1"/><field-ref name="address2"/>
-                        <field-row><field-ref name="city"/><field-ref name="stateProvinceGeoId"/><field-ref name="postalCode"/></field-row>
-
-                        <field-ref name="telecomContactMechId"/>
-                        <field-row><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
-
-                        <field-ref name="submitButton"/>
-                    </field-layout>
-                </form-single>
-            </widgets>
-        </section>
-
         <section name="BillingSection">
             <actions>
-                <set field="fieldValues" from="null"/>
-                <set field="postalContactMechId" from="null"/>
-                <set field="telecomContactMechId" from="null"/>
-
-                <!-- prep based on paymentMethodId -->
-                <entity-find entity-name="PaymentMethod" list="paymentMethodList">
-                    <date-filter/>
-                    <econdition field-name="ownerPartyId" from="ec.user.userAccount.partyId"/>
-                    <econdition field-name="paymentMethodTypeEnumId" value="PMT_CREDIT_CARD"/>
-                    <order-by field-name="-fromDate"/><!-- get the most recent one if there is more than one -->
-                </entity-find>
-                <set field="paymentMethod" from="paymentMethodList.getAt(0)"/>
-                <set field="paymentMethodId" from="paymentMethod?.paymentMethodId"/>
-                <entity-find-related-one value-field="paymentMethod" relationship-name="CreditCard" to-value-field="creditCard"/>
-                <entity-find-related-one value-field="paymentMethod" relationship-name="PostalAddress" to-value-field="postalAddress"/>
-                <entity-find-related-one value-field="paymentMethod" relationship-name="TelecomNumber" to-value-field="telecomNumber"/>
-
+                <service-call name="mantle.accounting.PaymentMethodServices.get#PartyCreditCardInfo"
+                        in-map="[partyId:partyId]" out-map="context"/>
                 <set field="fieldValues" from="[:] + (paymentMethod ?: [:]) + (creditCard ?: [:]) + (postalAddress ?: [:]) + (telecomNumber ?: [:])"/>
                 <set field="fieldValues.expireMonth" from="fieldValues.expireDate ? fieldValues.expireDate.substring(0, fieldValues.expireDate.indexOf('/')) : null"/>
                 <set field="fieldValues.expireYear" from="fieldValues.expireDate ? fieldValues.expireDate.substring(fieldValues.expireDate.indexOf('/')+1) : null"/>
@@ -198,6 +99,70 @@ This Work includes contributions authored by David E. Jones, not as a
                         <field-row><field-ref name="expireMonth"/><field-ref name="expireYear"/></field-row>
 
                         <field-ref name="postalContactMechId"/>
+                        <field-ref name="countryGeoId"/><field-ref name="address1"/><field-ref name="address2"/>
+                        <field-row><field-ref name="city"/><field-ref name="stateProvinceGeoId"/><field-ref name="postalCode"/></field-row>
+
+                        <field-ref name="telecomContactMechId"/>
+                        <field-row><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
+
+                        <field-ref name="submitButton"/>
+                    </field-layout>
+                </form-single>
+            </widgets>
+        </section>
+
+        <section name="ShippingSection">
+            <actions>
+                <set field="fieldValues" from="null"/>
+                <set field="postalContactMechId" from="null"/>
+                <set field="telecomContactMechId" from="null"/>
+
+                <service-call name="mantle.party.ContactServices.get#PartyShippingInfo" in-map="[partyId:partyId]" out-map="context"/>
+                <set field="fieldValues" from="[:] + (postalAddress ?: [:]) + (telecomNumber ?: [:])"/>
+            </actions>
+            <widgets>
+                <label text="Shipping Information" type="h3"/>
+                <form-single name="ShippingInfo" transition="storeShippingInfo">
+                    <field name="postalContactMechId"><default-field><hidden/></default-field></field>
+
+                    <field name="toName"><default-field><text-line size="30"/></default-field></field>
+                    <field name="attnName"><default-field title="Attention"><text-line size="30"/></default-field></field>
+
+                    <!-- TODO: list countries, when one selected populate state drop-down below
+                    <field name="countryGeoId"><default-field title="Country">
+                        <drop-down allow-empty="false" no-current-selected-key="USA">
+                            <entity-options key="geoId" text="${geoName} (${geoCodeAlpha3})">
+                                <entity-find entity-name="Geo" cache="true">
+                                    <econdition field-name="geoTypeEnumId" value="GEOT_COUNTRY"/>
+                                    <order-by field-name="geoName"/>
+                                </entity-find>
+                            </entity-options>
+                        </drop-down>
+                    </default-field></field> -->
+                    <field name="countryGeoId"><default-field title="Country"><hidden default-value="USA"/></default-field></field>
+                    <field name="address1"><default-field title="Address Line 1"><text-line size="30"/></default-field></field>
+                    <field name="address2"><default-field title="Address Line 2"><text-line size="30"/></default-field></field>
+                    <field name="city"><default-field title="City/State/Zip"><text-line size="16"/></default-field></field>
+                    <field name="stateProvinceGeoId"><default-field title="">
+                        <drop-down><entity-options key="${toGeoId}" text="${geoName}">
+                            <entity-find entity-name="GeoAssocAndToDetail">
+                                <econdition field-name="geoId" value="USA"/>
+                                <econdition field-name="geoAssocTypeEnumId" value="GAT_REGIONS"/>
+                                <order-by field-name="geoName"/>
+                            </entity-find>
+                        </entity-options></drop-down>
+                    </default-field></field>
+                    <field name="postalCode"><default-field title=""><text-line size="10"/></default-field></field>
+
+                    <field name="telecomContactMechId"><default-field><hidden/></default-field></field>
+                    <field name="areaCode"><default-field title="Phone"><text-line size="3" maxlength="3"/></default-field></field>
+                    <field name="contactNumber"><default-field title=""><text-line size="8" maxlength="8"/></default-field></field>
+
+                    <field name="submitButton"><default-field title="${postalContactMechId ? 'Update' : 'Create'}"><submit/></default-field></field>
+
+                    <field-layout>
+                        <field-ref name="postalContactMechId"/><field-ref name="toName"/><field-ref name="attnName"/>
+
                         <field-ref name="countryGeoId"/><field-ref name="address1"/><field-ref name="address2"/>
                         <field-row><field-ref name="city"/><field-ref name="stateProvinceGeoId"/><field-ref name="postalCode"/></field-row>
 
