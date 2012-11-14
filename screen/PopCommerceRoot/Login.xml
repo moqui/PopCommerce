@@ -12,13 +12,13 @@ This Work includes contributions authored by David E. Jones, not as a
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.2.xsd"
-        default-menu-include="false" require-authentication="anonymous-view">
+        default-menu-include="false" require-authentication="anonymous-all">
 
     <transition name="login">
         <actions>
             <script>ec.user.loginUser(username, password, null)</script>
             <if condition="ec.user.userAccount">
-                <!-- TODO: move this to a service so that screen.@require-authentication can be false instead of anonymous-view (slightly tighter security) -->
+                <!-- TODO: move this to a service so that screen.@require-authentication can be false instead of anonymous-all (slightly tighter security) -->
                 <!-- see if there is an open order for user and get that ID into session -->
                 <entity-find entity-name="OrderHeaderAndPart" list="existingOrderList">
                     <econdition field-name="statusId" value="ORDER_OPEN"/>
