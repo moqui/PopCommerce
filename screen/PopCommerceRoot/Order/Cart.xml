@@ -37,7 +37,7 @@ This Work includes contributions authored by David E. Jones, not as a
                 <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/>
             </default-field></field>
             <field name="unitPrice"><default-field>
-                <display currency-unit-field="orderHeader.currencyUomId"/>
+                <display currency-unit-field="orderHeader.currencyUomId" also-hidden="false"/>
             </default-field></field>
             <field name="quantity"><default-field><text-line size="4"/></default-field></field>
             <field name="updateCartButton"><default-field title="Update Cart"><submit/></default-field></field>
