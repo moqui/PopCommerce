@@ -13,9 +13,98 @@ This Work includes contributions authored by David E. Jones, not as a
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.2.xsd"
         require-authentication="true">
+
+    <transition name="storeShippingInfo">
+        <service-call name="PopCommerce.CustomerServices.store#ShippingInfo"/>
+        <default-response url="."/>
+    </transition>
+    <transition name="storeBillingInfo">
+        <service-call name="PopCommerce.CustomerServices.store#BillingInfo"/>
+        <default-response url="."/>
+    </transition>
+    <transition name="setOrderBillingShippingInfo">
+        <service-call name="mantle.order.OrderServices.set#OrderBillingShippingInfo"/>
+        <default-response url="../Review"/>
+    </transition>
+
+    <actions>
+        <service-call name="mantle.accounting.PaymentMethodServices.get#PartyCreditCardInfo"
+                in-map="[partyId:customerPartyId]" out-map="creditCardInfo"/>
+        <service-call name="mantle.party.ContactServices.get#PartyShippingInfo"
+                in-map="[partyId:customerPartyId]" out-map="shippingInfo"/>
+    </actions>
     <widgets>
         <label text="Checkout" type="h1"/>
 
         <!-- TODO: show billing and shipping info with container-dialogs to add or update the info -->
+        <container>
+            <label text="Billing Information" type="h2"/>
+            <container-dialog id="BillingInfoUpdate" button-text="Update">
+                <section name="BillingInfoUpdateSection">
+                    <actions>
+                        <set field="fieldValues" from="[postalContactMechId:creditCardInfo.postalContactMechId,
+                                telecomContactMechId:creditCardInfo.telecomContactMechId] +
+                                (creditCardInfo.postalAddress ?: [:]) + (creditCardInfo.telecomNumber ?: [:]) +
+                                (creditCardInfo.paymentMethod ?: [:]) + (creditCardInfo.creditCard ?: [:])"/>
+                        <set field="fieldValues.expireMonth" from="fieldValues.expireDate ? fieldValues.expireDate.substring(0, fieldValues.expireDate.indexOf('/')) : null"/>
+                        <set field="fieldValues.expireYear" from="fieldValues.expireDate ? fieldValues.expireDate.substring(fieldValues.expireDate.indexOf('/')+1) : null"/>
+                    </actions>
+                    <widgets>
+                        <form-single name="BillingInfo" extends="component://PopCommerce/screen/PopCommerceRoot/Customer/Profile.xml#BillingInfo"/>
+                    </widgets>
+                </section>
+            </container-dialog>
+        </container>
+        <container>
+            <section name="BillingInfoSection">
+                <condition><expression>creditCardInfo?.creditCard</expression></condition>
+                <widgets>
+                    <label text="${creditCardInfo.creditCard?.firstNameOnCard} ${creditCardInfo.creditCard?.lastNameOnCard}" type="p"/>
+                    <!-- TODO: mask the cardNumber -->
+                    <label text="${creditCardInfo.creditCardTypeEnum?.description} ${creditCardInfo.creditCard?.cardNumber} ${creditCardInfo.creditCard?.expireDate}" type="p"/>
+                    <label text="${creditCardInfo.postalAddress.address1}" type="p"/>
+                    <label text="${creditCardInfo.postalAddress?.address2 ?: ''}" type="p"/>
+                    <label text="${creditCardInfo.postalAddress?.city}, ${creditCardInfo.postalAddressStateGeo?.geoCodeAlpha2} ${creditCardInfo.postalAddress?.postalCode}" type="p"/>
+                    <label text="(${creditCardInfo.telecomNumber?.areaCode}) ${creditCardInfo.telecomNumber?.contactNumber}" type="p"/>
+                </widgets>
+                <fail-widgets>
+                    <label text="Please add billing information" type="p"/>
+                </fail-widgets>
+            </section>
+        </container>
+
+        <container>
+            <label text="Shipping Information" type="h2"/>
+            <container-dialog id="ShippingInfoUpdate" button-text="Update">
+                <section name="ShippingInfoUpdateSection">
+                    <actions>
+                        <set field="fieldValues" from="[postalContactMechId:shippingInfo.postalContactMechId,
+                                telecomContactMechId:shippingInfo.telecomContactMechId] +
+                                (shippingInfo.postalAddress ?: [:]) + (shippingInfo.telecomNumber ?: [:])"/>
+                    </actions>
+                    <widgets>
+                        <form-single name="ShippingInfo" extends="component://PopCommerce/screen/PopCommerceRoot/Customer/Profile.xml#ShippingInfo"/>
+                    </widgets>
+                </section>
+            </container-dialog>
+        </container>
+        <container>
+            <section name="ShippingInfoSection">
+                <condition><expression>shippingInfo?.postalAddress</expression></condition>
+                <widgets>
+                    <label text="To: ${shippingInfo.postalAddress?.toName}" type="p"/>
+                    <label text="${shippingInfo.postalAddress?.attnName ? 'Attn: ' + shippingInfo.postalAddress.attnName : ''}" type="p"/>
+                    <label text="${shippingInfo.postalAddress?.address1}" type="p"/>
+                    <label text="${shippingInfo.postalAddress?.address2 ?: ''}" type="p"/>
+                    <label text="${shippingInfo.postalAddress?.city}, ${shippingInfo.postalAddressStateGeo?.geoCodeAlpha2} ${shippingInfo.postalAddress?.postalCode}" type="p"/>
+                    <label text="(${shippingInfo.telecomNumber?.areaCode}) ${shippingInfo.telecomNumber?.contactNumber}" type="p"/>
+                </widgets>
+                <fail-widgets>
+                    <label text="Please add shipping information" type="p"/>
+                </fail-widgets>
+            </section>
+        </container>
+
+        <link text="Set Info and Review Order" link-type="hidden-form" url="setOrderBillingShippingInfo"/>
     </widgets>
 </screen>

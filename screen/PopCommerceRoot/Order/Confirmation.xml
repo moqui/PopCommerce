@@ -13,7 +13,31 @@ This Work includes contributions authored by David E. Jones, not as a
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.2.xsd"
         require-authentication="true">
+
+    <parameter name="orderId"/>
+
+    <actions>
+        <service-call name="mantle.order.OrderServices.get#OrderDisplayInfo" in-map="[orderId:orderId]" out-map="context"/>
+        <!-- TODO: make sure the logged in user is the customer for this order -->
+    </actions>
     <widgets>
-        <label text="Order Confirmation" type="h1"/>
+        <label text="Confirmation for Order #${orderId}" type="h1"/>
+
+        <form-list name="OrderItems" list="orderItemList" list-entry="orderItem">
+            <row-actions>
+                <service-call name="mantle.order.OrderServices.get#OrderItemTotal" in-map="[orderItem:orderItem]" out-map="orderItemTotalOut"/>
+                <script>context.putAll(orderItem)</script>
+            </row-actions>
+            <field name="productId"><default-field title="Product">
+                <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/>
+            </default-field></field>
+            <field name="unitPrice"><default-field><display currency-unit-field="orderHeader.currencyUomId"/></default-field></field>
+            <field name="quantity"><default-field><display/></default-field></field>
+            <field name="itemTotal"><default-field>
+                <display text="${ec.l10n.formatCurrency(orderItemTotalOut.itemTotal, orderHeader.currencyUomId, 2)}" also-hidden="false"/>
+            </default-field></field>
+        </form-list>
+        <label text="Order Total: ${ec.l10n.formatCurrency(orderHeader?.grandTotal ?: 0, orderHeader?.currencyUomId, 2)}" type="h3"/>
+
     </widgets>
 </screen>
