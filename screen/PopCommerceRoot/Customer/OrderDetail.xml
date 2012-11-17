@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.2.xsd"
+        require-authentication="true">
+
+    <parameter name="orderId"/>
+
+    <actions>
+        <service-call name="mantle.order.OrderServices.get#OrderDisplayInfo" in-map="[orderId:orderId]" out-map="context"/>
+        <!-- make sure the logged in user is the customer for this order -->
+        <set field="isCustomer" from="false"/>
+        <iterate list="orderPartInfoList" entry="orderPartInfo">
+            <if condition="orderPartInfo.orderPart.customerPartyId == ec.user.userAccount?.partyId">
+                <set field="isCustomer" from="true"/>
+            </if>
+        </iterate>
+    </actions>
+    <widgets>
+        <section name="CheckCustomerSection">
+            <condition><expression>isCustomer</expression></condition>
+            <widgets>
+                <label text="Order #${orderId}, placed ${ec.l10n.formatValue(orderHeader.placedDate ?: orderHeader.entryDate, 'd MMM yyyy')}" type="h2"/>
+
+                <!-- NOTE: this section-iterate is the same as on Review.xml -->
+                <section-iterate name="order-part-section" list="orderPartInfoList" entry="orderPartInfo">
+                    <widgets>
+                        <container-panel id="order-panel-${orderPartInfo.orderPart.orderPartSeqId}">
+                            <panel-left>
+                                <label text="Order Part ${orderPartInfo.orderPart.orderPartSeqId}" type="p"/>
+                                <label text="Part Total ${ec.l10n.formatCurrency(orderHeader?.grandTotal ?: 0, orderHeader?.currencyUomId, 2)}" type="p"/>
+
+                                <!-- shipping info -->
+                                <label text="${orderPartInfo.postalAddress?.toName ? 'To: ' + orderPartInfo.postalAddress?.toName : ''}" type="p"/>
+                                <label text="${orderPartInfo.postalAddress?.attnName ? 'Attn: ' + orderPartInfo.postalAddress.attnName : ''}" type="p"/>
+                                <label text="${orderPartInfo.postalAddress?.address1 ?: ''}" type="p"/>
+                                <label text="${orderPartInfo.postalAddress?.address2 ?: ''}" type="p"/>
+                                <label text="${orderPartInfo.postalAddress?.city ? orderPartInfo.postalAddress?.city + ', ' : ''}${orderPartInfo.postalAddressStateGeo?.geoCodeAlpha2 ?: ''} ${orderPartInfo.postalAddress?.postalCode ?: ''}" type="p"/>
+                                <label text="${orderPartInfo.telecomNumber?.areaCode ? '(' + orderPartInfo.telecomNumber?.areaCode + ') ' : ''}${orderPartInfo.telecomNumber?.contactNumber ?: ''}" type="p"/>
+                            </panel-left>
+                            <panel-center>
+                                <!-- payment info -->
+                                <section-iterate name="payment-info-${orderPartInfo.orderPart.orderPartSeqId}"
+                                        list="orderPartInfo.partPaymentInfoList" entry="partPaymentInfo">
+                                    <widgets>
+                                        <label text="${partPaymentInfo.paymentMethodTypeEnum?.description}" type="p"/>
+                                        <label text="${ec.l10n.formatCurrency(partPaymentInfo.partPayment.amount, partPaymentInfo.partPayment.amountUomId, 2)}" type="p"/>
+
+                                        <label text="${partPaymentInfo.creditCard?.firstNameOnCard} ${partPaymentInfo.creditCard?.lastNameOnCard}" type="p"/>
+                                        <!-- TODO: mask the cardNumber -->
+                                        <label text="${partPaymentInfo.creditCardTypeEnum?.description} ${partPaymentInfo.creditCard?.cardNumber} ${partPaymentInfo.creditCard?.expireDate}" type="p"/>
+                                        <label text="${partPaymentInfo.postalAddress.address1}" type="p"/>
+                                        <label text="${partPaymentInfo.postalAddress?.address2 ?: ''}" type="p"/>
+                                        <label text="${partPaymentInfo.postalAddress?.city}, ${partPaymentInfo.postalAddressStateGeo?.geoCodeAlpha2} ${partPaymentInfo.postalAddress?.postalCode}" type="p"/>
+                                        <label text="(${partPaymentInfo.telecomNumber?.areaCode}) ${partPaymentInfo.telecomNumber?.contactNumber}" type="p"/>
+                                    </widgets>
+                                </section-iterate>
+                            </panel-center>
+                            <panel-footer>
+                                <form-list name="OrderItems" list="orderPartInfo.partOrderItemList" list-entry="orderItem" skip-start="true" skip-end="true">
+                                    <row-actions>
+                                        <service-call name="mantle.order.OrderServices.get#OrderItemTotal" in-map="[orderItem:orderItem]" out-map="orderItemTotalOut"/>
+                                        <script>context.putAll(orderItem)</script>
+                                    </row-actions>
+                                    <field name="productId"><default-field title="Product">
+                                        <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/>
+                                    </default-field></field>
+                                    <field name="unitPrice"><default-field><display currency-unit-field="orderHeader.currencyUomId"/></default-field></field>
+                                    <field name="quantity"><default-field><display/></default-field></field>
+                                    <field name="itemTotal"><default-field>
+                                        <display text="${ec.l10n.formatCurrency(orderItemTotalOut.itemTotal, orderHeader.currencyUomId, 2)}" also-hidden="false"/>
+                                    </default-field></field>
+                                </form-list>
+                            </panel-footer>
+                        </container-panel>
+                    </widgets>
+                </section-iterate>
+            </widgets>
+            <fail-widgets>
+                <label text="You cannot view Order #${orderId}" type="h3"/>
+            </fail-widgets>
+        </section>
+    </widgets>
+</screen>

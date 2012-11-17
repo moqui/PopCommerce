@@ -26,7 +26,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <set field="vendorPartyId" from="productStore?.organizationPartyId"/>
 
         <!-- some settings used when adding to cart, etc -->
-        <set field="orderId" from="ec.web.sessionAttributes.cartOrderId" set-if-empty="false"/>
+        <set field="cartOrderId" from="ec.web.sessionAttributes.cartOrderId" set-if-empty="false"/>
         <set field="customerPartyId" from="ec.user.userAccount?.partyId"/>
     </always-actions>
 
@@ -42,7 +42,7 @@ This Work includes contributions authored by David E. Jones, not as a
     </pre-actions>
     
     <actions>
-        <service-call name="mantle.order.OrderServices.get#OrderItemsTotalCount" in-map="[orderId:orderId]" out-map="context"/>
+        <service-call name="mantle.order.OrderServices.get#OrderItemsTotalCount" in-map="[orderId:cartOrderId]" out-map="context"/>
     </actions>
     <widgets>
         <render-mode>

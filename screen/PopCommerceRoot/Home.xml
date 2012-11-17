@@ -17,7 +17,7 @@ This Work includes contributions authored by David E. Jones, not as a
     <transition name="addToCart">
         <actions>
             <service-call name="mantle.order.OrderServices.add#OrderProductQuantity" out-map="addOut"
-                    in-map="[orderId:orderId, productId:productId, quantity:quantity, customerPartyId:customerPartyId,
+                    in-map="[orderId:cartOrderId, productId:productId, quantity:quantity, customerPartyId:customerPartyId,
                             currencyUomId:currencyUomId, productStoreId:productStoreId]"/>
             <set field="ec.web.sessionAttributes.cartOrderId" from="addOut.orderId"/>
         </actions>
