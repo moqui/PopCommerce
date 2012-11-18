@@ -39,6 +39,7 @@ This Work includes contributions authored by David E. Jones, not as a
                         <label text="Part Total ${ec.l10n.formatCurrency(orderHeader?.grandTotal ?: 0, orderHeader?.currencyUomId, 2)}" type="p"/>
 
                         <!-- shipping info -->
+                        <label text="${orderPartInfo.shipmentMethodEnum?.description ?: ''}" type="p"/>
                         <label text="${orderPartInfo.postalAddress?.toName ? 'To: ' + orderPartInfo.postalAddress?.toName : ''}" type="p"/>
                         <label text="${orderPartInfo.postalAddress?.attnName ? 'Attn: ' + orderPartInfo.postalAddress.attnName : ''}" type="p"/>
                         <label text="${orderPartInfo.postalAddress?.address1 ?: ''}" type="p"/>

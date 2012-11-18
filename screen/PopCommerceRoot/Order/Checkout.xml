@@ -117,7 +117,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
                     <field name="shipmentMethodEnumId"><default-field title="Shipment Method">
                         <drop-down>
-                            <entity-options key="enumId"><entity-find entity-name="Enumeration">
+                            <entity-options key="${enumId}"><entity-find entity-name="Enumeration">
                                 <econdition field-name="enumTypeId" value="ShipmentMethod"/>
                                 <order-by field-name="sequenceNum"/><order-by field-name="description"/>
                             </entity-find></entity-options>
