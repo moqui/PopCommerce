@@ -18,6 +18,6 @@ This Work includes contributions authored by David E. Jones, not as a
     <parameter name="keywords"/>
 
     <widgets>
-        <label text="Search Results" type="h1"/>
+        <label text="Search Results (not yet implemented, check back later)" type="h1"/>
     </widgets>
 </screen>
