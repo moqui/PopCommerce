@@ -105,23 +105,28 @@ This Work includes contributions authored by David E. Jones, not as a
             </section>
         </container>
 
-        <form-single name="SetOrderInfoForm" transition="setOrderBillingShippingInfo">
-            <!-- TODO: Add support for updates, ie get values from Order/etc in db -->
-            <field name="orderId" entry-name="cartOrderId"><default-field><hidden/></default-field></field>
-            <field name="paymentMethodId" entry-name="creditCardInfo.paymentMethodId"><default-field><hidden/></default-field></field>
-            <field name="shippingPostalContactMechId" entry-name="shippingInfo.postalContactMechId"><default-field><hidden/></default-field></field>
-            <field name="shippingTelecomContactMechId" entry-name="shippingInfo.telecomContactMechId"><default-field><hidden/></default-field></field>
+        <section name="SetInfoSection">
+            <condition><expression>creditCardInfo?.creditCard &amp;&amp; shippingInfo?.postalAddress</expression></condition>
+            <widgets>
+                <form-single name="SetOrderInfoForm" transition="setOrderBillingShippingInfo">
+                    <!-- TODO: Add support for updates, ie get values from Order/etc in db -->
+                    <field name="orderId" entry-name="cartOrderId"><default-field><hidden/></default-field></field>
+                    <field name="paymentMethodId" entry-name="creditCardInfo.paymentMethodId"><default-field><hidden/></default-field></field>
+                    <field name="shippingPostalContactMechId" entry-name="shippingInfo.postalContactMechId"><default-field><hidden/></default-field></field>
+                    <field name="shippingTelecomContactMechId" entry-name="shippingInfo.telecomContactMechId"><default-field><hidden/></default-field></field>
 
-            <field name="shipmentMethodEnumId"><default-field title="Shipment Method">
-                <drop-down>
-                    <entity-options key="enumId"><entity-find entity-name="Enumeration">
-                        <econdition field-name="enumTypeId" value="ShipmentMethod"/>
-                        <order-by field-name="sequenceNum"/><order-by field-name="description"/>
-                    </entity-find></entity-options>
-                </drop-down>
-            </default-field></field>
+                    <field name="shipmentMethodEnumId"><default-field title="Shipment Method">
+                        <drop-down>
+                            <entity-options key="enumId"><entity-find entity-name="Enumeration">
+                                <econdition field-name="enumTypeId" value="ShipmentMethod"/>
+                                <order-by field-name="sequenceNum"/><order-by field-name="description"/>
+                            </entity-find></entity-options>
+                        </drop-down>
+                    </default-field></field>
 
-            <field name="submitButton"><default-field title="Set Info and Review Order"><submit/></default-field></field>
-        </form-single>
+                    <field name="submitButton"><default-field title="Set Info and Review Order"><submit/></default-field></field>
+                </form-single>
+            </widgets>
+        </section>
     </widgets>
 </screen>
