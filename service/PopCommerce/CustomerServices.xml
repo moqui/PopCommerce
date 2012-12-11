@@ -12,7 +12,7 @@ This Work includes contributions authored by David E. Jones, not as a
 -->
 <services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-1.2.xsd">
 
-    <service verb="store" noun="ShippingInfo" type="inline" authenticate="true">
+    <service verb="store" noun="ShippingInfo">
         <in-parameters>
             <parameter name="postalContactMechId" type="String" required="false"/>
 
@@ -69,7 +69,7 @@ This Work includes contributions authored by David E. Jones, not as a
         </actions>
     </service>
 
-    <service verb="store" noun="BillingInfo" type="inline" authenticate="true">
+    <service verb="store" noun="BillingInfo">
         <in-parameters>
             <parameter name="paymentMethodId" type="String" required="false"/>
 
