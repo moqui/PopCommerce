@@ -12,7 +12,7 @@ This Work includes contributions authored by David E. Jones, not as a
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.2.xsd"
-        include-child-content="true" screen-theme-type-enum-id="STT_POP_COMMERCE" standalone="true"
+        screen-theme-type-enum-id="STT_POP_COMMERCE" standalone="true"
         require-authentication="anonymous-view" login-path="/popc/Login">
 
     <always-actions>
@@ -52,10 +52,10 @@ This Work includes contributions authored by David E. Jones, not as a
         <container-panel id="apps-container">
             <panel-header>
                 <container style="ui-helper-clearfix">
-                    <container id="header-logo"><link text="My POP Store" url="/popc" link-type="anchor"/></container>
+                    <container id="header-logo"><link text="My Little Store" url="/popc" link-type="anchor"/></container>
                     <container id="header-user">
                         <section name="headerUser">
-                            <condition><compare field="ec.user.userId" operator="not-empty"/></condition>
+                            <condition><expression>ec.user.userId</expression></condition>
                             <widgets>
                                 <label text="Welcome ${ec.user.userAccount?.userFullName}!"/>
                                 <link text="Logout" url="/popc/Login/logout" link-type="hidden-form" icon="key"/>

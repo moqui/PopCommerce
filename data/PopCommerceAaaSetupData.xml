@@ -12,27 +12,29 @@ This Work includes contributions authored by David E. Jones, not as a
 -->
 <entity-facade-xml type="seed">
     <moqui.screen.SubscreensItem screenLocation="component://webroot/screen/webroot.xml"
-        subscreenName="popc" userGroupId="ALL_USERS" subscreenLocation="component://PopCommerce/screen/PopCommerceRoot.xml"
-        menuTitle="POP Commerce" menuIndex="9" menuInclude="N"/>
+            subscreenName="popc" userGroupId="ALL_USERS" menuTitle="POP Commerce" menuIndex="9" menuInclude="N"
+            subscreenLocation="component://PopCommerce/screen/PopCommerceRoot.xml"/>
 
     <!-- authz/permission for ALL users -->
     <moqui.security.ArtifactGroup artifactGroupId="POPC" description="POP Commerce App (via root screen)"/>
     <moqui.security.ArtifactGroupMember artifactGroupId="POPC" artifactName="component://PopCommerce/screen/PopCommerceRoot.xml"
-        artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
+            artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
     <moqui.security.ArtifactAuthz artifactAuthzId="POPC_ALL" userGroupId="ALL_USERS" artifactGroupId="POPC"
-        authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
+            authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
 
     <!-- Theme Type and Default Theme -->
     <moqui.basic.Enumeration description="POP Commerce Theme Type" enumId="STT_POP_COMMERCE" enumTypeId="ScreenThemeType"/>
     <moqui.screen.ScreenTheme screenThemeId="POPC_DEFAULT" screenThemeTypeEnumId="STT_POP_COMMERCE"
-                              description="POP Commerce Default Theme"/>
+            description="POP Commerce Default Theme"/>
     <!-- NOTE: these default resources are from the Moqui default runtime webroot component -->
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="1" resourceTypeEnumId="STRT_STYLESHEET"
-                         resourceValue="/css/smoothness/jquery-ui-1.9.2.min.css"/>
+            resourceValue="/css/smoothness/jquery-ui-1.9.2.min.css"/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="2" resourceTypeEnumId="STRT_STYLESHEET"
-                         resourceValue="/css/default.css"/>
+            resourceValue="/css/default.css"/>
+    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="3" resourceTypeEnumId="STRT_STYLESHEET"
+            resourceValue="/popc/css/PopcDefault.css"/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="99" resourceTypeEnumId="STRT_SHORTCUT_ICON"
-                         resourceValue="/moqui.ico"/>
+            resourceValue="/moqui.ico"/>
 
     <!-- A skeleton record for the default store -->
     <mantle.product.store.ProductStore productStoreId="POPC" defaultLocale="en_US" defaultCurrencyUomId="USD"/>
