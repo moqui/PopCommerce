@@ -84,10 +84,10 @@ This Work includes contributions authored by David E. Jones, not as a
 
                         <field name="cart"><default-field title="">
                             <link text="Cart${itemCount ? ' (' + ec.l10n.formatValue(itemCount, null) + (itemCount > 1 ? ' items)' : ' item)') : ''}"
-                                    url="/popc/Order/Cart" link-type="anchor"/>
+                                    url="/popc/Order/Cart" link-type="anchor-button"/>
                         </default-field></field>
                         <field name="checkout"><default-field title="">
-                            <link text="Checkout" url="/popc/Order/Checkout" link-type="anchor"/>
+                            <link text="Checkout" url="/popc/Order/Checkout" link-type="anchor-button"/>
                         </default-field></field>
 
                         <field-layout>
