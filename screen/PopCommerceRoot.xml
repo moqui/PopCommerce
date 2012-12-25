@@ -58,11 +58,17 @@ This Work includes contributions authored by David E. Jones, not as a
                             <condition><compare field="ec.user.userId" operator="not-empty"/></condition>
                             <widgets>
                                 <label text="Welcome ${ec.user.userAccount?.userFullName}!"/>
-                                <link text="Logout" url="/popc/Login/logout"/>
+                                <link text="Logout" url="/popc/Login/logout" link-type="hidden-form" icon="key"/>
                             </widgets>
                         </section>
-                        <link text="Profile" url="/popc/Customer/Profile"/>
-                        <link text="Orders" url="/popc/Customer/OrderHistory"/>
+                        <link text="Profile" url="/popc/Customer/Profile" link-type="anchor-button" icon="person"/>
+                        <link text="Orders" url="/popc/Customer/OrderHistory" link-type="anchor-button" icon="folder-open"/>
+                        <link text="Cart${itemCount ? ' (' + ec.l10n.formatValue(itemCount, null) + (itemCount > 1 ? ' items)' : ' item)') : ''}"
+                                url="/popc/Order/Cart" link-type="anchor-button" icon="cart"/>
+                        <section name="CheckoutLink">
+                            <condition><expression>itemCount</expression></condition>
+                            <widgets><link text="Checkout" url="/popc/Order/Checkout" link-type="anchor-button" icon="arrowthick-1-e"/></widgets>
+                        </section>
                     </container>
                 </container>
                 <container>
@@ -82,17 +88,8 @@ This Work includes contributions authored by David E. Jones, not as a
                         <field name="keywords"><default-field title=""><text-line size="30"/></default-field></field>
                         <field name="submitButton"><default-field title="Search"><submit/></default-field></field>
 
-                        <field name="cart"><default-field title="">
-                            <link text="Cart${itemCount ? ' (' + ec.l10n.formatValue(itemCount, null) + (itemCount > 1 ? ' items)' : ' item)') : ''}"
-                                    url="/popc/Order/Cart" link-type="anchor-button"/>
-                        </default-field></field>
-                        <field name="checkout"><default-field title="">
-                            <link text="Checkout" url="/popc/Order/Checkout" link-type="anchor-button"/>
-                        </default-field></field>
-
                         <field-layout>
-                            <field-row><field-ref name="category"/><field-ref name="keywords"/><field-ref name="submitButton"/>
-                                <field-ref name="cart"/><field-ref name="checkout"/></field-row>
+                            <field-row><field-ref name="category"/><field-ref name="keywords"/><field-ref name="submitButton"/></field-row>
                         </field-layout>
                     </form-single>
                 </container>
