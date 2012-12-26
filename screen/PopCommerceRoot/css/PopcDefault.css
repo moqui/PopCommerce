@@ -1,0 +1,5 @@
+
+#header-logo { float: left; width: 150px; height: 30px; }
+#header-logo h1, #header-logo a { font-size: 1.5em; font-family: Impact, Charcoal, sans-serif; font-weight: bold;
+    border: 0px; padding: 0px; margin: 0px; }
+#header-user { float: right; }
