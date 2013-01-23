@@ -74,7 +74,7 @@ This Work includes contributions authored by David E. Jones, not as a
                             <field name="productId"><default-field title="Product">
                                 <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/>
                             </default-field></field>
-                            <field name="unitPrice"><default-field><display currency-unit-field="orderHeader.currencyUomId"/></default-field></field>
+                            <field name="unitAmount"><default-field><display currency-unit-field="orderHeader.currencyUomId"/></default-field></field>
                             <field name="quantity"><default-field><display/></default-field></field>
                             <field name="itemTotal"><default-field>
                                 <display text="${ec.l10n.formatCurrency(orderItemTotalOut.itemTotal, orderHeader.currencyUomId, 2)}" also-hidden="false"/>
