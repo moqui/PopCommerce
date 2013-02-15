@@ -42,10 +42,10 @@ This Work includes contributions authored by David E. Jones, not as a
             <container-dialog id="BillingInfoUpdate" button-text="Update">
                 <section name="BillingInfoUpdateSection">
                     <actions>
-                        <set field="fieldValues" from="[postalContactMechId:creditCardInfo.postalContactMechId,
-                                telecomContactMechId:creditCardInfo.telecomContactMechId] +
-                                (creditCardInfo.postalAddress ?: [:]) + (creditCardInfo.telecomNumber ?: [:]) +
-                                (creditCardInfo.paymentMethod ?: [:]) + (creditCardInfo.creditCard ?: [:])"/>
+                        <set field="fieldValues" from="[postalContactMechId:creditCardInfo?.postalContactMechId,
+                                telecomContactMechId:creditCardInfo?.telecomContactMechId] +
+                                (creditCardInfo?.postalAddress ?: [:]) + (creditCardInfo?.telecomNumber ?: [:]) +
+                                (creditCardInfo?.paymentMethod ?: [:]) + (creditCardInfo?.creditCard ?: [:])"/>
                         <set field="fieldValues.expireMonth" from="fieldValues.expireDate ? fieldValues.expireDate.substring(0, fieldValues.expireDate.indexOf('/')) : null"/>
                         <set field="fieldValues.expireYear" from="fieldValues.expireDate ? fieldValues.expireDate.substring(fieldValues.expireDate.indexOf('/')+1) : null"/>
                     </actions>
@@ -78,9 +78,9 @@ This Work includes contributions authored by David E. Jones, not as a
             <container-dialog id="ShippingInfoUpdate" button-text="Update">
                 <section name="ShippingInfoUpdateSection">
                     <actions>
-                        <set field="fieldValues" from="[postalContactMechId:shippingInfo.postalContactMechId,
-                                telecomContactMechId:shippingInfo.telecomContactMechId] +
-                                (shippingInfo.postalAddress ?: [:]) + (shippingInfo.telecomNumber ?: [:])"/>
+                        <set field="fieldValues" from="[postalContactMechId:shippingInfo?.postalContactMechId,
+                                telecomContactMechId:shippingInfo?.telecomContactMechId] +
+                                (shippingInfo?.postalAddress ?: [:]) + (shippingInfo?.telecomNumber ?: [:])"/>
                     </actions>
                     <widgets>
                         <form-single name="ShippingInfo" extends="component://PopCommerce/screen/PopCommerceRoot/Customer/Profile.xml#ShippingInfo"/>

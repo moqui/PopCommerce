@@ -31,7 +31,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <form-list name="OrderHistoryList" list="orderList">
             <field name="orderId"><default-field><link text="${orderId}" url="orderDetail"/></default-field></field>
             <field name="entryDate"><default-field><display format="d MMM yyyy"/></default-field></field>
-            <field name="statusId"><default-field><display-entity entity-name="StatusItem"/></default-field></field>
+            <field name="statusId"><default-field title="Status"><display-entity entity-name="StatusItem"/></default-field></field>
             <field name="grandTotal"><default-field><display currency-unit-field="currencyUomId"/></default-field></field>
         </form-list>
     </widgets>
