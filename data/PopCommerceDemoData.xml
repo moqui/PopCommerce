@@ -71,7 +71,7 @@ This Work includes contributions authored by David E. Jones, not as a
             chargeShipping="Y" returnable="Y"/>
     <mantle.product.product.ProductPrice productPriceId="DEMO_1_2_C" productId="DEMO_1_2" productStoreId="POPC"
             pricePurposeEnumId="PPP_PURCHASE" priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0"
-            minQuantity="1" price="9.99" priceUomId="USD"/>
+            minQuantity="1" price="11119.99" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_ONE" productId="DEMO_1_2"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="2"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="POPC_HOME" productId="DEMO_1_2"
