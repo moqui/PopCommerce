@@ -12,8 +12,8 @@ This Work includes contributions authored by David E. Jones, not as a
 -->
 <entity-facade-xml type="demo">
     <!-- Demo Customer: Joe Q Public (joe@public.com) -->
-    <mantle.party.party.Party partyId="POPC_JQP" partyTypeEnumId="PERSON"/>
-    <mantle.party.party.Person partyId="POPC_JQP" firstName="Joe" middleName="Q" lastName="Public"/>
+    <mantle.party.Party partyId="POPC_JQP" partyTypeEnumId="PERSON"/>
+    <mantle.party.Person partyId="POPC_JQP" firstName="Joe" middleName="Q" lastName="Public"/>
     <moqui.security.UserAccount userId="POPC_JQP" username="joe@public.com" userFullName="Joe Q Public"
             currentPassword="16ac58bbfa332c1c55bd98b53e60720bfa90d394" passwordHashType="SHA"
             passwordHint="framework name, lowercase" currencyUomId="USD" locale="en_US" partyId="POPC_JQP"/>
