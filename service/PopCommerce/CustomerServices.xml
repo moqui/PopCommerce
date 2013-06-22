@@ -117,7 +117,7 @@ This Work includes contributions authored by David E. Jones, not as a
                     </service-call>
                 </else>
             </if>
-            <set field="result.postalContactMechId" from="paOut?.contactMechId ?: postalContactMechId"/>
+            <set field="postalContactMechId" from="paOut?.contactMechId ?: postalContactMechId"/>
 
             <if condition="telecomContactMechId">
                 <service-call name="mantle.party.ContactServices.update#PartyTelecomNumber" in-map="context" out-map="tnOut">
@@ -133,24 +133,24 @@ This Work includes contributions authored by David E. Jones, not as a
                     </service-call>
                 </else>
             </if>
-            <set field="result.telecomContactMechId" from="tnOut?.contactMechId ?: telecomContactMechId"/>
+            <set field="telecomContactMechId" from="tnOut?.contactMechId ?: telecomContactMechId"/>
 
             <!-- update PaymentMethod last so we know new postalContactMechId and telecomContactMechId updates (if applicable) -->
             <if condition="paymentMethodId">
-                <service-call name="mantle.accounting.PaymentMethodServices.update#CreditCard" in-map="context" out-map="ccOut">
+                <service-call name="mantle.account.PaymentMethodServices.update#CreditCard" in-map="context" out-map="ccOut">
                     <field-map field-name="postalContactMechId" from="result.postalContactMechId"/>
                     <field-map field-name="telecomContactMechId" from="result.telecomContactMechId"/>
                 </service-call>
 
                 <else>
-                    <service-call name="mantle.accounting.PaymentMethodServices.create#CreditCard" in-map="context" out-map="ccOut">
+                    <service-call name="mantle.account.PaymentMethodServices.create#CreditCard" in-map="context" out-map="ccOut">
                         <field-map field-name="ownerPartyId" from="ec.user.userAccount.partyId"/>
                         <field-map field-name="postalContactMechId" from="result.postalContactMechId"/>
                         <field-map field-name="telecomContactMechId" from="result.telecomContactMechId"/>
                     </service-call>
                 </else>
             </if>
-            <set field="result.paymentMethodId" from="ccOut?.paymentMethodId ?: paymentMethodId"/>
+            <set field="paymentMethodId" from="ccOut?.paymentMethodId ?: paymentMethodId"/>
         </actions>
     </service>
 </services>

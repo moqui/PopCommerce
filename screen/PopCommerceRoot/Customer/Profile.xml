@@ -35,7 +35,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
         <section name="BillingSection">
             <actions>
-                <service-call name="mantle.accounting.PaymentMethodServices.get#PartyCreditCardInfo"
+                <service-call name="mantle.account.PaymentMethodServices.get#PartyCreditCardInfo"
                         in-map="[partyId:partyId]" out-map="context"/>
                 <set field="fieldValues" from="[:] + (paymentMethod ?: [:]) + (creditCard ?: [:]) + (postalAddress ?: [:]) + (telecomNumber ?: [:])"/>
                 <set field="fieldValues.expireMonth" from="fieldValues.expireDate ? fieldValues.expireDate.substring(0, fieldValues.expireDate.indexOf('/')) : null"/>

@@ -28,7 +28,7 @@ This Work includes contributions authored by David E. Jones, not as a
     </transition>
 
     <actions>
-        <service-call name="mantle.accounting.PaymentMethodServices.get#PartyCreditCardInfo"
+        <service-call name="mantle.account.PaymentMethodServices.get#PartyCreditCardInfo"
                 in-map="[partyId:customerPartyId]" out-map="creditCardInfo"/>
         <service-call name="mantle.party.ContactServices.get#PartyShippingInfo"
                 in-map="[partyId:customerPartyId]" out-map="shippingInfo"/>
