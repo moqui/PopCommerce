@@ -56,20 +56,20 @@ This Work includes contributions authored by David E. Jones, not as a
             parentProductCategoryId="POPC_BROWSE_ROOT" fromDate="2010-02-03 00:00:00.0" sequenceNum="3"/>
 
     <!-- Demo Products -->
-    <mantle.product.product.Product productId="DEMO_1_1" productTypeEnumId="FINISHED_GOOD" chargeShipping="Y"
+    <mantle.product.Product productId="DEMO_1_1" productTypeEnumId="FINISHED_GOOD" chargeShipping="Y"
             returnable="Y" productName="Demo Product One-One" description=""/>
-    <mantle.product.product.ProductPrice productPriceId="DEMO_1_1_L" productId="DEMO_1_1" productStoreId="POPC"
+    <mantle.product.ProductPrice productPriceId="DEMO_1_1_L" productId="DEMO_1_1" productStoreId="POPC"
             pricePurposeEnumId="PPP_PURCHASE" priceTypeEnumId="LIST_PRICE"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="19.99" priceUomId="USD"/>
-    <mantle.product.product.ProductPrice productPriceId="DEMO_1_1_C" productId="DEMO_1_1" productStoreId="POPC"
+    <mantle.product.ProductPrice productPriceId="DEMO_1_1_C" productId="DEMO_1_1" productStoreId="POPC"
             pricePurposeEnumId="PPP_PURCHASE" priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="16.99" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_ONE" productId="DEMO_1_1"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
-    <mantle.product.product.Product productId="DEMO_1_2" productTypeEnumId="FINISHED_GOOD"
+    <mantle.product.Product productId="DEMO_1_2" productTypeEnumId="FINISHED_GOOD"
             productName="Demo Product One-Two" description=""
             chargeShipping="Y" returnable="Y"/>
-    <mantle.product.product.ProductPrice productPriceId="DEMO_1_2_C" productId="DEMO_1_2" productStoreId="POPC"
+    <mantle.product.ProductPrice productPriceId="DEMO_1_2_C" productId="DEMO_1_2" productStoreId="POPC"
             pricePurposeEnumId="PPP_PURCHASE" priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="11119.99" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_ONE" productId="DEMO_1_2"
@@ -77,9 +77,9 @@ This Work includes contributions authored by David E. Jones, not as a
     <mantle.product.category.ProductCategoryMember productCategoryId="POPC_HOME" productId="DEMO_1_2"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
 
-    <mantle.product.product.Product productId="DEMO_2_1" productTypeEnumId="FINISHED_GOOD" chargeShipping="Y"
+    <mantle.product.Product productId="DEMO_2_1" productTypeEnumId="FINISHED_GOOD" chargeShipping="Y"
             returnable="Y" productName="Demo Product Two-One" description=""/>
-    <mantle.product.product.ProductPrice productPriceId="DEMO_2_1_C" productId="DEMO_2_1" productStoreId="POPC"
+    <mantle.product.ProductPrice productPriceId="DEMO_2_1_C" productId="DEMO_2_1" productStoreId="POPC"
             pricePurposeEnumId="PPP_PURCHASE" priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="12.12" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_TWO" productId="DEMO_2_1"
@@ -87,9 +87,9 @@ This Work includes contributions authored by David E. Jones, not as a
     <mantle.product.category.ProductCategoryMember productCategoryId="POPC_HOME" productId="DEMO_2_1"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="2"/>
 
-    <mantle.product.product.Product productId="DEMO_3_1" productTypeEnumId="FINISHED_GOOD" chargeShipping="Y"
+    <mantle.product.Product productId="DEMO_3_1" productTypeEnumId="FINISHED_GOOD" chargeShipping="Y"
             returnable="Y" productName="Demo Product Three-One" description=""/>
-    <mantle.product.product.ProductPrice productPriceId="DEMO_3_1_C" productId="DEMO_3_1" productStoreId="POPC"
+    <mantle.product.ProductPrice productPriceId="DEMO_3_1_C" productId="DEMO_3_1" productStoreId="POPC"
             pricePurposeEnumId="PPP_PURCHASE" priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="7.77" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_THREE" productId="DEMO_3_1"
