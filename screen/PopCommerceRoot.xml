@@ -117,7 +117,7 @@ This Work includes contributions authored by David E. Jones, not as a
         </container-panel>
 
         <render-mode>
-            <text type="html"><![CDATA[</body></html>]]></text>
+            <text type="html" location="component://webroot/screen/includes/Footer.html.ftl"/>
         </render-mode>
     </widgets>
 </screen>
