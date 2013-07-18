@@ -17,7 +17,7 @@ This Work includes contributions authored by David E. Jones, not as a
     <moqui.security.UserAccount userId="POPC_JQP" username="joe@public.com" userFullName="Joe Q Public"
             currentPassword="16ac58bbfa332c1c55bd98b53e60720bfa90d394" passwordHashType="SHA"
             passwordHint="framework name, lowercase" currencyUomId="USD" locale="en_US" partyId="POPC_JQP"/>
-    <mantle.party.contact.ContactMech contactMechId="POPC_JQP_PEM" contactMechTypeEnumId="EMAIL_ADDRESS"
+    <mantle.party.contact.ContactMech contactMechId="POPC_JQP_PEM" contactMechTypeEnumId="CmtEmailAddress"
             infoString="joe@public.com"/>
     <mantle.party.contact.PartyContactMech partyId="POPC_JQP" contactMechId="POPC_JQP_PEM"
             contactMechPurposeId="PRIMARY_EMAIL" fromDate="2010-02-03 00:00:00.000"/>
