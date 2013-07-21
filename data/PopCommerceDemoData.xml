@@ -12,15 +12,15 @@ This Work includes contributions authored by David E. Jones, not as a
 -->
 <entity-facade-xml type="demo">
     <!-- Demo Customer: Joe Q Public (joe@public.com) -->
-    <mantle.party.Party partyId="POPC_JQP" partyTypeEnumId="PERSON"/>
-    <mantle.party.Person partyId="POPC_JQP" firstName="Joe" middleName="Q" lastName="Public"/>
-    <moqui.security.UserAccount userId="POPC_JQP" username="joe@public.com" userFullName="Joe Q Public"
+    <mantle.party.Party partyId="PopcJqp" partyTypeEnumId="PtyPerson"/>
+    <mantle.party.Person partyId="PopcJqp" firstName="Joe" middleName="Q" lastName="Public"/>
+    <moqui.security.UserAccount userId="PopcJqp" username="joe@public.com" userFullName="Joe Q Public"
             currentPassword="16ac58bbfa332c1c55bd98b53e60720bfa90d394" passwordHashType="SHA"
-            passwordHint="framework name, lowercase" currencyUomId="USD" locale="en_US" partyId="POPC_JQP"/>
-    <mantle.party.contact.ContactMech contactMechId="POPC_JQP_PEM" contactMechTypeEnumId="CmtEmailAddress"
+            passwordHint="framework name, lowercase" currencyUomId="USD" locale="en_US" partyId="PopcJqp"/>
+    <mantle.party.contact.ContactMech contactMechId="PopcJqpPem" contactMechTypeEnumId="CmtEmailAddress"
             infoString="joe@public.com"/>
-    <mantle.party.contact.PartyContactMech partyId="POPC_JQP" contactMechId="POPC_JQP_PEM"
-            contactMechPurposeId="PRIMARY_EMAIL" fromDate="2010-02-03 00:00:00.000"/>
+    <mantle.party.contact.PartyContactMech partyId="PopcJqp" contactMechId="PopcJqpPem"
+            contactMechPurposeId="EmailPrimary" fromDate="2010-02-03 00:00:00.000"/>
 
     <!-- The default ProductStore -->
     <mantle.product.store.ProductStore productStoreId="POPC" storeName="PopCommerce Default Store"
@@ -30,30 +30,30 @@ This Work includes contributions authored by David E. Jones, not as a
     <!-- TODO: setup an organization Party that represents the company -->
 
     <!-- Default Home Page and Root Browse Categories -->
-    <mantle.product.category.ProductCategory productCategoryId="POPC_HOME" productCategoryTypeEnumId="CATALOG_CATEGORY"
+    <mantle.product.category.ProductCategory productCategoryId="PopcHome" productCategoryTypeEnumId="CATALOG_CATEGORY"
             categoryName="POP Commerce Home Page"/>
-    <mantle.product.store.ProductStoreCategory productStoreId="POPC" productCategoryId="POPC_HOME"
+    <mantle.product.store.ProductStoreCategory productStoreId="POPC" productCategoryId="PopcHome"
             storeCategoryTypeEnumId="PSCT_HOME_PAGE" fromDate="2010-02-03 00:00:00.000" thruDate=""/>
-    <mantle.product.category.ProductCategory productCategoryId="POPC_BROWSE_ROOT"
+    <mantle.product.category.ProductCategory productCategoryId="PopcBrowseRoot"
             productCategoryTypeEnumId="CATALOG_CATEGORY" categoryName="POP Commerce Browse Root"/>
-    <mantle.product.store.ProductStoreCategory productStoreId="POPC" productCategoryId="POPC_BROWSE_ROOT"
+    <mantle.product.store.ProductStoreCategory productStoreId="POPC" productCategoryId="PopcBrowseRoot"
             storeCategoryTypeEnumId="PSCT_BROWSE_ROOT" fromDate="2010-02-03 00:00:00.000" thruDate=""/>
 
     <!-- Demo Categories -->
     <mantle.product.category.ProductCategory productCategoryId="DEMO_ONE" productCategoryTypeEnumId="CATALOG_CATEGORY"
             categoryName="Demo Category One" description=""/>
     <mantle.product.category.ProductCategoryRollup productCategoryId="DEMO_ONE"
-            parentProductCategoryId="POPC_BROWSE_ROOT" fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
+            parentProductCategoryId="PopcBrowseRoot" fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
 
     <mantle.product.category.ProductCategory productCategoryId="DEMO_TWO" productCategoryTypeEnumId="CATALOG_CATEGORY"
             categoryName="Demo Category Two" description=""/>
     <mantle.product.category.ProductCategoryRollup productCategoryId="DEMO_TWO"
-            parentProductCategoryId="POPC_BROWSE_ROOT" fromDate="2010-02-03 00:00:00.0" sequenceNum="2"/>
+            parentProductCategoryId="PopcBrowseRoot" fromDate="2010-02-03 00:00:00.0" sequenceNum="2"/>
 
     <mantle.product.category.ProductCategory productCategoryId="DEMO_THREE" productCategoryTypeEnumId="CATALOG_CATEGORY"
             categoryName="Demo Category Three" description=""/>
     <mantle.product.category.ProductCategoryRollup productCategoryId="DEMO_THREE"
-            parentProductCategoryId="POPC_BROWSE_ROOT" fromDate="2010-02-03 00:00:00.0" sequenceNum="3"/>
+            parentProductCategoryId="PopcBrowseRoot" fromDate="2010-02-03 00:00:00.0" sequenceNum="3"/>
 
     <!-- Demo Products -->
     <mantle.product.Product productId="DEMO_1_1" productTypeEnumId="FINISHED_GOOD" chargeShipping="Y"
@@ -74,7 +74,7 @@ This Work includes contributions authored by David E. Jones, not as a
             minQuantity="1" price="11119.99" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_ONE" productId="DEMO_1_2"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="2"/>
-    <mantle.product.category.ProductCategoryMember productCategoryId="POPC_HOME" productId="DEMO_1_2"
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcHome" productId="DEMO_1_2"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
 
     <mantle.product.Product productId="DEMO_2_1" productTypeEnumId="FINISHED_GOOD" chargeShipping="Y"
@@ -84,7 +84,7 @@ This Work includes contributions authored by David E. Jones, not as a
             minQuantity="1" price="12.12" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_TWO" productId="DEMO_2_1"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
-    <mantle.product.category.ProductCategoryMember productCategoryId="POPC_HOME" productId="DEMO_2_1"
+    <mantle.product.category.ProductCategoryMember productCategoryId="PopcHome" productId="DEMO_2_1"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="2"/>
 
     <mantle.product.Product productId="DEMO_3_1" productTypeEnumId="FINISHED_GOOD" chargeShipping="Y"

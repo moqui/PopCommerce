@@ -79,7 +79,7 @@ This Work includes contributions authored by David E. Jones, not as a
                                 <entity-options key="${productCategoryId}" text="${categoryName}">
                                     <entity-find entity-name="ProductCategoryChildren" cache="true">
                                         <date-filter/>
-                                        <econdition field-name="parentProductCategoryId" value="POPC_BROWSE_ROOT"/>
+                                        <econdition field-name="parentProductCategoryId" value="PopcBrowseRoot"/>
                                         <order-by field-name="sequenceNum"/>
                                         <order-by field-name="categoryName"/>
                                     </entity-find>

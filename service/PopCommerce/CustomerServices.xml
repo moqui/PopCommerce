@@ -39,13 +39,13 @@ This Work includes contributions authored by David E. Jones, not as a
                 <service-call name="mantle.party.ContactServices.update#PartyPostalAddress" in-map="context" out-map="paOut">
                     <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
                     <field-map field-name="contactMechId" from="postalContactMechId"/>
-                    <field-map field-name="contactMechPurposeId" value="SHIPPING_DESTINATION"/>
+                    <field-map field-name="contactMechPurposeId" value="PostalShippingDest"/>
                 </service-call>
 
                 <else>
                     <service-call name="mantle.party.ContactServices.create#PostalAddress" in-map="context" out-map="paOut">
                         <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
-                        <field-map field-name="contactMechPurposeId" value="SHIPPING_DESTINATION"/>
+                        <field-map field-name="contactMechPurposeId" value="PostalShippingDest"/>
                     </service-call>
                 </else>
             </if>
@@ -55,13 +55,13 @@ This Work includes contributions authored by David E. Jones, not as a
                 <service-call name="mantle.party.ContactServices.update#PartyTelecomNumber" in-map="context" out-map="tnOut">
                     <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
                     <field-map field-name="contactMechId" from="telecomContactMechId"/>
-                    <field-map field-name="contactMechPurposeId" value="PHONE_SHIP_DEST"/>
+                    <field-map field-name="contactMechPurposeId" value="PhoneShippingDest"/>
                 </service-call>
 
                 <else>
                     <service-call name="mantle.party.ContactServices.create#TelecomNumber" in-map="context" out-map="tnOut">
                         <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
-                        <field-map field-name="contactMechPurposeId" value="PHONE_SHIP_DEST"/>
+                        <field-map field-name="contactMechPurposeId" value="PhoneShippingDest"/>
                     </service-call>
                 </else>
             </if>
@@ -107,13 +107,13 @@ This Work includes contributions authored by David E. Jones, not as a
                 <service-call name="mantle.party.ContactServices.update#PartyPostalAddress" in-map="context" out-map="paOut">
                     <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
                     <field-map field-name="contactMechId" from="postalContactMechId"/>
-                    <field-map field-name="contactMechPurposeId" value="BILLING_LOCATION"/>
+                    <field-map field-name="contactMechPurposeId" value="PostalBilling"/>
                 </service-call>
 
                 <else>
                     <service-call name="mantle.party.ContactServices.create#PostalAddress" in-map="context" out-map="paOut">
                         <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
-                        <field-map field-name="contactMechPurposeId" value="BILLING_LOCATION"/>
+                        <field-map field-name="contactMechPurposeId" value="PostalBilling"/>
                     </service-call>
                 </else>
             </if>
@@ -123,13 +123,13 @@ This Work includes contributions authored by David E. Jones, not as a
                 <service-call name="mantle.party.ContactServices.update#PartyTelecomNumber" in-map="context" out-map="tnOut">
                     <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
                     <field-map field-name="contactMechId" from="telecomContactMechId"/>
-                    <field-map field-name="contactMechPurposeId" value="PHONE_BILLING"/>
+                    <field-map field-name="contactMechPurposeId" value="PhoneBilling"/>
                 </service-call>
 
                 <else>
                     <service-call name="mantle.party.ContactServices.create#TelecomNumber" in-map="context" out-map="tnOut">
                         <field-map field-name="partyId" from="ec.user.userAccount.partyId"/>
-                        <field-map field-name="contactMechPurposeId" value="PHONE_BILLING"/>
+                        <field-map field-name="contactMechPurposeId" value="PhoneBilling"/>
                     </service-call>
                 </else>
             </if>
