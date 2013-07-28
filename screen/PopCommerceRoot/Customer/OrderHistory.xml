@@ -20,7 +20,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
     <actions>
         <entity-find entity-name="OrderHeaderAndPart" list="orderList">
-            <!-- maybe actually better to show all orders, even open/cart ones: <econdition field-name="statusId" operator="not-equals" value="ORDER_OPEN"/> -->
+            <!-- maybe actually better to show all orders, even open/cart ones: <econdition field-name="statusId" operator="not-equals" value="OrderOpen"/> -->
             <econdition field-name="customerPartyId" from="ec.user.userAccount.partyId"/>
             <order-by field-name="-entryDate"/>
         </entity-find>

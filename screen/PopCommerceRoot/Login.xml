@@ -21,7 +21,7 @@ This Work includes contributions authored by David E. Jones, not as a
                 <!-- TODO: move this to a service so that screen.@require-authentication can be false instead of anonymous-all (slightly tighter security) -->
                 <!-- see if there is an open order for user and get that ID into session -->
                 <entity-find entity-name="OrderHeaderAndPart" list="existingOrderList">
-                    <econdition field-name="statusId" value="ORDER_OPEN"/>
+                    <econdition field-name="statusId" value="OrderOpen"/>
                     <econdition field-name="customerPartyId" from="ec.user.userAccount.partyId"/>
                     <select-field field-name="orderId"/><select-field field-name="orderPartSeqId"/>
                     <order-by field-name="-entryDate"/><!-- get most recent open order -->

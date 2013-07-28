@@ -62,10 +62,10 @@ This Work includes contributions authored by David E. Jones, not as a
                     <label text="${creditCardInfo.creditCard?.firstNameOnCard} ${creditCardInfo.creditCard?.lastNameOnCard}" type="p"/>
                     <!-- TODO: mask the cardNumber -->
                     <label text="${creditCardInfo.creditCardTypeEnum?.description} ${creditCardInfo.creditCard?.cardNumber} ${creditCardInfo.creditCard?.expireDate}" type="p"/>
-                    <label text="${creditCardInfo.postalAddress.address1}" type="p"/>
+                    <label text="${creditCardInfo.postalAddress?.address1 ?: ''}" type="p"/>
                     <label text="${creditCardInfo.postalAddress?.address2 ?: ''}" type="p"/>
-                    <label text="${creditCardInfo.postalAddress?.city}, ${creditCardInfo.postalAddressStateGeo?.geoCodeAlpha2} ${creditCardInfo.postalAddress?.postalCode}" type="p"/>
-                    <label text="(${creditCardInfo.telecomNumber?.areaCode}) ${creditCardInfo.telecomNumber?.contactNumber}" type="p"/>
+                    <label text="${creditCardInfo.postalAddress?.city ? creditCardInfo.postalAddress.city + ',' : ''} ${creditCardInfo.postalAddressStateGeo?.geoCodeAlpha2 ?: ''} ${creditCardInfo.postalAddress?.postalCode ?: ''}" type="p"/>
+                    <label text="${creditCardInfo.telecomNumber?.areaCode ? '(' + creditCardInfo.telecomNumber.areaCode + ')' : ''} ${creditCardInfo.telecomNumber?.contactNumber ?: ''}" type="p"/>
                 </widgets>
                 <fail-widgets>
                     <label text="Please add billing information" type="p"/>

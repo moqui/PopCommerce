@@ -30,67 +30,67 @@ This Work includes contributions authored by David E. Jones, not as a
     <!-- TODO: setup an organization Party that represents the company -->
 
     <!-- Default Home Page and Root Browse Categories -->
-    <mantle.product.category.ProductCategory productCategoryId="PopcHome" productCategoryTypeEnumId="CATALOG_CATEGORY"
+    <mantle.product.category.ProductCategory productCategoryId="PopcHome" productCategoryTypeEnumId="PctCatalog"
             categoryName="POP Commerce Home Page"/>
     <mantle.product.store.ProductStoreCategory productStoreId="POPC" productCategoryId="PopcHome"
             storeCategoryTypeEnumId="PSCT_HOME_PAGE" fromDate="2010-02-03 00:00:00.000" thruDate=""/>
     <mantle.product.category.ProductCategory productCategoryId="PopcBrowseRoot"
-            productCategoryTypeEnumId="CATALOG_CATEGORY" categoryName="POP Commerce Browse Root"/>
+            productCategoryTypeEnumId="PctCatalog" categoryName="POP Commerce Browse Root"/>
     <mantle.product.store.ProductStoreCategory productStoreId="POPC" productCategoryId="PopcBrowseRoot"
             storeCategoryTypeEnumId="PSCT_BROWSE_ROOT" fromDate="2010-02-03 00:00:00.000" thruDate=""/>
 
     <!-- Demo Categories -->
-    <mantle.product.category.ProductCategory productCategoryId="DEMO_ONE" productCategoryTypeEnumId="CATALOG_CATEGORY"
+    <mantle.product.category.ProductCategory productCategoryId="DEMO_ONE" productCategoryTypeEnumId="PctCatalog"
             categoryName="Demo Category One" description=""/>
     <mantle.product.category.ProductCategoryRollup productCategoryId="DEMO_ONE"
             parentProductCategoryId="PopcBrowseRoot" fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
 
-    <mantle.product.category.ProductCategory productCategoryId="DEMO_TWO" productCategoryTypeEnumId="CATALOG_CATEGORY"
+    <mantle.product.category.ProductCategory productCategoryId="DEMO_TWO" productCategoryTypeEnumId="PctCatalog"
             categoryName="Demo Category Two" description=""/>
     <mantle.product.category.ProductCategoryRollup productCategoryId="DEMO_TWO"
             parentProductCategoryId="PopcBrowseRoot" fromDate="2010-02-03 00:00:00.0" sequenceNum="2"/>
 
-    <mantle.product.category.ProductCategory productCategoryId="DEMO_THREE" productCategoryTypeEnumId="CATALOG_CATEGORY"
+    <mantle.product.category.ProductCategory productCategoryId="DEMO_THREE" productCategoryTypeEnumId="PctCatalog"
             categoryName="Demo Category Three" description=""/>
     <mantle.product.category.ProductCategoryRollup productCategoryId="DEMO_THREE"
             parentProductCategoryId="PopcBrowseRoot" fromDate="2010-02-03 00:00:00.0" sequenceNum="3"/>
 
     <!-- Demo Products -->
-    <mantle.product.Product productId="DEMO_1_1" productTypeEnumId="FINISHED_GOOD" chargeShipping="Y"
+    <mantle.product.Product productId="DEMO_1_1" productTypeEnumId="PtFinishedGood" chargeShipping="Y"
             returnable="Y" productName="Demo Product One-One" description=""/>
     <mantle.product.ProductPrice productPriceId="DEMO_1_1_L" productId="DEMO_1_1" productStoreId="POPC"
-            pricePurposeEnumId="PPP_PURCHASE" priceTypeEnumId="LIST_PRICE"  fromDate="2010-02-03 00:00:00.0"
+            pricePurposeEnumId="PppPurchase" priceTypeEnumId="PptList"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="19.99" priceUomId="USD"/>
     <mantle.product.ProductPrice productPriceId="DEMO_1_1_C" productId="DEMO_1_1" productStoreId="POPC"
-            pricePurposeEnumId="PPP_PURCHASE" priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0"
+            pricePurposeEnumId="PppPurchase" priceTypeEnumId="PptCurrent"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="16.99" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_ONE" productId="DEMO_1_1"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
-    <mantle.product.Product productId="DEMO_1_2" productTypeEnumId="FINISHED_GOOD"
+    <mantle.product.Product productId="DEMO_1_2" productTypeEnumId="PtFinishedGood"
             productName="Demo Product One-Two" description=""
             chargeShipping="Y" returnable="Y"/>
     <mantle.product.ProductPrice productPriceId="DEMO_1_2_C" productId="DEMO_1_2" productStoreId="POPC"
-            pricePurposeEnumId="PPP_PURCHASE" priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0"
+            pricePurposeEnumId="PppPurchase" priceTypeEnumId="PptCurrent"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="11119.99" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_ONE" productId="DEMO_1_2"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="2"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="PopcHome" productId="DEMO_1_2"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
 
-    <mantle.product.Product productId="DEMO_2_1" productTypeEnumId="FINISHED_GOOD" chargeShipping="Y"
+    <mantle.product.Product productId="DEMO_2_1" productTypeEnumId="PtFinishedGood" chargeShipping="Y"
             returnable="Y" productName="Demo Product Two-One" description=""/>
     <mantle.product.ProductPrice productPriceId="DEMO_2_1_C" productId="DEMO_2_1" productStoreId="POPC"
-            pricePurposeEnumId="PPP_PURCHASE" priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0"
+            pricePurposeEnumId="PppPurchase" priceTypeEnumId="PptCurrent"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="12.12" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_TWO" productId="DEMO_2_1"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="PopcHome" productId="DEMO_2_1"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="2"/>
 
-    <mantle.product.Product productId="DEMO_3_1" productTypeEnumId="FINISHED_GOOD" chargeShipping="Y"
+    <mantle.product.Product productId="DEMO_3_1" productTypeEnumId="PtFinishedGood" chargeShipping="Y"
             returnable="Y" productName="Demo Product Three-One" description=""/>
     <mantle.product.ProductPrice productPriceId="DEMO_3_1_C" productId="DEMO_3_1" productStoreId="POPC"
-            pricePurposeEnumId="PPP_PURCHASE" priceTypeEnumId="CURRENT_PRICE"  fromDate="2010-02-03 00:00:00.0"
+            pricePurposeEnumId="PppPurchase" priceTypeEnumId="PptCurrent"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="7.77" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_THREE" productId="DEMO_3_1"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
