@@ -92,7 +92,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <section name="ShippingInfoSection">
                 <condition><expression>shippingInfo?.postalAddress</expression></condition>
                 <widgets>
-                    <label text="To: ${shippingInfo.postalAddress?.toName}" type="p"/>
+                    <label text="To: ${shippingInfo.postalAddress?.toName?:''}" type="p"/>
                     <label text="${shippingInfo.postalAddress?.attnName ? 'Attn: ' + shippingInfo.postalAddress.attnName : ''}" type="p"/>
                     <label text="${shippingInfo.postalAddress?.address1}" type="p"/>
                     <label text="${shippingInfo.postalAddress?.address2 ?: ''}" type="p"/>
