@@ -20,7 +20,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <actions>
             <service-call name="mantle.order.OrderServices.add#OrderProductQuantity" out-map="addOut"
                     in-map="[orderId:cartOrderId, productId:productId, quantity:quantity, customerPartyId:customerPartyId,
-                            currencyUomId:currencyUomId, productStoreId:productStoreId]"/>
+                        currencyUomId:currencyUomId, productStoreId:productStoreId]"/>
             <set field="ec.web.sessionAttributes.cartOrderId" from="addOut.orderId"/>
         </actions>
         <default-response url="../../Order/Cart"/>
@@ -37,7 +37,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <entity-find-one entity-name="mantle.product.Product" value-field="product"/>
         <service-call name="mantle.product.ProductServices.get#ProductPrice" out-map="priceMap"
                 in-map="[productId:productId, priceUomId:priceUomId, productStoreId:productStoreId,
-                                vendorPartyId:vendorPartyId, customerPartyId:customerPartyId]"/>
+                    vendorPartyId:vendorPartyId, customerPartyId:customerPartyId]"/>
         <set field="price" from="priceMap?.price"/>
         <set field="priceUomId" from="priceMap?.priceUomId"/>
     </actions>
