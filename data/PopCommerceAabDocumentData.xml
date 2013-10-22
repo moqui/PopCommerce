@@ -11,8 +11,8 @@ This Work includes contributions authored by David E. Jones, not as a
 "work for hire", who hereby disclaims any copyright to the same.
 -->
 <entity-facade-xml type="seed">
-    <!-- Task -->
-    <moqui.entity.document.DataDocument dataDocumentId="PopcProduct" indexName="popc" documentName="Task"
+    <!-- Product -->
+    <moqui.entity.document.DataDocument dataDocumentId="PopcProduct" indexName="popc" documentName="Product"
             primaryEntityName="mantle.product.Product" documentTitle="${name}"/>
     <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct" fieldPath="productId"/>
     <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct" fieldPath="productName" fieldNameAlias="name"/>
