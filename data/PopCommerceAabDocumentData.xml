@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<entity-facade-xml type="seed">
+    <!-- Task -->
+    <moqui.entity.document.DataDocument dataDocumentId="PopcProduct" indexName="popc" documentName="Task"
+            primaryEntityName="mantle.product.Product" documentTitle="${name}"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct" fieldPath="productId"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct" fieldPath="productName" fieldNameAlias="name"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct" fieldPath="description"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct" fieldPath="salesIntroductionDate"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct" fieldPath="salesDiscontinuationDate"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct" fieldPath="supportDiscontinuationDate"/>
+
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct" fieldPath="productTypeEnumId"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="ProductType#moqui.basic.Enumeration:description" fieldNameAlias="type"/>
+
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.category.ProductCategoryMember:productCategoryId"/>
+    <!-- TODO: any way to automatically filter by from/thru dates without requiring them (make sure condition generated allows nulls...)? -->
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.category.ProductCategoryMember:fromDate" fieldNameAlias="categoryFromDate"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.category.ProductCategoryMember:thruDate" fieldNameAlias="categoryThruDate"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.category.ProductCategoryMember:mantle.product.category.ProductCategory:categoryName"
+            fieldNameAlias="category"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.category.ProductCategoryMember:mantle.product.category.ProductCategory:productCategoryTypeEnumId"/>
+
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.ProductIdentification:idValue"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.ProductIdentification:productIdTypeEnumId"/>
+
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.ProductPrice:price"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.ProductPrice:productStoreId" fieldNameAlias="priceProductStoreId"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.ProductPrice:priceTypeEnumId"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.ProductPrice:pricePurposeEnumId"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.ProductPrice:fromDate" fieldNameAlias="priceFromDate"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.ProductPrice:thruDate" fieldNameAlias="priceThruDate"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.ProductPrice:priceUomId"/>
+
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.ProductAssoc:toProductId" fieldNameAlias="assocToId"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="mantle.product.ProductAssoc:ProductAssocType#moqui.basic.Enumeration:description"
+            fieldNameAlias="assocType"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="To#mantle.product.ProductAssoc:productId" fieldNameAlias="assocFromId"/>
+    <moqui.entity.document.DataDocumentField dataDocumentId="PopcProduct"
+            fieldPath="To#mantle.product.ProductAssoc:ProductAssocType#moqui.basic.Enumeration:description"
+            fieldNameAlias="assocTypeTo"/>
+
+    <moqui.entity.document.DataDocumentRelAlias dataDocumentId="PopcProduct"
+            relationshipName="mantle.product.Product" documentAlias="Product"/>
+    <moqui.entity.document.DataDocumentRelAlias dataDocumentId="PopcProduct"
+            relationshipName="ProductType#moqui.basic.Enumeration" documentAlias="ProductType"/>
+
+    <moqui.entity.document.DataDocumentRelAlias dataDocumentId="PopcProduct"
+            relationshipName="mantle.product.category.ProductCategoryMember" documentAlias="ProductCategoryMember"/>
+    <moqui.entity.document.DataDocumentRelAlias dataDocumentId="PopcProduct"
+            relationshipName="mantle.product.category.ProductCategory" documentAlias="ProductCategory"/>
+
+    <moqui.entity.document.DataDocumentRelAlias dataDocumentId="PopcProduct"
+            relationshipName="mantle.product.ProductIdentification" documentAlias="ProductIdentification"/>
+    <moqui.entity.document.DataDocumentRelAlias dataDocumentId="PopcProduct"
+            relationshipName="mantle.product.ProductPrice" documentAlias="ProductPrice"/>
+
+    <moqui.entity.document.DataDocumentRelAlias dataDocumentId="PopcProduct"
+            relationshipName="mantle.product.ProductAssoc" documentAlias="Assoc"/>
+    <moqui.entity.document.DataDocumentRelAlias dataDocumentId="PopcProduct"
+            relationshipName="To#mantle.product.ProductAssoc" documentAlias="AssocTo"/>
+    <moqui.entity.document.DataDocumentRelAlias dataDocumentId="PopcProduct"
+            relationshipName="ProductAssocType#moqui.basic.Enumeration" documentAlias="ProductAssocType"/>
+
+    <!-- for now do all: <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcProduct"
+            fieldNameAlias="productTypeEnumId" fieldValue="PtFinishedGood"/> -->
+    <moqui.entity.document.DataDocumentLink dataDocumentId="PopcProduct" label="Product Detail"
+            linkUrl="/popc/Product/Detail?productId=${productId}"/>
+
+    <!-- ================ -->
+    <!-- Search Data Feed -->
+    <moqui.entity.feed.DataFeed dataFeedId="PopCommerceSearch" dataFeedTypeEnumId="DTFDTP_RT_PUSH"
+            feedName="PopCommerce Search" feedReceiveServiceName="org.moqui.impl.EntityServices.index#DataDocuments"/>
+    <moqui.entity.feed.DataFeedDocument dataFeedId="PopCommerceSearch" dataDocumentId="PopcProduct"/>
+</entity-facade-xml>
