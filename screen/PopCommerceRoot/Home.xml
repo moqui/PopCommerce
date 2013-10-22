@@ -39,7 +39,7 @@ This Work includes contributions authored by David E. Jones, not as a
         </entity-find>
     </actions>
     <widgets>
-        <label text="POP Commerce Home Page" type="h1"/>
+        <!-- <label text="POP Commerce Home Page" type="h1"/> -->
         <form-list name="HomeProductList" list="pcmpList" transition="addToCart">
             <row-actions>
                 <service-call name="mantle.product.ProductServices.get#ProductPrice" out-map="priceMap"
@@ -50,7 +50,9 @@ This Work includes contributions authored by David E. Jones, not as a
             </row-actions>
             
             <field name="productId"><default-field><hidden/></default-field></field>
-            <field name="productName"><default-field title=""><display also-hidden="false"/></default-field></field>
+            <field name="productName"><default-field title="">
+                <link text="${productName}" url="Product/Detail/${productId}/${productName}" url-type="plain" link-type="anchor"/>
+            </default-field></field>
             <field name="price"><default-field title=""><display also-hidden="false" currency-unit-field="priceUomId"/></default-field></field>
             <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>
             <field name="add"><default-field title="Add to Cart"><submit/></default-field></field>
