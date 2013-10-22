@@ -28,7 +28,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
             <parameter name="telecomContactMechId" type="String" required="false"/>
             <parameter name="areaCode" type="String" required="true"><text-digits/></parameter>
-            <parameter name="contactNumber" type="String" required="true"><text-digits/></parameter>
+            <parameter name="contactNumber"><matches regexp="^\d\d[-\. \d]*\d\d$" message="Please enter a valid phone number"/></parameter>
         </in-parameters>
         <out-parameters>
             <parameter name="postalContactMechId" type="String" required="true"/>
@@ -95,7 +95,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
             <parameter name="telecomContactMechId" type="String" required="false"/>
             <parameter name="areaCode" type="String" required="true"><text-digits/></parameter>
-            <parameter name="contactNumber" type="String" required="true"><text-digits/></parameter>
+            <parameter name="contactNumber"><matches regexp="^\d\d[-\. \d]*\d\d$" message="Please enter a valid phone number"/></parameter>
         </in-parameters>
         <out-parameters>
             <parameter name="paymentMethodId" type="String" required="true"/>
