@@ -15,7 +15,7 @@ This Work includes contributions authored by David E. Jones, not as a
         require-authentication="true">
 
     <transition name="storeShippingInfo">
-        <service-call name="PopCommerce.CustomerServices.store#ShippingInfo"/>
+        <service-call name="mantle.party.ContactServices.store#PartyContactInfo"/>
         <default-response url="."/>
     </transition>
     <transition name="storeBillingInfo">
@@ -93,18 +93,13 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="submitButton"><default-field title="${paymentMethodId ? 'Update' : 'Create'}"><submit/></default-field></field>
 
                     <field-layout>
-                        <field-ref name="paymentMethodId"/>
                         <field-ref name="firstNameOnCard"/><field-ref name="lastNameOnCard"/>
                         <field-ref name="creditCardTypeEnumId"/><field-ref name="cardNumber"/>
                         <field-row><field-ref name="expireMonth"/><field-ref name="expireYear"/></field-row>
-
-                        <field-ref name="postalContactMechId"/>
                         <field-ref name="countryGeoId"/><field-ref name="address1"/><field-ref name="address2"/>
                         <field-row><field-ref name="city"/><field-ref name="stateProvinceGeoId"/><field-ref name="postalCode"/></field-row>
-
-                        <field-ref name="telecomContactMechId"/>
                         <field-row><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
-
+                        <fields-not-referenced/>
                         <field-ref name="submitButton"/>
                     </field-layout>
                 </form-single>
@@ -117,15 +112,16 @@ This Work includes contributions authored by David E. Jones, not as a
                 <set field="postalContactMechId" from="null"/>
                 <set field="telecomContactMechId" from="null"/>
 
-                <service-call name="mantle.party.ContactServices.get#PartyContactInfo" out-map="context"
+                <service-call name="mantle.party.ContactServices.get#PartyContactInfo" out-map="shippingContactInfo"
                         in-map="[partyId:partyId, postalContactMechPurposeId:'PostalShippingDest',
                             telecomContactMechPurposeId:'PhoneShippingDest']"/>
-                <set field="fieldValues" from="[:] + (postalAddress ?: [:]) + (telecomNumber ?: [:])"/>
+                <set field="fieldValues" from="StupidUtilities.flattenNestedMap(shippingContactInfo)"/>
             </actions>
             <widgets>
                 <label text="Shipping Information" type="h3"/>
                 <form-single name="ShippingInfo" transition="storeShippingInfo">
                     <field name="postalContactMechId"><default-field><hidden/></default-field></field>
+                    <field name="postalContactMechPurposeId"><default-field><hidden/></default-field></field>
 
                     <field name="toName"><default-field><text-line size="30"/></default-field></field>
                     <field name="attnName"><default-field title="Attention"><text-line size="30"/></default-field></field>
@@ -157,20 +153,18 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="postalCode"><default-field title=""><text-line size="10"/></default-field></field>
 
                     <field name="telecomContactMechId"><default-field><hidden/></default-field></field>
+                    <field name="telecomContactMechPurposeId"><default-field><hidden/></default-field></field>
                     <field name="areaCode"><default-field title="Phone"><text-line size="3" maxlength="3"/></default-field></field>
                     <field name="contactNumber"><default-field title=""><text-line size="8" maxlength="8"/></default-field></field>
 
-                    <field name="submitButton"><default-field title="${postalContactMechId ? 'Update' : 'Create'}"><submit/></default-field></field>
+                    <field name="submitButton"><default-field title="${fieldValues.postalContactMechId ? 'Update' : 'Create'}"><submit/></default-field></field>
 
                     <field-layout>
-                        <field-ref name="postalContactMechId"/><field-ref name="toName"/><field-ref name="attnName"/>
-
+                        <field-ref name="toName"/><field-ref name="attnName"/>
                         <field-ref name="countryGeoId"/><field-ref name="address1"/><field-ref name="address2"/>
                         <field-row><field-ref name="city"/><field-ref name="stateProvinceGeoId"/><field-ref name="postalCode"/></field-row>
-
-                        <field-ref name="telecomContactMechId"/>
                         <field-row><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
-
+                        <fields-not-referenced/>
                         <field-ref name="submitButton"/>
                     </field-layout>
                 </form-single>

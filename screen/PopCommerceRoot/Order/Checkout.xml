@@ -15,7 +15,7 @@ This Work includes contributions authored by David E. Jones, not as a
         require-authentication="true">
 
     <transition name="storeShippingInfo">
-        <service-call name="PopCommerce.CustomerServices.store#ShippingInfo"/>
+        <service-call name="mantle.party.ContactServices.store#PartyContactInfo"/>
         <default-response url="."/>
     </transition>
     <transition name="storeBillingInfo">
@@ -79,9 +79,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <container-dialog id="ShippingInfoUpdate" button-text="Update">
                 <section name="ShippingInfoUpdateSection">
                     <actions>
-                        <set field="fieldValues" from="[postalContactMechId:shippingInfo?.postalContactMechId,
-                                telecomContactMechId:shippingInfo?.telecomContactMechId] +
-                                (shippingInfo?.postalAddress ?: [:]) + (shippingInfo?.telecomNumber ?: [:])"/>
+                        <set field="fieldValues" from="StupidUtilities.flattenNestedMap(shippingInfo)"/>
                     </actions>
                     <widgets>
                         <form-single name="ShippingInfo" extends="component://PopCommerce/screen/PopCommerceRoot/Customer/Profile.xml#ShippingInfo"/>
