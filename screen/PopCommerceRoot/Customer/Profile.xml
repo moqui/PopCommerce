@@ -117,7 +117,9 @@ This Work includes contributions authored by David E. Jones, not as a
                 <set field="postalContactMechId" from="null"/>
                 <set field="telecomContactMechId" from="null"/>
 
-                <service-call name="mantle.party.ContactServices.get#PartyShippingInfo" in-map="[partyId:partyId]" out-map="context"/>
+                <service-call name="mantle.party.ContactServices.get#PartyContactInfo" out-map="context"
+                        in-map="[partyId:partyId, postalContactMechPurposeId:'PostalShippingDest',
+                            telecomContactMechPurposeId:'PhoneShippingDest']"/>
                 <set field="fieldValues" from="[:] + (postalAddress ?: [:]) + (telecomNumber ?: [:])"/>
             </actions>
             <widgets>

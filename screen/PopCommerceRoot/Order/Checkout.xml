@@ -30,8 +30,9 @@ This Work includes contributions authored by David E. Jones, not as a
     <actions>
         <service-call name="mantle.account.PaymentMethodServices.get#PartyCreditCardInfo"
                 in-map="[partyId:customerPartyId]" out-map="creditCardInfo"/>
-        <service-call name="mantle.party.ContactServices.get#PartyShippingInfo"
-                in-map="[partyId:customerPartyId]" out-map="shippingInfo"/>
+        <service-call name="mantle.party.ContactServices.get#PartyContactInfo"
+                in-map="[partyId:customerPartyId, postalContactMechPurposeId:'PostalShippingDest',
+                    telecomContactMechPurposeId:'PhoneShippingDest']" out-map="shippingInfo"/>
     </actions>
     <widgets>
         <label text="Checkout" type="h1"/>
