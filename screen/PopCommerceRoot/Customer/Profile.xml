@@ -19,7 +19,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <default-response url="."/>
     </transition>
     <transition name="storeBillingInfo">
-        <service-call name="PopCommerce.CustomerServices.store#BillingInfo"/>
+        <service-call name="mantle.account.PaymentMethodServices.store#CreditCardInfo"/>
         <default-response url="."/>
     </transition>
 
@@ -36,14 +36,14 @@ This Work includes contributions authored by David E. Jones, not as a
         <section name="BillingSection">
             <actions>
                 <service-call name="mantle.account.PaymentMethodServices.get#PartyCreditCardInfo"
-                        in-map="[partyId:partyId]" out-map="context"/>
-                <set field="fieldValues" from="[:] + (paymentMethod ?: [:]) + (creditCard ?: [:]) + (postalAddress ?: [:]) + (telecomNumber ?: [:])"/>
-                <set field="fieldValues.expireMonth" from="fieldValues.expireDate ? fieldValues.expireDate.substring(0, fieldValues.expireDate.indexOf('/')) : null"/>
-                <set field="fieldValues.expireYear" from="fieldValues.expireDate ? fieldValues.expireDate.substring(fieldValues.expireDate.indexOf('/')+1) : null"/>
+                        in-map="[partyId:partyId]" out-map="creditCardInfo"/>
+                <set field="ccInfoFlat" from="StupidUtilities.flattenNestedMap(creditCardInfo)"/>
+                <set field="ccInfoFlat.expireMonth" from="ccInfoFlat.expireDate ? ccInfoFlat.expireDate.substring(0, ccInfoFlat.expireDate.indexOf('/')) : null"/>
+                <set field="ccInfoFlat.expireYear" from="ccInfoFlat.expireDate ? ccInfoFlat.expireDate.substring(ccInfoFlat.expireDate.indexOf('/')+1) : null"/>
             </actions>
             <widgets>
                 <label text="Billing Information" type="h3"/>
-                <form-single name="BillingInfo" transition="storeBillingInfo">
+                <form-single name="BillingInfo" transition="storeBillingInfo" map="ccInfoFlat">
                     <field name="paymentMethodId"><default-field><hidden/></default-field></field>
 
                     <field name="firstNameOnCard"><default-field><text-line size="20"/></default-field></field>
@@ -108,18 +108,14 @@ This Work includes contributions authored by David E. Jones, not as a
 
         <section name="ShippingSection">
             <actions>
-                <set field="fieldValues" from="null"/>
-                <set field="postalContactMechId" from="null"/>
-                <set field="telecomContactMechId" from="null"/>
-
                 <service-call name="mantle.party.ContactServices.get#PartyContactInfo" out-map="shippingContactInfo"
                         in-map="[partyId:partyId, postalContactMechPurposeId:'PostalShippingDest',
                             telecomContactMechPurposeId:'PhoneShippingDest']"/>
-                <set field="fieldValues" from="StupidUtilities.flattenNestedMap(shippingContactInfo)"/>
+                <set field="shipInfoFlat" from="StupidUtilities.flattenNestedMap(shippingContactInfo)"/>
             </actions>
             <widgets>
                 <label text="Shipping Information" type="h3"/>
-                <form-single name="ShippingInfo" transition="storeShippingInfo">
+                <form-single name="ShippingInfo" transition="storeShippingInfo" map="shipInfoFlat">
                     <field name="postalContactMechId"><default-field><hidden/></default-field></field>
                     <field name="postalContactMechPurposeId"><default-field><hidden/></default-field></field>
 
@@ -157,7 +153,7 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="areaCode"><default-field title="Phone"><text-line size="3" maxlength="3"/></default-field></field>
                     <field name="contactNumber"><default-field title=""><text-line size="8" maxlength="8"/></default-field></field>
 
-                    <field name="submitButton"><default-field title="${fieldValues.postalContactMechId ? 'Update' : 'Create'}"><submit/></default-field></field>
+                    <field name="submitButton"><default-field title="${shipInfoFlat.postalContactMechId ? 'Update' : 'Create'}"><submit/></default-field></field>
 
                     <field-layout>
                         <field-ref name="toName"/><field-ref name="attnName"/>
