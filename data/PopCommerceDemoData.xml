@@ -11,32 +11,21 @@ This Work includes contributions authored by David E. Jones, not as a
 "work for hire", who hereby disclaims any copyright to the same.
 -->
 <entity-facade-xml type="demo">
-    <!-- Demo Customer: Joe Q Public (joe@public.com) -->
-    <mantle.party.Party partyId="PopcJqp" partyTypeEnumId="PtyPerson"/>
-    <mantle.party.Person partyId="PopcJqp" firstName="Joe" middleName="Q" lastName="Public"/>
-    <moqui.security.UserAccount userId="PopcJqp" username="joe@public.com" userFullName="Joe Q Public"
-            currentPassword="16ac58bbfa332c1c55bd98b53e60720bfa90d394" passwordHashType="SHA"
-            passwordHint="framework name, lowercase" currencyUomId="USD" locale="en_US" partyId="PopcJqp"/>
-    <mantle.party.contact.ContactMech contactMechId="PopcJqpPem" contactMechTypeEnumId="CmtEmailAddress"
-            infoString="joe@public.com"/>
-    <mantle.party.contact.PartyContactMech partyId="PopcJqp" contactMechId="PopcJqpPem"
-            contactMechPurposeId="EmailPrimary" fromDate="2010-02-03 00:00:00.000"/>
-
-    <!-- The default ProductStore -->
-    <mantle.product.store.ProductStore productStoreId="POPC" storeName="PopCommerce Default Store"
-            organizationPartyId="" inventoryFacilityId="" reservationOrderEnumId="" requirementMethodEnumId=""
+    <!-- Biziwork Retail ProductStore -->
+    <mantle.product.store.ProductStore productStoreId="POPC_DEFAULT" storeName="Biziwork Retail Store"
+            organizationPartyId="ORG_BIZI_RETAIL" inventoryFacilityId=""
+            reservationOrderEnumId="" requirementMethodEnumId=""
             defaultLocale="en_US" defaultCurrencyUomId="USD"/>
     <!-- TODO: setup an inventory Facility -->
-    <!-- TODO: setup an organization Party that represents the company -->
 
     <!-- Default Home Page and Root Browse Categories -->
     <mantle.product.category.ProductCategory productCategoryId="PopcHome" productCategoryTypeEnumId="PctCatalog"
-            categoryName="POP Commerce Home Page"/>
-    <mantle.product.store.ProductStoreCategory productStoreId="POPC" productCategoryId="PopcHome"
+            categoryName="Home Page Category"/>
+    <mantle.product.store.ProductStoreCategory productStoreId="POPC_DEFAULT" productCategoryId="PopcHome"
             storeCategoryTypeEnumId="PSCT_HOME_PAGE" fromDate="2010-02-03 00:00:00.000" thruDate=""/>
     <mantle.product.category.ProductCategory productCategoryId="PopcBrowseRoot"
-            productCategoryTypeEnumId="PctCatalog" categoryName="POP Commerce Browse Root"/>
-    <mantle.product.store.ProductStoreCategory productStoreId="POPC" productCategoryId="PopcBrowseRoot"
+            productCategoryTypeEnumId="PctCatalog" categoryName="Browse Root Category"/>
+    <mantle.product.store.ProductStoreCategory productStoreId="POPC_DEFAULT" productCategoryId="PopcBrowseRoot"
             storeCategoryTypeEnumId="PSCT_BROWSE_ROOT" fromDate="2010-02-03 00:00:00.000" thruDate=""/>
 
     <!-- Demo Categories -->
@@ -58,10 +47,10 @@ This Work includes contributions authored by David E. Jones, not as a
     <!-- Demo Products -->
     <mantle.product.Product productId="DEMO_1_1" productTypeEnumId="PtFinishedGood" chargeShipping="Y"
             returnable="Y" productName="Demo Product One-One" description=""/>
-    <mantle.product.ProductPrice productPriceId="DEMO_1_1_L" productId="DEMO_1_1" productStoreId="POPC"
+    <mantle.product.ProductPrice productPriceId="DEMO_1_1_L" productId="DEMO_1_1" productStoreId="POPC_DEFAULT"
             pricePurposeEnumId="PppPurchase" priceTypeEnumId="PptList"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="19.99" priceUomId="USD"/>
-    <mantle.product.ProductPrice productPriceId="DEMO_1_1_C" productId="DEMO_1_1" productStoreId="POPC"
+    <mantle.product.ProductPrice productPriceId="DEMO_1_1_C" productId="DEMO_1_1" productStoreId="POPC_DEFAULT"
             pricePurposeEnumId="PppPurchase" priceTypeEnumId="PptCurrent"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="16.99" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_ONE" productId="DEMO_1_1"
@@ -69,7 +58,7 @@ This Work includes contributions authored by David E. Jones, not as a
     <mantle.product.Product productId="DEMO_1_2" productTypeEnumId="PtFinishedGood"
             productName="Demo Product One-Two" description=""
             chargeShipping="Y" returnable="Y"/>
-    <mantle.product.ProductPrice productPriceId="DEMO_1_2_C" productId="DEMO_1_2" productStoreId="POPC"
+    <mantle.product.ProductPrice productPriceId="DEMO_1_2_C" productId="DEMO_1_2" productStoreId="POPC_DEFAULT"
             pricePurposeEnumId="PppPurchase" priceTypeEnumId="PptCurrent"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="11119.99" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_ONE" productId="DEMO_1_2"
@@ -79,7 +68,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
     <mantle.product.Product productId="DEMO_2_1" productTypeEnumId="PtFinishedGood" chargeShipping="Y"
             returnable="Y" productName="Demo Product Two-One" description=""/>
-    <mantle.product.ProductPrice productPriceId="DEMO_2_1_C" productId="DEMO_2_1" productStoreId="POPC"
+    <mantle.product.ProductPrice productPriceId="DEMO_2_1_C" productId="DEMO_2_1" productStoreId="POPC_DEFAULT"
             pricePurposeEnumId="PppPurchase" priceTypeEnumId="PptCurrent"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="12.12" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_TWO" productId="DEMO_2_1"
@@ -89,13 +78,13 @@ This Work includes contributions authored by David E. Jones, not as a
 
     <mantle.product.Product productId="DEMO_3_1" productTypeEnumId="PtFinishedGood" chargeShipping="Y"
             returnable="Y" productName="Demo Product Three-One" description=""/>
-    <mantle.product.ProductPrice productPriceId="DEMO_3_1_C" productId="DEMO_3_1" productStoreId="POPC"
+    <mantle.product.ProductPrice productPriceId="DEMO_3_1_C" productId="DEMO_3_1" productStoreId="POPC_DEFAULT"
             pricePurposeEnumId="PppPurchase" priceTypeEnumId="PptCurrent"  fromDate="2010-02-03 00:00:00.0"
             minQuantity="1" price="7.77" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_THREE" productId="DEMO_3_1"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
 
     <!-- index for search -->
-    <moqui.entity.ServiceTrigger serviceTriggerId="POPC_SEARCH_DEMO" statusId="SrtrNotRun"
+    <moqui.entity.ServiceTrigger serviceTriggerId="POPC_SEARCH_BIZI" statusId="SrtrNotRun"
             serviceName="org.moqui.impl.EntityServices.index#DataFeedDocuments" mapString="[dataFeedId:'PopCommerceSearch']"/>
 </entity-facade-xml>
