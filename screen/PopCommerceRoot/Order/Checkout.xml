@@ -30,9 +30,14 @@ This Work includes contributions authored by David E. Jones, not as a
     <actions>
         <service-call name="mantle.account.PaymentMethodServices.get#PartyCreditCardInfo"
                 in-map="[partyId:customerPartyId]" out-map="creditCardInfo"/>
+        <set field="ccInfoFlat" from="StupidUtilities.flattenNestedMap(creditCardInfo)"/>
+        <set field="ccInfoFlat.expireMonth" from="ccInfoFlat.expireDate ? ccInfoFlat.expireDate.substring(0, ccInfoFlat.expireDate.indexOf('/')) : null"/>
+        <set field="ccInfoFlat.expireYear" from="ccInfoFlat.expireDate ? ccInfoFlat.expireDate.substring(ccInfoFlat.expireDate.indexOf('/')+1) : null"/>
+
         <service-call name="mantle.party.ContactServices.get#PartyContactInfo"
                 in-map="[partyId:customerPartyId, postalContactMechPurposeId:'PostalShippingDest',
                     telecomContactMechPurposeId:'PhoneShippingDest']" out-map="shippingInfo"/>
+        <set field="shipInfoFlat" from="StupidUtilities.flattenNestedMap(shippingInfo)"/>
     </actions>
     <widgets>
         <label text="Checkout" type="h1"/>
@@ -41,16 +46,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <container>
             <label text="Billing Information" type="h2"/>
             <container-dialog id="BillingInfoUpdate" button-text="Update">
-                <section name="BillingInfoUpdateSection">
-                    <actions>
-                        <set field="ccInfoFlat" from="StupidUtilities.flattenNestedMap(creditCardInfo)"/>
-                        <set field="ccInfoFlat.expireMonth" from="ccInfoFlat.expireDate ? ccInfoFlat.expireDate.substring(0, ccInfoFlat.expireDate.indexOf('/')) : null"/>
-                        <set field="ccInfoFlat.expireYear" from="ccInfoFlat.expireDate ? ccInfoFlat.expireDate.substring(ccInfoFlat.expireDate.indexOf('/')+1) : null"/>
-                    </actions>
-                    <widgets>
-                        <form-single name="BillingInfo" extends="component://PopCommerce/screen/PopCommerceRoot/Customer/Profile.xml#BillingInfo"/>
-                    </widgets>
-                </section>
+                <form-single name="BillingInfo" extends="component://PopCommerce/screen/PopCommerceRoot/Customer/Profile.xml#BillingInfo"/>
             </container-dialog>
         </container>
         <container>
@@ -60,9 +56,9 @@ This Work includes contributions authored by David E. Jones, not as a
                     <label text="${creditCardInfo.creditCard?.firstNameOnCard} ${creditCardInfo.creditCard?.lastNameOnCard}" type="p"/>
                     <!-- TODO: mask the cardNumber -->
                     <label text="${creditCardInfo.creditCardTypeEnum?.description} ${creditCardInfo.creditCard?.cardNumber} ${creditCardInfo.creditCard?.expireDate}" type="p"/>
-                    <label text="${creditCardInfo.postalAddress?.address1 ?: ''}" type="p"/>
+                    <label text="${creditCardInfo.postalAddress?.address1 ?: ''}${creditCardInfo.postalAddress?.unitNumber ? ' #' + creditCardInfo.postalAddress.unitNumber : ''}" type="p"/>
                     <label text="${creditCardInfo.postalAddress?.address2 ?: ''}" type="p"/>
-                    <label text="${creditCardInfo.postalAddress?.city ? creditCardInfo.postalAddress.city + ',' : ''} ${creditCardInfo.postalAddressStateGeo?.geoCodeAlpha2 ?: ''} ${creditCardInfo.postalAddress?.postalCode ?: ''}" type="p"/>
+                    <label text="${creditCardInfo.postalAddress?.city ? creditCardInfo.postalAddress.city + ',' : ''} ${creditCardInfo.postalAddressStateGeo?.geoCodeAlpha2 ?: ''} ${creditCardInfo.postalAddress?.postalCode ?: ''}${creditCardInfo.postalAddress?.postalCodeExt ? '-' + creditCardInfo.postalAddress.postalCodeExt : ''}" type="p"/>
                     <label text="${creditCardInfo.telecomNumber?.areaCode ? '(' + creditCardInfo.telecomNumber.areaCode + ')' : ''} ${creditCardInfo.telecomNumber?.contactNumber ?: ''}" type="p"/>
                 </widgets>
                 <fail-widgets>
@@ -74,14 +70,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <container>
             <label text="Shipping Information" type="h2"/>
             <container-dialog id="ShippingInfoUpdate" button-text="Update">
-                <section name="ShippingInfoUpdateSection">
-                    <actions>
-                        <set field="shipInfoFlat" from="StupidUtilities.flattenNestedMap(shippingInfo)"/>
-                    </actions>
-                    <widgets>
-                        <form-single name="ShippingInfo" extends="component://PopCommerce/screen/PopCommerceRoot/Customer/Profile.xml#ShippingInfo"/>
-                    </widgets>
-                </section>
+                <form-single name="ShippingInfo" extends="component://PopCommerce/screen/PopCommerceRoot/Customer/Profile.xml#ShippingInfo"/>
             </container-dialog>
         </container>
         <container>
@@ -90,9 +79,9 @@ This Work includes contributions authored by David E. Jones, not as a
                 <widgets>
                     <label text="To: ${shippingInfo.postalAddress?.toName?:''}" type="p"/>
                     <label text="${shippingInfo.postalAddress?.attnName ? 'Attn: ' + shippingInfo.postalAddress.attnName : ''}" type="p"/>
-                    <label text="${shippingInfo.postalAddress?.address1}" type="p"/>
+                    <label text="${shippingInfo.postalAddress?.address1}${shippingInfo.postalAddress?.unitNumber ? ' #' + shippingInfo.postalAddress.unitNumber : ''}" type="p"/>
                     <label text="${shippingInfo.postalAddress?.address2 ?: ''}" type="p"/>
-                    <label text="${shippingInfo.postalAddress?.city}, ${shippingInfo.postalAddressStateGeo?.geoCodeAlpha2} ${shippingInfo.postalAddress?.postalCode}" type="p"/>
+                    <label text="${shippingInfo.postalAddress?.city}, ${shippingInfo.postalAddressStateGeo?.geoCodeAlpha2} ${shippingInfo.postalAddress?.postalCode}${shippingInfo.postalAddress?.postalCodeExt ? '-' + shippingInfo.postalAddress.postalCodeExt : ''}" type="p"/>
                     <label text="(${shippingInfo.telecomNumber?.areaCode}) ${shippingInfo.telecomNumber?.contactNumber}" type="p"/>
                 </widgets>
                 <fail-widgets>

@@ -35,16 +35,16 @@ This Work includes contributions authored by David E. Jones, not as a
             <widgets>
                 <container-panel id="order-panel-${orderPartInfo.orderPart.orderPartSeqId}">
                     <panel-left>
-                        <label text="Order Part ${orderPartInfo.orderPart.orderPartSeqId}" type="p"/>
+                        <label text="Order Part ${orderPartInfo.orderPart.orderPartSeqId}" type="strong"/>
                         <label text="Part Total ${ec.l10n.formatCurrency(orderHeader?.grandTotal ?: 0, orderHeader?.currencyUomId, 2)}" type="p"/>
 
                         <!-- shipping info -->
                         <label text="${orderPartInfo.shipmentMethodEnum?.description ?: ''}" type="p"/>
                         <label text="${orderPartInfo.postalAddress?.toName ? 'To: ' + orderPartInfo.postalAddress?.toName : ''}" type="p"/>
                         <label text="${orderPartInfo.postalAddress?.attnName ? 'Attn: ' + orderPartInfo.postalAddress.attnName : ''}" type="p"/>
-                        <label text="${orderPartInfo.postalAddress?.address1 ?: ''}" type="p"/>
+                        <label text="${orderPartInfo.postalAddress?.address1 ?: ''}${orderPartInfo.postalAddress?.unitNumber ? ' #' + orderPartInfo.postalAddress.unitNumber : ''}" type="p"/>
                         <label text="${orderPartInfo.postalAddress?.address2 ?: ''}" type="p"/>
-                        <label text="${orderPartInfo.postalAddress?.city ? orderPartInfo.postalAddress?.city + ', ' : ''}${orderPartInfo.postalAddressStateGeo?.geoCodeAlpha2 ?: ''} ${orderPartInfo.postalAddress?.postalCode ?: ''}" type="p"/>
+                        <label text="${orderPartInfo.postalAddress?.city ? orderPartInfo.postalAddress?.city + ', ' : ''}${orderPartInfo.postalAddressStateGeo?.geoCodeAlpha2 ?: ''} ${orderPartInfo.postalAddress?.postalCode ?: ''}${orderPartInfo.postalAddress?.postalCodeExt ? '-' + orderPartInfo.postalAddress.postalCodeExt : ''}" type="p"/>
                         <label text="${orderPartInfo.telecomNumber?.areaCode ? '(' + orderPartInfo.telecomNumber?.areaCode + ') ' : ''}${orderPartInfo.telecomNumber?.contactNumber ?: ''}" type="p"/>
                     </panel-left>
                     <panel-center>
@@ -58,9 +58,9 @@ This Work includes contributions authored by David E. Jones, not as a
                                 <label text="${partPaymentInfo.creditCard?.firstNameOnCard} ${partPaymentInfo.creditCard?.lastNameOnCard}" type="p"/>
                                 <!-- TODO: mask the cardNumber -->
                                 <label text="${partPaymentInfo.creditCardTypeEnum?.description} ${partPaymentInfo.creditCard?.cardNumber} ${partPaymentInfo.creditCard?.expireDate}" type="p"/>
-                                <label text="${partPaymentInfo.postalAddress.address1}" type="p"/>
+                                <label text="${partPaymentInfo.postalAddress.address1}${partPaymentInfo.postalAddress?.unitNumber ? ' #' + partPaymentInfo.postalAddress.unitNumber : ''}" type="p"/>
                                 <label text="${partPaymentInfo.postalAddress?.address2 ?: ''}" type="p"/>
-                                <label text="${partPaymentInfo.postalAddress?.city}, ${partPaymentInfo.postalAddressStateGeo?.geoCodeAlpha2} ${partPaymentInfo.postalAddress?.postalCode}" type="p"/>
+                                <label text="${partPaymentInfo.postalAddress?.city}, ${partPaymentInfo.postalAddressStateGeo?.geoCodeAlpha2} ${partPaymentInfo.postalAddress?.postalCode}${partPaymentInfo.postalAddress?.postalCodeExt ? '-' + partPaymentInfo.postalAddress.postalCodeExt : ''}" type="p"/>
                                 <label text="(${partPaymentInfo.telecomNumber?.areaCode}) ${partPaymentInfo.telecomNumber?.contactNumber}" type="p"/>
                             </widgets>
                         </section-iterate>
