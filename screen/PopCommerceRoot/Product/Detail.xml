@@ -12,8 +12,48 @@ This Work includes contributions authored by David E. Jones, not as a
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.3.xsd"
-        require-authentication="false">
+        require-authentication="false" allow-extra-path="true">
+
+    <parameter name="productId"/>
+
+    <transition name="addToCart">
+        <actions>
+            <service-call name="mantle.order.OrderServices.add#OrderProductQuantity" out-map="addOut"
+                    in-map="[orderId:cartOrderId, productId:productId, quantity:quantity, customerPartyId:customerPartyId,
+                            currencyUomId:currencyUomId, productStoreId:productStoreId]"/>
+            <set field="ec.web.sessionAttributes.cartOrderId" from="addOut.orderId"/>
+        </actions>
+        <default-response url="../../Order/Cart"/>
+        <error-response url="."/>
+    </transition>
+
+    <pre-actions>
+        <set field="extraPathNameList" from="sri.screenUrlInfo.extraPathNameList"/>
+        <if condition="extraPathNameList &amp;&amp; !productId">
+            <set field="productId" from="extraPathNameList[0]"/>
+        </if>
+    </pre-actions>
+    <actions>
+        <entity-find-one entity-name="mantle.product.Product" value-field="product"/>
+        <service-call name="mantle.product.ProductServices.get#ProductPrice" out-map="priceMap"
+                in-map="[productId:productId, priceUomId:priceUomId, productStoreId:productStoreId,
+                                vendorPartyId:vendorPartyId, customerPartyId:customerPartyId]"/>
+        <set field="price" from="priceMap?.price"/>
+        <set field="priceUomId" from="priceMap?.priceUomId"/>
+    </actions>
     <widgets>
-        <label text="Product Detail" type="h1"/>
+        <label text="${product.productName ?: ''}" type="h2"/>
+        <label text="${product.description ?: ''}" type="p"/>
+
+        <form-single name="ProductAddToCartForm" transition="addToCart">
+            <field name="productId"><default-field><hidden/></default-field></field>
+            <field name="price"><default-field title=""><display also-hidden="false" currency-unit-field="priceUomId"/></default-field></field>
+            <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>
+            <field name="add"><default-field title="Add to Cart"><submit/></default-field></field>
+
+            <field-layout>
+                <field-row><field-ref name="price"/><field-ref name="quantity"/><field-ref name="add"/></field-row>
+            </field-layout>
+        </form-single>
     </widgets>
 </screen>
