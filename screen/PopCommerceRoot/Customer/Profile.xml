@@ -73,6 +73,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
                     <field name="countryGeoId"><default-field title="Country"><hidden default-value="USA"/></default-field></field>
                     <field name="address1"><default-field title="Address Line 1"><text-line size="30"/></default-field></field>
+                    <field name="unitNumber"><default-field><text-line size="10"/></default-field></field>
                     <field name="address2"><default-field title="Address Line 2"><text-line size="30"/></default-field></field>
                     <field name="city"><default-field title="City/State/Zip"><text-line size="16"/></default-field></field>
                     <field name="stateProvinceGeoId"><default-field title="">
@@ -84,20 +85,23 @@ This Work includes contributions authored by David E. Jones, not as a
                             </entity-find>
                         </entity-options></drop-down>
                     </default-field></field>
-                    <field name="postalCode"><default-field title=""><text-line size="10"/></default-field></field>
+                    <field name="postalCode"><default-field title=""><text-line size="8"/></default-field></field>
+                    <field name="postalCodeExt"><default-field title=""><text-line size="4"/></default-field></field>
 
                     <field name="telecomContactMechId"><default-field><hidden/></default-field></field>
                     <field name="areaCode"><default-field title="Phone"><text-line size="3" maxlength="3"/></default-field></field>
                     <field name="contactNumber"><default-field title=""><text-line size="8" maxlength="8"/></default-field></field>
 
-                    <field name="submitButton"><default-field title="${paymentMethodId ? 'Update' : 'Create'}"><submit/></default-field></field>
+                    <field name="submitButton"><default-field title="${ccInfoFlat.paymentMethodId ? 'Update' : 'Create'}"><submit/></default-field></field>
 
                     <field-layout>
                         <field-ref name="firstNameOnCard"/><field-ref name="lastNameOnCard"/>
                         <field-ref name="creditCardTypeEnumId"/><field-ref name="cardNumber"/>
                         <field-row><field-ref name="expireMonth"/><field-ref name="expireYear"/></field-row>
-                        <field-ref name="countryGeoId"/><field-ref name="address1"/><field-ref name="address2"/>
-                        <field-row><field-ref name="city"/><field-ref name="stateProvinceGeoId"/><field-ref name="postalCode"/></field-row>
+                        <field-ref name="countryGeoId"/>
+                        <field-row><field-ref name="address1"/><field-ref name="unitNumber"/></field-row>
+                        <field-ref name="address2"/>
+                        <field-row><field-ref name="city"/><field-ref name="stateProvinceGeoId"/><field-ref name="postalCode"/><field-ref name="postalCodeExt"/></field-row>
                         <field-row><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
                         <fields-not-referenced/>
                         <field-ref name="submitButton"/>
@@ -135,6 +139,7 @@ This Work includes contributions authored by David E. Jones, not as a
                     </default-field></field> -->
                     <field name="countryGeoId"><default-field title="Country"><hidden default-value="USA"/></default-field></field>
                     <field name="address1"><default-field title="Address Line 1"><text-line size="30"/></default-field></field>
+                    <field name="unitNumber"><default-field><text-line size="10"/></default-field></field>
                     <field name="address2"><default-field title="Address Line 2"><text-line size="30"/></default-field></field>
                     <field name="city"><default-field title="City/State/Zip"><text-line size="16"/></default-field></field>
                     <field name="stateProvinceGeoId"><default-field title="">
@@ -146,7 +151,8 @@ This Work includes contributions authored by David E. Jones, not as a
                             </entity-find>
                         </entity-options></drop-down>
                     </default-field></field>
-                    <field name="postalCode"><default-field title=""><text-line size="10"/></default-field></field>
+                    <field name="postalCode"><default-field title=""><text-line size="8"/></default-field></field>
+                    <field name="postalCodeExt"><default-field title=""><text-line size="4"/></default-field></field>
 
                     <field name="telecomContactMechId"><default-field><hidden/></default-field></field>
                     <field name="telecomContactMechPurposeId"><default-field><hidden/></default-field></field>
@@ -157,8 +163,10 @@ This Work includes contributions authored by David E. Jones, not as a
 
                     <field-layout>
                         <field-ref name="toName"/><field-ref name="attnName"/>
-                        <field-ref name="countryGeoId"/><field-ref name="address1"/><field-ref name="address2"/>
-                        <field-row><field-ref name="city"/><field-ref name="stateProvinceGeoId"/><field-ref name="postalCode"/></field-row>
+                        <field-ref name="countryGeoId"/>
+                        <field-row><field-ref name="address1"/><field-ref name="unitNumber"/></field-row>
+                        <field-ref name="address2"/>
+                        <field-row><field-ref name="city"/><field-ref name="stateProvinceGeoId"/><field-ref name="postalCode"/><field-ref name="postalCodeExt"/></field-row>
                         <field-row><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
                         <fields-not-referenced/>
                         <field-ref name="submitButton"/>
