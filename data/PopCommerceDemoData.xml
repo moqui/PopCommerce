@@ -94,4 +94,8 @@ This Work includes contributions authored by David E. Jones, not as a
             minQuantity="1" price="7.77" priceUomId="USD"/>
     <mantle.product.category.ProductCategoryMember productCategoryId="DEMO_THREE" productId="DEMO_3_1"
             fromDate="2010-02-03 00:00:00.0" sequenceNum="1"/>
+
+    <!-- index for search -->
+    <moqui.entity.ServiceTrigger serviceTriggerId="POPC_SEARCH_DEMO" statusId="SrtrNotRun"
+            serviceName="org.moqui.impl.EntityServices.index#DataFeedDocuments" mapString="[dataFeedId:'PopCommerceSearch']"/>
 </entity-facade-xml>
