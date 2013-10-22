@@ -16,8 +16,8 @@ This Work includes contributions authored by David E. Jones, not as a
         require-authentication="anonymous-view" login-path="/popc/Login">
 
     <always-actions>
-        <!-- get the ProductStore using the default ID -->
-        <set field="productStoreId" value="POPC"/>
+        <!-- TODO: set the productStoreId for this store here (some way to make this more dynamic?) -->
+        <set field="productStoreId" value="POPC_DEFAULT"/>
         <entity-find-one entity-name="ProductStore" value-field="productStore"/>
         <set field="currencyUomId" from="productStore?.defaultCurrencyUomId"/>
         <set field="priceUomId" from="productStore?.defaultCurrencyUomId"/>
@@ -79,6 +79,7 @@ This Work includes contributions authored by David E. Jones, not as a
                                 <entity-options key="${productCategoryId}" text="${categoryName}">
                                     <entity-find entity-name="ProductCategoryChildren" cache="true">
                                         <date-filter/>
+                                        <!-- TODO: lookup using mantle.product.store.ProductStoreCategory -->
                                         <econdition field-name="parentProductCategoryId" value="PopcBrowseRoot"/>
                                         <order-by field-name="sequenceNum"/>
                                         <order-by field-name="categoryName"/>
@@ -112,10 +113,12 @@ This Work includes contributions authored by David E. Jones, not as a
                 <subscreens-active id="pop-commerce-root"/>
             </panel-center>
             <panel-footer>
-                <render-mode><text type="html"><![CDATA[
+                <render-mode><text type="html" template="true"><![CDATA[
                     <div id="apps-footer-content">
                         <h6><a href="http://www.moqui.org/" target="_blank">Built on Moqui Framework 1.3.2</a></h6>
                     </div>
+                    <!-- productStoreId=${productStoreId}, currencyUomId=${currencyUomId}, priceUomId=${priceUomId}, defaultLocale=${defaultLocale} -->
+                    <!-- organizationPartyId=${organizationPartyId!!}, vendorPartyId=${vendorPartyId!!}, cartOrderId=${cartOrderId!!}, customerPartyId=${customerPartyId!!} -->
                 ]]></text></render-mode>
             </panel-footer>
         </container-panel>

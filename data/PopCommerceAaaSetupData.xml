@@ -36,6 +36,6 @@ This Work includes contributions authored by David E. Jones, not as a
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="99" resourceTypeEnumId="STRT_SHORTCUT_ICON"
             resourceValue="/moqui.ico"/>
 
-    <!-- A skeleton record for the default store -->
-    <mantle.product.store.ProductStore productStoreId="POPC" defaultLocale="en_US" defaultCurrencyUomId="USD"/>
+    <!-- A skeleton record for the default store; this record is here just in case no demo/config data is loaded -->
+    <mantle.product.store.ProductStore productStoreId="POPC_DEFAULT" defaultLocale="en_US" defaultCurrencyUomId="USD"/>
 </entity-facade-xml>
