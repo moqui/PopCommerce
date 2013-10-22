@@ -17,7 +17,45 @@ This Work includes contributions authored by David E. Jones, not as a
     <parameter name="category"/>
     <parameter name="keywords"/>
 
+    <transition name="addToCart">
+        <actions>
+            <service-call name="mantle.order.OrderServices.add#OrderProductQuantity" out-map="addOut"
+                    in-map="[orderId:cartOrderId, productId:productId, quantity:quantity, customerPartyId:customerPartyId,
+                            currencyUomId:currencyUomId, productStoreId:productStoreId]"/>
+            <set field="ec.web.sessionAttributes.cartOrderId" from="addOut.orderId"/>
+        </actions>
+        <default-response url="../../Order/Cart"/>
+        <error-response url="."/>
+    </transition>
+
+    <actions>
+        <if condition="category || keywords">
+            <set field="queryString" from="keywords"/>
+            <if condition="category"><set field="queryString" from="(queryString ? queryString + ' AND ' : '') + 'productCategoryId:' + category"/></if>
+            <service-call name="org.moqui.impl.EntityServices.search#DataDocuments" out-map="context"
+                    in-map="[queryString:queryString, indexName:'popc', documentType:'PopcProduct']"/>
+        </if>
+    </actions>
     <widgets>
-        <label text="Search Results (not yet implemented, check back later)" type="h1"/>
+        <label text="Search Results" type="h2"/>
+        <form-list name="SearchProductList" list="documentList" list-entry="document" transition="addToCart">
+            <row-actions>
+                <set field="productId" from="document._id"/>
+                <entity-find-one entity-name="mantle.product.Product" value-field="product" cache="true"/>
+                <service-call name="mantle.product.ProductServices.get#ProductPrice" out-map="priceMap"
+                        in-map="[productId:productId, priceUomId:priceUomId, productStoreId:productStoreId,
+                                vendorPartyId:vendorPartyId, customerPartyId:customerPartyId]"/>
+                <set field="price" from="priceMap?.price"/>
+                <set field="priceUomId" from="priceMap?.priceUomId"/>
+            </row-actions>
+
+            <field name="productId"><default-field><hidden/></default-field></field>
+            <field name="productName" entry-name="product.productName"><default-field title="">
+                <link text="${product.productName}" url="Product/Detail/${productId}/${product.productName}" url-type="plain" link-type="anchor"/>
+            </default-field></field>
+            <field name="price"><default-field title=""><display also-hidden="false" currency-unit-field="priceUomId"/></default-field></field>
+            <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>
+            <field name="add"><default-field title="Add to Cart"><submit/></default-field></field>
+        </form-list>
     </widgets>
 </screen>
