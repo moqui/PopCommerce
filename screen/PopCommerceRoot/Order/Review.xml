@@ -46,14 +46,17 @@ This Work includes contributions authored by David E. Jones, not as a
                     <panel-center>
                         <!-- payment info -->
                         <section-iterate name="payment-info" list="orderPartInfo.partPaymentInfoList" entry="partPaymentInfo">
-                            <actions><set field="contactInfo" from="partPaymentInfo"/></actions>
+                            <actions>
+                                <set field="contactInfo" from="partPaymentInfo"/>
+                                <set field="cardNumber" from="partPaymentInfo.creditCard?.cardNumber"/>
+                                <set field="cardNumber" from="cardNumber ? (partPaymentInfo.creditCard.creditCardTypeEnumId == 'CctAmericanExpress' ? '***********' : '************') + cardNumber.substring(cardNumber.length() - 4, cardNumber.length()) : ''"/>
+                            </actions>
                             <widgets>
                                 <label text="${partPaymentInfo.paymentMethodTypeEnum?.description}" type="p"/>
                                 <label text="${ec.l10n.formatCurrency(partPaymentInfo.partPayment.amount, partPaymentInfo.partPayment.amountUomId, 2)}" type="p"/>
 
                                 <label text="${partPaymentInfo.creditCard?.firstNameOnCard} ${partPaymentInfo.creditCard?.lastNameOnCard}" type="p"/>
-                                <!-- TODO: mask the cardNumber -->
-                                <label text="${partPaymentInfo.creditCardTypeEnum?.description} ${partPaymentInfo.creditCard?.cardNumber} ${partPaymentInfo.creditCard?.expireDate}" type="p"/>
+                                <label text="${partPaymentInfo.creditCardTypeEnum?.description} ${cardNumber} ${partPaymentInfo.creditCard?.expireDate}" type="p"/>
 
                                 <widgets><render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
                             </widgets>

@@ -52,11 +52,14 @@ This Work includes contributions authored by David E. Jones, not as a
         <container>
             <section name="BillingInfoSection">
                 <condition><expression>creditCardInfo?.creditCard</expression></condition>
-                <actions><set field="contactInfo" from="creditCardInfo"/></actions>
+                <actions>
+                    <set field="contactInfo" from="creditCardInfo"/>
+                    <set field="cardNumber" from="creditCardInfo.creditCard?.cardNumber"/>
+                    <set field="cardNumber" from="cardNumber ? (creditCardInfo.creditCard.creditCardTypeEnumId == 'CctAmericanExpress' ? '***********' : '************') + cardNumber.substring(cardNumber.length() - 4, cardNumber.length()) : ''"/>
+                </actions>
                 <widgets>
                     <label text="${creditCardInfo.creditCard?.firstNameOnCard} ${creditCardInfo.creditCard?.lastNameOnCard}" type="p"/>
-                    <!-- TODO: mask the cardNumber -->
-                    <label text="${creditCardInfo.creditCardTypeEnum?.description} ${creditCardInfo.creditCard?.cardNumber} ${creditCardInfo.creditCard?.expireDate}" type="p"/>
+                    <label text="${creditCardInfo.creditCardTypeEnum?.description} ${cardNumber} ${creditCardInfo.creditCard?.expireDate}" type="p"/>
 
                     <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
                 </widgets>
