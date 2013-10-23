@@ -63,7 +63,7 @@ This Work includes contributions authored by David E. Jones, not as a
                         </section-iterate>
                     </panel-center>
                     <panel-footer>
-                        <form-list name="OrderItems" list="orderPartInfo.partOrderItemList" list-entry="orderItem" skip-start="true" skip-end="true">
+                        <form-list name="OrderItems" list="orderPartInfo.partOrderItemList" list-entry="orderItem" skip-form="true">
                             <row-actions>
                                 <service-call name="mantle.order.OrderServices.get#OrderItemTotal" in-map="[orderItem:orderItem]" out-map="orderItemTotalOut"/>
                                 <script>context.putAll(orderItem)</script>
@@ -73,8 +73,8 @@ This Work includes contributions authored by David E. Jones, not as a
                             </default-field></field>
                             <field name="unitAmount"><default-field><display currency-unit-field="orderHeader.currencyUomId"/></default-field></field>
                             <field name="quantity"><default-field><display/></default-field></field>
-                            <field name="itemTotal"><default-field>
-                                <display text="${ec.l10n.formatCurrency(orderItemTotalOut.itemTotal, orderHeader.currencyUomId, 2)}" also-hidden="false"/>
+                            <field name="itemTotal" entry-name="orderItemTotalOut.itemTotal"><default-field>
+                                <display currency-unit-field="orderHeader.currencyUomId" also-hidden="false"/>
                             </default-field></field>
                         </form-list>
                     </panel-footer>

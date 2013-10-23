@@ -39,8 +39,8 @@ This Work includes contributions authored by David E. Jones, not as a
                 <display currency-unit-field="orderHeader.currencyUomId" also-hidden="false"/>
             </default-field></field>
             <field name="quantity"><default-field><text-line size="4"/></default-field></field>
-            <field name="itemTotal"><default-field>
-                <display text="${ec.l10n.formatCurrency(orderItemTotalOut.itemTotal, orderHeader.currencyUomId, 2)}" also-hidden="false"/>
+            <field name="itemTotal" entry-name="orderItemTotalOut.itemTotal"><default-field>
+                <display currency-unit-field="orderHeader.currencyUomId" also-hidden="false"/>
             </default-field></field>
             <field name="updateCartButton"><default-field title="Update Cart"><submit/></default-field></field>
         </form-list>
