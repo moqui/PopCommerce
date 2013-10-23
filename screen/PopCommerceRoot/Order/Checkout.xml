@@ -33,6 +33,8 @@ This Work includes contributions authored by David E. Jones, not as a
         <set field="ccInfoFlat" from="StupidUtilities.flattenNestedMap(creditCardInfo)"/>
         <set field="ccInfoFlat.expireMonth" from="ccInfoFlat.expireDate ? ccInfoFlat.expireDate.substring(0, ccInfoFlat.expireDate.indexOf('/')) : null"/>
         <set field="ccInfoFlat.expireYear" from="ccInfoFlat.expireDate ? ccInfoFlat.expireDate.substring(ccInfoFlat.expireDate.indexOf('/')+1) : null"/>
+        <set field="cardNumber" from="creditCardInfo.creditCard?.cardNumber"/>
+        <set field="cardNumber" from="cardNumber ? (creditCardInfo.creditCard.creditCardTypeEnumId == 'CctAmericanExpress' ? '***********' : '************') + cardNumber.substring(cardNumber.length() - 4, cardNumber.length()) : ''"/>
 
         <service-call name="mantle.party.ContactServices.get#PartyContactInfo"
                 in-map="[partyId:customerPartyId, postalContactMechPurposeId:'PostalShippingDest',
@@ -54,8 +56,6 @@ This Work includes contributions authored by David E. Jones, not as a
                 <condition><expression>creditCardInfo?.creditCard</expression></condition>
                 <actions>
                     <set field="contactInfo" from="creditCardInfo"/>
-                    <set field="cardNumber" from="creditCardInfo.creditCard?.cardNumber"/>
-                    <set field="cardNumber" from="cardNumber ? (creditCardInfo.creditCard.creditCardTypeEnumId == 'CctAmericanExpress' ? '***********' : '************') + cardNumber.substring(cardNumber.length() - 4, cardNumber.length()) : ''"/>
                 </actions>
                 <widgets>
                     <label text="${creditCardInfo.creditCard?.firstNameOnCard} ${creditCardInfo.creditCard?.lastNameOnCard}" type="p"/>
@@ -72,7 +72,10 @@ This Work includes contributions authored by David E. Jones, not as a
         <container>
             <label text="Shipping Information" type="h2"/>
             <container-dialog id="ShippingInfoUpdate" button-text="Update">
-                <form-single name="ShippingInfo" extends="component://PopCommerce/screen/PopCommerceRoot/Customer/Profile.xml#ShippingInfo"/>
+                <form-single name="ShippingInfo" transition="storeShippingInfo" map="shipInfoFlat"
+                        extends="component://mantle-usl/template/party/PartyForms.xml#ContactInfo">
+                    <field name="emailAddress"><default-field><ignored/></default-field></field>
+                </form-single>
             </container-dialog>
         </container>
         <container>
