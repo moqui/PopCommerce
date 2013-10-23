@@ -28,8 +28,14 @@ This Work includes contributions authored by David E. Jones, not as a
     </transition>
 
     <actions>
-        <service-call name="mantle.party.ContactServices.get#PartyContactInfo" out-map="contactInfo" in-map="context"/>
-        <set field="contactInfoFlat" from="StupidUtilities.flattenNestedMap(contactInfo)"/>
+        <if condition="postalContactMechId || telecomContactMechId || emailContactMechId">
+            <service-call name="mantle.party.ContactServices.get#PartyContactInfo" out-map="contactInfo" in-map="context"/>
+            <set field="contactInfoFlat" from="StupidUtilities.flattenNestedMap(contactInfo)"/>
+            <else>
+                <set field="contactInfoFlat" from="[postalContactMechPurposeId:postalContactMechPurposeId,
+                        telecomContactMechPurposeId:telecomContactMechPurposeId, emailContactMechPurposeId:emailContactMechPurposeId]"/>
+            </else>
+        </if>
     </actions>
     <widgets>
         <form-single name="ShippingInfo" transition="storeContactInfo" map="contactInfoFlat"
