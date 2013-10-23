@@ -120,7 +120,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <widgets>
                 <label text="Shipping Information" type="h3"/>
                 <form-single name="ShippingInfo" transition="storeShippingInfo" map="shipInfoFlat"
-                        extends="component://mantle-usl/template/screen/PartyForms.xml#ContactInfo">
+                        extends="component://mantle-usl/template/party/PartyForms.xml#ContactInfo">
                     <field name="emailAddress"><default-field><ignored/></default-field></field>
                 </form-single>
             </widgets>
