@@ -33,15 +33,15 @@ This Work includes contributions authored by David E. Jones, not as a
     <actions>
         <set field="partyId" from="ec.user.userAccount.partyId"/>
         <entity-find-one entity-name="PersonAndUserAccount" value-field="personAndUserAccount"/>
-        <service-call name="mantle.party.ContactServices.get#PartyContactInfo" out-map="emailInfo"
-                in-map="[partyId:partyId, emailContactMechPurposeId:'EmailPrimary']"/>
+        <service-call name="mantle.party.ContactServices.get#PrimaryEmailAddress" out-map="primaryEmail"
+                in-map="[partyId:partyId]"/>
 
         <service-call name="mantle.party.ContactServices.get#PartyContactInfo" out-map="paymentContactInfo"
                 in-map="[partyId:partyId, postalContactMechPurposeId:'PostalPayment',
                     telecomContactMechPurposeId:'PhonePayment', emailContactMechPurposeId:'EmailPayment']"/>
         <set field="paymentInfoFlat" from="StupidUtilities.flattenNestedMap(paymentContactInfo)"/>
 
-        <!-- TODO: limit to locales for tenant or store? -->
+        <!-- TODO: limit to locales for tenant (or store?) -->
         <set field="localeStringList" from="[]"/>
         <iterate list="Locale.getAvailableLocales()" entry="lcl"><script>localeStringList.add([locale:lcl.toString(), name:lcl.getDisplayName()])</script></iterate>
         <order-map-list list="localeStringList"><order-by field-name="name"/></order-map-list>
@@ -63,7 +63,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <field name="firstName"><default-field><text-line size="15"/></default-field></field>
             <field name="middleName"><default-field><text-line size="15"/></default-field></field>
             <field name="lastName"><default-field><text-line size="15"/></default-field></field>
-            <field name="emailAddress" entry-name="emailInfo.emailAddress"><default-field><text-line size="40"/></default-field></field>
+            <field name="emailAddress" entry-name="primaryEmail.emailAddress"><default-field><text-line/></default-field></field>
 
             <field name="locale"><default-field>
                 <drop-down allow-empty="true"><list-options list="localeStringList" key="${locale}" text="${name}"/></drop-down>
