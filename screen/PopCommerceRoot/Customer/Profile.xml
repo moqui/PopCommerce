@@ -18,6 +18,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <service-call name="mantle.party.ContactServices.store#PartyContactInfo"/>
         <default-response url="."/>
     </transition>
+    <transition name="updateContactInfo"><default-response url="UpdateContactInfo"/></transition>
     <transition name="storeBillingInfo">
         <service-call name="mantle.account.PaymentMethodServices.store#CreditCardInfo"/>
         <default-response url="."/>
@@ -59,7 +60,7 @@ This Work includes contributions authored by David E. Jones, not as a
                             </entity-find>
                         </entity-options></drop-down>
                     </default-field></field>
-                    <field name="cardNumber"><default-field><display/></default-field></field>
+                    <field name="cardNumber"><default-field><display text="${cardNumber}"/></default-field></field>
                     <!-- <field name="expireDate"><default-field><text-line size="7"/></default-field></field> -->
                     <field name="expireMonth"><default-field title="Expire Date"><drop-down>
                         <option key="01"/><option key="02"/><option key="03"/><option key="04"/><option key="05"/>
@@ -91,7 +92,8 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="postalCodeExt"><default-field title=""><text-line size="4"/></default-field></field>
 
                     <field name="telecomContactMechId"><default-field><hidden/></default-field></field>
-                    <field name="areaCode"><default-field title="Phone"><text-line size="3" maxlength="3"/></default-field></field>
+                    <field name="countryCode"><default-field title="Phone"><text-line size="3" maxlength="3" default-value="+1"/></default-field></field>
+                    <field name="areaCode"><default-field title=""><text-line size="3" maxlength="3"/></default-field></field>
                     <field name="contactNumber"><default-field title=""><text-line size="8" maxlength="8"/></default-field></field>
 
                     <field name="submitButton"><default-field title="${ccInfoFlat.paymentMethodId ? 'Update' : 'Create'}"><submit/></default-field></field>
@@ -104,7 +106,7 @@ This Work includes contributions authored by David E. Jones, not as a
                         <field-row><field-ref name="address1"/><field-ref name="unitNumber"/></field-row>
                         <field-ref name="address2"/>
                         <field-row><field-ref name="city"/><field-ref name="stateProvinceGeoId"/><field-ref name="postalCode"/><field-ref name="postalCodeExt"/></field-row>
-                        <field-row><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
+                        <field-row><field-ref name="countryCode"/><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
                         <fields-not-referenced/>
                         <field-ref name="submitButton"/>
                     </field-layout>
@@ -114,17 +116,37 @@ This Work includes contributions authored by David E. Jones, not as a
 
         <section name="ShippingSection">
             <actions>
-                <service-call name="mantle.party.ContactServices.get#PartyContactInfo" out-map="shippingContactInfo"
+                <service-call name="mantle.party.ContactServices.get#PartyContactInfoList" out-map="shippingContactListInfo"
                         in-map="[partyId:partyId, postalContactMechPurposeId:'PostalShippingDest',
                             telecomContactMechPurposeId:'PhoneShippingDest']"/>
-                <set field="shipInfoFlat" from="StupidUtilities.flattenNestedMap(shippingContactInfo)"/>
             </actions>
             <widgets>
                 <label text="Shipping Information" type="h3"/>
-                <form-single name="ShippingInfo" transition="storeShippingInfo" map="shipInfoFlat"
-                        extends="component://mantle-usl/template/party/PartyForms.xml#ContactInfo">
-                    <field name="emailAddress"><default-field><ignored/></default-field></field>
-                </form-single>
+                <!-- TODO: add form to add new shipping address and/or phone -->
+                <section-iterate name="ShippingAddressList" list="shippingContactListInfo.postalAddressList" entry="postalAddressInfo">
+                    <actions>
+                        <set field="contactInfo" from="postalAddressInfo"/>
+                    </actions>
+                    <widgets>
+                        <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                        <dynamic-dialog id="UpdatePostalInfo${postalAddressInfo_index}" button-text="Update Address" transition="updateContactInfo"
+                                parameter-map="[partyId:partyId, postalContactMechId:contactInfo.postalContactMechId,
+                                    postalContactMechPurposeId:contactInfo.postalContactMechPurposeId]">
+                        </dynamic-dialog>
+                    </widgets>
+                </section-iterate>
+                <section-iterate name="ShippingPhoneList" list="shippingContactListInfo.telecomNumberList" entry="telecomNumberInfo">
+                    <actions>
+                        <set field="contactInfo" from="telecomNumberInfo"/>
+                    </actions>
+                    <widgets>
+                        <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                        <dynamic-dialog id="UpdatePhoneInfo${telecomNumberInfo_index}" button-text="Update Phone" transition="updateContactInfo"
+                                parameter-map="[partyId:partyId, telecomContactMechId:contactInfo.telecomContactMechId,
+                                    telecomContactMechPurposeId:contactInfo.telecomContactMechPurposeId]">
+                        </dynamic-dialog>
+                    </widgets>
+                </section-iterate>
             </widgets>
         </section>
     </widgets>
