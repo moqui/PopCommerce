@@ -32,6 +32,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
         <!-- NOTE: this section-iterate is the same as on OrderDetail.xml -->
         <section-iterate name="order-part-section" list="orderPartInfoList" entry="orderPartInfo">
+            <actions><set field="contactInfo" from="orderPartInfo"/></actions>
             <widgets>
                 <container-panel id="order-panel-${orderPartInfo.orderPart.orderPartSeqId}">
                     <panel-left>
@@ -40,17 +41,12 @@ This Work includes contributions authored by David E. Jones, not as a
 
                         <!-- shipping info -->
                         <label text="${orderPartInfo.shipmentMethodEnum?.description ?: ''}" type="p"/>
-                        <label text="${orderPartInfo.postalAddress?.toName ? 'To: ' + orderPartInfo.postalAddress?.toName : ''}" type="p"/>
-                        <label text="${orderPartInfo.postalAddress?.attnName ? 'Attn: ' + orderPartInfo.postalAddress.attnName : ''}" type="p"/>
-                        <label text="${orderPartInfo.postalAddress?.address1 ?: ''}${orderPartInfo.postalAddress?.unitNumber ? ' #' + orderPartInfo.postalAddress.unitNumber : ''}" type="p"/>
-                        <label text="${orderPartInfo.postalAddress?.address2 ?: ''}" type="p"/>
-                        <label text="${orderPartInfo.postalAddress?.city ? orderPartInfo.postalAddress?.city + ', ' : ''}${orderPartInfo.postalAddressStateGeo?.geoCodeAlpha2 ?: ''} ${orderPartInfo.postalAddress?.postalCode ?: ''}${orderPartInfo.postalAddress?.postalCodeExt ? '-' + orderPartInfo.postalAddress.postalCodeExt : ''}" type="p"/>
-                        <label text="${orderPartInfo.telecomNumber?.areaCode ? '(' + orderPartInfo.telecomNumber?.areaCode + ') ' : ''}${orderPartInfo.telecomNumber?.contactNumber ?: ''}" type="p"/>
+                        <widgets><render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
                     </panel-left>
                     <panel-center>
                         <!-- payment info -->
-                        <section-iterate name="payment-info-${orderPartInfo.orderPart.orderPartSeqId}"
-                                list="orderPartInfo.partPaymentInfoList" entry="partPaymentInfo">
+                        <section-iterate name="payment-info" list="orderPartInfo.partPaymentInfoList" entry="partPaymentInfo">
+                            <actions><set field="contactInfo" from="partPaymentInfo"/></actions>
                             <widgets>
                                 <label text="${partPaymentInfo.paymentMethodTypeEnum?.description}" type="p"/>
                                 <label text="${ec.l10n.formatCurrency(partPaymentInfo.partPayment.amount, partPaymentInfo.partPayment.amountUomId, 2)}" type="p"/>
@@ -58,10 +54,8 @@ This Work includes contributions authored by David E. Jones, not as a
                                 <label text="${partPaymentInfo.creditCard?.firstNameOnCard} ${partPaymentInfo.creditCard?.lastNameOnCard}" type="p"/>
                                 <!-- TODO: mask the cardNumber -->
                                 <label text="${partPaymentInfo.creditCardTypeEnum?.description} ${partPaymentInfo.creditCard?.cardNumber} ${partPaymentInfo.creditCard?.expireDate}" type="p"/>
-                                <label text="${partPaymentInfo.postalAddress.address1}${partPaymentInfo.postalAddress?.unitNumber ? ' #' + partPaymentInfo.postalAddress.unitNumber : ''}" type="p"/>
-                                <label text="${partPaymentInfo.postalAddress?.address2 ?: ''}" type="p"/>
-                                <label text="${partPaymentInfo.postalAddress?.city}, ${partPaymentInfo.postalAddressStateGeo?.geoCodeAlpha2} ${partPaymentInfo.postalAddress?.postalCode}${partPaymentInfo.postalAddress?.postalCodeExt ? '-' + partPaymentInfo.postalAddress.postalCodeExt : ''}" type="p"/>
-                                <label text="(${partPaymentInfo.telecomNumber?.areaCode}) ${partPaymentInfo.telecomNumber?.contactNumber}" type="p"/>
+
+                                <widgets><render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
                             </widgets>
                         </section-iterate>
                     </panel-center>

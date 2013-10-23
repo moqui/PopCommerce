@@ -52,14 +52,13 @@ This Work includes contributions authored by David E. Jones, not as a
         <container>
             <section name="BillingInfoSection">
                 <condition><expression>creditCardInfo?.creditCard</expression></condition>
+                <actions><set field="contactInfo" from="creditCardInfo"/></actions>
                 <widgets>
                     <label text="${creditCardInfo.creditCard?.firstNameOnCard} ${creditCardInfo.creditCard?.lastNameOnCard}" type="p"/>
                     <!-- TODO: mask the cardNumber -->
                     <label text="${creditCardInfo.creditCardTypeEnum?.description} ${creditCardInfo.creditCard?.cardNumber} ${creditCardInfo.creditCard?.expireDate}" type="p"/>
-                    <label text="${creditCardInfo.postalAddress?.address1 ?: ''}${creditCardInfo.postalAddress?.unitNumber ? ' #' + creditCardInfo.postalAddress.unitNumber : ''}" type="p"/>
-                    <label text="${creditCardInfo.postalAddress?.address2 ?: ''}" type="p"/>
-                    <label text="${creditCardInfo.postalAddress?.city ? creditCardInfo.postalAddress.city + ',' : ''} ${creditCardInfo.postalAddressStateGeo?.geoCodeAlpha2 ?: ''} ${creditCardInfo.postalAddress?.postalCode ?: ''}${creditCardInfo.postalAddress?.postalCodeExt ? '-' + creditCardInfo.postalAddress.postalCodeExt : ''}" type="p"/>
-                    <label text="${creditCardInfo.telecomNumber?.areaCode ? '(' + creditCardInfo.telecomNumber.areaCode + ')' : ''} ${creditCardInfo.telecomNumber?.contactNumber ?: ''}" type="p"/>
+
+                    <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
                 </widgets>
                 <fail-widgets>
                     <label text="Please add billing information" type="p"/>
@@ -76,17 +75,9 @@ This Work includes contributions authored by David E. Jones, not as a
         <container>
             <section name="ShippingInfoSection">
                 <condition><expression>shippingInfo?.postalAddress</expression></condition>
-                <widgets>
-                    <label text="To: ${shippingInfo.postalAddress?.toName?:''}" type="p"/>
-                    <label text="${shippingInfo.postalAddress?.attnName ? 'Attn: ' + shippingInfo.postalAddress.attnName : ''}" type="p"/>
-                    <label text="${shippingInfo.postalAddress?.address1}${shippingInfo.postalAddress?.unitNumber ? ' #' + shippingInfo.postalAddress.unitNumber : ''}" type="p"/>
-                    <label text="${shippingInfo.postalAddress?.address2 ?: ''}" type="p"/>
-                    <label text="${shippingInfo.postalAddress?.city}, ${shippingInfo.postalAddressStateGeo?.geoCodeAlpha2} ${shippingInfo.postalAddress?.postalCode}${shippingInfo.postalAddress?.postalCodeExt ? '-' + shippingInfo.postalAddress.postalCodeExt : ''}" type="p"/>
-                    <label text="(${shippingInfo.telecomNumber?.areaCode}) ${shippingInfo.telecomNumber?.contactNumber}" type="p"/>
-                </widgets>
-                <fail-widgets>
-                    <label text="Please add shipping information" type="p"/>
-                </fail-widgets>
+                <actions><set field="contactInfo" from="shippingInfo"/></actions>
+                <widgets><render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
+                <fail-widgets><label text="Please add shipping information" type="p"/></fail-widgets>
             </section>
         </container>
 
