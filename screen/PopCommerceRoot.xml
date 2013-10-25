@@ -18,7 +18,7 @@ This Work includes contributions authored by David E. Jones, not as a
     <always-actions>
         <!-- TODO: set the productStoreId for this store here (some way to make this more dynamic?) -->
         <set field="productStoreId" value="POPC_DEFAULT"/>
-        <entity-find-one entity-name="ProductStore" value-field="productStore"/>
+        <entity-find-one entity-name="mantle.product.store.ProductStore" value-field="productStore"/>
         <set field="currencyUomId" from="productStore?.defaultCurrencyUomId"/>
         <set field="priceUomId" from="productStore?.defaultCurrencyUomId"/>
         <set field="defaultLocale" from="productStore?.defaultLocale"/>
