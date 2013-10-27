@@ -89,6 +89,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <widgets>
                 <label text="Billing Information" type="h3"/>
                 <form-single name="BillingInfo" transition="storeBillingInfo" map="ccInfoFlat">
+                    <field name="partyId"><default-field><hidden/></default-field></field>
                     <field name="paymentMethodId"><default-field><hidden/></default-field></field>
 
                     <field name="firstNameOnCard"><default-field><text-line size="20"/></default-field></field>
@@ -102,7 +103,10 @@ This Work includes contributions authored by David E. Jones, not as a
                             </entity-find>
                         </entity-options></drop-down>
                     </default-field></field>
-                    <field name="cardNumber"><default-field><display text="${cardNumber}"/></default-field></field>
+                    <field name="cardNumber">
+                        <conditional-field condition="!ccInfoFlat.paymentMethodId"><text-line size="16"/></conditional-field>
+                        <default-field><display text="${cardNumber}"/></default-field>
+                    </field>
                     <!-- <field name="expireDate"><default-field><text-line size="7"/></default-field></field> -->
                     <field name="expireMonth"><default-field title="Expire Date"><drop-down>
                         <option key="01"/><option key="02"/><option key="03"/><option key="04"/><option key="05"/>
