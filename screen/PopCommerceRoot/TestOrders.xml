@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.3.xsd"
+        require-authentication="false">
+
+    <!-- to use login then go to URL like http://localhost:8080/popc/TestOrders?numOrders=20 -->
+    <actions>
+        <script><![CDATA[
+            import org.moqui.context.ExecutionContext
+            import org.moqui.impl.context.ArtifactExecutionInfoImpl
+            ExecutionContext ec = context.ec
+
+            resultMessages = []
+
+            numOrders = (numOrders ?: 10) as int
+
+            long startTime = System.currentTimeMillis()
+            for (int i = 0; i < numOrders; i++) {
+                Map addOut1 = ec.service.sync().name("mantle.order.OrderServices.add#OrderProductQuantity")
+                        .parameters([productId:'DEMO_1_1', quantity:1, customerPartyId:customerPartyId,
+                            currencyUomId:currencyUomId, productStoreId:productStoreId]).call()
+
+                String cartOrderId = addOut1.orderId
+                //String orderPartSeqId = addOut1.orderPartSeqId
+
+                ec.service.sync().name("mantle.order.OrderServices.add#OrderProductQuantity")
+                        .parameters([orderId:cartOrderId, productId:'DEMO_3_1', quantity:1, customerPartyId:customerPartyId,
+                            currencyUomId:currencyUomId, productStoreId:productStoreId]).call()
+                ec.service.sync().name("mantle.order.OrderServices.add#OrderProductQuantity")
+                        .parameters([orderId:cartOrderId, productId:'DEMO_2_1', quantity:1, customerPartyId:customerPartyId,
+                            currencyUomId:currencyUomId, productStoreId:productStoreId]).call()
+
+                ec.service.sync().name("mantle.order.OrderServices.set#OrderBillingShippingInfo")
+                        .parameters([orderId:cartOrderId, paymentMethodId:'CustJqpCc', shippingPostalContactMechId:'CustJqpAddr',
+                            shippingTelecomContactMechId:'CustJqpTeln', shipmentMethodEnumId:'ShMthNoShipping']).call()
+                ec.service.sync().name("mantle.order.OrderServices.place#Order").parameters([orderId:cartOrderId]).call()
+
+                resultMessages.add("[${i+1}/${numOrders} - ${System.currentTimeMillis() - startTime}] Created order ${cartOrderId}")
+                ec.logger.info("[${i+1}/${numOrders} - ${System.currentTimeMillis() - startTime}] Created order ${cartOrderId}")
+            }
+            long endTime = System.currentTimeMillis()
+            double seconds = (endTime - startTime)/1000
+            resultMessages.add("Created and placed ${numOrders} in ${seconds} seconds, ${numOrders/seconds} orders per second")
+
+            def artifactHistory = ec.artifactExecution.history
+            ownHotSpotList = ArtifactExecutionInfoImpl.hotSpotByTime(artifactHistory, true)
+            totalHotSpotList = ArtifactExecutionInfoImpl.hotSpotByTime(artifactHistory, false)
+        ]]></script>
+    </actions>
+    <widgets>
+        <section-iterate name="ResultSection" list="resultMessages" entry="resultMessage">
+            <widgets><label text="${resultMessage}" type="p"/></widgets>
+        </section-iterate>
+        <label text="Artifacts by Own Time" type="h3"/>
+        <form-list name="OwnHotSpots" list="ownHotSpotList" skip-form="true">
+            <field name="time"><default-field><display/></default-field></field>
+            <field name="artifact"><default-field><display/></default-field></field>
+        </form-list>
+        <label text="Artifacts by Own plus Children Time" type="h3"/>
+        <form-list name="TotalHotSpots" list="totalHotSpotList" skip-form="true">
+            <field name="time"><default-field><display/></default-field></field>
+            <field name="artifact"><default-field><display/></default-field></field>
+        </form-list>
+    </widgets>
+</screen>
