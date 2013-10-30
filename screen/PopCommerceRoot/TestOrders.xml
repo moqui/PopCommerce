@@ -15,7 +15,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
     <parameter name="numOrders"/>
 
-    <!-- to use login then go to URL like http://localhost:8080/popc/TestOrders?numOrders=20 -->
+    <!-- to go to URL like http://localhost:8080/popc/TestOrders?numOrders=10 -->
     <actions>
         <script><![CDATA[
             import org.moqui.context.ExecutionContext
