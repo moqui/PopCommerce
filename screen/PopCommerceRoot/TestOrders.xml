@@ -54,8 +54,8 @@ This Work includes contributions authored by David E. Jones, not as a
             resultMessages.add("Created and placed ${numOrders} in ${seconds} seconds, ${numOrders/seconds} orders per second")
 
             def artifactHistory = ec.artifactExecution.history
-            ownHotSpotList = ArtifactExecutionInfoImpl.hotSpotByTime(artifactHistory, true)
-            totalHotSpotList = ArtifactExecutionInfoImpl.hotSpotByTime(artifactHistory, false)
+            ownHotSpotList = ArtifactExecutionInfoImpl.hotSpotByTime(artifactHistory, true, "-time")
+            totalHotSpotList = ArtifactExecutionInfoImpl.hotSpotByTime(artifactHistory, false, "-time")
         ]]></script>
     </actions>
     <widgets>
@@ -65,12 +65,18 @@ This Work includes contributions authored by David E. Jones, not as a
         <label text="Artifacts by Own Time" type="h3"/>
         <form-list name="OwnHotSpots" list="ownHotSpotList" skip-form="true">
             <field name="time"><default-field><display/></default-field></field>
-            <field name="artifact"><default-field><display/></default-field></field>
+            <field name="count"><default-field><display/></default-field></field>
+            <field name="name"><default-field><display/></default-field></field>
+            <field name="type"><default-field><display/></default-field></field>
+            <field name="action"><default-field><display/></default-field></field>
         </form-list>
         <label text="Artifacts by Own plus Children Time" type="h3"/>
         <form-list name="TotalHotSpots" list="totalHotSpotList" skip-form="true">
             <field name="time"><default-field><display/></default-field></field>
-            <field name="artifact"><default-field><display/></default-field></field>
+            <field name="count"><default-field><display/></default-field></field>
+            <field name="name"><default-field><display/></default-field></field>
+            <field name="type"><default-field><display/></default-field></field>
+            <field name="action"><default-field><display/></default-field></field>
         </form-list>
     </widgets>
 </screen>
