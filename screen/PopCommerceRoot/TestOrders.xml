@@ -91,6 +91,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <field name="name"><default-field><display/></default-field></field>
             <field name="type"><default-field><display/></default-field></field>
             <field name="action"><default-field><display/></default-field></field>
+            <field name="actionDetail"><default-field><display/></default-field></field>
         </form-list>
         <label text="Artifacts by Own plus Children Time" type="h3"/>
         <form-list name="TotalHotSpots" list="totalHotSpotList" skip-form="true">
@@ -99,6 +100,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <field name="name"><default-field><display/></default-field></field>
             <field name="type"><default-field><display/></default-field></field>
             <field name="action"><default-field><display/></default-field></field>
+            <field name="actionDetail"><default-field><display/></default-field></field>
         </form-list>
         <label text="Consolidated Artifacts Tree" type="h3"/>
         <label text="${printedArtifactInfo}" encode="true" type="pre"/>
