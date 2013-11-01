@@ -40,15 +40,17 @@ This Work includes contributions authored by David E. Jones, not as a
                             .parameters([productId:'DEMO_1_1', quantity:1, customerPartyId:customerPartyId,
                             currencyUomId:currencyUomId, productStoreId:productStoreId]).call()
 
-                    String cartOrderId = addOut1.orderId
-                    //String orderPartSeqId = addOut1.orderPartSeqId
+                    cartOrderId = addOut1.orderId
+                    orderPartSeqId = addOut1.orderPartSeqId
 
                     ec.service.sync().name("mantle.order.OrderServices.add#OrderProductQuantity")
-                            .parameters([orderId:cartOrderId, productId:'DEMO_3_1', quantity:1, customerPartyId:customerPartyId,
-                            currencyUomId:currencyUomId, productStoreId:productStoreId]).call()
+                            .parameters([orderId:cartOrderId, orderPartSeqId:orderPartSeqId, productId:'DEMO_3_1',
+                                quantity:1, customerPartyId:customerPartyId, currencyUomId:currencyUomId,
+                                productStoreId:productStoreId]).call()
                     ec.service.sync().name("mantle.order.OrderServices.add#OrderProductQuantity")
-                            .parameters([orderId:cartOrderId, productId:'DEMO_2_1', quantity:1, customerPartyId:customerPartyId,
-                            currencyUomId:currencyUomId, productStoreId:productStoreId]).call()
+                            .parameters([orderId:cartOrderId, orderPartSeqId:orderPartSeqId, productId:'DEMO_2_1',
+                                quantity:1, customerPartyId:customerPartyId, currencyUomId:currencyUomId,
+                                productStoreId:productStoreId]).call()
 
                     ec.service.sync().name("mantle.order.OrderServices.set#OrderBillingShippingInfo")
                             .parameters([orderId:cartOrderId, paymentMethodId:'CustJqpCc', shippingPostalContactMechId:'CustJqpAddr',
@@ -62,7 +64,6 @@ This Work includes contributions authored by David E. Jones, not as a
                     ec.logger.warn("Error running test" + t.toString())
                 } finally {
                     if (beganTransaction && tf.isTransactionInPlace()) {
-                        ec.logger.info("[${i+1}/${numOrders} - ${System.currentTimeMillis() - startTime}] Committing order ${cartOrderId}")
                         tf.commit()
                     }
                 }
