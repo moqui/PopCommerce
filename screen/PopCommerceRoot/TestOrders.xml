@@ -34,7 +34,7 @@ This Work includes contributions authored by David E. Jones, not as a
             for (int i = 0; i < numOrders; i++) {
                 if (ec.message.hasError()) continue
                 boolean beganTransaction = tf.begin()
-                if (beganTransaction) new TransactionCache(ec.getEcfi()).enlist()
+                new TransactionCache(ec.getEcfi()).enlist()
                 try {
                     Map addOut1 = ec.service.sync().name("mantle.order.OrderServices.add#OrderProductQuantity")
                             .parameters([productId:'DEMO_1_1', quantity:1, customerPartyId:customerPartyId,
@@ -54,8 +54,12 @@ This Work includes contributions authored by David E. Jones, not as a
 
                     ec.service.sync().name("mantle.order.OrderServices.set#OrderBillingShippingInfo")
                             .parameters([orderId:cartOrderId, paymentMethodId:'CustJqpCc', shippingPostalContactMechId:'CustJqpAddr',
-                            shippingTelecomContactMechId:'CustJqpTeln', shipmentMethodEnumId:'ShMthNoShipping']).call()
+                                shippingTelecomContactMechId:'CustJqpTeln', shipmentMethodEnumId:'ShMthNoShipping']).call()
+
                     ec.service.sync().name("mantle.order.OrderServices.place#Order").parameters([orderId:cartOrderId]).call()
+
+                    ec.service.sync().name("mantle.shipment.ShipmentServices.ship#OrderPart")
+                            .parameters([orderId:cartOrderId, orderPartSeqId:orderPartSeqId]).call()
 
                     resultMessages.add("[${i+1}/${numOrders} - ${System.currentTimeMillis() - startTime}] Created order ${cartOrderId}")
                     ec.logger.info("[${i+1}/${numOrders} - ${System.currentTimeMillis() - startTime}] Created order ${cartOrderId}")
@@ -87,6 +91,9 @@ This Work includes contributions authored by David E. Jones, not as a
         <label text="Artifacts by Own Time" type="h3"/>
         <form-list name="OwnHotSpots" list="ownHotSpotList" skip-form="true">
             <field name="time"><default-field><display/></default-field></field>
+            <field name="timeMin"><default-field><display/></default-field></field>
+            <field name="timeAvg"><default-field><display text="${time/count}" format="0.##"/></default-field></field>
+            <field name="timeMax"><default-field><display/></default-field></field>
             <field name="count"><default-field><display/></default-field></field>
             <field name="name"><default-field><display/></default-field></field>
             <field name="type"><default-field><display/></default-field></field>
@@ -96,6 +103,9 @@ This Work includes contributions authored by David E. Jones, not as a
         <label text="Artifacts by Own plus Children Time" type="h3"/>
         <form-list name="TotalHotSpots" list="totalHotSpotList" skip-form="true">
             <field name="time"><default-field><display/></default-field></field>
+            <field name="timeMin"><default-field><display/></default-field></field>
+            <field name="timeAvg"><default-field><display text="${time/count}" format="0.##"/></default-field></field>
+            <field name="timeMax"><default-field><display/></default-field></field>
             <field name="count"><default-field><display/></default-field></field>
             <field name="name"><default-field><display/></default-field></field>
             <field name="type"><default-field><display/></default-field></field>
