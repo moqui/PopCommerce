@@ -29,7 +29,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <entity-find entity-name="ProductStoreCategory" list="pscList" cache="true">
             <date-filter/>
             <econdition field-name="productStoreId"/>
-            <econdition field-name="storeCategoryTypeEnumId" value="PSCT_HOME_PAGE"/>
+            <econdition field-name="storeCategoryTypeEnumId" value="PsctHomePage"/>
         </entity-find>
         <entity-find entity-name="ProductCategoryMemberProduct" list="pcmpList" cache="true">
             <date-filter/>
