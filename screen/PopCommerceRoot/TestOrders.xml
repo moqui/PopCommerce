@@ -43,7 +43,7 @@ This Work includes contributions authored by David E. Jones, not as a
                 boolean beganTransaction = false
 
                 // boolean beganTransaction = tf.begin()
-                // new TransactionCache(ec.getEcfi()).enlist()
+                // ec.transaction.initTransactionCache()
                 try {
                     // ec.user.loginUser("joe@public.com", "moqui", null)
 
