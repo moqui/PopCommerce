@@ -42,7 +42,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <!-- <label text="POP Commerce Home Page" type="h1"/> -->
         <form-list name="HomeProductList" list="pcmpList" transition="addToCart">
             <row-actions>
-                <service-call name="mantle.product.ProductServices.get#ProductPrice" out-map="priceMap"
+                <service-call name="mantle.product.PriceServices.get#ProductPrice" out-map="priceMap"
                         in-map="[productId:productId, priceUomId:priceUomId, productStoreId:productStoreId,
                                 vendorPartyId:vendorPartyId, customerPartyId:customerPartyId]"/>
                 <set field="price" from="priceMap?.price"/>

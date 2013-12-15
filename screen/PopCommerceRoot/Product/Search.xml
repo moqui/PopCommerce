@@ -42,7 +42,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <row-actions>
                 <set field="productId" from="document._id"/>
                 <entity-find-one entity-name="mantle.product.Product" value-field="product" cache="true"/>
-                <service-call name="mantle.product.ProductServices.get#ProductPrice" out-map="priceMap"
+                <service-call name="mantle.product.PriceServices.get#ProductPrice" out-map="priceMap"
                         in-map="[productId:productId, priceUomId:priceUomId, productStoreId:productStoreId,
                                 vendorPartyId:vendorPartyId, customerPartyId:customerPartyId]"/>
                 <set field="price" from="priceMap?.price"/>
