@@ -68,8 +68,12 @@ This Work includes contributions authored by David E. Jones, not as a
                                 <service-call name="mantle.order.OrderServices.get#OrderItemTotal" in-map="[orderItem:orderItem]" out-map="orderItemTotalOut"/>
                                 <script>context.putAll(orderItem)</script>
                             </row-actions>
-                            <field name="productId"><default-field title="Product">
-                                <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/>
+                            <field name="itemTypeEnumId"><default-field title="Type">
+                                <display-entity entity-name="moqui.basic.Enumeration" key-field-name="enumId" text="${description}"/>
+                            </default-field></field>
+                            <field name="description"><default-field title="Description">
+                                <display text="${itemDescription} ${productId ? '[' + productId + ']' : ''}"/>
+                                <!-- <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/> -->
                             </default-field></field>
                             <field name="unitAmount"><default-field><display currency-unit-field="orderHeader.currencyUomId"/></default-field></field>
                             <field name="quantity"><default-field><display/></default-field></field>
