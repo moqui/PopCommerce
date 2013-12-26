@@ -41,7 +41,14 @@ This Work includes contributions authored by David E. Jones, not as a
                     telecomContactMechPurposeId:'PhoneShippingDest']" out-map="shippingInfo"/>
         <set field="shipInfoFlat" from="StupidUtilities.flattenNestedMap(shippingInfo)"/>
 
-        <service-call name="mantle.product.StoreServices.get#StoreShippingOptions" in-map="context" out-map="context"/>
+        <service-call name="mantle.product.StoreServices.get#StoreShippingOptions"
+                in-map="[productStoreId:productStoreId, orderId:cartOrderId]" out-map="context"/>
+        <entity-find-one entity-name="mantle.order.OrderHeader" value-field="orderHeader">
+            <field-map field-name="orderId" from="cartOrderId"/>
+        </entity-find-one>
+        <entity-find-one entity-name="mantle.order.OrderPart" value-field="orderPart">
+            <field-map field-name="orderId" from="cartOrderId"/>
+        </entity-find-one>
     </actions>
     <widgets>
         <label text="Checkout" type="h1"/>
@@ -99,10 +106,12 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="shippingPostalContactMechId" entry-name="shippingInfo.postalContactMechId"><default-field><hidden/></default-field></field>
                     <field name="shippingTelecomContactMechId" entry-name="shippingInfo.telecomContactMechId"><default-field><hidden/></default-field></field>
 
-                    <field name="carrierAndShipmentMethod"><default-field title="Shipment Method"><drop-down>
-                        <list-options list="shippingOptions" key="${carrierPartyId}:${shipmentMethodEnumId}"
-                                text="${carrierPartyId == '_NA_' ? '' : (carrierName + ' - ') }${shipmentMethodDescription}"/>
-                    </drop-down></default-field></field>
+                    <field name="carrierAndShipmentMethod"><default-field title="Shipment Method">
+                        <drop-down no-current-selected-key="${orderPart.carrierPartyId ? orderPart.carrierPartyId + ':' + orderPart.shipmentMethodEnumId : ''}">
+                            <list-options list="shippingOptions" key="${carrierPartyId}:${shipmentMethodEnumId}"
+                                text="${carrierPartyId == '_NA_' ? '' : (carrierName + ' - ') }${shipmentMethodDescription} ${shippingTotal != null ? ec.l10n.formatCurrency(shippingTotal, orderHeader.currencyUomId, 2) : ''}"/>
+                        </drop-down>
+                    </default-field></field>
 
                     <field name="submitButton"><default-field title="Set Info and Review Order"><submit/></default-field></field>
                 </form-single>
