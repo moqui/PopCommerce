@@ -41,8 +41,9 @@ This Work includes contributions authored by David E. Jones, not as a
                     telecomContactMechPurposeId:'PhoneShippingDest']" out-map="shippingInfo"/>
         <set field="shipInfoFlat" from="StupidUtilities.flattenNestedMap(shippingInfo)"/>
 
-        <service-call name="mantle.product.StoreServices.get#StoreShippingOptions"
-                in-map="[productStoreId:productStoreId, orderId:cartOrderId]" out-map="context"/>
+        <service-call name="mantle.product.StoreServices.get#StoreShippingOptions" out-map="context"
+                in-map="[productStoreId:productStoreId, orderId:cartOrderId,
+                    postalContactMechId:shipInfoFlat.postalContactMechId]"/>
         <entity-find-one entity-name="mantle.order.OrderHeader" value-field="orderHeader">
             <field-map field-name="orderId" from="cartOrderId"/>
         </entity-find-one>
