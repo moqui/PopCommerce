@@ -27,8 +27,6 @@ This Work includes contributions authored by David E. Jones, not as a
     <moqui.screen.ScreenTheme screenThemeId="POPC_DEFAULT" screenThemeTypeEnumId="STT_POP_COMMERCE"
             description="POP Commerce Default Theme"/>
     <!-- NOTE: these default resources are from the Moqui default runtime webroot component -->
-    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="1" resourceTypeEnumId="STRT_STYLESHEET"
-            resourceValue="/css/smoothness/jquery-ui-1.9.2.min.css"/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="2" resourceTypeEnumId="STRT_STYLESHEET"
             resourceValue="/css/default.css"/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="3" resourceTypeEnumId="STRT_STYLESHEET"
