@@ -57,8 +57,8 @@ This Work includes contributions authored by David E. Jones, not as a
                                         <label text="${partPaymentInfo.paymentMethodTypeEnum?.description}" type="p"/>
                                         <label text="${ec.l10n.formatCurrency(partPaymentInfo.partPayment.amount, partPaymentInfo.partPayment.amountUomId, 2)}" type="p"/>
 
-                                        <label text="${partPaymentInfo.creditCard?.firstNameOnCard} ${partPaymentInfo.creditCard?.lastNameOnCard}" type="p"/>
-                                        <label text="${partPaymentInfo.creditCardTypeEnum?.description} ${cardNumber} ${partPaymentInfo.creditCard?.expireDate}" type="p"/>
+                                        <label text="${partPaymentInfo.creditCard?.firstNameOnCard ?: ''} ${partPaymentInfo.creditCard?.lastNameOnCard ?: ''}" type="p"/>
+                                        <label text="${partPaymentInfo.creditCardTypeEnum?.description ?: ''} ${cardNumber ?: ''} ${partPaymentInfo.creditCard?.expireDate ?: ''}" type="p"/>
 
                                         <widgets><render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
                                     </widgets>
