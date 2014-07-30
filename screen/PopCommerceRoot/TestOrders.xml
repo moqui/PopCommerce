@@ -65,7 +65,8 @@ This Work includes contributions authored by David E. Jones, not as a
 
                     ec.service.sync().name("mantle.order.OrderServices.set#OrderBillingShippingInfo")
                             .parameters([orderId:cartOrderId, paymentMethodId:'CustJqpCc', shippingPostalContactMechId:'CustJqpAddr',
-                                shippingTelecomContactMechId:'CustJqpTeln', shipmentMethodEnumId:'ShMthNoShipping']).call()
+                                shippingTelecomContactMechId:'CustJqpTeln', shipmentMethodEnumId:'ShMthNoShipping',
+                                carrierPartyId:'_NA_']).call()
 
                     ec.service.sync().name("mantle.order.OrderServices.place#Order").parameters([orderId:cartOrderId]).call()
 
