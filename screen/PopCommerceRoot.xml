@@ -162,7 +162,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <container id="footer">
             <render-mode><text type="html" template="true"><![CDATA[
                     <div id="apps-footer-content">
-                        <h6><a href="http://www.moqui.org/" target="_blank">Built on Moqui Framework 1.4.1</a></h6>
+                        <h6><a href="http://www.moqui.org/" target="_blank">Built on Moqui Framework 1.4.2</a></h6>
                     </div>
                     <!-- productStoreId=${productStoreId}, currencyUomId=${currencyUomId}, priceUomId=${priceUomId}, defaultLocale=${defaultLocale} -->
                     <!-- organizationPartyId=${organizationPartyId!!}, vendorPartyId=${vendorPartyId!!}, cartOrderId=${cartOrderId!!}, customerPartyId=${customerPartyId!!} -->
