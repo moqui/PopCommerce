@@ -35,10 +35,13 @@ This Work includes contributions authored by David E. Jones, not as a
             <field name="itemTypeEnumId"><default-field title="Type">
                 <display-entity entity-name="moqui.basic.Enumeration" key-field-name="enumId" text="${description}"/>
             </default-field></field>
-            <field name="description"><default-field title="Description">
-                <display text="${itemDescription} ${productId ? '[' + productId + ']' : ''}"/>
-                <!-- <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/> -->
-            </default-field></field>
+            <field name="description">
+                <conditional-field condition="productId">
+                    <link text="${itemDescription} [${productId}]" url="/popc/Product/Detail/${productId}/${itemDescription?.replace(' ', '-')}" url-type="plain" link-type="anchor"/>
+                    <!-- <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/> -->
+                </conditional-field>
+                <default-field title="Description"><display text="${itemDescription}"/></default-field>
+            </field>
             <!--<field name="productId"><default-field title="Product">
                 <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/>
             </default-field></field>-->

@@ -73,7 +73,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
             <field name="productId"><default-field><hidden/></default-field></field>
             <field name="productName" entry-name="product.productName"><default-field title="">
-                <link text="${product.productName}" url="Product/Detail/${productId}/${product.productName}" url-type="plain" link-type="anchor"/>
+                <link text="${product.productName}" url="/popc/Product/Detail/${productId}/${product.productName?.replace(' ', '-')}" url-type="plain" link-type="anchor"/>
             </default-field></field>
             <field name="price"><default-field title=""><display also-hidden="false" currency-unit-field="priceUomId"/></default-field></field>
             <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>
