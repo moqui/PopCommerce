@@ -101,7 +101,7 @@ This Work includes contributions authored by David E. Jones, not as a
             </container-dialog>
             <container-dialog id="create-account" button-text="Create Account">
                 <form-single name="createAccount" transition="createAccount">
-                    <field name="firstName"><default-field title="Name"><text-line size="15"/></default-field></field>
+                    <field name="firstName"><default-field title=""><text-line size="15"/></default-field></field>
                     <field name="middleName"><default-field title=""><text-line size="2"/></default-field></field>
                     <field name="lastName"><default-field title=""><text-line size="15"/></default-field></field>
 
@@ -116,7 +116,7 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
 
                     <field-layout>
-                        <field-row><field-ref name="firstName"/><field-ref name="middleName"/><field-ref name="lastName"/></field-row>
+                        <field-row-big title="Name"><field-ref name="firstName"/><field-ref name="middleName"/><field-ref name="lastName"/></field-row-big>
 
                         <field-ref name="emailAddress"/>
                         <field-row><field-ref name="newPassword"/><field-ref name="newPasswordVerify"/></field-row>

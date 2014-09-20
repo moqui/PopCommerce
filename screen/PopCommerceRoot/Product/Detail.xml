@@ -52,7 +52,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <field name="add"><default-field title="Add to Cart"><submit/></default-field></field>
 
             <field-layout>
-                <field-row><field-ref name="price"/><field-ref name="quantity"/><field-ref name="add"/></field-row>
+                <field-row-big><field-ref name="price"/><field-ref name="quantity"/><field-ref name="add"/></field-row-big>
             </field-layout>
         </form-single>
     </widgets>
