@@ -30,9 +30,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <set field="customerPartyId" from="ec.user.userAccount?.partyId"/>
     </always-actions>
 
-    <transition name="search">
-        <default-response url="/popc/Product/Search"/>
-    </transition>
+    <transition name="search"><default-response url="/popc/Product/Search"/></transition>
 
     <subscreens default-item="Home"/>
 
@@ -54,7 +52,7 @@ This Work includes contributions authored by David E. Jones, not as a
             '/assets/lib/Font-Awesome/css/font-awesome.min.css', '/assets/lib//jquery-ui/jquery-ui.min.css',
             '/assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css',
             '/assets/lib/chosen/chosen.min.css', '/assets/lib/jasny/css/jasny-bootstrap.min.css',
-            '/assets/css/main.min.css', '/assets/css/theme.css', '/css/default.css'])"/>
+            '/assets/css/main.min.css', '/assets/css/theme.css'])"/>
     </pre-actions>
     
     <actions>
@@ -65,93 +63,103 @@ This Work includes contributions authored by David E. Jones, not as a
             <text type="html" location="component://webroot/screen/includes/Header.html.ftl"/>
         </render-mode>
 
-        <container id="top">
-            <container style="ui-helper-clearfix">
-                <container id="header-logo"><link text="My Little Store" url="/popc" link-type="anchor"/></container>
-                <container id="header-user">
-                    <section name="headerUser">
-                        <condition><expression>ec.user.userId</expression></condition>
-                        <widgets>
-                            <label text="Welcome ${ec.user.userAccount?.userFullName}!"/>
-                            <link text="Logout" url="/popc/Login/logout" link-type="hidden-form" icon="glyphicon glyphicon-off"/>
-                        </widgets>
-                    </section>
-                    <link text="Profile" url="/popc/Customer/Profile" link-type="anchor-button" icon="glyphicon glyphicon-user"/>
-                    <link text="Orders" url="/popc/Customer/OrderHistory" link-type="anchor-button" icon="glyphicon glyphicon-folder-open"/>
-                    <link text="Cart${itemCount ? ' (' + ec.l10n.formatValue(itemCount, null) + (itemCount > 1 ? ' items)' : ' item)') : ''}"
-                            url="/popc/Order/Cart" link-type="anchor-button" icon="glyphicon glyphicon-shopping-cart"/>
-                    <section name="CheckoutLink">
-                        <condition><expression>itemCount</expression></condition>
-                        <widgets><link text="Checkout" url="/popc/Order/Checkout" link-type="anchor-button" icon="glyphicon glyphicon-circle-arrow-right"/></widgets>
-                    </section>
-                </container>
+        <container id="wrap" style="bg-dark dk">
+            <container id="top">
+                <render-mode><text type="html"><![CDATA[
+<nav class="navbar navbar-inverse navbar-fixed-top"><#-- navbar-static-top -->
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="/popc" class="navbar-title">My Little Store</a>
+        <#-- ${(ec.getTenant().tenantName)!"Welcome to Moqui"} -->
+        <#-- <a href="index.html" class="navbar-brand"><img src="assets/img/logo.png" alt=""></a> -->
+    </header>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    ]]></text></render-mode>
+
+                <section name="CheckoutLink"><condition><expression>itemCount</expression></condition>
+                    <widgets><link text="Checkout" url="/popc/Order/Checkout" link-type="anchor-button" icon="glyphicon glyphicon-circle-arrow-right" style="navbar-btn navbar-right"/></widgets>
+                </section>
+                <link text="Cart${itemCount ? ' (' + ec.l10n.formatValue(itemCount, null) + (itemCount > 1 ? ' items)' : ' item)') : ''}"
+                        url="/popc/Order/Cart" link-type="anchor-button" icon="glyphicon glyphicon-shopping-cart" style="navbar-btn navbar-right"/>
+                <link text="Orders" url="/popc/Customer/OrderHistory" link-type="anchor-button" icon="glyphicon glyphicon-folder-open" style="navbar-btn navbar-right"/>
+                <link text="Profile" url="/popc/Customer/Profile" link-type="anchor-button" icon="glyphicon glyphicon-user" style="navbar-btn navbar-right"/>
+                <section name="HeaderUser"><condition><expression>ec.user.userId</expression></condition>
+                    <widgets>
+                        <link text="Logout" url="/popc/Login/logout" link-type="hidden-form" icon="glyphicon glyphicon-off" style="navbar-btn navbar-right"/>
+                        <label text="Welcome ${ec.user.userAccount?.userFullName}!" style="navbar-text navbar-right"/>
+                    </widgets>
+                </section>
+
+                <render-mode><text type="html"><![CDATA[
+    </div>
+  </div> <!-- container-fluid -->
+</nav><!-- /.navbar -->
+                    ]]></text></render-mode>
+
+                <render-mode><text type="html"><![CDATA[
+<header class="head">
+  <div class="search-bar">
+    <form class="main-search" action="${sri.makeUrlByType('search', 'transition', null, null).url}">
+      <div class="input-group">
+        <input type="text" name="keywords" class="form-control" placeholder="Search products...">
+        <span class="input-group-btn"><button class="btn btn-primary btn-sm text-muted" type="button"><i class="fa fa-search"></i></button></span>
+      </div>
+    </form><!-- /.main-search -->
+  </div><!-- /.search-bar -->
+  <div class="main-bar">
+    <h3><i class="fa fa-building"></i>${html_title!((sri.screenUrlInfo.targetScreen.getDefaultMenuName())!"Page")}</h3>
+  </div><!-- /.main-bar -->
+</header>
+                    ]]></text></render-mode>
             </container>
-            <container>
-                <form-single name="HeaderSearch" focus-field="keywords" transition="search">
-                    <field name="category"><default-field title="">
-                        <drop-down allow-empty="true">
-                            <entity-options key="${productCategoryId}" text="${categoryName}">
-                                <entity-find entity-name="ProductCategoryChildren" cache="true">
-                                    <date-filter/>
-                                    <!-- TODO: lookup using mantle.product.store.ProductStoreCategory -->
-                                    <econdition field-name="parentProductCategoryId" value="PopcBrowseRoot"/>
-                                    <order-by field-name="sequenceNum"/>
-                                    <order-by field-name="categoryName"/>
-                                </entity-find>
-                            </entity-options>
-                        </drop-down>
-                    </default-field></field>
-                    <field name="keywords"><default-field title=""><text-line size="30"/></default-field></field>
-                    <field name="submitButton"><default-field title="Search"><submit/></default-field></field>
 
-                    <field-layout>
-                        <field-row-big><field-ref name="category"/><field-ref name="keywords"/><field-ref name="submitButton"/></field-row-big>
-                    </field-layout>
-                </form-single>
+            <!-- <container id="left"></container> -->
+            <container id="content">
+                <!-- <container style="outer"> -->
+                    <container style="inner bg-light lter">
+                        <section-iterate name="headerMessages" list="ec.message.messages" entry="message">
+                            <widgets><container style="message"><label text="${message}"/></container></widgets>
+                        </section-iterate>
+                        <section-iterate name="headerErrors" list="ec.message.errors" entry="errorMessage">
+                            <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
+                        </section-iterate>
+                        <section-iterate name="headerValidationErrors" list="ec.message.validationErrors" entry="validationError">
+                            <!-- TODO: put these by fields instead of in header -->
+                            <widgets><container style="message error"><label text="${validationError.message} (for field ${validationError.field})"/></container></widgets>
+                        </section-iterate>
+
+                        <section-iterate name="headerSavedMessages" list="ec.web?.savedMessages" entry="message">
+                            <widgets><container style="message"><label text="${message}"/></container></widgets>
+                        </section-iterate>
+                        <section-iterate name="headerSavedErrors" list="ec.web?.savedErrors" entry="errorMessage">
+                            <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
+                        </section-iterate>
+                        <section-iterate name="headerSavedValidationErrors" list="ec.web?.savedValidationErrors" entry="validationError">
+                            <!-- TODO: put these by fields instead of in header -->
+                            <widgets><container style="message error"><label text="${validationError.message} (for field ${validationError.field})"/></container></widgets>
+                        </section-iterate>
+
+                        <!-- the subscreen goes here -->
+                        <subscreens-active id="pop-commerce-root"/>
+                    </container>
+                <!-- </container> -->
             </container>
         </container>
-        <!--
-        <container id="left">
-        </container>
-        -->
-        <container id="content">
-            <!-- <container style="outer"> -->
-                <container style="inner">
-                    <section-iterate name="headerMessages" list="ec.message.messages" entry="message">
-                        <widgets><container style="message"><label text="${message}"/></container></widgets>
-                    </section-iterate>
-                    <section-iterate name="headerErrors" list="ec.message.errors" entry="errorMessage">
-                        <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
-                    </section-iterate>
-                    <section-iterate name="headerValidationErrors" list="ec.message.validationErrors" entry="validationError">
-                        <!-- TODO: put these by fields instead of in header -->
-                        <widgets><container style="message error"><label text="${validationError.message} (for field ${validationError.field})"/></container></widgets>
-                    </section-iterate>
-
-                    <section-iterate name="headerSavedMessages" list="ec.web?.savedMessages" entry="message">
-                        <widgets><container style="message"><label text="${message}"/></container></widgets>
-                    </section-iterate>
-                    <section-iterate name="headerSavedErrors" list="ec.web?.savedErrors" entry="errorMessage">
-                        <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
-                    </section-iterate>
-                    <section-iterate name="headerSavedValidationErrors" list="ec.web?.savedValidationErrors" entry="validationError">
-                        <!-- TODO: put these by fields instead of in header -->
-                        <widgets><container style="message error"><label text="${validationError.message} (for field ${validationError.field})"/></container></widgets>
-                    </section-iterate>
-
-                    <!-- the subscreen goes here -->
-                    <subscreens-active id="pop-commerce-root"/>
-                </container>
-            <!-- </container> -->
-        </container>
-        <container id="footer">
+        <container id="footer" style="Footer bg-dark dker">
             <render-mode><text type="html" template="true"><![CDATA[
-                    <div id="apps-footer-content">
-                        <h6><a href="http://www.moqui.org/" target="_blank">Built on Moqui Framework 1.4.2</a></h6>
-                    </div>
-                    <!-- productStoreId=${productStoreId}, currencyUomId=${currencyUomId}, priceUomId=${priceUomId}, defaultLocale=${defaultLocale} -->
-                    <!-- organizationPartyId=${organizationPartyId!!}, vendorPartyId=${vendorPartyId!!}, cartOrderId=${cartOrderId!!}, customerPartyId=${customerPartyId!!} -->
-                ]]></text></render-mode>
+                        <div id="apps-footer-content">
+                            <h6><a href="http://www.moqui.org/" target="_blank">Built on Moqui Framework 1.4.2</a></h6>
+                        </div>
+                        <!-- productStoreId=${productStoreId}, currencyUomId=${currencyUomId}, priceUomId=${priceUomId}, defaultLocale=${defaultLocale} -->
+                        <!-- organizationPartyId=${organizationPartyId!!}, vendorPartyId=${vendorPartyId!!}, cartOrderId=${cartOrderId!!}, customerPartyId=${customerPartyId!!} -->
+                    ]]></text></render-mode>
         </container>
 
         <render-mode>
