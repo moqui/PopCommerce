@@ -26,10 +26,6 @@ This Work includes contributions authored by David E. Jones, not as a
 
     <transition name="updateContactInfo"><default-response url="UpdateContactInfo"/></transition>
     <transition name="updatePaymentMethodInfo"><default-response url="UpdatePaymentMethodInfo"/></transition>
-    <transition name="storePaymentMethodInfo">
-        <service-call name="mantle.account.PaymentMethodServices.store#PaymentMethodInfo"/>
-        <default-response url="."/>
-    </transition>
 
     <actions>
         <set field="partyId" from="ec.user.userAccount.partyId"/>
@@ -93,14 +89,18 @@ This Work includes contributions authored by David E. Jones, not as a
                                         parameter-map="[partyId:partyId, paymentMethodTypeEnumId:'PmtCreditCard']"/>
                             </box-toolbar>
                             <box-body>
-                                <section-iterate name="BillingInfoSection" list="cciOut.methodInfoList" entry="methodInfo">
-                                    <widgets>
-                                        <render-mode><text type="html" location="component://mantle-usl/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
-                                        <dynamic-dialog id="UpdatePaymentMethodDialog" button-text="Update Payment Method"
-                                                transition="updatePaymentMethodInfo" width="800"
-                                                parameter-map="[partyId:partyId, paymentMethodId:methodInfo.paymentMethodId]"/>
-                                    </widgets>
-                                </section-iterate>
+                                <container style="float-box" type="ul">
+                                    <section-iterate name="BillingInfoSection" list="cciOut.methodInfoList" entry="methodInfo">
+                                        <widgets>
+                                            <container type="li">
+                                                <render-mode><text type="html" location="component://mantle-usl/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
+                                                <dynamic-dialog id="UpdatePaymentMethodDialog" button-text="Update Payment Method"
+                                                        transition="updatePaymentMethodInfo" width="800"
+                                                        parameter-map="[partyId:partyId, paymentMethodId:methodInfo.paymentMethodId]"/>
+                                            </container>
+                                        </widgets>
+                                    </section-iterate>
+                                </container>
                             </box-body>
                         </container-box>
                     </widgets>
@@ -122,34 +122,34 @@ This Work includes contributions authored by David E. Jones, not as a
                                             telecomContactMechPurposeId:'PhoneShippingDest']"/>
                             </box-toolbar>
                             <box-body>
-                                <container style="row">
-                                    <container style="col-lg-6">
-                                        <section-iterate name="ShippingAddressList" list="shippingContactListInfo.postalAddressList" entry="postalAddressInfo">
-                                            <actions>
-                                                <set field="contactInfo" from="postalAddressInfo"/>
-                                            </actions>
-                                            <widgets>
+                                <container style="float-box" type="ul">
+                                    <section-iterate name="ShippingAddressList" list="shippingContactListInfo.postalAddressList" entry="postalAddressInfo">
+                                        <actions>
+                                            <set field="contactInfo" from="postalAddressInfo"/>
+                                        </actions>
+                                        <widgets>
+                                            <container type="li">
                                                 <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
                                                 <dynamic-dialog id="UpdatePostalInfo" button-text="Update Address"
                                                         transition="updateContactInfo" width="800"
                                                         parameter-map="[partyId:partyId, postalContactMechId:contactInfo.postalContactMechId,
-                                                    postalContactMechPurposeId:contactInfo.postalContactMechPurposeId]"/>
-                                            </widgets>
-                                        </section-iterate>
-                                    </container>
-                                    <container style="col-lg-6">
-                                        <section-iterate name="ShippingPhoneList" list="shippingContactListInfo.telecomNumberList" entry="telecomNumberInfo">
-                                            <actions>
-                                                <set field="contactInfo" from="telecomNumberInfo"/>
-                                            </actions>
-                                            <widgets>
+                                                                postalContactMechPurposeId:contactInfo.postalContactMechPurposeId]"/>
+                                            </container>
+                                        </widgets>
+                                    </section-iterate>
+                                    <section-iterate name="ShippingPhoneList" list="shippingContactListInfo.telecomNumberList" entry="telecomNumberInfo">
+                                        <actions>
+                                            <set field="contactInfo" from="telecomNumberInfo"/>
+                                        </actions>
+                                        <widgets>
+                                            <container type="li">
                                                 <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
                                                 <dynamic-dialog id="UpdatePhoneInfo" button-text="Update Phone" transition="updateContactInfo"
                                                         parameter-map="[partyId:partyId, telecomContactMechId:contactInfo.telecomContactMechId,
-                                                    telecomContactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
-                                            </widgets>
-                                        </section-iterate>
-                                    </container>
+                                                                telecomContactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
+                                            </container>
+                                        </widgets>
+                                    </section-iterate>
                                 </container>
                             </box-body>
                         </container-box>
