@@ -18,8 +18,8 @@ This Work includes contributions authored by David E. Jones, not as a
         <service-call name="mantle.party.ContactServices.store#PartyContactInfo"/>
         <default-response url="."/>
     </transition>
-    <transition name="storeBillingInfo">
-        <service-call name="mantle.account.PaymentMethodServices.store#CreditCardInfo"/>
+    <transition name="storePaymentMethodInfo">
+        <service-call name="mantle.account.PaymentMethodServices.store#PaymentMethodInfo"/>
         <default-response url="."/>
     </transition>
     <transition name="setOrderBillingShippingInfo">
@@ -28,13 +28,9 @@ This Work includes contributions authored by David E. Jones, not as a
     </transition>
 
     <actions>
-        <service-call name="mantle.account.PaymentMethodServices.get#PartyCreditCardInfo"
-                in-map="[partyId:customerPartyId]" out-map="creditCardInfo"/>
-        <set field="ccInfoFlat" from="StupidUtilities.flattenNestedMap(creditCardInfo)"/>
-        <set field="ccInfoFlat.expireMonth" from="ccInfoFlat.expireDate ? ccInfoFlat.expireDate.substring(0, ccInfoFlat.expireDate.indexOf('/')) : null"/>
-        <set field="ccInfoFlat.expireYear" from="ccInfoFlat.expireDate ? ccInfoFlat.expireDate.substring(ccInfoFlat.expireDate.indexOf('/')+1) : null"/>
-        <set field="cardNumber" from="creditCardInfo.creditCard?.cardNumber"/>
-        <set field="cardNumber" from="cardNumber ? (creditCardInfo.creditCard.creditCardTypeEnumId == 'CctAmericanExpress' ? '***********' : '************') + cardNumber.substring(cardNumber.length() - 4, cardNumber.length()) : ''"/>
+        <service-call name="mantle.account.PaymentMethodServices.get#PartyPaymentMethodInfo"
+                in-map="[partyId:customerPartyId]" out-map="methodInfo"/>
+        <set field="methodInfoFlat" from="StupidUtilities.flattenNestedMap(methodInfo)"/>
 
         <service-call name="mantle.party.ContactServices.get#PartyContactInfo"
                 in-map="[partyId:customerPartyId, postalContactMechPurposeId:'PostalShippingDest',
@@ -56,20 +52,14 @@ This Work includes contributions authored by David E. Jones, not as a
         <container>
             <label text="Billing Information" type="h2"/>
             <container-dialog id="BillingInfoUpdate" button-text="Update">
-                <form-single name="BillingInfo" extends="component://PopCommerce/screen/PopCommerceRoot/Customer/Profile.xml#BillingInfo"/>
+                <form-single name="BillingInfo" extends="component://mantle-usl/template/party/PartyForms.xml#PaymentMethodInfo"/>
             </container-dialog>
         </container>
         <container>
             <section name="BillingInfoSection">
-                <condition><expression>creditCardInfo?.creditCard</expression></condition>
-                <actions>
-                    <set field="contactInfo" from="creditCardInfo"/>
-                </actions>
+                <condition><expression>methodInfo?.paymentMethod</expression></condition>
                 <widgets>
-                    <label text="${creditCardInfo.creditCard?.firstNameOnCard} ${creditCardInfo.creditCard?.lastNameOnCard}" type="p"/>
-                    <label text="${creditCardInfo.creditCardTypeEnum?.description} ${cardNumber} ${creditCardInfo.creditCard?.expireDate}" type="p"/>
-
-                    <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                    <render-mode><text type="html" location="component://mantle-usl/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
                 </widgets>
                 <fail-widgets>
                     <label text="Please add billing information" type="p"/>
