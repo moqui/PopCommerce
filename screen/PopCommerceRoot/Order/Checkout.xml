@@ -52,8 +52,6 @@ This Work includes contributions authored by David E. Jones, not as a
         </entity-find-one>
     </actions>
     <widgets>
-        <label text="Checkout" type="h1"/>
-
         <!-- show billing and shipping info with container-dialogs to add or update the info -->
         <container>
             <label text="Billing Information" type="h2"/>

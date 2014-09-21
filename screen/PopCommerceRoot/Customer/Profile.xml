@@ -47,8 +47,6 @@ This Work includes contributions authored by David E. Jones, not as a
         <order-map-list list="localeStringList"><order-by field-name="name"/></order-map-list>
     </actions>
     <widgets>
-        <label text="Profile" type="h2"/>
-
         <container style="row">
             <container style="col-lg-6">
                 <container-dialog id="change-password" button-text="Change Password">

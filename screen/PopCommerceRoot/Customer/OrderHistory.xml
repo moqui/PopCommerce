@@ -26,8 +26,6 @@ This Work includes contributions authored by David E. Jones, not as a
         </entity-find>
     </actions>
     <widgets>
-        <label text="Order History" type="h1"/>
-
         <form-list name="OrderHistoryList" list="orderList">
             <field name="orderId"><default-field><link text="${orderId}" url="orderDetail"/></default-field></field>
             <field name="entryDate"><default-field><display format="d MMM yyyy"/></default-field></field>
