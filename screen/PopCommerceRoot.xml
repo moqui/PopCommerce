@@ -84,15 +84,33 @@ This Work includes contributions authored by David E. Jones, not as a
                     ]]></text></render-mode>
 
                 <section name="CheckoutLink"><condition><expression>itemCount</expression></condition>
-                    <widgets><link text="Checkout" url="/popc/Order/Checkout" link-type="anchor-button" icon="glyphicon glyphicon-circle-arrow-right" style="navbar-btn navbar-right"/></widgets>
+                    <widgets><link text="Checkout" url="/popc/Order/Checkout" link-type="anchor-button" icon="glyphicon glyphicon-circle-arrow-right" style="btn-success navbar-btn navbar-right"/></widgets>
                 </section>
                 <link text="Cart${itemCount ? ' (' + ec.l10n.formatValue(itemCount, null) + (itemCount > 1 ? ' items)' : ' item)') : ''}"
-                        url="/popc/Order/Cart" link-type="anchor-button" icon="glyphicon glyphicon-shopping-cart" style="navbar-btn navbar-right"/>
+                        url="/popc/Order/Cart" link-type="anchor-button" icon="glyphicon glyphicon-shopping-cart" style="btn-success navbar-btn navbar-right"/>
                 <link text="Orders" url="/popc/Customer/OrderHistory" link-type="anchor-button" icon="glyphicon glyphicon-folder-open" style="navbar-btn navbar-right"/>
                 <link text="Profile" url="/popc/Customer/Profile" link-type="anchor-button" icon="glyphicon glyphicon-user" style="navbar-btn navbar-right"/>
+
                 <section name="HeaderUser"><condition><expression>ec.user.userId</expression></condition>
                     <widgets>
-                        <link text="Logout" url="/popc/Login/logout" link-type="hidden-form" icon="glyphicon glyphicon-off" style="navbar-btn navbar-right"/>
+                        <render-mode><text type="html"><![CDATA[
+<a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+    <i class="glyphicon glyphicon-adjust"></i>
+</a>
+<script>
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark dk");
+        $("body").toggleClass("bg-light lter");
+        var currentStyle = $("body").hasClass("bg-dark dk") ? "bg-dark dk" : "bg-light lter";
+        $.ajax({ type:'POST', url:'/apps/setPreference', data:{ 'preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+<a href="/Login/logout" data-toggle="tooltip" data-original-title="Logout ${(ec.getUser().getUserAccount().userFullName)!!}" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+    <i class="glyphicon glyphicon-off"></i>
+</a>
+                        ]]></text></render-mode>
+
+                        <!-- <link text="" url="/popc/Login/logout" link-type="hidden-form" icon="glyphicon glyphicon-off" style="btn-danger navbar-btn navbar-right"/> -->
                         <label text="Welcome ${ec.user.userAccount?.userFullName}!" style="navbar-text navbar-right"/>
                     </widgets>
                 </section>
