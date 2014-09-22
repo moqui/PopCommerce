@@ -63,7 +63,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <text type="html" location="component://webroot/screen/includes/Header.html.ftl"/>
         </render-mode>
 
-        <container id="wrap" style="bg-dark dk">
+        <container id="wrap">
             <container id="top">
                 <render-mode><text type="html"><![CDATA[
 <nav class="navbar navbar-inverse navbar-fixed-top"><#-- navbar-static-top -->
@@ -123,7 +123,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <!-- <container id="left"></container> -->
             <container id="content">
                 <!-- <container style="outer"> -->
-                    <container style="inner bg-light lter">
+                    <container style="inner">
                         <section-iterate name="headerMessages" list="ec.message.messages" entry="message">
                             <widgets><container style="message"><label text="${message}"/></container></widgets>
                         </section-iterate>
