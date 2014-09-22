@@ -94,9 +94,10 @@ This Work includes contributions authored by David E. Jones, not as a
                                         <widgets>
                                             <container type="li">
                                                 <render-mode><text type="html" location="component://mantle-usl/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
-                                                <dynamic-dialog id="UpdatePaymentMethodDialog" button-text="Update Payment Method"
+                                                <dynamic-dialog id="UpdatePaymentMethodDialog" button-text="Update"
                                                         transition="updatePaymentMethodInfo" width="800"
                                                         parameter-map="[partyId:partyId, paymentMethodId:methodInfo.paymentMethodId]"/>
+                                                <!-- TODO: add remove link -->
                                             </container>
                                         </widgets>
                                     </section-iterate>
@@ -130,10 +131,11 @@ This Work includes contributions authored by David E. Jones, not as a
                                         <widgets>
                                             <container type="li">
                                                 <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
-                                                <dynamic-dialog id="UpdatePostalInfo" button-text="Update Address"
+                                                <dynamic-dialog id="UpdatePostalInfo" button-text="Update"
                                                         transition="updateContactInfo" width="800"
                                                         parameter-map="[partyId:partyId, postalContactMechId:contactInfo.postalContactMechId,
                                                                 postalContactMechPurposeId:contactInfo.postalContactMechPurposeId]"/>
+                                                <!-- TODO: add remove link -->
                                             </container>
                                         </widgets>
                                     </section-iterate>
@@ -144,9 +146,10 @@ This Work includes contributions authored by David E. Jones, not as a
                                         <widgets>
                                             <container type="li">
                                                 <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
-                                                <dynamic-dialog id="UpdatePhoneInfo" button-text="Update Phone" transition="updateContactInfo"
+                                                <dynamic-dialog id="UpdatePhoneInfo" button-text="Update" transition="updateContactInfo"
                                                         parameter-map="[partyId:partyId, telecomContactMechId:contactInfo.telecomContactMechId,
                                                                 telecomContactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
+                                                <!-- TODO: add remove link -->
                                             </container>
                                         </widgets>
                                     </section-iterate>

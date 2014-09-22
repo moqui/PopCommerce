@@ -76,9 +76,9 @@ This Work includes contributions authored by David E. Jones, not as a
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
+        <a href="/popc/" class="navbar-brand"><img src="/images/MoquiLogoSmall.png" alt="Moqui" height="50"></a>
         <a href="/popc" class="navbar-title">My Little Store</a>
         <#-- ${(ec.getTenant().tenantName)!"Welcome to Moqui"} -->
-        <#-- <a href="index.html" class="navbar-brand"><img src="assets/img/logo.png" alt=""></a> -->
     </header>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
                     ]]></text></render-mode>
