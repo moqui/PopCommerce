@@ -104,7 +104,7 @@ This Work includes contributions authored by David E. Jones, not as a
                     ]]></text></render-mode>
 
                 <render-mode><text type="html"><![CDATA[
-<header class="head">
+<header class="head bg-dark dk">
   <div class="search-bar">
     <form class="main-search" action="${sri.makeUrlByType('search', 'transition', null, null).url}">
       <div class="input-group">
