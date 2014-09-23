@@ -52,6 +52,8 @@ This Work includes contributions authored by David E. Jones, not as a
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="102" resourceTypeEnumId="STRT_BODY_CLASS"
             resourceValue="bg-light lter"/>
 
+    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="110" resourceTypeEnumId="STRT_HEADER_TITLE"
+            resourceValue="POP Commerce"/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="50" resourceTypeEnumId="STRT_STYLESHEET"
             resourceValue="/popc/css/PopcDefault.css"/>
 

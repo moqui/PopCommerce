@@ -73,9 +73,10 @@ This Work includes contributions authored by David E. Jones, not as a
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a href="/popc/" class="navbar-brand"><img src="/images/MoquiLogoSmall.png" alt="Moqui" height="50"></a>
-        <a href="/popc" class="navbar-title">My Little Store</a>
-        <#-- ${(ec.getTenant().tenantName)!"Welcome to Moqui"} -->
+        <#assign headerLogoList = sri.getThemeValues("STRT_HEADER_LOGO")>
+        <#if headerLogoList?has_content><a href="/popc/" class="navbar-brand"><img src="${headerLogoList?first}" alt="Home" height="50"></a></#if>
+        <#assign headerTitleList = sri.getThemeValues("STRT_HEADER_TITLE")>
+        <#if headerTitleList?has_content><a href="/popc" class="navbar-title">${headerTitleList?first}</a></#if>
     </header>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
                     ]]></text></render-mode>
