@@ -1,5 +1,9 @@
 
-#header-logo { float: left; width: 150px; height: 30px; }
-#header-logo h1, #header-logo a { font-size: 1.5em; font-family: Impact, Charcoal, sans-serif; font-weight: bold;
-    border: 0px; padding: 0px; margin: 0px; }
-#header-user { float: right; }
+/* #header-search { margin: 8px auto 8px auto; vertical-align: middle; } */
+
+.navbar-title { float: left; height: 50px; font-size: 18px; line-height: 20px; padding: 15px 0 0 0; }
+.navbar-title:hover, .navbar-title:focus { text-decoration: none; }
+.navbar-inverse .navbar-title { color: #777; }
+.navbar-inverse .navbar-title:hover, .navbar-inverse .navbar-title:focus { color: #fff; background-color: transparent; }
+
+.navbar-text { padding: 0 8px 0 8px; }

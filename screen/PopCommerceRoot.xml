@@ -11,7 +11,7 @@ This Work includes contributions authored by David E. Jones, not as a
 "work for hire", who hereby disclaims any copyright to the same.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.4.xsd"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         screen-theme-type-enum-id="STT_POP_COMMERCE" standalone="true"
         require-authentication="anonymous-view" login-path="/popc/Login">
 
@@ -30,46 +30,26 @@ This Work includes contributions authored by David E. Jones, not as a
         <set field="customerPartyId" from="ec.user.userAccount?.partyId"/>
     </always-actions>
 
-    <transition name="search">
-        <default-response url="/popc/Product/Search"/>
-    </transition>
+    <transition name="search"><default-response url="/popc/Product/Search"/></transition>
 
     <subscreens default-item="Home"/>
 
     <pre-actions>
-        <set field="html_scripts" from="['/assets/lib/jquery.min.js',
-            '/assets/lib/bootstrap/js/bootstrap.min.js', '/assets/lib/jquery-ui.min.js',
-            '/assets/lib/uniform/jquery.uniform.min.js', '/assets/lib/form/jquery.form.js',
+        <set field="html_scripts" from="new LinkedHashSet(['/assets/lib/jquery/jquery.min.js',
+            '/assets/lib/jquery-ui/jquery-ui.min.js', '/assets/lib/bootstrap/js/bootstrap.min.js',
+            '/assets/lib/form/jquery.form.js'])"/>
+        <set field="footer_scripts" from="new LinkedHashSet([
             '/assets/lib/datetimepicker/js/bootstrap-datetimepicker.min.js',
             '/assets/lib/jquery-validation-1.11.1/dist/jquery.validate.min.js',
             '/assets/lib/chosen/chosen.jquery.min.js',
             '/assets/lib/autosize/jquery.autosize.min.js',
-            '/assets/lib/jasny/js/jasny-bootstrap.min.js', '/assets/js/main.min.js',
-            '/js/jquery-jeditable-1.7.1.min.js']"/>
-        <!-- out until used in DefaultScreenMacros.html.ftl:
-            '/assets/lib/inputlimiter/jquery.inputlimiter.1.3.1.min.js', '/assets/lib/tagsinput/jquery.tagsinput.min.js',
-            '/assets/lib/validationengine/js/jquery.validationEngine.js', '/assets/lib/validationengine/js/languages/jquery.validationEngine-en.js',
-            '/assets/lib/validVal/src/js/jquery.validVal.min.js', '/js/jquery.validVal-customValidations.js',
-            '/assets/lib/daterangepicker/daterangepicker.js',
-            '/assets/lib/daterangepicker/moment.min.js',
-            '/assets/lib/datepicker/js/bootstrap-datepicker.js',
-            '/assets/lib/timepicker/js/bootstrap-timepicker.min.js', '/assets/lib/switch/build/js/bootstrap-switch.min.js',
-            '/assets/lib/jquery.dualListbox-1.3/jquery.dualListBox-1.3.min.js',
+            '/assets/lib/jasny/js/jasny-bootstrap.min.js',
+            '/js/jquery-jeditable-1.7.1.min.js',
+            '/js/jstree-3.0.3/jstree.min.js',
+            '/assets/js/main.min.js','/assets/js/minHeight.js'])"/>
 
-            '/assets/lib/inputlimiter/jquery.inputlimiter.1.0.css', '/assets/lib/chosen/chosen.min.css',
-            '/assets/lib/tagsinput/jquery.tagsinput.css', '/assets/lib/daterangepicker/daterangepicker-bs3.css',
-            '/assets/lib/validationengine/css/validationEngine.jquery.css',
-            '/assets/lib/datepicker/css/datepicker.css',
-            '/assets/lib/timepicker/css/bootstrap-timepicker.min.css',
-            '/assets/lib/switch/build/css/bootstrap3/bootstrap-switch.min.css',
-        -->
-        <set field="html_stylesheets" from="['/assets/lib/bootstrap/css/bootstrap.min.css',
-            '/assets/lib/Font-Awesome/css/font-awesome.min.css',
-            '/assets/css/main.min.css', '/assets/lib/uniform/themes/default/css/uniform.default.min.css',
-            '/assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css',
-            '/assets/lib/chosen/chosen.min.css',
-            '/assets/lib/jasny/css/jasny-bootstrap.min.css',
-            '/assets/lib/jquery-ui.css', '/assets/css/theme.css', '/css/default.css']"/>
+        <!-- See PopCommerceAaaSetupData.xml for CSS references -->
+        <set field="html_stylesheets" from="new LinkedHashSet()"/>
     </pre-actions>
     
     <actions>
@@ -80,93 +60,122 @@ This Work includes contributions authored by David E. Jones, not as a
             <text type="html" location="component://webroot/screen/includes/Header.html.ftl"/>
         </render-mode>
 
-        <container id="top">
-            <container style="ui-helper-clearfix">
-                <container id="header-logo"><link text="My Little Store" url="/popc" link-type="anchor"/></container>
-                <container id="header-user">
-                    <section name="headerUser">
-                        <condition><expression>ec.user.userId</expression></condition>
-                        <widgets>
-                            <label text="Welcome ${ec.user.userAccount?.userFullName}!"/>
-                            <link text="Logout" url="/popc/Login/logout" link-type="hidden-form" icon="glyphicon glyphicon-off"/>
-                        </widgets>
-                    </section>
-                    <link text="Profile" url="/popc/Customer/Profile" link-type="anchor-button" icon="glyphicon glyphicon-user"/>
-                    <link text="Orders" url="/popc/Customer/OrderHistory" link-type="anchor-button" icon="glyphicon glyphicon-folder-open"/>
-                    <link text="Cart${itemCount ? ' (' + ec.l10n.formatValue(itemCount, null) + (itemCount > 1 ? ' items)' : ' item)') : ''}"
-                            url="/popc/Order/Cart" link-type="anchor-button" icon="glyphicon glyphicon-shopping-cart"/>
-                    <section name="CheckoutLink">
-                        <condition><expression>itemCount</expression></condition>
-                        <widgets><link text="Checkout" url="/popc/Order/Checkout" link-type="anchor-button" icon="glyphicon glyphicon-circle-arrow-right"/></widgets>
-                    </section>
-                </container>
-            </container>
-            <container>
-                <form-single name="HeaderSearch" focus-field="keywords" transition="search">
-                    <field name="category"><default-field title="">
-                        <drop-down allow-empty="true">
-                            <entity-options key="${productCategoryId}" text="${categoryName}">
-                                <entity-find entity-name="ProductCategoryChildren" cache="true">
-                                    <date-filter/>
-                                    <!-- TODO: lookup using mantle.product.store.ProductStoreCategory -->
-                                    <econdition field-name="parentProductCategoryId" value="PopcBrowseRoot"/>
-                                    <order-by field-name="sequenceNum"/>
-                                    <order-by field-name="categoryName"/>
-                                </entity-find>
-                            </entity-options>
-                        </drop-down>
-                    </default-field></field>
-                    <field name="keywords"><default-field title=""><text-line size="30"/></default-field></field>
-                    <field name="submitButton"><default-field title="Search"><submit/></default-field></field>
+        <container id="wrap">
+            <container id="top">
+                <render-mode><text type="html"><![CDATA[
+<nav class="navbar navbar-inverse navbar-fixed-top"><#-- navbar-static-top -->
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <#assign headerLogoList = sri.getThemeValues("STRT_HEADER_LOGO")>
+        <#if headerLogoList?has_content><a href="/popc/" class="navbar-brand"><img src="${headerLogoList?first}" alt="Home" height="50"></a></#if>
+        <#assign headerTitleList = sri.getThemeValues("STRT_HEADER_TITLE")>
+        <#if headerTitleList?has_content><a href="/popc" class="navbar-title">${headerTitleList?first}</a></#if>
+    </header>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    ]]></text></render-mode>
 
-                    <field-layout>
-                        <field-row><field-ref name="category"/><field-ref name="keywords"/><field-ref name="submitButton"/></field-row>
-                    </field-layout>
-                </form-single>
+                <section name="CheckoutLink"><condition><expression>itemCount</expression></condition>
+                    <widgets><link text="Checkout" url="/popc/Order/Checkout" link-type="anchor-button" icon="glyphicon glyphicon-circle-arrow-right" style="btn-success navbar-btn navbar-right"/></widgets>
+                </section>
+                <link text="Cart${itemCount ? ' (' + ec.l10n.formatValue(itemCount, null) + (itemCount > 1 ? ' items)' : ' item)') : ''}"
+                        url="/popc/Order/Cart" link-type="anchor-button" icon="glyphicon glyphicon-shopping-cart" style="btn-success navbar-btn navbar-right"/>
+                <link text="Orders" url="/popc/Customer/OrderHistory" link-type="anchor-button" icon="glyphicon glyphicon-folder-open" style="navbar-btn navbar-right"/>
+                <link text="Profile" url="/popc/Customer/Profile" link-type="anchor-button" icon="glyphicon glyphicon-user" style="navbar-btn navbar-right"/>
+
+                <section name="HeaderUser"><condition><expression>ec.user.userId</expression></condition>
+                    <widgets>
+                        <render-mode><text type="html"><![CDATA[
+<a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
+    <i class="glyphicon glyphicon-adjust"></i>
+</a>
+<script>
+    function switchDarkLight() {
+        $("body").toggleClass("bg-dark dk");
+        $("body").toggleClass("bg-light lter");
+        var currentStyle = $("body").hasClass("bg-dark dk") ? "bg-dark dk" : "bg-light lter";
+        $.ajax({ type:'POST', url:'/apps/setPreference', data:{ 'preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
+    }
+</script>
+<a href="/Login/logout" data-toggle="tooltip" data-original-title="Logout ${(ec.getUser().getUserAccount().userFullName)!!}" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+    <i class="glyphicon glyphicon-off"></i>
+</a>
+                        ]]></text></render-mode>
+
+                        <!-- <link text="" url="/popc/Login/logout" link-type="hidden-form" icon="glyphicon glyphicon-off" style="btn-danger navbar-btn navbar-right"/> -->
+                        <label text="Welcome ${ec.user.userAccount?.userFullName}!" style="navbar-text navbar-right"/>
+                    </widgets>
+                </section>
+
+                <render-mode><text type="html"><![CDATA[
+    </div>
+  </div> <!-- container-fluid -->
+</nav><!-- /.navbar -->
+                    ]]></text></render-mode>
+
+                <render-mode><text type="html"><![CDATA[
+<header class="head bg-dark dk">
+  <div class="search-bar">
+    <form class="main-search" action="${sri.makeUrlByType('search', 'transition', null, null).url}">
+      <div class="input-group">
+        <input type="text" name="keywords" class="form-control" placeholder="Search products...">
+        <span class="input-group-btn"><button class="btn btn-primary btn-sm text-muted" type="button"><i class="fa fa-search"></i></button></span>
+      </div>
+    </form><!-- /.main-search -->
+  </div><!-- /.search-bar -->
+  <div class="main-bar">
+    <h3><i class="fa fa-building"></i>${html_title!((sri.screenUrlInfo.targetScreen.getDefaultMenuName())!"Page")}</h3>
+  </div><!-- /.main-bar -->
+</header>
+                    ]]></text></render-mode>
+            </container>
+
+            <!-- <container id="left"></container> -->
+            <container id="content">
+                <!-- <container style="outer"> -->
+                    <container style="inner">
+                        <section-iterate name="headerMessages" list="ec.message.messages" entry="message">
+                            <widgets><container style="message"><label text="${message}"/></container></widgets>
+                        </section-iterate>
+                        <section-iterate name="headerErrors" list="ec.message.errors" entry="errorMessage">
+                            <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
+                        </section-iterate>
+                        <section-iterate name="headerValidationErrors" list="ec.message.validationErrors" entry="validationError">
+                            <!-- TODO: put these by fields instead of in header -->
+                            <widgets><container style="message error"><label text="${validationError.message} (for field ${validationError.field})"/></container></widgets>
+                        </section-iterate>
+
+                        <section-iterate name="headerSavedMessages" list="ec.web?.savedMessages" entry="message">
+                            <widgets><container style="message"><label text="${message}"/></container></widgets>
+                        </section-iterate>
+                        <section-iterate name="headerSavedErrors" list="ec.web?.savedErrors" entry="errorMessage">
+                            <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
+                        </section-iterate>
+                        <section-iterate name="headerSavedValidationErrors" list="ec.web?.savedValidationErrors" entry="validationError">
+                            <!-- TODO: put these by fields instead of in header -->
+                            <widgets><container style="message error"><label text="${validationError.message} (for field ${validationError.field})"/></container></widgets>
+                        </section-iterate>
+
+                        <!-- the subscreen goes here -->
+                        <subscreens-active id="pop-commerce-root"/>
+                    </container>
+                <!-- </container> -->
             </container>
         </container>
-        <!--
-        <container id="left">
-        </container>
-        -->
-        <container id="content">
-            <container style="outer">
-                <container style="inner">
-                    <section-iterate name="headerMessages" list="ec.message.messages" entry="message">
-                        <widgets><container style="message"><label text="${message}"/></container></widgets>
-                    </section-iterate>
-                    <section-iterate name="headerErrors" list="ec.message.errors" entry="errorMessage">
-                        <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
-                    </section-iterate>
-                    <section-iterate name="headerValidationErrors" list="ec.message.validationErrors" entry="validationError">
-                        <!-- TODO: put these by fields instead of in header -->
-                        <widgets><container style="message error"><label text="${validationError.message} (for field ${validationError.field})"/></container></widgets>
-                    </section-iterate>
-
-                    <section-iterate name="headerSavedMessages" list="ec.web?.savedMessages" entry="message">
-                        <widgets><container style="message"><label text="${message}"/></container></widgets>
-                    </section-iterate>
-                    <section-iterate name="headerSavedErrors" list="ec.web?.savedErrors" entry="errorMessage">
-                        <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
-                    </section-iterate>
-                    <section-iterate name="headerSavedValidationErrors" list="ec.web?.savedValidationErrors" entry="validationError">
-                        <!-- TODO: put these by fields instead of in header -->
-                        <widgets><container style="message error"><label text="${validationError.message} (for field ${validationError.field})"/></container></widgets>
-                    </section-iterate>
-
-                    <!-- the subscreen goes here -->
-                    <subscreens-active id="pop-commerce-root"/>
-                </container>
-            </container>
-        </container>
-        <container id="footer">
+        <container id="footer" style="Footer bg-dark dker">
             <render-mode><text type="html" template="true"><![CDATA[
-                    <div id="apps-footer-content">
-                        <h6><a href="http://www.moqui.org/" target="_blank">Built on Moqui Framework 1.4.2</a></h6>
-                    </div>
-                    <!-- productStoreId=${productStoreId}, currencyUomId=${currencyUomId}, priceUomId=${priceUomId}, defaultLocale=${defaultLocale} -->
-                    <!-- organizationPartyId=${organizationPartyId!!}, vendorPartyId=${vendorPartyId!!}, cartOrderId=${cartOrderId!!}, customerPartyId=${customerPartyId!!} -->
-                ]]></text></render-mode>
+                        <div id="apps-footer-content">
+                            <h6><a href="http://www.moqui.org/" target="_blank">Built on Moqui Framework 1.5.0</a></h6>
+                        </div>
+                        <!-- productStoreId=${productStoreId}, currencyUomId=${currencyUomId}, priceUomId=${priceUomId}, defaultLocale=${defaultLocale} -->
+                        <!-- organizationPartyId=${organizationPartyId!!}, vendorPartyId=${vendorPartyId!!}, cartOrderId=${cartOrderId!!}, customerPartyId=${customerPartyId!!} -->
+                    ]]></text></render-mode>
         </container>
 
         <render-mode>

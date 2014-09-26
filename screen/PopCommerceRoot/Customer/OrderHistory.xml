@@ -11,7 +11,7 @@ This Work includes contributions authored by David E. Jones, not as a
 "work for hire", who hereby disclaims any copyright to the same.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.4.xsd"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         require-authentication="true">
 
     <transition name="orderDetail">
@@ -26,8 +26,6 @@ This Work includes contributions authored by David E. Jones, not as a
         </entity-find>
     </actions>
     <widgets>
-        <label text="Order History" type="h1"/>
-
         <form-list name="OrderHistoryList" list="orderList">
             <field name="orderId"><default-field><link text="${orderId}" url="orderDetail"/></default-field></field>
             <field name="entryDate"><default-field><display format="d MMM yyyy"/></default-field></field>

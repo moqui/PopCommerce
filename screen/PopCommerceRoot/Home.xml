@@ -11,7 +11,7 @@ This Work includes contributions authored by David E. Jones, not as a
 "work for hire", who hereby disclaims any copyright to the same.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.4.xsd"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         require-authentication="false">
 
     <transition name="addToCart">
@@ -51,7 +51,7 @@ This Work includes contributions authored by David E. Jones, not as a
             
             <field name="productId"><default-field><hidden/></default-field></field>
             <field name="productName"><default-field title="">
-                <link text="${productName}" url="Product/Detail/${productId}/${productName}" url-type="plain" link-type="anchor"/>
+                <link text="${productName}" url="/popc/Product/Detail/${productId}/${productName?.replace(' ', '-')}" url-type="plain" link-type="anchor"/>
             </default-field></field>
             <field name="price"><default-field title=""><display also-hidden="false" currency-unit-field="priceUomId"/></default-field></field>
             <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>

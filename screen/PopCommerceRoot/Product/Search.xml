@@ -11,12 +11,13 @@ This Work includes contributions authored by David E. Jones, not as a
 "work for hire", who hereby disclaims any copyright to the same.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.4.xsd"
-        require-authentication="false">
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+        default-menu-title="Search Results" require-authentication="false">
 
     <parameter name="category"/>
     <parameter name="keywords"/>
 
+    <transition name="search"><default-response url="."/></transition>
     <transition name="addToCart">
         <actions>
             <service-call name="mantle.order.OrderServices.add#OrderProductQuantity" out-map="addOut"
@@ -37,7 +38,28 @@ This Work includes contributions authored by David E. Jones, not as a
         </if>
     </actions>
     <widgets>
-        <label text="Search Results" type="h2"/>
+        <form-single name="HeaderSearch" focus-field="keywords" transition="search">
+            <field name="category"><default-field title="">
+                <drop-down allow-empty="true">
+                    <entity-options key="${productCategoryId}" text="${categoryName}">
+                        <entity-find entity-name="ProductCategoryChildren" cache="true">
+                            <date-filter/>
+                            <!-- TODO: lookup using mantle.product.store.ProductStoreCategory -->
+                            <econdition field-name="parentProductCategoryId" value="PopcBrowseRoot"/>
+                            <order-by field-name="sequenceNum"/>
+                            <order-by field-name="categoryName"/>
+                        </entity-find>
+                    </entity-options>
+                </drop-down>
+            </default-field></field>
+            <field name="keywords"><default-field title=""><text-line size="25"/></default-field></field>
+            <field name="submitButton"><default-field title="Search"><submit/></default-field></field>
+
+            <field-layout>
+                <field-row-big><field-ref name="category"/><field-ref name="keywords"/><field-ref name="submitButton"/></field-row-big>
+            </field-layout>
+        </form-single>
+
         <form-list name="SearchProductList" list="documentList" list-entry="document" transition="addToCart">
             <row-actions>
                 <set field="productId" from="document._id"/>
@@ -51,7 +73,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
             <field name="productId"><default-field><hidden/></default-field></field>
             <field name="productName" entry-name="product.productName"><default-field title="">
-                <link text="${product.productName}" url="Product/Detail/${productId}/${product.productName}" url-type="plain" link-type="anchor"/>
+                <link text="${product.productName}" url="/popc/Product/Detail/${productId}/${product.productName?.replace(' ', '-')}" url-type="plain" link-type="anchor"/>
             </default-field></field>
             <field name="price"><default-field title=""><display also-hidden="false" currency-unit-field="priceUomId"/></default-field></field>
             <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>

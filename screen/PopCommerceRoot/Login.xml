@@ -11,7 +11,7 @@ This Work includes contributions authored by David E. Jones, not as a
 "work for hire", who hereby disclaims any copyright to the same.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.4.xsd"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         default-menu-include="false" require-authentication="anonymous-all">
 
     <transition name="login">
@@ -74,7 +74,16 @@ This Work includes contributions authored by David E. Jones, not as a
         <error-response url="."/>
     </transition>
 
+    <pre-actions><script>html_stylesheets.add('/assets/lib/animate/animate.min.css')</script></pre-actions>
+
     <widgets>
+        <container style="login">
+            <container style="container">
+                <render-mode><text type="html" template="true" location="component://PopCommerce/screen/PopCommerceRoot/Login.ftl"/></render-mode>
+            </container>
+        </container>
+
+        <!-- pre-Metis login screen stuff:
         <container id="login-box">
             <form-single name="login" transition="login">
                 <field name="username"><default-field><text-line size="20"/></default-field></field>
@@ -101,7 +110,7 @@ This Work includes contributions authored by David E. Jones, not as a
             </container-dialog>
             <container-dialog id="create-account" button-text="Create Account">
                 <form-single name="createAccount" transition="createAccount">
-                    <field name="firstName"><default-field title="Name"><text-line size="15"/></default-field></field>
+                    <field name="firstName"><default-field title=""><text-line size="15"/></default-field></field>
                     <field name="middleName"><default-field title=""><text-line size="2"/></default-field></field>
                     <field name="lastName"><default-field title=""><text-line size="15"/></default-field></field>
 
@@ -109,14 +118,14 @@ This Work includes contributions authored by David E. Jones, not as a
                     <field name="newPassword"><default-field title="Password"><password size="15"/></default-field></field>
                     <field name="newPasswordVerify"><default-field title="Password Verify"><password size="15"/></default-field></field>
 
-                    <!-- these hidden fields are set in PopCommerceRoot.xml based on the store settings -->
+                    <!- - these hidden fields are set in PopCommerceRoot.xml based on the store settings - ->
                     <field name="currencyUomId"><default-field><hidden default-value="${currencyUomId?:'USD'}"/></default-field></field>
                     <field name="locale"><default-field><hidden default-value="${defaultLocale?:'en_US'}"/></default-field></field>
 
                     <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
 
                     <field-layout>
-                        <field-row><field-ref name="firstName"/><field-ref name="middleName"/><field-ref name="lastName"/></field-row>
+                        <field-row-big title="Name"><field-ref name="firstName"/><field-ref name="middleName"/><field-ref name="lastName"/></field-row-big>
 
                         <field-ref name="emailAddress"/>
                         <field-row><field-ref name="newPassword"/><field-ref name="newPasswordVerify"/></field-row>
@@ -126,6 +135,7 @@ This Work includes contributions authored by David E. Jones, not as a
                 </form-single>
             </container-dialog>
         </container>
+        -->
 
         <!-- TODO remove this link when moving away from more of a testing mode, very convenient for now -->
         <link url="login" text="Test Login (Joe Q Public)">

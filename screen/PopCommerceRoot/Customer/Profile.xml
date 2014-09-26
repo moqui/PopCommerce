@@ -11,7 +11,7 @@ This Work includes contributions authored by David E. Jones, not as a
 "work for hire", who hereby disclaims any copyright to the same.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.4.xsd"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         require-authentication="true">
 
     <transition name="updateUser">
@@ -25,10 +25,7 @@ This Work includes contributions authored by David E. Jones, not as a
     </transition>
 
     <transition name="updateContactInfo"><default-response url="UpdateContactInfo"/></transition>
-    <transition name="storeBillingInfo">
-        <service-call name="mantle.account.PaymentMethodServices.store#CreditCardInfo"/>
-        <default-response url="."/>
-    </transition>
+    <transition name="updatePaymentMethodInfo"><default-response url="UpdatePaymentMethodInfo"/></transition>
 
     <actions>
         <set field="partyId" from="ec.user.userAccount.partyId"/>
@@ -47,158 +44,121 @@ This Work includes contributions authored by David E. Jones, not as a
         <order-map-list list="localeStringList"><order-by field-name="name"/></order-map-list>
     </actions>
     <widgets>
-        <label text="Profile" type="h2"/>
-        <container-dialog id="change-password" button-text="Change Password">
-            <form-single name="ChangePasswordForm" transition="changePassword">
-                <field name="oldPassword"><default-field><password size="20"/></default-field></field>
-                <field name="newPassword"><default-field><password size="20"/></default-field></field>
-                <field name="newPasswordVerify"><default-field><password size="20"/></default-field></field>
-                <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
-            </form-single>
-        </container-dialog>
-        <form-single name="EditUser" transition="updateUser" map="personAndUserAccount">
-            <field name="partyId"><default-field><hidden/></default-field></field>
-            <field name="userId"><default-field><hidden/></default-field></field>
-            <field name="username"><default-field><text-line size="20"/></default-field></field>
-            <field name="firstName"><default-field><text-line size="15"/></default-field></field>
-            <field name="middleName"><default-field><text-line size="15"/></default-field></field>
-            <field name="lastName"><default-field><text-line size="15"/></default-field></field>
-            <field name="emailAddress" entry-name="primaryEmail.emailAddress"><default-field><text-line/></default-field></field>
-
-            <field name="locale"><default-field>
-                <drop-down allow-empty="true"><list-options list="localeStringList" key="${locale}" text="${name}"/></drop-down>
-            </default-field></field>
-            <field name="timeZone"><default-field>
-                <!-- TODO: limit time zones to tenant (or store?) zones -->
-                <drop-down allow-empty="true"><list-options list="new TreeSet(TimeZone.getAvailableIDs().collect())"/></drop-down>
-            </default-field></field>
-
-            <field name="submitButton"><default-field title="Save"><submit/></default-field></field>
-        </form-single>
-
-        <section name="BillingSection">
-            <actions>
-                <service-call name="mantle.account.PaymentMethodServices.get#PartyCreditCardInfo"
-                        in-map="[partyId:partyId]" out-map="creditCardInfo"/>
-                <set field="ccInfoFlat" from="StupidUtilities.flattenNestedMap(creditCardInfo)"/>
-                <set field="ccInfoFlat.expireMonth" from="ccInfoFlat.expireDate ? ccInfoFlat.expireDate.substring(0, ccInfoFlat.expireDate.indexOf('/')) : null"/>
-                <set field="ccInfoFlat.expireYear" from="ccInfoFlat.expireDate ? ccInfoFlat.expireDate.substring(ccInfoFlat.expireDate.indexOf('/')+1) : null"/>
-                <set field="cardNumber" from="creditCardInfo.creditCard?.cardNumber"/>
-                <set field="cardNumber" from="cardNumber ? (creditCardInfo.creditCard.creditCardTypeEnumId == 'CctAmericanExpress' ? '***********' : '************') + cardNumber.substring(cardNumber.length() - 4, cardNumber.length()) : ''"/>
-            </actions>
-            <widgets>
-                <label text="Billing Information" type="h3"/>
-                <form-single name="BillingInfo" transition="storeBillingInfo" map="ccInfoFlat">
+        <container style="row">
+            <container style="col-lg-5">
+                <container-dialog id="change-password" button-text="Change Password">
+                    <form-single name="ChangePasswordForm" transition="changePassword">
+                        <field name="oldPassword"><default-field><password size="20"/></default-field></field>
+                        <field name="newPassword"><default-field><password size="20"/></default-field></field>
+                        <field name="newPasswordVerify"><default-field><password size="20"/></default-field></field>
+                        <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+                    </form-single>
+                </container-dialog>
+                <form-single name="EditUser" transition="updateUser" map="personAndUserAccount">
                     <field name="partyId"><default-field><hidden/></default-field></field>
-                    <field name="paymentMethodId"><default-field><hidden/></default-field></field>
+                    <field name="userId"><default-field><hidden/></default-field></field>
+                    <field name="username"><default-field><text-line size="20"/></default-field></field>
+                    <field name="firstName"><default-field><text-line size="15"/></default-field></field>
+                    <field name="middleName"><default-field><text-line size="15"/></default-field></field>
+                    <field name="lastName"><default-field><text-line size="15"/></default-field></field>
+                    <field name="emailAddress" entry-name="primaryEmail.emailAddress"><default-field><text-line size="40"/></default-field></field>
 
-                    <field name="firstNameOnCard"><default-field><text-line size="20"/></default-field></field>
-                    <field name="lastNameOnCard"><default-field><text-line size="20"/></default-field></field>
-
-                    <field name="creditCardTypeEnumId"><default-field title="Card Type">
-                        <drop-down><entity-options key="${enumId}" text="${description}">
-                            <entity-find entity-name="Enumeration">
-                                <econdition field-name="enumTypeId" value="CreditCardType"/>
-                                <order-by field-name="description"/>
-                            </entity-find>
-                        </entity-options></drop-down>
+                    <field name="locale"><default-field>
+                        <drop-down allow-empty="true"><list-options list="localeStringList" key="${locale}" text="${name}"/></drop-down>
                     </default-field></field>
-                    <field name="cardNumber">
-                        <conditional-field condition="!ccInfoFlat.paymentMethodId"><text-line size="16"/></conditional-field>
-                        <default-field><display text="${cardNumber}"/></default-field>
-                    </field>
-                    <!-- <field name="expireDate"><default-field><text-line size="7"/></default-field></field> -->
-                    <field name="expireMonth"><default-field title="Expire Date"><drop-down>
-                        <option key="01"/><option key="02"/><option key="03"/><option key="04"/><option key="05"/>
-                        <option key="06"/><option key="07"/><option key="08"/><option key="09"/><option key="10"/>
-                        <option key="11"/><option key="12"/>
-                    </drop-down></default-field></field>
-                    <field name="expireYear"><default-field title=""><drop-down>
-                        <option key="2013"/><option key="2014"/><option key="2015"/><option key="2016"/>
-                        <option key="2017"/><option key="2018"/><option key="2019"/><option key="2020"/>
-                    </drop-down></default-field></field>
-
-                    <field name="postalContactMechId"><default-field><hidden/></default-field></field>
-
-                    <field name="countryGeoId"><default-field title="Country"><hidden default-value="USA"/></default-field></field>
-                    <field name="address1"><default-field title="Address Line 1"><text-line size="30"/></default-field></field>
-                    <field name="unitNumber"><default-field><text-line size="10"/></default-field></field>
-                    <field name="address2"><default-field title="Address Line 2"><text-line size="30"/></default-field></field>
-                    <field name="city"><default-field title="City/State/Zip"><text-line size="16"/></default-field></field>
-                    <field name="stateProvinceGeoId"><default-field title="">
-                        <drop-down><entity-options key="${toGeoId}" text="${geoName}">
-                            <entity-find entity-name="GeoAssocAndToDetail">
-                                <econdition field-name="geoId" value="USA"/>
-                                <econdition field-name="geoAssocTypeEnumId" value="GAT_REGIONS"/>
-                                <order-by field-name="geoName"/>
-                            </entity-find>
-                        </entity-options></drop-down>
+                    <field name="timeZone"><default-field>
+                        <!-- TODO: limit time zones to tenant (or store?) zones -->
+                        <drop-down allow-empty="true"><list-options list="new TreeSet(TimeZone.getAvailableIDs().collect())"/></drop-down>
                     </default-field></field>
-                    <field name="postalCode"><default-field title=""><text-line size="8"/></default-field></field>
-                    <field name="postalCodeExt"><default-field title=""><text-line size="4"/></default-field></field>
 
-                    <field name="telecomContactMechId"><default-field><hidden/></default-field></field>
-                    <field name="countryCode"><default-field title="Phone"><text-line size="3" maxlength="3" default-value="+1"/></default-field></field>
-                    <field name="areaCode"><default-field title=""><text-line size="3" maxlength="3"/></default-field></field>
-                    <field name="contactNumber"><default-field title=""><text-line size="8" maxlength="8"/></default-field></field>
-
-                    <field name="submitButton"><default-field title="${ccInfoFlat.paymentMethodId ? 'Update' : 'Create'}"><submit/></default-field></field>
-
-                    <field-layout>
-                        <field-ref name="firstNameOnCard"/><field-ref name="lastNameOnCard"/>
-                        <field-ref name="creditCardTypeEnumId"/><field-ref name="cardNumber"/>
-                        <field-row><field-ref name="expireMonth"/><field-ref name="expireYear"/></field-row>
-                        <field-ref name="countryGeoId"/>
-                        <field-row><field-ref name="address1"/><field-ref name="unitNumber"/></field-row>
-                        <field-ref name="address2"/>
-                        <field-row><field-ref name="city"/><field-ref name="stateProvinceGeoId"/><field-ref name="postalCode"/><field-ref name="postalCodeExt"/></field-row>
-                        <field-row><field-ref name="countryCode"/><field-ref name="areaCode"/><field-ref name="contactNumber"/></field-row>
-                        <fields-not-referenced/>
-                        <field-ref name="submitButton"/>
-                    </field-layout>
+                    <field name="submitButton"><default-field title="Save"><submit/></default-field></field>
                 </form-single>
-            </widgets>
-        </section>
+            </container>
+            <container style="col-lg-7">
+                <section name="BillingSection">
+                    <actions>
+                        <service-call name="mantle.account.PaymentMethodServices.get#PartyPaymentMethodInfoList"
+                                in-map="[partyId:partyId]" out-map="cciOut"/>
+                    </actions>
+                    <widgets>
+                        <container-box>
+                            <box-header><label text="Billing Information" type="h5"/></box-header>
+                            <box-toolbar>
+                                <dynamic-dialog id="CreateCreditCardDialog" button-text="Create Credit Card"
+                                        transition="updatePaymentMethodInfo" width="800"
+                                        parameter-map="[partyId:partyId, paymentMethodTypeEnumId:'PmtCreditCard']"/>
+                            </box-toolbar>
+                            <box-body>
+                                <container style="float-box" type="ul">
+                                    <section-iterate name="BillingInfoSection" list="cciOut.methodInfoList" entry="methodInfo">
+                                        <widgets>
+                                            <container type="li">
+                                                <render-mode><text type="html" location="component://mantle-usl/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
+                                                <dynamic-dialog id="UpdatePaymentMethodDialog" button-text="Update"
+                                                        transition="updatePaymentMethodInfo" width="800"
+                                                        parameter-map="[partyId:partyId, paymentMethodId:methodInfo.paymentMethodId]"/>
+                                                <!-- TODO: add remove link -->
+                                            </container>
+                                        </widgets>
+                                    </section-iterate>
+                                </container>
+                            </box-body>
+                        </container-box>
+                    </widgets>
+                </section>
 
-        <section name="ShippingSection">
-            <actions>
-                <service-call name="mantle.party.ContactServices.get#PartyContactInfoList" out-map="shippingContactListInfo"
-                        in-map="[partyId:partyId, postalContactMechPurposeId:'PostalShippingDest',
-                            telecomContactMechPurposeId:'PhoneShippingDest']"/>
-            </actions>
-            <widgets>
-                <label text="Shipping Information" type="h3"/>
-                <dynamic-dialog id="UpdatePostalInfo${postalAddressInfo_index}" button-text="Add Shipping Info"
-                        transition="updateContactInfo" width="800"
-                        parameter-map="[partyId:partyId, postalContactMechPurposeId:'PostalShippingDest',
-                            telecomContactMechPurposeId:'PhoneShippingDest']">
-                </dynamic-dialog>
-                <section-iterate name="ShippingAddressList" list="shippingContactListInfo.postalAddressList" entry="postalAddressInfo">
+                <section name="ShippingSection">
                     <actions>
-                        <set field="contactInfo" from="postalAddressInfo"/>
+                        <service-call name="mantle.party.ContactServices.get#PartyContactInfoList" out-map="shippingContactListInfo"
+                                in-map="[partyId:partyId, postalContactMechPurposeId:'PostalShippingDest',
+                                    telecomContactMechPurposeId:'PhoneShippingDest']"/>
                     </actions>
                     <widgets>
-                        <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
-                        <dynamic-dialog id="UpdatePostalInfo${postalAddressInfo_index}" button-text="Update Address"
-                                transition="updateContactInfo" width="800"
-                                parameter-map="[partyId:partyId, postalContactMechId:contactInfo.postalContactMechId,
-                                    postalContactMechPurposeId:contactInfo.postalContactMechPurposeId]">
-                        </dynamic-dialog>
+                        <container-box>
+                            <box-header><label text="Shipping Information" type="h5"/></box-header>
+                            <box-toolbar>
+                                <dynamic-dialog id="UpdatePostalInfo" button-text="Add Shipping Info"
+                                        transition="updateContactInfo" width="800"
+                                        parameter-map="[partyId:partyId, postalContactMechPurposeId:'PostalShippingDest',
+                                            telecomContactMechPurposeId:'PhoneShippingDest']"/>
+                            </box-toolbar>
+                            <box-body>
+                                <container style="float-box" type="ul">
+                                    <section-iterate name="ShippingAddressList" list="shippingContactListInfo.postalAddressList" entry="postalAddressInfo">
+                                        <actions>
+                                            <set field="contactInfo" from="postalAddressInfo"/>
+                                        </actions>
+                                        <widgets>
+                                            <container type="li">
+                                                <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                                                <dynamic-dialog id="UpdatePostalInfo" button-text="Update"
+                                                        transition="updateContactInfo" width="800"
+                                                        parameter-map="[partyId:partyId, postalContactMechId:contactInfo.postalContactMechId,
+                                                                postalContactMechPurposeId:contactInfo.postalContactMechPurposeId]"/>
+                                                <!-- TODO: add remove link -->
+                                            </container>
+                                        </widgets>
+                                    </section-iterate>
+                                    <section-iterate name="ShippingPhoneList" list="shippingContactListInfo.telecomNumberList" entry="telecomNumberInfo">
+                                        <actions>
+                                            <set field="contactInfo" from="telecomNumberInfo"/>
+                                        </actions>
+                                        <widgets>
+                                            <container type="li">
+                                                <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                                                <dynamic-dialog id="UpdatePhoneInfo" button-text="Update" transition="updateContactInfo"
+                                                        parameter-map="[partyId:partyId, telecomContactMechId:contactInfo.telecomContactMechId,
+                                                                telecomContactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
+                                                <!-- TODO: add remove link -->
+                                            </container>
+                                        </widgets>
+                                    </section-iterate>
+                                </container>
+                            </box-body>
+                        </container-box>
                     </widgets>
-                </section-iterate>
-                <section-iterate name="ShippingPhoneList" list="shippingContactListInfo.telecomNumberList" entry="telecomNumberInfo">
-                    <actions>
-                        <set field="contactInfo" from="telecomNumberInfo"/>
-                    </actions>
-                    <widgets>
-                        <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
-                        <dynamic-dialog id="UpdatePhoneInfo${telecomNumberInfo_index}" button-text="Update Phone" transition="updateContactInfo"
-                                parameter-map="[partyId:partyId, telecomContactMechId:contactInfo.telecomContactMechId,
-                                    telecomContactMechPurposeId:contactInfo.telecomContactMechPurposeId]">
-                        </dynamic-dialog>
-                    </widgets>
-                </section-iterate>
-            </widgets>
-        </section>
+                </section>
+            </container>
+        </container>
     </widgets>
 </screen>

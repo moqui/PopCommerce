@@ -11,7 +11,7 @@ This Work includes contributions authored by David E. Jones, not as a
 "work for hire", who hereby disclaims any copyright to the same.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.4.xsd"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         require-authentication="false">
 
     <transition name="updateCartItems">
@@ -19,12 +19,13 @@ This Work includes contributions authored by David E. Jones, not as a
         <default-response url="."/>
     </transition>
 
+    <pre-actions>
+        <set field="html_title" value="Shopping Cart${cartOrderId ? ' for Order #' + cartOrderId : ''}"/>
+    </pre-actions>
     <actions>
         <service-call name="mantle.order.OrderServices.get#OrderDisplayInfo" in-map="[orderId:cartOrderId]" out-map="context"/>
     </actions>
     <widgets>
-        <label text="Shopping Cart${cartOrderId ? ' for Order #' + cartOrderId : ''}" type="h1"/>
-
         <form-list name="CartItems" list="orderItemList" list-entry="orderItem" multi="true" transition="updateCartItems">
             <row-actions>
                 <service-call name="mantle.order.OrderServices.get#OrderItemTotal" in-map="[orderItem:orderItem]" out-map="orderItemTotalOut"/>
@@ -35,10 +36,13 @@ This Work includes contributions authored by David E. Jones, not as a
             <field name="itemTypeEnumId"><default-field title="Type">
                 <display-entity entity-name="moqui.basic.Enumeration" key-field-name="enumId" text="${description}"/>
             </default-field></field>
-            <field name="description"><default-field title="Description">
-                <display text="${itemDescription} ${productId ? '[' + productId + ']' : ''}"/>
-                <!-- <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/> -->
-            </default-field></field>
+            <field name="description">
+                <conditional-field condition="productId">
+                    <link text="${itemDescription} [${productId}]" url="/popc/Product/Detail/${productId}/${itemDescription?.replace(' ', '-')}" url-type="plain" link-type="anchor"/>
+                    <!-- <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/> -->
+                </conditional-field>
+                <default-field title="Description"><display text="${itemDescription}"/></default-field>
+            </field>
             <!--<field name="productId"><default-field title="Product">
                 <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/>
             </default-field></field>-->

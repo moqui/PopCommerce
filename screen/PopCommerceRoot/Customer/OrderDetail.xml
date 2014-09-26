@@ -11,7 +11,7 @@ This Work includes contributions authored by David E. Jones, not as a
 "work for hire", who hereby disclaims any copyright to the same.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.4.xsd"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         require-authentication="true">
 
     <parameter name="orderId"/>
@@ -73,10 +73,13 @@ This Work includes contributions authored by David E. Jones, not as a
                                     <field name="itemTypeEnumId"><default-field title="Type">
                                         <display-entity entity-name="moqui.basic.Enumeration" key-field-name="enumId" text="${description}"/>
                                     </default-field></field>
-                                    <field name="description"><default-field title="Description">
-                                        <display text="${itemDescription} ${productId ? '[' + productId + ']' : ''}"/>
-                                        <!-- <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/> -->
-                                    </default-field></field>
+                                    <field name="description">
+                                        <conditional-field condition="productId">
+                                            <link text="${itemDescription} [${productId}]" url="/popc/Product/Detail/${productId}/${itemDescription?.replace(' ', '-')}" url-type="plain" link-type="anchor"/>
+                                            <!-- <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/> -->
+                                        </conditional-field>
+                                        <default-field title="Description"><display text="${itemDescription}"/></default-field>
+                                    </field>
                                     <field name="unitAmount"><default-field><display currency-unit-field="orderHeader.currencyUomId"/></default-field></field>
                                     <field name="quantity"><default-field><display/></default-field></field>
                                     <field name="itemTotal" entry-name="orderItemTotalOut.itemTotal"><default-field>

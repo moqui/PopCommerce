@@ -11,8 +11,8 @@ This Work includes contributions authored by David E. Jones, not as a
 "work for hire", who hereby disclaims any copyright to the same.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.4.xsd"
-        require-authentication="false" allow-extra-path="true">
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+        default-menu-title="Product Detail" require-authentication="false" allow-extra-path="true">
 
     <parameter name="productId"/>
 
@@ -32,9 +32,10 @@ This Work includes contributions authored by David E. Jones, not as a
         <if condition="extraPathNameList &amp;&amp; !productId">
             <set field="productId" from="extraPathNameList[0]"/>
         </if>
+        <entity-find-one entity-name="mantle.product.Product" value-field="product"/>
+        <set field="html_title" from="product?.productName ?: ''"/>
     </pre-actions>
     <actions>
-        <entity-find-one entity-name="mantle.product.Product" value-field="product"/>
         <service-call name="mantle.product.PriceServices.get#ProductPrice" out-map="priceMap"
                 in-map="[productId:productId, priceUomId:priceUomId, productStoreId:productStoreId,
                     vendorPartyId:vendorPartyId, customerPartyId:customerPartyId]"/>
@@ -42,7 +43,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <set field="priceUomId" from="priceMap?.priceUomId"/>
     </actions>
     <widgets>
-        <label text="${product.productName ?: ''}" type="h2"/>
+        <!-- <label text="${product.productName ?: ''}" type="h2"/> -->
         <label text="${product.description ?: ''}" type="p"/>
 
         <form-single name="ProductAddToCartForm" transition="addToCart">
@@ -52,7 +53,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <field name="add"><default-field title="Add to Cart"><submit/></default-field></field>
 
             <field-layout>
-                <field-row><field-ref name="price"/><field-ref name="quantity"/><field-ref name="add"/></field-row>
+                <field-row-big><field-ref name="price"/><field-ref name="quantity"/><field-ref name="add"/></field-row-big>
             </field-layout>
         </form-single>
     </widgets>
