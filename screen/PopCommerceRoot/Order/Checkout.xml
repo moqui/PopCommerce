@@ -86,12 +86,12 @@ This Work includes contributions authored by David E. Jones, not as a
         </container>
 
         <section name="SetInfoSection">
-            <condition><expression>creditCardInfo?.creditCard &amp;&amp; shippingInfo?.postalAddress</expression></condition>
+            <condition><expression>methodInfo?.creditCard &amp;&amp; shippingInfo?.postalAddress</expression></condition>
             <widgets>
                 <form-single name="SetOrderInfoForm" transition="setOrderBillingShippingInfo">
                     <!-- TODO: Add support for updates, ie get values from Order/etc in db -->
                     <field name="orderId" entry-name="cartOrderId"><default-field><hidden/></default-field></field>
-                    <field name="paymentMethodId" entry-name="creditCardInfo.paymentMethodId"><default-field><hidden/></default-field></field>
+                    <field name="paymentMethodId" entry-name="methodInfo.paymentMethodId"><default-field><hidden/></default-field></field>
                     <field name="shippingPostalContactMechId" entry-name="shippingInfo.postalContactMechId"><default-field><hidden/></default-field></field>
                     <field name="shippingTelecomContactMechId" entry-name="shippingInfo.telecomContactMechId"><default-field><hidden/></default-field></field>
 
