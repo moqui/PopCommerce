@@ -113,35 +113,6 @@ This Work includes contributions authored by David E. Jones, not as a
                 </container>
             </box-body>
         </container-box>
-        <container-box>
-            <box-header><label text="Choose a Shipping Phone Number" type="h5"/></box-header>
-            <box-toolbar>
-                <dynamic-dialog id="UpdatePhoneInfo" button-text="Add Shipping Phone"
-                        transition="updateContactInfo" width="800"
-                        parameter-map="[partyId:partyId, telecomContactMechPurposeId:'PhoneShippingDest']"/>
-            </box-toolbar>
-            <box-body>
-                <container style="float-box" type="ul">
-                    <section-iterate name="ShippingPhoneList" list="shippingContactListInfo.telecomNumberList" entry="telecomNumberInfo">
-                        <actions>
-                            <set field="contactInfo" from="telecomNumberInfo"/>
-                            <set field="checkRadio" from="(orderPart.telecomContactMechId &amp;&amp; orderPart.telecomContactMechId == contactInfo.telecomContactMechId) || (!orderPart.telecomContactMechId &amp;&amp; telecomNumberInfo_index == 0)"/>
-                        </actions>
-                        <widgets>
-                            <container type="li">
-                                <render-mode><text type="html"><![CDATA[
-                                    <div class="text-center"><input type="radio" name="shippingTelecomContactMechId" value="${contactInfo.telecomContactMechId}"<#if checkRadio> checked="checked"</#if>></div>
-                                ]]></text></render-mode>
-                                <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
-                                <dynamic-dialog id="UpdatePhoneInfo" button-text="Update" transition="updateContactInfo"
-                                        parameter-map="[partyId:partyId, telecomContactMechId:contactInfo.telecomContactMechId,
-                                                        telecomContactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
-                            </container>
-                        </widgets>
-                    </section-iterate>
-                </container>
-            </box-body>
-        </container-box>
 
         <form-single name="SetOrderInfoForm" transition="setOrderBillingShippingInfo">
             <field name="orderId" entry-name="cartOrderId"><default-field><hidden/></default-field></field>
@@ -170,9 +141,6 @@ This Work includes contributions authored by David E. Jones, not as a
 
                 $("#SetOrderInfoForm_shippingPostalContactMechId").val($("input[name=shippingPostalContactMechId]:checked").val());
                 $("input[name=shippingPostalContactMechId]:radio").change( function() { $("#SetOrderInfoForm_shippingPostalContactMechId").val($("input[name=shippingPostalContactMechId]:checked").val()); })
-
-                $("#SetOrderInfoForm_shippingTelecomContactMechId").val($("input[name=shippingTelecomContactMechId]:checked").val());
-                $("input[name=shippingTelecomContactMechId]:radio").change( function() { $("#SetOrderInfoForm_shippingTelecomContactMechId").val($("input[name=shippingTelecomContactMechId]:checked").val()); })
             </script>
         ]]></text></render-mode>
     </widgets>

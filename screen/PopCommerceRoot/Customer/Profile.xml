@@ -135,9 +135,7 @@ This Work includes contributions authored by David E. Jones, not as a
                             <box-body>
                                 <container style="float-box" type="ul">
                                     <section-iterate name="ShippingAddressList" list="shippingContactListInfo.postalAddressList" entry="postalAddressInfo">
-                                        <actions>
-                                            <set field="contactInfo" from="postalAddressInfo"/>
-                                        </actions>
+                                        <actions><set field="contactInfo" from="postalAddressInfo"/></actions>
                                         <widgets>
                                             <container type="li">
                                                 <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
@@ -148,22 +146,6 @@ This Work includes contributions authored by David E. Jones, not as a
                                                 <link url="removeContactInfo" text="Remove"
                                                         parameter-map="[partyId:partyId, contactMechId:contactInfo.postalContactMechId,
                                                             contactMechPurposeId:contactInfo.postalContactMechPurposeId]"/>
-                                            </container>
-                                        </widgets>
-                                    </section-iterate>
-                                    <section-iterate name="ShippingPhoneList" list="shippingContactListInfo.telecomNumberList" entry="telecomNumberInfo">
-                                        <actions>
-                                            <set field="contactInfo" from="telecomNumberInfo"/>
-                                        </actions>
-                                        <widgets>
-                                            <container type="li">
-                                                <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
-                                                <dynamic-dialog id="UpdatePhoneInfo" button-text="Update" transition="updateContactInfo"
-                                                        parameter-map="[partyId:partyId, telecomContactMechId:contactInfo.telecomContactMechId,
-                                                                telecomContactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
-                                                <link url="removeContactInfo" text="Remove"
-                                                        parameter-map="[partyId:partyId, contactMechId:contactInfo.telecomContactMechId,
-                                                            contactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
                                             </container>
                                         </widgets>
                                     </section-iterate>
