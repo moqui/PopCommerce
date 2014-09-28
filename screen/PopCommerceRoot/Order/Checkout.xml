@@ -107,7 +107,6 @@ This Work includes contributions authored by David E. Jones, not as a
                                         transition="updateContactInfo" width="800"
                                         parameter-map="[partyId:partyId, postalContactMechId:contactInfo.postalContactMechId,
                                                         postalContactMechPurposeId:contactInfo.postalContactMechPurposeId]"/>
-                                <!-- TODO: add remove link -->
                             </container>
                         </widgets>
                     </section-iterate>
@@ -137,7 +136,6 @@ This Work includes contributions authored by David E. Jones, not as a
                                 <dynamic-dialog id="UpdatePhoneInfo" button-text="Update" transition="updateContactInfo"
                                         parameter-map="[partyId:partyId, telecomContactMechId:contactInfo.telecomContactMechId,
                                                         telecomContactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
-                                <!-- TODO: add remove link -->
                             </container>
                         </widgets>
                     </section-iterate>
