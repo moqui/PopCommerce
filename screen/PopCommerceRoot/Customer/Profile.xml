@@ -42,11 +42,6 @@ This Work includes contributions authored by David E. Jones, not as a
         <service-call name="mantle.party.ContactServices.get#PrimaryEmailAddress" out-map="primaryEmail"
                 in-map="[partyId:partyId]"/>
 
-        <service-call name="mantle.party.ContactServices.get#PartyContactInfo" out-map="paymentContactInfo"
-                in-map="[partyId:partyId, postalContactMechPurposeId:'PostalPayment',
-                    telecomContactMechPurposeId:'PhonePayment', emailContactMechPurposeId:'EmailPayment']"/>
-        <set field="paymentInfoFlat" from="StupidUtilities.flattenNestedMap(paymentContactInfo)"/>
-
         <!-- TODO: limit to locales for tenant (or store?) -->
         <set field="localeStringList" from="[]"/>
         <iterate list="Locale.getAvailableLocales()" entry="lcl"><script>localeStringList.add([locale:lcl.toString(), name:lcl.getDisplayName()])</script></iterate>
