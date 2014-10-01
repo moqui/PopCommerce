@@ -120,6 +120,7 @@ This Work includes contributions authored by David E. Jones, not as a
             <field name="shippingPostalContactMechId"><default-field><hidden/></default-field></field>
             <field name="shippingTelecomContactMechId"><default-field><hidden/></default-field></field>
 
+            <!-- TODO: update this when shippingPostalContactMechId changes! -->
             <field name="carrierAndShipmentMethod"><default-field title="Shipment Method">
                 <drop-down no-current-selected-key="${orderPart.carrierPartyId ? orderPart.carrierPartyId + ':' + orderPart.shipmentMethodEnumId : ''}">
                     <list-options list="shippingOptions" key="${carrierPartyId}:${shipmentMethodEnumId}"
