@@ -36,10 +36,10 @@ This Work includes contributions authored by David E. Jones, not as a
                 <section-iterate name="order-part-section" list="orderPartInfoList" entry="orderPartInfo">
                     <actions><set field="contactInfo" from="orderPartInfo"/></actions>
                     <widgets>
-                        <container style="row">
+                        <container style="row shaded-area">
                             <container style="col-lg-4">
                                 <label text="Order Part ${orderPartInfo.orderPart.orderPartSeqId}" type="strong"/>
-                                <label text="Part Total ${ec.l10n.formatCurrency(orderHeader?.grandTotal ?: 0, orderHeader?.currencyUomId, 2)}" type="p"/>
+                                <label text="Part Total ${ec.l10n.formatCurrency(orderPartInfo.orderPart.partTotal ?: 0, orderHeader?.currencyUomId, 2)}" type="p"/>
 
                                 <!-- shipping info -->
                                 <label text="${orderPartInfo.shipmentMethodEnum?.description ?: ''}" type="p"/>
