@@ -14,97 +14,135 @@ This Work includes contributions authored by David E. Jones, not as a
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         require-authentication="true">
 
-    <transition name="storeShippingInfo">
-        <service-call name="mantle.party.ContactServices.store#PartyContactInfo"/>
-        <default-response url="."/>
-    </transition>
-    <transition name="storePaymentMethodInfo">
-        <service-call name="mantle.account.PaymentMethodServices.store#PaymentMethodInfo"/>
-        <default-response url="."/>
-    </transition>
     <transition name="setOrderBillingShippingInfo">
         <service-call name="mantle.order.OrderServices.set#OrderBillingShippingInfo"/>
         <default-response url="../Review"/>
     </transition>
 
-    <actions>
-        <service-call name="mantle.account.PaymentMethodServices.get#PartyPaymentMethodInfo"
-                in-map="[partyId:customerPartyId]" out-map="methodInfo"/>
-        <set field="methodInfoFlat" from="StupidUtilities.flattenNestedMap(methodInfo)"/>
+    <transition name="updateContactInfo"><default-response url="UpdateContactInfo"/></transition>
+    <transition name="updatePaymentMethodInfo"><default-response url="UpdatePaymentMethodInfo"/></transition>
 
-        <service-call name="mantle.party.ContactServices.get#PartyContactInfo"
-                in-map="[partyId:customerPartyId, postalContactMechPurposeId:'PostalShippingDest',
-                    telecomContactMechPurposeId:'PhoneShippingDest']" out-map="shippingInfo"/>
-        <set field="shipInfoFlat" from="StupidUtilities.flattenNestedMap(shippingInfo)"/>
+    <subscreens>
+        <subscreens-item name="UpdateContactInfo" location="component://PopCommerce/screen/PopCommerceRoot/Customer/Profile/UpdateContactInfo.xml"/>
+        <subscreens-item name="UpdatePaymentMethodInfo" location="component://PopCommerce/screen/PopCommerceRoot/Customer/Profile/UpdatePaymentMethodInfo.xml"/>
+    </subscreens>
+
+    <actions>
+        <set field="partyId" from="ec.user.userAccount.partyId"/>
+
+        <service-call name="mantle.account.PaymentMethodServices.get#PartyPaymentMethodInfoList"
+                in-map="[partyId:partyId]" out-map="cciOut"/>
+
+        <service-call name="mantle.party.ContactServices.get#PartyContactInfoList" out-map="shippingContactListInfo"
+                in-map="[partyId:partyId, postalContactMechPurposeId:'PostalShippingDest',
+                    telecomContactMechPurposeId:'PhoneShippingDest']"/>
 
         <service-call name="mantle.product.StoreServices.get#StoreShippingOptions" out-map="context"
                 in-map="[productStoreId:productStoreId, orderId:cartOrderId,
-                    postalContactMechId:shipInfoFlat.postalContactMechId]"/>
+                    postalContactMechId:shippingContactListInfo.postalAddressList?.first?.postalContactMechId]"/>
+
         <entity-find-one entity-name="mantle.order.OrderHeader" value-field="orderHeader">
             <field-map field-name="orderId" from="cartOrderId"/>
         </entity-find-one>
         <entity-find-one entity-name="mantle.order.OrderPart" value-field="orderPart">
             <field-map field-name="orderId" from="cartOrderId"/>
         </entity-find-one>
+        <entity-find entity-name="mantle.account.payment.Payment" list="paymentList">
+            <econdition field-name="orderId" from="orderPart.orderId"/>
+            <econdition field-name="orderPartSeqId" from="orderPart.orderPartSeqId"/>
+            <order-by field-name="paymentId"/>
+        </entity-find>
+        <set field="payment" from="paymentList.first"/>
     </actions>
     <widgets>
-        <!-- show billing and shipping info with container-dialogs to add or update the info -->
-        <container>
-            <label text="Billing Information" type="h2"/>
-            <container-dialog id="BillingInfoUpdate" button-text="Update">
-                <form-single name="BillingInfo" extends="component://mantle-usl/template/party/PartyForms.xml#PaymentMethodInfo"/>
-            </container-dialog>
-        </container>
-        <container>
-            <section name="BillingInfoSection">
-                <condition><expression>methodInfo?.paymentMethod</expression></condition>
-                <widgets>
-                    <render-mode><text type="html" location="component://mantle-usl/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
-                </widgets>
-                <fail-widgets>
-                    <label text="Please add billing information" type="p"/>
-                </fail-widgets>
-            </section>
-        </container>
+        <container-box>
+            <box-header><label text="Choose a Credit Card" type="h5"/></box-header>
+            <box-toolbar>
+                <dynamic-dialog id="CreateCreditCardDialog" button-text="Add Credit Card"
+                        transition="updatePaymentMethodInfo" width="800"
+                        parameter-map="[partyId:partyId, paymentMethodTypeEnumId:'PmtCreditCard']"/>
+            </box-toolbar>
+            <box-body>
+                <container style="float-box" type="ul">
+                    <section-iterate name="BillingInfoSection" list="cciOut.methodInfoList" entry="methodInfo">
+                        <actions><set field="checkRadio" from="(payment?.paymentMethodId &amp;&amp; payment?.paymentMethodId == methodInfo.paymentMethodId) || (!payment?.paymentMethodId &amp;&amp; methodInfo_index == 0)"/></actions>
+                        <widgets>
+                            <container type="li">
+                                <render-mode><text type="html"><![CDATA[
+                                    <div class="text-center"><input type="radio" name="paymentMethodId" value="${methodInfo.paymentMethodId}"<#if checkRadio> checked="checked"</#if>></div>
+                                ]]></text></render-mode>
+                                <render-mode><text type="html" location="component://mantle-usl/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
+                                <dynamic-dialog id="UpdatePaymentMethodDialog" button-text="Update"
+                                        transition="updatePaymentMethodInfo" width="800"
+                                        parameter-map="[partyId:partyId, paymentMethodId:methodInfo.paymentMethodId]"/>
+                                <!-- TODO: add remove link -->
+                            </container>
+                        </widgets>
+                    </section-iterate>
+                </container>
+            </box-body>
+        </container-box>
 
-        <container>
-            <label text="Shipping Information" type="h2"/>
-            <container-dialog id="ShippingInfoUpdate" button-text="Update">
-                <form-single name="ShippingInfo" transition="storeShippingInfo" map="shipInfoFlat"
-                        extends="component://mantle-usl/template/party/PartyForms.xml#ContactInfo">
-                    <field name="emailAddress"><default-field><ignored/></default-field></field>
-                </form-single>
-            </container-dialog>
-        </container>
-        <container>
-            <section name="ShippingInfoSection">
-                <condition><expression>shippingInfo?.postalAddress</expression></condition>
-                <actions><set field="contactInfo" from="shippingInfo"/></actions>
-                <widgets><render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
-                <fail-widgets><label text="Please add shipping information" type="p"/></fail-widgets>
-            </section>
-        </container>
+        <container-box>
+            <box-header><label text="Choose a Shipping Address" type="h5"/></box-header>
+            <box-toolbar>
+                <dynamic-dialog id="UpdatePostalInfo" button-text="Add Shipping Address"
+                        transition="updateContactInfo" width="800"
+                        parameter-map="[partyId:partyId, postalContactMechPurposeId:'PostalShippingDest']"/>
+            </box-toolbar>
+            <box-body>
+                <container style="float-box" type="ul">
+                    <section-iterate name="ShippingAddressList" list="shippingContactListInfo.postalAddressList" entry="postalAddressInfo">
+                        <actions>
+                            <set field="contactInfo" from="postalAddressInfo"/>
+                            <set field="checkRadio" from="(orderPart.postalContactMechId &amp;&amp; orderPart.postalContactMechId == contactInfo.postalContactMechId) || (!orderPart.postalContactMechId &amp;&amp; postalAddressInfo_index == 0)"/>
+                        </actions>
+                        <widgets>
+                            <container type="li">
+                                <render-mode><text type="html"><![CDATA[
+                                    <div class="text-center"><input type="radio" name="shippingPostalContactMechId" value="${contactInfo.postalContactMechId}"<#if checkRadio> checked="checked"</#if>></div>
+                                ]]></text></render-mode>
+                                <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                                <dynamic-dialog id="UpdatePostalInfo" button-text="Update"
+                                        transition="updateContactInfo" width="800"
+                                        parameter-map="[partyId:partyId, postalContactMechId:contactInfo.postalContactMechId,
+                                                        postalContactMechPurposeId:contactInfo.postalContactMechPurposeId]"/>
+                            </container>
+                        </widgets>
+                    </section-iterate>
+                </container>
+            </box-body>
+        </container-box>
 
-        <section name="SetInfoSection">
-            <condition><expression>creditCardInfo?.creditCard &amp;&amp; shippingInfo?.postalAddress</expression></condition>
-            <widgets>
-                <form-single name="SetOrderInfoForm" transition="setOrderBillingShippingInfo">
-                    <!-- TODO: Add support for updates, ie get values from Order/etc in db -->
-                    <field name="orderId" entry-name="cartOrderId"><default-field><hidden/></default-field></field>
-                    <field name="paymentMethodId" entry-name="creditCardInfo.paymentMethodId"><default-field><hidden/></default-field></field>
-                    <field name="shippingPostalContactMechId" entry-name="shippingInfo.postalContactMechId"><default-field><hidden/></default-field></field>
-                    <field name="shippingTelecomContactMechId" entry-name="shippingInfo.telecomContactMechId"><default-field><hidden/></default-field></field>
+        <form-single name="SetOrderInfoForm" transition="setOrderBillingShippingInfo">
+            <field name="orderId" entry-name="cartOrderId"><default-field><hidden/></default-field></field>
+            <field name="paymentMethodId"><default-field><hidden/></default-field></field>
+            <field name="shippingPostalContactMechId"><default-field><hidden/></default-field></field>
+            <field name="shippingTelecomContactMechId"><default-field><hidden/></default-field></field>
 
-                    <field name="carrierAndShipmentMethod"><default-field title="Shipment Method">
-                        <drop-down no-current-selected-key="${orderPart.carrierPartyId ? orderPart.carrierPartyId + ':' + orderPart.shipmentMethodEnumId : ''}">
-                            <list-options list="shippingOptions" key="${carrierPartyId}:${shipmentMethodEnumId}"
-                                text="${carrierPartyId == '_NA_' ? '' : (carrierName + ' - ') }${shipmentMethodDescription} ${shippingTotal != null ? ec.l10n.formatCurrency(shippingTotal, orderHeader.currencyUomId, 2) : ''}"/>
-                        </drop-down>
-                    </default-field></field>
+            <!-- TODO: update this when shippingPostalContactMechId changes! -->
+            <field name="carrierAndShipmentMethod"><default-field title="Shipment Method">
+                <drop-down no-current-selected-key="${orderPart.carrierPartyId ? orderPart.carrierPartyId + ':' + orderPart.shipmentMethodEnumId : ''}">
+                    <list-options list="shippingOptions" key="${carrierPartyId}:${shipmentMethodEnumId}"
+                        text="${carrierPartyId == '_NA_' ? '' : (carrierName + ' - ') }${shipmentMethodDescription} ${shippingTotal != null ? ec.l10n.formatCurrency(shippingTotal, orderHeader.currencyUomId, 2) : ''}"/>
+                </drop-down>
+            </default-field></field>
 
-                    <field name="submitButton"><default-field title="Set Info and Review Order"><submit/></default-field></field>
-                </form-single>
-            </widgets>
-        </section>
+            <field name="submitButton">
+                <conditional-field condition="cciOut.methodInfoList &amp;&amp; shippingContactListInfo.postalAddressList"
+                        title="Set Info and Review Order"><submit/></conditional-field>
+                <default-field><ignored/></default-field>
+            </field>
+        </form-single>
+
+        <render-mode><text type="html"><![CDATA[
+            <script>
+                $("#SetOrderInfoForm_paymentMethodId").val($("input[name=paymentMethodId]:checked").val());
+                $("input[name=paymentMethodId]:radio").change( function() { $("#SetOrderInfoForm_paymentMethodId").val($("input[name=paymentMethodId]:checked").val()); })
+
+                $("#SetOrderInfoForm_shippingPostalContactMechId").val($("input[name=shippingPostalContactMechId]:checked").val());
+                $("input[name=shippingPostalContactMechId]:radio").change( function() { $("#SetOrderInfoForm_shippingPostalContactMechId").val($("input[name=shippingPostalContactMechId]:checked").val()); })
+            </script>
+        ]]></text></render-mode>
     </widgets>
 </screen>
