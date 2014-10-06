@@ -57,6 +57,10 @@ This Work includes contributions authored by David E. Jones, not as a
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="50" resourceTypeEnumId="STRT_STYLESHEET"
             resourceValue="/popc/css/PopcDefault.css"/>
 
+    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="200" resourceTypeEnumId="STRT_FOOTER_ITEM">
+        <resourceValue><![CDATA[<h6><a href="http://www.moqui.org/" target="_blank">Built on Moqui Framework 1.5.0</a></h6>]]></resourceValue>
+    </moqui.screen.ScreenThemeResource>
+
     <!-- A skeleton record for the default store; this record is here just in case no demo/config data is loaded -->
     <mantle.product.store.ProductStore productStoreId="POPC_DEFAULT" defaultLocale="en_US" defaultCurrencyUomId="USD"/>
 </entity-facade-xml>
