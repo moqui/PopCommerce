@@ -14,6 +14,5 @@ This Work includes contributions authored by David E. Jones, not as a
     <!-- NOTE: other store/product demo data on Mantle in ZzcProductDemoData.xml -->
 
     <!-- index for search -->
-    <moqui.entity.ServiceTrigger serviceTriggerId="POPC_SEARCH_BIZI" statusId="SrtrNotRun"
-            serviceName="org.moqui.impl.EntityServices.index#DataFeedDocuments" mapString="[dataFeedId:'PopCommerceSearch']"/>
+    <org.moqui.impl.EntityServices.indexDataFeedDocuments dataFeedId="PopCommerceSearch"/>
 </entity-facade-xml>
