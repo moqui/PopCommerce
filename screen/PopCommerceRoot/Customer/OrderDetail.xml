@@ -30,7 +30,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <section name="CheckCustomerSection">
             <condition><expression>isCustomer</expression></condition>
             <widgets>
-                <label text="Order #${orderId}, placed ${ec.l10n.formatValue(orderHeader.placedDate ?: orderHeader.entryDate, 'd MMM yyyy')}" type="h2"/>
+                <label text="Order #${orderId}, placed ${ec.l10n.format(orderHeader.placedDate ?: orderHeader.entryDate, 'd MMM yyyy')}" type="h2"/>
 
                 <!-- NOTE: this section-iterate is the same as on Review.xml -->
                 <section-iterate name="order-part-section" list="orderPartInfoList" entry="orderPartInfo">
