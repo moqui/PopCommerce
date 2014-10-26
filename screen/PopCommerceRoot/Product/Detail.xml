@@ -14,7 +14,7 @@ This Work includes contributions authored by David E. Jones, not as a
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         default-menu-title="Product Detail" require-authentication="false" allow-extra-path="true">
 
-    <parameter name="productId"/>
+    <parameter name="productId" required="true"/>
 
     <transition name="addToCart">
         <actions>

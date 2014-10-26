@@ -14,7 +14,7 @@ This Work includes contributions authored by David E. Jones, not as a
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         require-authentication="true">
 
-    <parameter name="orderId"/>
+    <parameter name="orderId" required="true"/>
 
     <actions>
         <service-call name="mantle.order.OrderServices.get#OrderDisplayInfo" in-map="[orderId:orderId]" out-map="context"/>
