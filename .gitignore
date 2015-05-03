@@ -1,0 +1,13 @@
+# OSX auto files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows auto files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux auto files
+*~
