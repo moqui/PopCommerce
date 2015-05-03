@@ -14,12 +14,29 @@ This Work includes contributions authored by David E. Jones, not as a
     <moqui.screen.SubscreensItem screenLocation="component://webroot/screen/webroot.xml"
             subscreenName="popc" userGroupId="ALL_USERS" menuTitle="POP Commerce" menuIndex="9" menuInclude="N"
             subscreenLocation="component://PopCommerce/screen/PopCommerceRoot.xml"/>
+    <moqui.screen.SubscreensItem screenLocation="component://webroot/screen/webroot/apps.xml"
+            subscreenName="PopcAdmin" userGroupId="ALL_USERS" subscreenLocation="component://PopCommerce/screen/PopCommerceAdmin.xml"
+            menuTitle="POP Commerce Admin" menuIndex="9" menuInclude="Y"/>
 
     <!-- authz/permission for ALL users -->
     <moqui.security.ArtifactGroup artifactGroupId="POPC" description="POP Commerce App (via root screen)"/>
     <moqui.security.ArtifactGroupMember artifactGroupId="POPC" artifactName="component://PopCommerce/screen/PopCommerceRoot.xml"
             artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
+
     <moqui.security.ArtifactAuthz artifactAuthzId="POPC_ALL" userGroupId="ALL_USERS" artifactGroupId="POPC"
+            authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
+
+    <!-- PopCommerce Admin screens -->
+    <moqui.security.ArtifactGroup artifactGroupId="POP_COMMERCE_ADMIN" description="PopCommerce Admin (via root screen)"/>
+    <moqui.security.ArtifactGroupMember artifactGroupId="POP_COMMERCE_ADMIN" artifactName="component://PopCommerce/screen/PopCommerceAdmin.xml"
+            artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
+
+    <moqui.security.ArtifactAuthz artifactAuthzId="POP_COMMERCE_ADM_ADM" userGroupId="ADMIN" artifactGroupId="POP_COMMERCE_ADMIN"
+            authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
+
+    <!-- authz/permission for POP_COMMERCE_ADMIN users -->
+    <moqui.security.UserGroup userGroupId="POP_COMMERCE_ADMIN" description="POP Commerce Administrators"/>
+    <moqui.security.ArtifactAuthz artifactAuthzId="POP_COMMERCE_ADM_PCADM" userGroupId="POP_COMMERCE_ADMIN" artifactGroupId="POP_COMMERCE_ADMIN"
             authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
 
     <!-- Theme Type and Default Theme -->

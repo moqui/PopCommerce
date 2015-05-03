@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+        default-menu-title="Dashboard" default-menu-index="1">
+
+    <transition name="Vendor"><default-response url="../Vendor"/></transition>
+    <transition name="Accounting"><default-response url="../Accounting"/></transition>
+    <transition name="Reports"><default-response url="//PopcAdmin/Accounting/Reports"/></transition>
+
+    <transition name="editVendor"><default-response url="../Vendor/EditVendor"/></transition>
+    <transition name="findInvoice"><default-response url="//PopcAdmin/Accounting/FindInvoice"/></transition>
+
+    <pre-actions>
+        <script>html_scripts.add('/assets/lib/sparkline/jquery.sparkline.min.js')</script>
+    </pre-actions>
+    <actions>
+        <entity-find entity-name="mantle.work.effort.WorkEffort" list="projectList">
+            <econdition field-name="workEffortTypeEnumId" value="WetProject"/>
+            <econdition field-name="statusId" value="WeInProgress"/>
+        </entity-find>
+
+        <entity-find entity-name="mantle.party.PartyDetailAndRole" list="orgInternalList">
+            <econdition field-name="roleTypeId" value="OrgInternal"/>
+            <order-by field-name="organizationName,firstName"/>
+        </entity-find>
+    </actions>
+    <widgets>
+        <container-panel id="dashboard-panel" dynamic="true">
+            <panel-left>
+                <label text="Operate" type="h2"/>
+                <container>
+                    <link url="Accounting" link-type="anchor"><image url="/hmstatic/images/invoice-pay.png" url-type="plain"/></link>
+                    <link text="Accounting" url="Accounting" link-type="anchor"/>
+                </container>
+                <container>
+                    <link url="Reports" link-type="anchor"><image url="/hmstatic/images/reports-dollar116.png" url-type="plain"/></link>
+                    <link text="Reports" url="Reports" link-type="anchor"/>
+                </container>
+
+                <label text="Setup" type="h2"/>
+                <container>
+                    <link url="Vendor" link-type="anchor"><image url="/hmstatic/images/vendor-person25.png" url-type="plain"/></link>
+                    <link text="Vendor(s)" url="Vendor" link-type="anchor"/>
+                </container>
+            </panel-left>
+
+            <panel-center>
+                <form-list name="OrgInternalForm" list="orgInternalList" skip-form="true">
+                    <row-actions>
+                        <entity-find entity-name="mantle.account.invoice.InvoiceSummary" list="recInvList">
+                            <econdition field-name="fromPartyId" from="partyId"/>
+                            <econdition field-name="statusId" operator="in" value="InvoiceFinalized,InvoiceSent"/>
+                            <select-field field-name="invoiceCount"/><select-field field-name="grandTotal"/>
+                            <select-field field-name="currencyUomId"/>
+                        </entity-find>
+                        <set field="recDesc" value=""/>
+                        <iterate list="recInvList" entry="recInv">
+                            <if condition="recDesc"><set field="recDesc" from="recDesc + ', '"/></if>
+                            <set field="recDesc" from="recDesc + recInv.invoiceCount + ' Invoice' + (recInv.invoiceCount ? 's ' : ' ') + ec.l10n.formatCurrency(recInv.grandTotal, recInv.currencyUomId, 2)"/>
+                        </iterate>
+                        <entity-find entity-name="mantle.account.invoice.InvoiceSummary" list="pblInvList">
+                            <econdition field-name="toPartyId" from="partyId"/>
+                            <econdition field-name="statusId" operator="in" value="InvoiceReceived,InvoiceApproved"/>
+                            <select-field field-name="invoiceCount"/><select-field field-name="grandTotal"/>
+                            <select-field field-name="currencyUomId"/>
+                        </entity-find>
+                        <set field="pblDesc" value=""/>
+                        <iterate list="pblInvList" entry="pblInv">
+                            <if condition="pblDesc"><set field="pblDesc" from="pblDesc + ', '"/></if>
+                            <set field="pblDesc" from="pblDesc + pblInv.invoiceCount + ' Invoice' + (pblInv.invoiceCount ? 's ' : ' ') + ec.l10n.formatCurrency(pblInv.grandTotal, pblInv.currencyUomId, 2)"/>
+                        </iterate>
+                    </row-actions>
+                    <field name="name"><default-field title="Internal Organization">
+                        <link url="editVendor" text="${organizationName?:''}${firstName?:''} ${lastName?:''}" link-type="anchor"/>
+                    </default-field></field>
+                    <field name="recSummary"><default-field title="Receivable">
+                        <link url="findInvoice" text="${recDesc?:'None'}" link-type="anchor"
+                                parameter-map="[fromPartyId:partyId, statusId:'InvoiceFinalized,InvoiceSent', statusId_op:'in']"/>
+                    </default-field></field>
+                    <field name="pblSummary"><default-field title="Payable">
+                        <link url="findInvoice" text="${pblDesc?:'None'}" link-type="anchor"
+                                parameter-map="[toPartyId:partyId, statusId:'InvoiceReceived,InvoiceApproved', statusId_op:'in']"/>
+                    </default-field></field>
+                </form-list>
+            </panel-center>
+        </container-panel>
+    </widgets>
+</screen>
