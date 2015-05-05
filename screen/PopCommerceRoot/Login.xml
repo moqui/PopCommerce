@@ -69,7 +69,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <error-response url="."/>
     </transition>
     <transition name="createAccount">
-        <service-call name="mantle.party.PartyServices.create#Account"/>
+        <service-call name="mantle.party.PartyServices.create#Account" in-map="context + [roleTypeId:'Customer']"/>
         <default-response type="screen-last"/>
         <error-response url="."/>
     </transition>
