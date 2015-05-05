@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+        default-menu-include="false">
+
+    <transition name="findSupplier"><default-response url="."/></transition>
+    <transition name="editSupplier"><default-response url="../EditSupplier"/></transition>
+    <transition name="findOrder"><default-response url="."/></transition><!-- TODO ../../Order/FindOrder -->
+
+    <transition name="createPerson"><service-call name="mantle.party.PartyServices.create#Person"/>
+        <default-response url="../EditSupplier"/></transition>
+    <transition name="createOrganization"><service-call name="mantle.party.PartyServices.create#Organization"/>
+        <default-response url="../EditSupplier"/></transition>
+
+    <pre-actions><set field="roleTypeId" value="Supplier"/></pre-actions>
+    <actions>
+        <service-call name="mantle.party.PartyServices.find#Party" in-map="context + [leadingWildcard:true]" out-map="context"/>
+    </actions>
+    <widgets>
+        <container-dialog id="FindOptionsDialog" button-text="Find Options">
+            <form-single name="FindOptionsForm" transition="findSupplier"
+                    extends="component://PopCommerce/screen/PopCommerceAdmin/Customer/FindCustomer.xml#FindOptionsForm">
+            </form-single>
+        </container-dialog>
+
+        <container-dialog id="CreatePersonDialog" button-text="New Person Supplier">
+            <form-single name="CreatePersonForm" transition="createPerson"
+                    extends="component://PopCommerce/screen/PopCommerceAdmin/Customer/FindCustomer.xml#CreatePersonForm">
+            </form-single>
+        </container-dialog>
+        <container-dialog id="CreateOrganizationDialog" button-text="New Organization Supplier">
+            <form-single name="CreateOrganizationForm" transition="createOrganization"
+                    extends="component://PopCommerce/screen/PopCommerceAdmin/Customer/FindCustomer.xml#CreateOrganizationForm">
+            </form-single>
+        </container-dialog>
+
+        <form-list name="SupplierListForm" list="partyIdList" list-entry="partyId" skip-form="true"
+                extends="component://PopCommerce/screen/PopCommerceAdmin/Customer/FindCustomer.xml#CustomerListForm">
+            <row-actions>
+                <entity-find-one entity-name="mantle.party.PartyDetail" value-field="party"/>
+                <entity-find-one entity-name="moqui.security.UserAccount" value-field="userAccount">
+                    <field-map field-name="partyId"/></entity-find-one>
+            </row-actions>
+
+            <field name="pseudoId">
+                <default-field><link url="editSupplier" text="${party.pseudoId}"/></default-field>
+            </field>
+            <field name="submitButton">
+                <header-field title="Find"><submit/></header-field>
+                <default-field><link url="findOrder" text="Purchase Orders" parameter-map="[vendorPartyId:partyId]"
+                        link-type="anchor"/></default-field>
+            </field>
+        </form-list>
+    </widgets>
+</screen>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+        default-menu-title="Supplier" default-menu-index="1">
+
+    <parameter name="partyId" required="true"/>
+
+    <transition name="findOrder"><default-response url="."/></transition><!-- TODO ../../Order/FindOrder -->
+    <transition name="updateParty"><service-call name="mantle.party.PartyServices.update#PartyDetail"/>
+        <default-response url="."/></transition>
+
+    <transition name="createPartyRole"><service-call name="create#mantle.party.PartyRole"/>
+        <default-response url="."/></transition>
+    <transition name="deletePartyRole"><service-call name="delete#mantle.party.PartyRole"/>
+        <default-response url="."/></transition>
+
+    <transition name="createPartyIdentification"><service-call name="create#mantle.party.PartyIdentification"/>
+        <default-response url="."/></transition>
+    <transition name="updatePartyIdentification"><service-call name="update#mantle.party.PartyIdentification"/>
+        <default-response url="."/></transition>
+    <transition name="deletePartyIdentification"><parameter name="partyIdTypeEnumId"/>
+        <service-call name="delete#mantle.party.PartyIdentification"/><default-response url="."/></transition>
+
+    <transition name="updateContactInfo"><default-response url="UpdateContactInfo"/></transition>
+    <transition name="removeContactInfo"><service-call name="mantle.party.ContactServices.delete#PartyContactMech"/>
+        <default-response url="."/></transition>
+
+    <transition name="createPartyNote"><service-call name="create#mantle.party.PartyNote"/>
+        <default-response url="."/></transition>
+    <transition name="updatePartyNote"><service-call name="update#mantle.party.PartyNote"/>
+        <default-response url="."/></transition>
+
+    <subscreens><subscreens-item name="UpdateContactInfo"
+            location="component://PopCommerce/screen/PopCommerceAdmin/Customer/EditCustomer/UpdateContactInfo.xml"/></subscreens>
+
+    <actions>
+        <entity-find-one entity-name="mantle.party.PartyDetail" value-field="party"/>
+    </actions>
+    <widgets>
+        <container-row>
+            <row-col lg="6">
+                <link url="findOrder" text="Orders" parameter-map="[vendorPartyId:partyId]"/>
+
+                <section-include name="EditPartySection" location="component://PopCommerce/screen/PopCommerceAdmin/Customer/EditCustomer.xml"/>
+                <section-include name="RolesSection" location="component://PopCommerce/screen/PopCommerceAdmin/Customer/EditCustomer.xml"/>
+                <section-include name="PartyIdentificationSection" location="component://PopCommerce/screen/PopCommerceAdmin/Customer/EditCustomer.xml"/>
+            </row-col>
+            <row-col lg="6">
+                <section-include name="ContactInfoSection" location="component://PopCommerce/screen/PopCommerceAdmin/Customer/EditCustomer.xml"/>
+                <section-include name="NotesSection" location="component://PopCommerce/screen/PopCommerceAdmin/Customer/EditCustomer.xml"/>
+            </row-col>
+        </container-row>
+    </widgets>
+</screen>
