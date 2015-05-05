@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+        default-menu-title="Customer" default-menu-index="1">
+
+    <parameter name="partyId" required="true"/>
+
+    <transition name="findOrder"><default-response url="."/></transition><!-- TODO ../../Order/FindOrder -->
+    <transition name="updateParty"><service-call name="mantle.party.PartyServices.update#PartyDetail"/>
+        <default-response url="."/></transition>
+
+    <transition name="createPartyRole"><service-call name="create#mantle.party.PartyRole"/>
+        <default-response url="."/></transition>
+    <transition name="deletePartyRole"><service-call name="delete#mantle.party.PartyRole"/>
+        <default-response url="."/></transition>
+
+    <transition name="createPartyIdentification"><service-call name="create#mantle.party.PartyIdentification"/>
+        <default-response url="."/></transition>
+    <transition name="updatePartyIdentification"><service-call name="update#mantle.party.PartyIdentification"/>
+        <default-response url="."/></transition>
+    <transition name="deletePartyIdentification"><parameter name="partyIdTypeEnumId"/>
+        <service-call name="delete#mantle.party.PartyIdentification"/><default-response url="."/></transition>
+
+    <transition name="createUserAccount"><service-call name="mantle.party.PartyServices.create#PartyUserAccount"/>
+        <default-response url="."/></transition>
+    <transition name="updateUserAccount"><service-call name="mantle.party.PartyServices.update#PartyUserAccount"/>
+        <default-response url="."/></transition>
+
+    <transition name="updateContactInfo"><default-response url="UpdateContactInfo"/></transition>
+    <transition name="removeContactInfo"><service-call name="mantle.party.ContactServices.delete#PartyContactMech"/>
+        <default-response url="."/></transition>
+
+    <transition name="createPartyNote"><service-call name="create#mantle.party.PartyNote"/>
+        <default-response url="."/></transition>
+    <transition name="updatePartyNote"><service-call name="update#mantle.party.PartyNote"/>
+        <default-response url="."/></transition>
+
+    <actions>
+        <entity-find-one entity-name="mantle.party.PartyDetail" value-field="party"/>
+        <entity-find-one entity-name="moqui.security.UserAccount" value-field="userAccount">
+            <field-map field-name="partyId"/></entity-find-one>
+    </actions>
+    <widgets>
+        <container-row>
+            <row-col lg="6">
+                <link url="findOrder" text="Orders" parameter-map="[vendorPartyId:partyId]"/>
+
+                <section name="NonUserPerson" condition="party?.partyTypeEnumId == 'PtyPerson' &amp;&amp; !userAccount">
+                    <actions>
+                        <entity-find entity-name="mantle.party.contact.PartyContactMechInfo" list="primaryEmailList">
+                            <date-filter/><econdition field-name="partyId"/>
+                            <econdition field-name="contactMechPurposeId" value="EmailPrimary"/>
+                            <order-by field-name="-fromDate"/>
+                        </entity-find>
+                        <set field="emailAddress" from="primaryEmailList?.first?.infoString"/>
+                    </actions>
+                    <widgets>
+                        <container-dialog id="CreateUserAccountDialog" button-text="Create User Account">
+                            <label text="User must change password before first login, even if password is set here." type="p"/>
+                            <form-single name="CreateUserAccount" transition="createUserAccount">
+                                <field name="partyId"><default-field><hidden/></default-field></field>
+                                <field name="username"><default-field><text-line size="20"/></default-field></field>
+                                <field name="emailAddress"><default-field title="System Email"><text-line size="60"/></default-field></field>
+                                <field name="newPassword"><default-field title="Password"><password size="15"/></default-field></field>
+                                <field name="newPasswordVerify"><default-field title="Password Verify"><password size="15"/></default-field></field>
+                                <field name="requirePasswordChange"><default-field><hidden default-value="Y"/></default-field></field>
+                                <field name="userGroupId"><default-field title="Group">
+                                    <drop-down><entity-options key="${userGroupId}" text="${description}">
+                                        <entity-find entity-name="moqui.security.UserGroup"><order-by field-name="description"/></entity-find>
+                                    </entity-options></drop-down>
+                                </default-field></field>
+                                <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
+                            </form-single>
+                        </container-dialog>
+                    </widgets>
+                </section>
+
+                <section name="EditPartySection" condition="party?.partyTypeEnumId == 'PtyOrganization'">
+                    <widgets>
+                        <form-single name="EditOrganizationForm" map="party" transition="updateParty">
+                            <field name="partyId"><default-field><hidden/></default-field></field>
+                            <field name="pseudoId"><default-field title="ID"><text-line size="15"/></default-field></field>
+                            <field name="organizationName"><default-field><text-line size="60"/></default-field></field>
+
+                            <field name="submitButton"><default-field title="Update Organization"><submit/></default-field></field>
+                        </form-single>
+                    </widgets>
+                    <fail-widgets>
+                        <form-single name="EditPersonForm" map="party" transition="updateParty">
+                            <field name="partyId"><default-field><hidden/></default-field></field>
+                            <field name="pseudoId"><default-field title="ID"><text-line size="15"/></default-field></field>
+                            <field name="firstName"><default-field><text-line size="30"/></default-field></field>
+                            <field name="middleName"><default-field><text-line size="20"/></default-field></field>
+                            <field name="lastName"><default-field><text-line size="30"/></default-field></field>
+                            <field name="birthDate"><default-field><date-time type="date"/></default-field></field>
+
+                            <field name="submitButton"><default-field title="Update Person"><submit/></default-field></field>
+                        </form-single>
+                    </fail-widgets>
+                </section>
+
+                <section name="RolesSection">
+                    <actions>
+                        <entity-find entity-name="mantle.party.PartyRole" list="partyRoleList">
+                            <econdition field-name="partyId"/></entity-find>
+                    </actions>
+                    <widgets>
+                        <container-box>
+                            <box-header><label text="Roles" type="h5"/></box-header>
+                            <box-toolbar>
+                                <container-dialog id="AddRoleDialog" button-text="Add Role">
+                                    <form-single name="AddRoleForm" transition="createPartyRole">
+                                        <field name="partyId"><default-field><hidden/></default-field></field>
+                                        <field name="roleTypeId"><default-field title="Role">
+                                            <drop-down><entity-options key="${roleTypeId}" text="${description}">
+                                                <entity-find entity-name="mantle.party.RoleType"><order-by field-name="description"/></entity-find>
+                                            </entity-options></drop-down>
+                                        </default-field></field>
+                                        <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
+                                    </form-single>
+                                </container-dialog>
+                            </box-toolbar>
+                            <box-body>
+                                <form-list name="RolesForm" list="partyRoleList" transition="deletePartyRole">
+                                    <field name="partyId"><default-field><hidden/></default-field></field>
+                                    <field name="roleTypeId"><default-field title="Role">
+                                        <display-entity entity-name="mantle.party.RoleType"/>
+                                    </default-field></field>
+                                    <field name="submitButton"><default-field title="Remove"><submit/></default-field></field>
+                                </form-list>
+                            </box-body>
+                        </container-box>
+                    </widgets>
+                </section>
+
+                <section name="PartyIdentificationSection">
+                    <actions>
+                        <entity-find entity-name="mantle.party.PartyIdentification" list="partyIdentificationList">
+                            <econdition field-name="partyId"/></entity-find>
+                        <set field="partyIdTypeEnumIds" from="partyIdentificationList.partyIdTypeEnumId"/>
+                    </actions>
+                    <widgets>
+                        <container-box>
+                            <box-header><label text="Identification" type="h5"/></box-header>
+                            <box-toolbar>
+                                <container-dialog id="AddIdentificationDialog" button-text="Add Identification">
+                                    <form-single name="AddIdentificationForm" transition="createPartyIdentification">
+                                        <field name="partyId"><default-field><hidden/></default-field></field>
+                                        <field name="partyIdTypeEnumId"><default-field title="ID Type">
+                                            <drop-down>
+                                                <entity-options key="${enumId}" text="${description}">
+                                                    <entity-find entity-name="moqui.basic.Enumeration">
+                                                        <econdition field-name="enumTypeId" value="PartyIdType"/>
+                                                        <econdition field-name="enumId" operator="not-in" from="partyIdTypeEnumIds" ignore-if-empty="true"/>
+                                                        <order-by field-name="description"/>
+                                                    </entity-find>
+                                                </entity-options>
+                                            </drop-down>
+                                        </default-field></field>
+                                        <field name="idValue"><default-field><text-line size="20"/></default-field></field>
+                                        <field name="expireDate"><default-field><date-time type="date"/></default-field></field>
+                                        <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
+                                    </form-single>
+                                </container-dialog>
+                            </box-toolbar>
+                            <box-body>
+                                <form-list name="IdentificationsForm" list="partyIdentificationList" transition="updatePartyIdentification">
+                                    <field name="partyId"><default-field><hidden/></default-field></field>
+                                    <field name="partyIdTypeEnumId"><default-field title="ID Type">
+                                        <display-entity entity-name="moqui.basic.Enumeration"/>
+                                    </default-field></field>
+                                    <field name="idValue"><default-field><text-line size="20"/></default-field></field>
+                                    <field name="expireDate"><default-field><date-time type="date"/></default-field></field>
+                                    <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+                                    <field name="removeButton"><default-field title="">
+                                        <link url="deletePartyIdentification" text="Remove"/>
+                                    </default-field></field>
+                                </form-list>
+                            </box-body>
+                        </container-box>
+                    </widgets>
+                </section>
+
+                <section name="UserSecuritySection" condition="userAccount">
+                    <actions>
+                        <entity-find entity-name="moqui.security.UserGroupMember" list="userGroupMemberList">
+                            <date-filter/><econdition field-name="userId" from="userAccount?.userId"/></entity-find>
+
+                        <!-- TODO: limit to locales for tenant -->
+                        <set field="localeStringList" from="[]"/>
+                        <iterate list="Locale.getAvailableLocales()" entry="lcl"><script>localeStringList.add([locale:lcl.toString(), name:lcl.getDisplayName()])</script></iterate>
+                        <order-map-list list="localeStringList"><order-by field-name="name"/></order-map-list>
+                    </actions>
+                    <widgets>
+                        <container-box>
+                            <box-header><label text="User Account" type="h5"/></box-header>
+                            <box-body>
+                                <form-single name="UpdateUserAccount" map="userAccount" transition="updateUserAccount">
+                                    <field name="partyId"><default-field><hidden/></default-field></field>
+                                    <field name="userId"><default-field><hidden/></default-field></field>
+                                    <field name="username"><default-field><text-line size="20"/></default-field></field>
+                                    <field name="emailAddress"><default-field title="System Email"><text-line size="60"/></default-field></field>
+
+                                    <field name="locale"><default-field>
+                                        <drop-down allow-empty="true" combo-box="true"><list-options list="localeStringList" key="${locale}" text="${name}"/></drop-down>
+                                    </default-field></field>
+                                    <field name="timeZone"><default-field>
+                                        <drop-down allow-empty="true" combo-box="true"><list-options list="new TreeSet(TimeZone.getAvailableIDs().collect())"/></drop-down>
+                                    </default-field></field>
+                                    <field name="disabled"><default-field><drop-down no-current-selected-key="N" current="selected">
+                                        <option key="N"/><option key="Y"/></drop-down></default-field></field>
+                                    <field name="disabledDateTime">
+                                        <conditional-field condition="userAccount?.disabledDateTime"><display/></conditional-field>
+                                        <default-field><ignored/></default-field>
+                                    </field>
+                                    <field name="successiveFailedLogins">
+                                        <conditional-field condition="userAccount?.successiveFailedLogins"><display/></conditional-field>
+                                        <default-field><ignored/></default-field>
+                                    </field>
+                                    <field name="requirePasswordChange"><default-field>
+                                        <drop-down no-current-selected-key="N"><option key="Y"/><option key="N"/></drop-down>
+                                    </default-field></field>
+
+                                    <field name="submitButton"><default-field title="Update User"><submit/></default-field></field>
+                                </form-single>
+                            </box-body>
+                        </container-box>
+                    </widgets>
+                </section>
+            </row-col>
+            <row-col lg="6">
+                <section name="ContactInfoSection">
+                    <actions>
+                        <service-call name="mantle.party.ContactServices.get#PartyContactInfoList" out-map="contactOut"
+                                in-map="[partyId:partyId, getAll:true]"/>
+                    </actions>
+                    <widgets>
+                        <container-box>
+                            <box-header><label text="Email Addresses" type="h5"/></box-header>
+                            <box-toolbar>
+                                <dynamic-dialog id="AddEmailInfo" button-text="Add Email" transition="updateContactInfo"
+                                        parameter-map="[partyId:partyId, createEmail:'true']"/>
+                            </box-toolbar>
+                            <box-body>
+                                <section-iterate name="EmailInfoSection" list="contactOut.emailAddressList" entry="contactInfo">
+                                    <widgets>
+                                        <container-row>
+                                            <row-col lg="4">
+                                                <dynamic-dialog id="UpdateEmailInfo" button-text="Update"
+                                                        transition="updateContactInfo"
+                                                        parameter-map="[partyId:partyId, emailContactMechId:contactInfo.emailContactMechId,
+                                                            emailContactMechPurposeId:contactInfo.emailContactMechPurposeId]"/>
+                                                <link url="removeContactInfo" text="Remove"
+                                                        parameter-map="[partyId:partyId, contactMechId:contactInfo.emailContactMechId,
+                                                            contactMechPurposeId:contactInfo.emailContactMechPurposeId]"/>
+                                            </row-col>
+                                            <row-col lg="4">
+                                                <label text="${contactInfo.emailContactMechPurpose.description}" type="p"/>
+                                            </row-col>
+                                            <row-col lg="4">
+                                                <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                                            </row-col>
+                                        </container-row>
+                                    </widgets>
+                                </section-iterate>
+                            </box-body>
+                        </container-box>
+
+                        <container-box>
+                            <box-header><label text="Phone Numbers" type="h5"/></box-header>
+                            <box-toolbar>
+                                <dynamic-dialog id="AddPhoneInfo" button-text="Add Phone" transition="updateContactInfo"
+                                        parameter-map="[partyId:partyId, createTelecom:'true']"/>
+                            </box-toolbar>
+                            <box-body>
+                                <section-iterate name="PhoneInfoSection" list="contactOut.telecomNumberList" entry="contactInfo">
+                                    <widgets>
+                                        <container-row>
+                                            <row-col lg="4">
+                                                <dynamic-dialog id="UpdatePhoneInfo" button-text="Update"
+                                                        transition="updateContactInfo"
+                                                        parameter-map="[partyId:partyId, telecomContactMechId:contactInfo.telecomContactMechId,
+                                                            telecomContactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
+                                                <link url="removeContactInfo" text="Remove"
+                                                        parameter-map="[partyId:partyId, contactMechId:contactInfo.telecomContactMechId,
+                                                            contactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
+                                            </row-col>
+                                            <row-col lg="4">
+                                                <label text="${contactInfo.telecomContactMechPurpose.description}" type="p"/>
+                                            </row-col>
+                                            <row-col lg="4">
+                                                <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                                            </row-col>
+                                        </container-row>
+                                    </widgets>
+                                </section-iterate>
+                            </box-body>
+                        </container-box>
+
+                        <container-box>
+                            <box-header><label text="Mailing Addresses" type="h5"/></box-header>
+                            <box-toolbar>
+                                <dynamic-dialog id="AddAddressInfo" button-text="Add Address" transition="updateContactInfo"
+                                        width="840" parameter-map="[partyId:partyId, createPostal:'true']"/>
+                            </box-toolbar>
+                            <box-body>
+                                <section-iterate name="PostalInfoSection" list="contactOut.postalAddressList" entry="contactInfo">
+                                    <widgets>
+                                        <container-row>
+                                            <row-col lg="6">
+                                                <dynamic-dialog id="UpdatePostalInfo" button-text="Update Address"
+                                                        transition="updateContactInfo" width="840"
+                                                        parameter-map="[partyId:partyId, postalContactMechId:contactInfo.postalContactMechId,
+                                                            postalContactMechPurposeId:contactInfo.postalContactMechPurposeId]"/>
+                                                <link url="removeContactInfo" text="Remove"
+                                                        parameter-map="[partyId:partyId, contactMechId:contactInfo.postalContactMechId,
+                                                            contactMechPurposeId:contactInfo.postalContactMechPurposeId]"/>
+                                                <label text="${contactInfo.postalContactMechPurpose.description}" type="p"/>
+                                            </row-col>
+                                            <row-col lg="6">
+                                                <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                                            </row-col>
+                                        </container-row>
+                                    </widgets>
+                                </section-iterate>
+                            </box-body>
+                        </container-box>
+                    </widgets>
+                </section>
+
+                <section name="NotesSection">
+                    <actions>
+                        <entity-find entity-name="mantle.party.PartyNote" list="partyNoteList">
+                            <econdition field-name="partyId"/><order-by field-name="-noteDate"/></entity-find>
+                    </actions>
+                    <widgets>
+                        <container-box>
+                            <box-header><label text="Notes" type="h5"/></box-header>
+                            <box-toolbar>
+                                <container-dialog id="NewNoteDialog" button-text="Add Note">
+                                    <form-single name="NewNoteForm" transition="createPartyNote">
+                                        <field name="partyId"><default-field><hidden/></default-field></field>
+                                        <field name="noteText"><default-field title="Note"><text-area cols="60" rows="6"/></default-field></field>
+                                        <field name="submitButton"><default-field title="Add Note"><submit/></default-field></field>
+                                    </form-single>
+                                </container-dialog>
+                            </box-toolbar>
+                            <box-body>
+                                <section-iterate name="NoteIterateSection" list="partyNoteList" entry="partyNote">
+                                    <actions>
+                                        <entity-find-one entity-name="mantle.party.PersonAndUserAccount" value-field="paua">
+                                            <field-map field-name="userId" from="partyNote.userId"/></entity-find-one>
+                                    </actions>
+                                    <widgets>
+                                        <label text="By ${paua?.firstName?:''} ${paua?.lastName?:''} (${paua?.username ?: partyNote.userId}) at ${ec.l10n.format(partyNote.noteDate, 'yyyy-MM-dd HH:mm')}" type="strong"/>
+                                        <section name="UpdateNoteSection" condition="partyNote.userId == ec.user.userId">
+                                            <widgets>
+                                                <container-dialog id="UpdateNoteContainer" button-text="Edit Note">
+                                                    <form-single name="UpdateNoteForm" transition="updatePartyNote" map="partyNote">
+                                                        <field name="partyId"><default-field><hidden/></default-field></field>
+                                                        <field name="noteDate"><default-field><hidden/></default-field></field>
+                                                        <field name="noteText"><default-field title="Note"><text-area cols="60" rows="6"/></default-field></field>
+                                                        <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+                                                    </form-single>
+                                                </container-dialog>
+                                            </widgets>
+                                        </section>
+                                        <label text="${partyNote.noteText}" type="p"/>
+                                    </widgets>
+                                </section-iterate>
+                            </box-body>
+                        </container-box>
+                    </widgets>
+                </section>
+            </row-col>
+        </container-row>
+    </widgets>
+</screen>
