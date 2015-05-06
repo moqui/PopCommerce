@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+        default-menu-title="Product" default-menu-index="1">
+
+    <parameter name="productId" required="true"/>
+
+    <transition name="updateProduct"><service-call name="update#mantle.product.Product"/>
+        <default-response url="."/></transition>
+    <transition name="cloneProduct"><service-call name="mantle.product.ProductServices.clone#Product"/>
+        <default-response url="."/></transition>
+
+    <transition name="createProductIdentification">
+        <service-call name="create#mantle.product.ProductIdentification"/><default-response url="."/></transition>
+    <transition name="updateProductIdentification">
+        <service-call name="update#mantle.product.ProductIdentification"/><default-response url="."/></transition>
+    <transition name="deleteProductIdentification">
+        <parameter name="productIdTypeEnumId"/>
+        <service-call name="delete#mantle.product.ProductIdentification"/><default-response url="."/></transition>
+
+    <transition name="createProductFeatureAppl"><service-call name="create#mantle.product.feature.ProductFeatureAppl"/>
+        <default-response url="."/></transition>
+    <transition name="updateProductFeatureAppl"><service-call name="update#mantle.product.feature.ProductFeatureAppl"/>
+        <default-response url="."/></transition>
+    <transition name="editFeature"><default-response url="."/></transition><!-- TODO: ../../Feature/EditFeature -->
+
+    <actions>
+        <entity-find-one entity-name="mantle.product.Product" value-field="product"/>
+
+        <entity-find entity-name="mantle.product.ProductIdentification" list="productIdentificationList">
+            <econdition field-name="productId"/></entity-find>
+        <set field="productIdTypeEnumIds" from="productIdentificationList.productIdTypeEnumId"/>
+
+        <entity-find entity-name="mantle.product.feature.ProductFeatureAndAppl" list="pfaaList">
+            <date-filter/><econdition field-name="productId"/>
+            <order-by field-name="productFeatureTypeEnumId"/><order-by field-name="description"/></entity-find>
+    </actions>
+    <widgets>
+        <container-dialog id="CloneProductDialog" button-text="Clone Product">
+            <form-single name="CloneProductForm" transition="cloneProduct">
+                <field name="productId"><default-field><hidden/></default-field></field>
+                <field name="baseProductId" entry-name="productId"><default-field><hidden/></default-field></field>
+                <field name="pseudoId"><default-field title="New ID"><text-line size="10"/></default-field></field>
+                <field name="productName"><default-field title="New Name"><text-line size="50"/></default-field></field>
+                <field name="submitButton"><default-field title="Clone"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+
+        <container-row>
+            <row-col lg="5">
+                <form-single name="EditProductForm" map="product" transition="updateProduct">
+                    <field name="productId"><default-field><hidden/></default-field></field>
+                    <field name="pseudoId"><default-field title="ID"><text-line size="15"/></default-field></field>
+                    <field name="productName"><default-field title="Name"><text-line size="50"/></default-field></field>
+                    <field name="productTypeEnumId"><default-field title="Type">
+                        <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                            <set field="enumTypeId" value="ProductType"/></widget-template-include>
+                    </default-field></field>
+
+                    <field name="amountFixed"><default-field title="Amount"><text-line size="10" format="0.######"/></default-field></field>
+                    <field name="amountUomId">
+                        <default-field title="UOM">
+                            <drop-down allow-empty="true">
+                                <entity-options key="${uomId}" text="${description} [${uomId}]">
+                                    <entity-find entity-name="moqui.basic.Uom">
+                                        <econdition field-name="uomTypeEnumId" operator="in" value="UT_VOLUME_DRY_MEAS,UT_WEIGHT_MEASURE"/>
+                                        <order-by field-name="description"/>
+                                    </entity-find>
+                                </entity-options>
+                            </drop-down>
+                        </default-field>
+                    </field>
+
+                    <field name="description"><default-field><text-area cols="58" rows="8"/></default-field></field>
+
+                    <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+                </form-single>
+
+                <container-box>
+                    <box-header><label text="Identification" type="h5"/></box-header>
+                    <box-toolbar>
+                        <container-dialog id="AddIdentificationDialog" button-text="Add Identification">
+                            <form-single name="AddIdentificationForm" transition="createProductIdentification">
+                                <field name="productId"><default-field><hidden/></default-field></field>
+                                <field name="productIdTypeEnumId"><default-field title="ID Type">
+                                    <drop-down>
+                                        <entity-options key="${enumId}" text="${description}">
+                                            <entity-find entity-name="moqui.basic.Enumeration">
+                                                <econdition field-name="enumTypeId" value="ProductIdentificationType"/>
+                                                <econdition field-name="enumId" operator="not-in" from="productIdTypeEnumIds" ignore-if-empty="true"/>
+                                                <order-by field-name="description"/>
+                                            </entity-find>
+                                        </entity-options>
+                                    </drop-down>
+                                </default-field></field>
+                                <field name="idValue"><default-field><text-line size="20"/></default-field></field>
+                                <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
+                            </form-single>
+                        </container-dialog>
+                    </box-toolbar>
+                    <box-body>
+                        <form-list name="IdentificationsForm" list="productIdentificationList" transition="updateProductIdentification">
+                            <field name="productId"><default-field><hidden/></default-field></field>
+                            <field name="productIdTypeEnumId"><default-field title="ID Type">
+                                <display-entity entity-name="moqui.basic.Enumeration"/>
+                            </default-field></field>
+                            <field name="idValue"><default-field><text-line size="20"/></default-field></field>
+                            <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+                            <field name="removeButton"><default-field title="">
+                                <link url="deleteProductIdentification" text="Remove"/>
+                            </default-field></field>
+                        </form-list>
+                    </box-body>
+                </container-box>
+            </row-col>
+            <row-col lg="7">
+                <container-box>
+                    <box-header><label text="Features" type="h5"/></box-header>
+                    <box-toolbar>
+                        <container-dialog id="AddFeatureDialog" button-text="Apply Feature">
+                            <form-single name="AddFeatureForm" transition="createProductFeatureAppl">
+                                <field name="productId"><default-field><hidden/></default-field></field>
+                                <field name="productFeatureId"><default-field title="Feature">
+                                    <drop-down style="chosen-wider">
+                                        <entity-options key="${productFeatureId}" text="${typeDescription} - ${description} [${abbrev ?: productFeatureId}]">
+                                            <entity-find entity-name="mantle.product.feature.ProductFeatureAndType" limit="200">
+                                                <order-by field-name="typeDescription"/><order-by field-name="description"/></entity-find>
+                                        </entity-options></drop-down>
+                                </default-field></field>
+                                <field name="applTypeEnumId"><default-field title="Appl. Type">
+                                    <drop-down no-current-selected-key="PfatStandard">
+                                        <entity-options key="${enumId}" text="${description}">
+                                            <entity-find entity-name="moqui.basic.Enumeration">
+                                                <econdition field-name="enumTypeId" value="ProductFeatureApplType"/>
+                                                <order-by field-name="description"/>
+                                            </entity-find></entity-options></drop-down>
+                                </default-field></field>
+                                <field name="fromDate" entry-name="ec.user.nowTimestamp"><default-field><hidden/></default-field></field>
+                                <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
+                            </form-single>
+                        </container-dialog>
+                    </box-toolbar>
+                    <box-body>
+                        <form-list name="FeaturesForm" list="pfaaList" transition="updateProductFeatureAppl">
+                            <field name="productId"><default-field><hidden/></default-field></field>
+                            <field name="productFeatureId"><default-field title="Feature"><display text=" "/>
+                                <link url="editFeature" text="${description} [${abbrev ?: productFeatureId}]" link-type="anchor"/>
+                            </default-field></field>
+                            <field name="productFeatureTypeEnumId"><default-field title="Type">
+                                <display-entity entity-name="moqui.basic.Enumeration"/></default-field></field>
+                            <field name="applTypeEnumId"><default-field title="Appl. Type">
+                                <display-entity entity-name="moqui.basic.Enumeration"/></default-field></field>
+                            <field name="fromDate"><default-field><hidden/></default-field></field>
+                            <field name="thruDate" entry-name="ec.user.nowTimestamp"><default-field><hidden/></default-field></field>
+                            <field name="submitButton"><default-field title="Unapply"><submit/></default-field></field>
+                        </form-list>
+                    </box-body>
+                </container-box>
+            </row-col>
+        </container-row>
+    </widgets>
+</screen>

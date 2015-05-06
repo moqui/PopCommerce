@@ -14,9 +14,9 @@ This Work includes contributions authored by David E. Jones, not as a
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd">
     <subscreens default-item="dashboard" always-use-full-path="true">
         <subscreens-item name="Vendor" location="component://HiveMind/screen/HiveMindAdmin/Vendor.xml"
-                menu-index="5" menu-title="Vendors"/>
+                menu-index="10" menu-title="Vendors"/>
         <subscreens-item name="Accounting" location="component://HiveMind/screen/HiveMindAdmin/Accounting.xml"
-                menu-index="8" menu-title="Accounting"/>
+                menu-index="11" menu-title="Accounting"/>
     </subscreens>
     <widgets>
         <subscreens-panel id="PopCommerceAdminAdminPanel" type="popup" title="POP Commerce Admin"/>

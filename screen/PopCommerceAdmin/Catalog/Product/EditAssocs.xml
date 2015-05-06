@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+        default-menu-title="Associated" default-menu-index="3">
+
+    <parameter name="productId" required="true"/>
+
+    <transition name="editProduct"><default-response url="../EditProduct"/></transition>
+    <transition name="editFeatureGroup"><default-response url="."/></transition><!-- TODO: ../../FeatureGroup/EditFeatureGroup -->
+
+    <transition name="getProductList">
+        <actions>
+            <entity-find-one entity-name="mantle.product.Product" value-field="product">
+                <field-map field-name="productId" from="term"/></entity-find-one>
+
+            <if condition="product">
+                <script>
+                    def outList = [[value:product.productId, label:"${product.productName?:product.productId} [${product.pseudoId}]".toString()]]
+                    ec.web.sendJsonResponse(outList)
+                </script>
+
+                <else>
+                    <service-call name="org.moqui.impl.EntityServices.search#DataDocuments" out-map="context"
+                            in-map="[queryString:(term + '*'), indexName:'popc', documentType:'PopcProduct']"/>
+                    <script>
+                        def outList = []
+                        for (def document in documentList)
+                            outList.add([value:document._id, label:"${document.name?:document._id} [${document.pseudoId}]".toString()])
+                        ec.web.sendJsonResponse(outList)
+                    </script>
+                </else>
+            </if>
+        </actions>
+        <default-response type="none"/>
+    </transition>
+
+    <transition name="createProductAssoc"><service-call name="create#mantle.product.ProductAssoc"/>
+        <default-response url="."/></transition>
+    <transition name="updateProductAssoc"><service-call name="update#mantle.product.ProductAssoc"/>
+        <default-response url="."/></transition>
+    <transition name="createVariants"><service-call name="mantle.product.ProductServices.create#VariantProducts"/>
+        <default-response url="."/></transition>
+
+    <actions>
+        <service-call name="mantle.product.ProductServices.find#ProductFeatures" out-map="selectableFeatureOut"
+                in-map="[productId:productId, applTypeEnumId:'PfatSelectable']"/>
+        <set field="selectableFeatureList" from="selectableFeatureOut.productFeatureList"/>
+        <order-map-list list="selectableFeatureList">
+            <order-by field-name="productFeatureTypeEnumId"/><order-by field-name="description"/></order-map-list>
+
+        <service-call name="mantle.product.ProductServices.find#ProductFeatureGroups" out-map="context"
+                in-map="[productId:productId, applTypeEnumId:'PfatSelectable']"/>
+
+        <entity-find entity-name="ProductAssocAndTo" list="paatList">
+            <search-form-inputs default-order-by="productName"/>
+            <date-filter/><econdition field-name="productId"/>
+        </entity-find>
+        <entity-find entity-name="ProductAssocAndFrom" list="paafList" limit="20">
+            <date-filter/><econdition field-name="toProductId" from="productId"/></entity-find>
+    </actions>
+    <widgets>
+        <container-row>
+            <row-col lg="7">
+                <container-box>
+                    <box-header><label text="Associated" type="h5"/></box-header>
+                    <box-toolbar>
+                        <container-dialog id="AddAssocToDialog" button-text="Add Assoc">
+                            <form-single name="AddAssocToForm" transition="createProductAssoc">
+                                <field name="productId"><default-field><hidden/></default-field></field>
+                                <field name="toProductId"><default-field title="Product">
+                                    <text-line ac-transition="getProductList" ac-min-length="2" size="50"/>
+                                </default-field></field>
+                                <field name="productAssocTypeEnumId"><default-field title="Assoc. Type">
+                                    <drop-down no-current-selected-key="PatMfgBom">
+                                        <entity-options key="${enumId}" text="${description}">
+                                            <entity-find entity-name="moqui.basic.Enumeration">
+                                                <econdition field-name="enumTypeId" value="ProductAssocType"/>
+                                                <order-by field-name="description"/></entity-find></entity-options>
+                                    </drop-down>
+                                </default-field></field>
+                                <field name="quantity"><default-field><text-line size="10"/></default-field></field>
+                                <field name="fromDate" entry-name="ec.user.nowTimestamp"><default-field><hidden/></default-field></field>
+                                <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
+                            </form-single>
+                        </container-dialog>
+                    </box-toolbar>
+                    <box-body>
+                        <form-list name="AssocToListForm" list="paatList" transition="updateProductAssoc" paginate="true">
+                            <field name="productId"><default-field><hidden/></default-field></field>
+                            <field name="toProductId"><default-field title="Product"><display text=" "/>
+                                <link url="editProduct" text="${productName} [${toProductId}]" parameter-map="[productId:toProductId]" link-type="anchor"/>
+                            </default-field></field>
+                            <field name="productTypeEnumId"><default-field title="Type">
+                                <display-entity entity-name="moqui.basic.Enumeration"/>
+                            </default-field></field>
+                            <field name="productAssocTypeEnumId"><default-field title="Assoc. Type">
+                                <display-entity entity-name="moqui.basic.Enumeration"/>
+                            </default-field></field>
+                            <field name="quantity"><default-field title="Qty"><text-line size="8" format="0.######"/></default-field></field>
+                            <field name="fromDate"><default-field><hidden/></default-field></field>
+                            <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+                            <field name="removeButton"><default-field title="">
+                                <link url="updateProductAssoc" text="X" parameter-map="[productId:productId,
+                                    toProductId:toProductId, productAssocTypeEnumId:productAssocTypeEnumId,
+                                    fromDate:fromDate, thruDate:ec.user.nowTimestamp]" confirmation="Remove this association?"/>
+                            </default-field></field>
+                        </form-list>
+                    </box-body>
+                </container-box>
+
+                <container-box>
+                    <box-header><label text="Associated From" type="h5"/></box-header>
+                    <box-body>
+                        <form-list name="AssocFromListForm" list="paafList" skip-form="true">
+                            <field name="productId"><default-field title="Product">
+                                <link url="editProduct" text="${productName} [${pseudoId}]" parameter-map="[productId:productId]" link-type="anchor"/>
+                            </default-field></field>
+                            <field name="productTypeEnumId"><default-field title="Type">
+                                <display-entity entity-name="moqui.basic.Enumeration"/>
+                            </default-field></field>
+                            <field name="productAssocTypeEnumId"><default-field title="Assoc. Type">
+                                <display-entity entity-name="moqui.basic.Enumeration"/>
+                            </default-field></field>
+                            <field name="quantity"><default-field title="Qty"><display format="0.######"/></default-field></field>
+                        </form-list>
+                    </box-body>
+                </container-box>
+            </row-col>
+            <row-col lg="5">
+                <container-box>
+                    <box-header><label text="Selectable Features" type="h5"/></box-header>
+                    <box-toolbar>
+                        <container-dialog id="CreateVariantsDialog" button-text="Create Variants">
+                            <form-single name="CreateVariantsForm" transition="createVariants">
+                                <field name="productId"><default-field><hidden/></default-field></field>
+                                <field name="copyCategoryMembers"><default-field><hidden default-value="true"/></default-field></field>
+                                <field name="productTypeEnumId"><default-field title="Variant Type">
+                                    <drop-down><option key="" text="Same"/>
+                                        <entity-options key="${enumId}" text="${description}">
+                                            <entity-find entity-name="moqui.basic.Enumeration">
+                                                <econdition field-name="enumTypeId" value="ProductType"/>
+                                                <order-by field-name="description"/></entity-find></entity-options>
+                                    </drop-down>
+                                </default-field></field>
+                                <field name="productFeatureGroupIdSet"><default-field title="Feature Group(s)">
+                                    <drop-down allow-multiple="true" style="chosen-wider">
+                                        <list-options list="productFeatureGroupList" key="${productFeatureGroupId}" text="${description}"/>
+                                    </drop-down>
+                                </default-field></field>
+                                <field name="submitButton"><default-field title="Create All Variants"><submit/></default-field></field>
+                            </form-single>
+                        </container-dialog>
+                    </box-toolbar>
+                    <box-body>
+                        <form-list name="AllSelectableFeaturesForm" list="selectableFeatureList" skip-form="true">
+                            <row-actions>
+                                <if condition="selectableFeatureList_entry.getEntityName() == 'mantle.product.feature.ProductFeatureAndGroupAppl'">
+                                    <entity-find-one entity-name="mantle.product.feature.ProductFeatureGroup" value-field="featureGroup"/></if>
+                            </row-actions>
+                            <field name="productFeatureTypeEnumId"><default-field title="Type">
+                                <display-entity entity-name="moqui.basic.Enumeration"/></default-field></field>
+                            <field name="productFeatureId"><default-field title="Feature">
+                                <link url="editFeature" text="${description} [${abbrev ?: productFeatureId}]" link-type="anchor"/>
+                            </default-field></field>
+                            <field name="productFeatureGroupId">
+                                <conditional-field condition="featureGroup">
+                                    <link url="editFeatureGroup" text="${featureGroup.description} [${productFeatureGroupId}]" link-type="anchor"/>
+                                </conditional-field>
+                                <default-field title="Feature Group"><display text=""/></default-field>
+                            </field>
+                        </form-list>
+                    </box-body>
+                </container-box>
+            </row-col>
+        </container-row>
+    </widgets>
+</screen>
