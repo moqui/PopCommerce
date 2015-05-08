@@ -11,51 +11,49 @@ This Work includes contributions authored by David E. Jones, not as a
 "work for hire", who hereby disclaims any copyright to the same.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
-        default-menu-title="Categories" default-menu-index="2">
+        default-menu-title="Products" default-menu-index="2">
 
-    <parameter name="productId" required="true"/>
+    <parameter name="productCategoryId" required="true"/>
+
+    <transition name="updateCategory"><service-call name="update#mantle.product.category.ProductCategory"/>
+        <default-response url="."/></transition>
 
     <transition name="createProductCategoryMember"><service-call name="create#mantle.product.category.ProductCategoryMember"/>
         <default-response url="."/></transition>
     <transition name="updateProductCategoryMember"><service-call name="update#mantle.product.category.ProductCategoryMember"/>
         <default-response url="."/></transition>
-    <transition name="editCategory"><default-response url="../../Category/EditCategory"/></transition>
+    <transition name="editProduct"><default-response url="../../Product/EditProduct"/></transition>
+    <transition-include name="getProductList" location="component://PopCommerce/screen/PopCommerceAdmin/Catalog/Product/EditAssocs.xml"/>
 
     <actions>
-        <entity-find entity-name="mantle.product.category.ProductCategoryAndMember" list="pcamList">
-            <search-form-inputs default-order-by="sequenceNum,categoryName"/>
-            <econdition field-name="productId"/></entity-find>
+        <entity-find entity-name="mantle.product.category.ProductCategoryMemberProduct" list="pcmpList">
+            <search-form-inputs default-order-by="sequenceNum,productName"/>
+            <econdition field-name="productCategoryId"/></entity-find>
     </actions>
     <widgets>
-        <container-dialog id="AddCategoryDialog" button-text="Add to Category">
-            <form-single name="AddCategoryForm" transition="createProductCategoryMember">
-                <field name="productId"><default-field><hidden/></default-field></field>
-                <field name="productCategoryId"><default-field title="Category">
-                    <drop-down style="chosen-wider">
-                        <entity-options key="${productCategoryId}" text="${typeDescription} - ${categoryName} [${pseudoId}]">
-                            <entity-find entity-name="mantle.product.category.ProductCategoryAndType" limit="200">
-                                <order-by field-name="typeDescription"/><order-by field-name="categoryName"/></entity-find>
-                        </entity-options>
-                    </drop-down>
+        <container-dialog id="AddProductDialog" button-text="Add Product">
+            <form-single name="AddProductForm" transition="createProductCategoryMember">
+                <field name="productCategoryId"><default-field><hidden/></default-field></field>
+                <field name="productId"><default-field title="Product">
+                    <text-line ac-transition="getProductList" ac-min-length="2" size="50"/>
                 </default-field></field>
                 <field name="fromDate" entry-name="ec.user.nowTimestamp"><default-field>
                     <date-time/></default-field></field>
                 <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
             </form-single>
         </container-dialog>
-        <form-list name="CategoriesForm" list="pcamList" transition="updateProductCategoryMember">
-            <field name="productId"><default-field><hidden/></default-field></field>
+        <form-list name="ProductsForm" list="pcmpList" transition="updateProductCategoryMember">
             <field name="productCategoryId"><default-field><hidden/></default-field></field>
+            <field name="productId"><default-field><hidden/></default-field></field>
             <field name="pseudoId">
                 <header-field title="ID" show-order-by="true"><text-find size="10" hide-options="true"/></header-field>
-                <default-field><link url="editCategory" text="${pseudoId}" link-type="anchor"/></default-field>
+                <default-field><link url="editProduct" text="${pseudoId}" link-type="anchor"/></default-field>
             </field>
-            <field name="categoryName">
+            <field name="productName">
                 <header-field title="Name" show-order-by="true"><text-find size="30" hide-options="true"/></header-field>
-                <default-field><link url="editCategory" text="${categoryName}" link-type="anchor"/></default-field>
+                <default-field><link url="editProduct" text="${productName}" link-type="anchor"/></default-field>
             </field>
-
-            <field name="productCategoryTypeEnumId"><default-field title="Type">
+            <field name="productTypeEnumId"><default-field title="Type">
                 <display-entity entity-name="moqui.basic.Enumeration"/>
             </default-field></field>
             <field name="fromDate"><header-field show-order-by="true"><date-period allow-empty="true"/></header-field>
