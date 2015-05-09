@@ -32,7 +32,7 @@ This Work includes contributions authored by David E. Jones, not as a
         <default-response url="."/></transition>
     <transition name="updateProductFeatureAppl"><service-call name="update#mantle.product.feature.ProductFeatureAppl"/>
         <default-response url="."/></transition>
-    <transition name="editFeature"><default-response url="."/></transition><!-- TODO: ../../Feature/EditFeature -->
+    <transition name="editFeature"><default-response url="../../Feature/EditFeature"/></transition>
 
     <actions>
         <entity-find-one entity-name="mantle.product.Product" value-field="product"/>
