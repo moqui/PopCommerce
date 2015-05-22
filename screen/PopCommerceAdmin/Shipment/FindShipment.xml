@@ -32,11 +32,18 @@ This Work includes contributions authored by David E. Jones, not as a
             <econdition field-name="facilityTypeEnumId" value="FcTpWarehouse"/>
             <order-by field-name="facilityName"/>
         </entity-find>
+
+        <service-call name="org.moqui.impl.BasicServices.find#EnumerationByParent" out-map="incomingTypeOut"
+                in-map="[parentEnumId:'ShpTpIncoming']"/>
+        <service-call name="org.moqui.impl.BasicServices.find#EnumerationByParent" out-map="outgoingTypeOut"
+                in-map="[parentEnumId:'ShpTpOutgoing']"/>
     </actions>
     <widgets>
         <container-dialog id="NewOutgoingShipmentDialog" button-text="New Outgoing Shipment">
             <form-single name="NewOutgoingShipment" transition="createShipment">
-                <field name="shipmentTypeEnumId"><default-field><hidden default-value="ShpTpOutgoing"/></default-field></field>
+                <field name="shipmentTypeEnumId"><default-field title="Type">
+                    <drop-down><list-options list="outgoingTypeOut.enumerationList" key="${enumId}" text="${description}"/></drop-down>
+                </default-field></field>
                 <field name="originFacilityId"><default-field title="Origin Facility">
                     <drop-down style="chosen-wider">
                         <list-options list="facilityList" key="${facilityId}" text="${facilityName} [${pseudoId}]"/>
@@ -51,7 +58,9 @@ This Work includes contributions authored by David E. Jones, not as a
         </container-dialog>
         <container-dialog id="NewIncomingShipmentDialog" button-text="New Incoming Shipment">
             <form-single name="NewIncomingShipment" transition="createShipment">
-                <field name="shipmentTypeEnumId"><default-field><hidden default-value="ShpTpIncoming"/></default-field></field>
+                <field name="shipmentTypeEnumId"><default-field title="Type">
+                    <drop-down><list-options list="incomingTypeOut.enumerationList" key="${enumId}" text="${description}"/></drop-down>
+                </default-field></field>
                 <field name="fromPartyId"><default-field title="From Party">
                     <drop-down style="chosen-wider">
                         <entity-options key="${partyId}" text="${organizationName?:''}${firstName?:''} ${lastName?:''} [${pseudoId}]">
