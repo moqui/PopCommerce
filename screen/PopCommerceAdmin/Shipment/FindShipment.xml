@@ -73,8 +73,8 @@ This Work includes contributions authored by David E. Jones, not as a
 
         <form-list name="ShipmentList" list="shipmentList" skip-form="true">
             <field name="shipmentId">
-                <header-field title="Shipment" show-order-by="true"><text-find size="15" hide-options="true"/></header-field>
-                <default-field><link url="shipmentDetail" text="${shipmentId}"/></default-field>
+                <header-field title="Shipment" show-order-by="true"><text-find size="10" hide-options="true"/></header-field>
+                <default-field><link url="shipmentDetail" text="${shipmentId}" link-type="anchor"/></default-field>
             </field>
             <field name="shipmentTypeEnumId">
                 <header-field title="Type" show-order-by="true">
@@ -84,6 +84,13 @@ This Work includes contributions authored by David E. Jones, not as a
                 </header-field>
                 <default-field><display-entity entity-name="moqui.basic.Enumeration"/></default-field>
             </field>
+            <field name="statusId">
+                <header-field title="Status" show-order-by="true">
+                    <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#statusDropDown">
+                        <set field="statusTypeId" value="Shipment"/><set field="allowEmpty" value="true"/></widget-template-include>
+                </header-field>
+                <default-field><display-entity entity-name="moqui.basic.StatusItem"/></default-field>
+            </field>
             <field name="originFacilityName">
                 <header-field title="Origin Facility" show-order-by="case-insensitive"><text-find size="20" hide-options="true"/></header-field>
                 <default-field><display/></default-field>
@@ -91,13 +98,6 @@ This Work includes contributions authored by David E. Jones, not as a
             <field name="destinationFacilityName">
                 <header-field title="Dest. Facility" show-order-by="case-insensitive"><text-find size="20" hide-options="true"/></header-field>
                 <default-field><display/></default-field>
-            </field>
-            <field name="statusId">
-                <header-field title="Status" show-order-by="true">
-                    <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#statusDropDown">
-                        <set field="statusTypeId" value="Shipment"/><set field="allowEmpty" value="true"/></widget-template-include>
-                </header-field>
-                <default-field><display-entity entity-name="moqui.basic.StatusItem"/></default-field>
             </field>
             <field name="fromPartyId">
                 <header-field title="From Party" show-order-by="true">
@@ -109,12 +109,20 @@ This Work includes contributions authored by David E. Jones, not as a
                     <text-line ac-transition="getPartyList" ac-min-length="2" size="20" parameter-map="[roleTypeId:'Customer']"/></header-field>
                 <default-field><display-entity entity-name="mantle.party.PartyDetail" text="${organizationName?:''}${firstName?:''} ${lastName?:''} [${pseudoId}]"/></default-field>
             </field>
+            <field name="estimatedArrivalDate"><header-field show-order-by="true"><date-period/></header-field>
+                <default-field><display/></default-field></field>
             <field name="estimatedReadyDate"><header-field show-order-by="true"><date-period/></header-field>
-                <default-field><display/></default-field>
-            </field>
+                <default-field><display/></default-field></field>
             <field name="findButton"><header-field title="Find"><submit/></header-field>
-                <default-field><link url="shipmentDetail" text="View"/></default-field>
-            </field>
+                <default-field><link url="shipmentDetail" text="View"/></default-field></field>
+
+            <form-list-column><field-ref name="shipmentId"/></form-list-column>
+            <form-list-column><field-ref name="shipmentTypeEnumId"/></form-list-column>
+            <form-list-column><field-ref name="statusId"/></form-list-column>
+            <form-list-column><field-ref name="originFacilityName"/><field-ref name="destinationFacilityName"/></form-list-column>
+            <form-list-column><field-ref name="fromPartyId"/><field-ref name="toPartyId"/></form-list-column>
+            <form-list-column><field-ref name="estimatedArrivalDate"/><field-ref name="estimatedReadyDate"/></form-list-column>
+            <form-list-column><field-ref name="findButton"/></form-list-column>
         </form-list>
     </widgets>
 </screen>
