@@ -23,7 +23,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
     <transition name="shipOrderPart"><service-call name="mantle.shipment.ShipmentServices.create#OrderPartShipment"/><default-response url="."/></transition>
     <transition name="addOrderPartToShipment"><service-call name="mantle.shipment.ShipmentServices.add#OrderPartToShipment"/><default-response url="."/></transition>
-    <transition name="shipmentDetail"><default-response url="."/></transition><!-- TODO: //PopcAdmin/Receiving/ShipmentDetail -->
+    <transition name="shipmentDetail"><default-response url="//PopcAdmin/Shipment/ShipmentDetail"/></transition>
 
     <transition name="createNote"><service-call name="create#mantle.order.OrderNote"/><default-response url="."/></transition>
     <transition name="updateNote"><service-call name="update#mantle.order.OrderNote"/><default-response url="."/></transition>
