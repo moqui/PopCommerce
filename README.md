@@ -1,7 +1,7 @@
 
 ## POP (Plain-Old-Product) Commerce Retail ERP and eCommerce
 
-"Commerce that Pops"
+**Commerce that Pops**
 
 ### Design Goals
 
@@ -43,7 +43,7 @@ Note that with JDK 8 you don't need the -XX:MaxPermSize argument.
 
 To get the latest Moqui, Mantle, and POP Commerce and run locally you'll 
 need JDK 7 or later (Sun JDK 8 recommended), Gradle 2 or later, and either
-a git client or you can use the "ZIP" download links on each project page 
+a git client or you can use the **ZIP** download links on each project page 
 on GitHub. The GitHub project pages are at:
 
 <https://github.com/moqui/moqui>
@@ -51,7 +51,7 @@ on GitHub. The GitHub project pages are at:
 <https://github.com/moqui/PopCommerce>
 
 Java can be downloaded here (make sure to use the Download button under
-the "JDK" column, not the under the "JRE" column):
+the **JDK** column, not the under the **JRE** column):
 
 <http://www.oracle.com/technetwork/java/javase/downloads/index.html>
 
@@ -65,54 +65,58 @@ following steps:
 #### Step 1: Download Moqui Framework
 
 Zip: <https://github.com/moqui/moqui/archive/master.zip>
+
 Git: <git://github.com/moqui/moqui.git>
 
-From either source you should have a "moqui" directory for the next steps.
-If you use the Zip download change the directory name from "moqui-master"
-to "moqui".
+From either source you should have a **moqui** directory for the next steps.
+If you use the Zip download change the directory name from **moqui-master**
+to **moqui**.
 
 #### Step 2: Download Mantle Business Artifacts
 
 Zip: <https://github.com/moqui/mantle/archive/master.zip>
+
 Git: <git://github.com/moqui/mantle.git>
 
-Put the "mantle" directory in the "moqui/runtime" directory so it is
-located at "moqui/runtime/mantle". If you use the Zip download change the
-name of the directory from "mantle-master" to "mantle" to make sure the
-directory under the "moqui/runtime" directory has the correct name.
+Put the **mantle** directory in the **moqui/runtime** directory so it is
+located at **moqui/runtime/mantle**. If you use the Zip download change the
+name of the directory from **mantle-master** to **mantle** to make sure the
+directory under the **moqui/runtime** directory has the correct name.
 
 #### Step 3: Download HiveMind
 
 Zip: <https://github.com/moqui/HiveMind/archive/master.zip>
+
 Git: <git://github.com/moqui/HiveMind.git>
 
-Put the "HiveMind" directory in the "moqui/runtime/component" directory so
-it is located at "moqui/runtime/component/HiveMind". If you use the Zip
-download change the name of the directory from "HiveMind-master" to
-"HiveMind" to make sure the directory under the "moqui/runtime/component"
+Put the **HiveMind** directory in the **moqui/runtime/component** directory so
+it is located at **moqui/runtime/component/HiveMind**. If you use the Zip
+download change the name of the directory from **HiveMind-master** to
+**HiveMind** to make sure the directory under the **moqui/runtime/component**
 directory has the correct name.
 
 #### Step 4: Download POP Commerce
 
 Zip: <https://github.com/moqui/PopCommerce/archive/master.zip>
+
 Git: <git://github.com/moqui/PopCommerce.git>
 
-Put the "PopCommerce" directory in the "moqui/runtime/component" directory so
-it is located at "moqui/runtime/component/PopCommerce". If you use the Zip
-download change the name of the directory from "PopCommerce-master" to
-"PopCommerce" to make sure the directory under the "moqui/runtime/component"
+Put the **PopCommerce** directory in the **moqui/runtime/component** directory so
+it is located at **moqui/runtime/component/PopCommerce**. If you use the Zip
+download change the name of the directory from **PopCommerce-master** to
+**PopCommerce** to make sure the directory under the **moqui/runtime/component**
 directory has the correct name.
 
 #### Step 5: Build and load seed and demo data
 
-From the "moqui" directory run "gradle load".
+From the **moqui** directory run **gradle load**.
 
 This will build Moqui and load data from Moqui, Mantle, HiveMind, and POP 
 Commerce into an embedded H2 database.
 
 #### Step 5: Run Moqui
 
-From the "moqui" directory run "gradle run".
+From the **moqui** directory run **gradle run**.
 
 #### Step 6: Access the POP Commerce application
 
