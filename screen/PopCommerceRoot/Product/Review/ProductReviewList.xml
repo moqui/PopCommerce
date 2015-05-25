@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Work is in the public domain and is provided on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
+including, without limitation, any warranties or conditions of TITLE,
+NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
+You are solely responsible for determining the appropriateness of using
+this Work and assume any risks associated with your use of this Work.
+
+This Work includes contributions authored by David E. Jones, not as a
+"work for hire", who hereby disclaims any copyright to the same.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+        default-menu-include="false" require-authentication="false" standalone="true">
+    
+    <parameter name="productId"/>
+
+    <actions>
+        <entity-find entity-name="ProductReview" list="productReviewList">
+            <econdition field-name="productStoreId" value="POPC_DEFAULT"/>
+            <econdition field-name="productId" from="productId"/>
+            <econdition field-name="statusId" value="PrvwApproved"/>
+        </entity-find>
+    </actions>
+
+    <widgets>
+        <render-mode><text type="html"><![CDATA[<br/><br/>]]></text></render-mode>
+        <section name="reviews">
+        	<condition><compare field="productReviewList" operator="not-empty"/></condition>
+        	<widgets>
+        		<section-iterate name="ProductReviewList" list="productReviewList" entry="review">
+            		<widgets>
+
+					<field name="productRating"><default-field>
+                    <render-mode>
+                       <text type="html"><![CDATA[
+                           <input id="productRating${review_index}" value="${review.productRating}" type="number" class="rating" data-min=0 data-max=5 data-step=1 data-size="xs" data-stars=5 data-show-clear="false" data-readonly="true">
+                           <script language="javascript">$("#productRating${review_index}").rating();</script>
+                       ]]></text>
+                    </render-mode>
+                    </default-field></field>
+
+       				<label text="${review.productReview}"/>
+       				<render-mode><text type="html"><![CDATA[<br/><br/><hr/>]]></text></render-mode>
+
+            		</widgets>
+        		</section-iterate>
+       		 </widgets>
+       		 <fail-widgets>
+       		 	<label text="Be the first to review"/>
+       		 </fail-widgets>
+        </section>
+    </widgets>
+</screen>
