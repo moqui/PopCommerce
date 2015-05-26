@@ -1,13 +1,13 @@
 
-## POP (Plain-Old-Product) Commerce Retail ERP and eCommerce
+## POP (Plain-Old-Product) Commerce - Retail and Wholesale ERP and eCommerce
 
 **Commerce that Pops**
 
 ### Design Goals
 
-The goal for POP Commerce is to be a simple eCommerce application  
-and an admin app to administer the eCommerce site and manage
-various aspects of a retail business, from customer service and fulfillment
+The goal for POP Commerce is to be a simple eCommerce application and an 
+admin app to administer the eCommerce site and manage various aspects of a 
+retail or wholesale business, from customer service and fulfillment
 to accounting. The goal is for POP Commerce to include all functionality a 
 general retail business might need.
 
