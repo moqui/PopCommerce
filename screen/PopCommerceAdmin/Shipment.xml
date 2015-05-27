@@ -12,10 +12,11 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
-        default-menu-title="Products" default-menu-index="2">
+        default-menu-title="Shipments" default-menu-index="8">
 
-    <subscreens default-item="FindProduct"/>
+    <subscreens default-item="FindShipment"/>
+
     <widgets>
-        <subscreens-panel id="ProductPanel" type="tab"/>
+        <subscreens-active id="ShipmentPanel"/>
     </widgets>
 </screen>

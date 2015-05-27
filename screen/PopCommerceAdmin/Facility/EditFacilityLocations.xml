@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+        default-menu-title="Locations" default-menu-index="2">
+
+    <parameter name="facilityId" required="true"/>
+
+    <transition name="findAsset"><default-response url="."/></transition><!-- TODO ../../Inventory/FindAsset -->
+    <transition name="createFacilityLocation"><service-call name="mantle.facility.FacilityServices.create#FacilityLocation"/>
+        <default-response url="."/></transition>
+    <transition name="updateFacilityLocation"><service-call name="update#mantle.facility.FacilityLocation"/>
+        <default-response url="."/></transition>
+
+    <actions>
+        <entity-find entity-name="mantle.facility.FacilityLocation" list="locationList">
+            <search-form-inputs default-order-by="locationSeqId"/>
+            <econdition field-name="facilityId"/>
+        </entity-find>
+    </actions>
+    <widgets>
+        <container-dialog id="NewLocationDialog" button-text="New Location">
+            <form-single name="NewLocationForm" transition="createFacilityLocation">
+                <field name="facilityId"><default-field title="Facility">
+                    <display-entity entity-name="mantle.facility.Facility" text="${facilityName} [${pseudoId}]"/></default-field></field>
+                <field name="locationSeqId"><default-field title="Location ID" tooltip="Leave empty to set to Area+Aisle+Section+Level+Position">
+                    <text-line size="30"/></default-field></field>
+                <field name="locationTypeEnumId"><default-field title="Type">
+                    <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                        <set field="enumTypeId" value="FacilityLocationType"/><set field="allowEmpty" value="true"/></widget-template-include>
+                </default-field></field>
+                <field name="description"><default-field title="Name"><text-line size="20"/></default-field></field>
+                <field name="areaId"><default-field title="Area"><text-line size="8"/></default-field></field>
+                <field name="aisleId"><default-field title="Aisle"><text-line size="8"/></default-field></field>
+                <field name="sectionId"><default-field title="Section"><text-line size="8"/></default-field></field>
+                <field name="levelId"><default-field title="Level"><text-line size="8"/></default-field></field>
+                <field name="positionId"><default-field title="Position"><text-line size="8"/></default-field></field>
+                <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+
+        <form-list name="LocationsForm" list="locationList" transition="updateFacilityLocation" paginate-always-show="false">
+            <field name="facilityId"><header-field><hidden/></header-field><default-field><hidden/></default-field></field>
+            <field name="Inventory"><default-field title=""><link url="findAsset" text="Inventory"
+                    link-type="anchor-button" parameter-map="[facilityId:facilityId, locationSeqId:locationSeqId]"/></default-field></field>
+            <field name="locationSeqId">
+                <header-field title="ID" show-order-by="true"><text-find size="6" hide-options="true"/></header-field>
+                <default-field><display/></default-field>
+            </field>
+            <field name="locationTypeEnumId">
+                <header-field title="Type" show-order-by="true">
+                    <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                        <set field="enumTypeId" value="FacilityLocationType"/><set field="allowEmpty" value="true"/>
+                        <set field="style" value=" "/></widget-template-include>
+                </header-field>
+                <default-field>
+                    <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                        <set field="enumTypeId" value="FacilityLocationType"/><set field="allowEmpty" value="true"/>
+                        <set field="style" value=" "/></widget-template-include>
+                </default-field>
+            </field>
+            <field name="description">
+                <header-field title="Name" show-order-by="true"><text-find size="15" hide-options="true"/></header-field>
+                <default-field><text-line size="20"/></default-field></field>
+            <field name="areaId">
+                <header-field title="Area" show-order-by="true"><text-find size="6" hide-options="true"/></header-field>
+                <default-field><text-line size="6"/></default-field></field>
+            <field name="aisleId">
+                <header-field title="Aisle" show-order-by="true"><text-find size="6" hide-options="true"/></header-field>
+                <default-field><text-line size="6"/></default-field></field>
+            <field name="sectionId">
+                <header-field title="Section" show-order-by="true"><text-find size="6" hide-options="true"/></header-field>
+                <default-field><text-line size="6"/></default-field></field>
+            <field name="levelId">
+                <header-field title="Level" show-order-by="true"><text-find size="6" hide-options="true"/></header-field>
+                <default-field><text-line size="6"/></default-field></field>
+            <field name="positionId">
+                <header-field title="Position" show-order-by="true"><text-find size="6" hide-options="true"/></header-field>
+                <default-field><text-line size="6"/></default-field></field>
+
+            <field name="submitButton"><header-field title="Find"><submit/></header-field>
+                <default-field title="Update"><submit/></default-field></field>
+        </form-list>
+    </widgets>
+</screen>

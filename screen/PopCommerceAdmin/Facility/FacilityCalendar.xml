@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+        default-menu-title="Calendar" default-menu-index="3">
+
+    <parameter name="facilityId" required="true"/>
+
+    <transition name="eventDetail"><default-response url="."/></transition><!-- TODO add when implemented -->
+    <transition name="getCalendarEvents">
+        <service-call name="mantle.work.EventServices.get#FullCalendarData" web-send-json-response="eventList"
+                in-map="context + [urlGString:(sri.buildUrl('eventDetail').url + '?workEffortId=${workEffort.workEffortId}')]"/>
+        <default-response type="none"/>
+    </transition>
+
+    <pre-actions>
+        <script>footer_scripts.add("/assets/lib/moment/moment.min.js")</script>
+        <script>footer_scripts.add("/assets/lib/fullcalendar-1.6.2/fullcalendar/fullcalendar.min.js")</script>
+        <script>html_stylesheets.add("/assets/lib/fullcalendar-1.6.2/fullcalendar/fullcalendar.css")</script>
+    </pre-actions>
+    <actions>
+        <entity-find-one entity-name="mantle.facility.Facility" value-field="facility"/>
+    </actions>
+    <widgets>
+        <render-mode>
+            <text type="html"><![CDATA[
+                <div id="calendar"></div>
+                <script>
+$(document).ready(function() {
+    $('#calendar').fullCalendar({ timezone: false, defaultView: 'agendaWeek',
+        header: { left: 'prev,next today', center: 'title', right: 'month,agendaWeek,agendaDay' },
+        eventSources: [ { url: "${sri.buildUrl('getCalendarEvents').url}", type: 'POST', data: { facilityId: '${facilityId}' } } ]
+    })
+});
+                </script>
+            ]]></text>
+        </render-mode>
+    </widgets>
+</screen>

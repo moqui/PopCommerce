@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-This Work is in the public domain and is provided on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
-including, without limitation, any warranties or conditions of TITLE,
-NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
-You are solely responsible for determining the appropriateness of using
-this Work and assume any risks associated with your use of this Work.
+This software is in the public domain under CC0 1.0 Universal.
 
-This Work includes contributions authored by David E. Jones, not as a
-"work for hire", who hereby disclaims any copyright to the same.
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         default-menu-title="Order Detail" require-authentication="true">
@@ -23,7 +24,7 @@ This Work includes contributions authored by David E. Jones, not as a
 
     <transition name="shipOrderPart"><service-call name="mantle.shipment.ShipmentServices.create#OrderPartShipment"/><default-response url="."/></transition>
     <transition name="addOrderPartToShipment"><service-call name="mantle.shipment.ShipmentServices.add#OrderPartToShipment"/><default-response url="."/></transition>
-    <transition name="shipmentDetail"><default-response url="."/></transition><!-- TODO: //PopcAdmin/Receiving/ShipmentDetail -->
+    <transition name="shipmentDetail"><default-response url="//PopcAdmin/Shipment/ShipmentDetail"/></transition>
 
     <transition name="createNote"><service-call name="create#mantle.order.OrderNote"/><default-response url="."/></transition>
     <transition name="updateNote"><service-call name="update#mantle.order.OrderNote"/><default-response url="."/></transition>
@@ -45,8 +46,9 @@ This Work includes contributions authored by David E. Jones, not as a
     <transition name="setOrderBillingShippingInfo"><service-call name="mantle.order.OrderServices.set#OrderBillingShippingInfo"/>
         <default-response url="."/></transition>
 
-    <transition name="editFacility"><default-response url="."/></transition><!-- TODO: //PopcAdmin/Facility/EditFacility -->
+    <transition name="editFacility"><default-response url="//PopcAdmin/Facility/EditFacility"/></transition>
     <transition name="editProduct"><default-response url="//PopcAdmin/Product/EditProduct"/></transition>
+    <transition name="assetDetail"><default-response url="//PopcAdmin/Asset/AssetDetail"/></transition>
 
     <transition name="editInvoice"><default-response url="//PopcAdmin/Accounting/EditInvoice"/></transition>
     <transition name="editPayment"><default-response url="//PopcAdmin/Accounting/EditPayment"/></transition>
