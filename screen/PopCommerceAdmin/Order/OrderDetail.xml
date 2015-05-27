@@ -46,8 +46,9 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="setOrderBillingShippingInfo"><service-call name="mantle.order.OrderServices.set#OrderBillingShippingInfo"/>
         <default-response url="."/></transition>
 
-    <transition name="editFacility"><default-response url="."/></transition><!-- TODO: //PopcAdmin/Facility/EditFacility -->
+    <transition name="editFacility"><default-response url="//PopcAdmin/Facility/EditFacility"/></transition>
     <transition name="editProduct"><default-response url="//PopcAdmin/Product/EditProduct"/></transition>
+    <transition name="assetDetail"><default-response url="//PopcAdmin/Asset/AssetDetail"/></transition>
 
     <transition name="editInvoice"><default-response url="//PopcAdmin/Accounting/EditInvoice"/></transition>
     <transition name="editPayment"><default-response url="//PopcAdmin/Accounting/EditPayment"/></transition>

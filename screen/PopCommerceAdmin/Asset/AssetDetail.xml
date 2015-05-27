@@ -141,7 +141,7 @@ along with this software (see the LICENSE.md file). If not, see
                             <field name="quantityNotAvailable"><default-field title="Not Avail"><display/></default-field></field>
                             <field name="quantityNotIssued"><default-field title="Not Issued"><display/></default-field></field>
                             <field name="orderId"><default-field title="Order">
-                                <link url="soDetail" text="${orderId?:'N/A'}" link-type="anchor"/>
+                                <link url="orderDetail" text="${orderId?:'N/A'}" link-type="anchor"/>
                             </default-field></field>
                         </form-list>
                     </box-body>
