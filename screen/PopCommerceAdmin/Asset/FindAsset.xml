@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+        default-menu-include="true" default-menu-index="3">
+
+    <transition name="assetDetail"><default-response url="../AssetDetail"/></transition>
+    <transition name="editProduct"><default-response url="../../Catalog/Product/EditProduct"/></transition>
+
+    <transition-include name="getPartyList" location="component://mantle-usl/template/party/PartyForms.xml"/>
+
+    <actions>
+        <entity-find entity-name="mantle.product.asset.AssetFindView" list="assetList">
+            <search-form-inputs default-order-by="-receivedDate,-assetId"/>
+            <!-- TODO: at some point consider separate inventory and equipment/supplies screens, filtering here by type -->
+        </entity-find>
+
+        <entity-find entity-name="mantle.facility.Facility" list="facilityList">
+            <econdition field-name="facilityTypeEnumId" value="FcTpWarehouse"/>
+            <order-by field-name="facilityName"/>
+        </entity-find>
+    </actions>
+    <widgets>
+        <form-list name="ListAssets" list="assetList" skip-form="true">
+            <row-actions>
+                <entity-find-one entity-name="mantle.facility.FacilityLocation" value-field="facLoc" cache="true"/>
+                <entity-find-one entity-name="moqui.basic.Uom" value-field="amountUom" cache="true">
+                    <field-map field-name="uomId" from="amountUomId"/></entity-find-one>
+            </row-actions>
+            <field name="assetId">
+                <header-field title="Asset ID" show-order-by="case-insensitive"><text-find size="15" hide-options="true"/></header-field>
+                <default-field><link url="assetDetail" text="${assetId}" link-type="anchor"/></default-field>
+            </field>
+            <field name="statusId">
+                <header-field title="Status" show-order-by="true">
+                    <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#statusDropDown">
+                        <set field="statusTypeId" value="Asset"/><set field="allowEmpty" value="true"/></widget-template-include>
+                </header-field>
+                <default-field><display-entity entity-name="moqui.basic.StatusItem"/></default-field>
+            </field>
+
+            <field name="ownerPartyId">
+                <header-field title="Owner Party"><text-line ac-transition="getPartyList" ac-min-length="2" size="15"/></header-field>
+                <default-field>
+                    <display-entity entity-name="mantle.party.PartyDetail" text="${organizationName?:''}${firstName?:''} ${lastName?:''} [${pseudoId}]"/>
+                </default-field>
+            </field>
+
+            <field name="productTypeEnumId">
+                <header-field title="Type" show-order-by="true">
+                    <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                        <set field="enumTypeId" value="ProductType"/><set field="allowEmpty" value="true"/></widget-template-include>
+                </header-field>
+                <default-field><display-entity entity-name="moqui.basic.Enumeration"/></default-field>
+            </field>
+
+            <field name="pseudoId">
+                <header-field title="Product ID" show-order-by="case-insensitive"><text-find size="10" hide-options="true"/></header-field>
+                <default-field><link url="editProduct" text="${pseudoId}" link-type="anchor"/></default-field>
+            </field>
+            <field name="productName">
+                <header-field show-order-by="case-insensitive"><text-find size="15" hide-options="true"/></header-field>
+                <default-field><display/></default-field>
+            </field>
+            <field name="receivedDate">
+                <header-field show-order-by="true"><date-period/></header-field>
+                <default-field><display/></default-field>
+            </field>
+            <field name="manufacturedDate">
+                <header-field show-order-by="true" title="Mfg Date"><date-period/></header-field>
+                <default-field><display/></default-field>
+            </field>
+            <field name="quantityOnHandTotal">
+                <header-field title="Quantity On Hand" show-order-by="true"/>
+                <default-field><display text="${ec.l10n.format(quantityOnHandTotal, null)} (${amountUom?.description?:'each'})"/></default-field>
+            </field>
+            <field name="availableToPromiseTotal">
+                <header-field title="Available To Promise" show-order-by="true"/>
+                <default-field><display text="${ec.l10n.format(availableToPromiseTotal, null)} (${amountUom?.description?:'each'})"/></default-field>
+            </field>
+
+            <field name="facilityId">
+                <header-field title="Facility" show-order-by="case-insensitive">
+                    <drop-down allow-empty="true"><list-options list="facilityList" key="${facilityId}" text="${facilityName} [${pseudoId}]"/></drop-down>
+                </header-field>
+                <default-field><display-entity entity-name="mantle.facility.Facility" text="${facilityName} [${pseudoId}]"/></default-field>
+            </field>
+            <field name="locationSeqId">
+                <header-field title="Location" show-order-by="case-insensitive"><text-find size="15" hide-options="true"/></header-field>
+                <default-field><display text="${locationSeqId?:''} ${facLoc?.description?:''} [${facLoc?.areaId?:' '}:${facLoc?.aisleId?:' '}:${facLoc?.sectionId?:' '}:${facLoc?.levelId?:' '}:${facLoc?.positionId?:' '}]"/></default-field>
+            </field>
+
+            <field name="submitButton">
+                <header-field title="Find"><submit/></header-field>
+                <default-field><link url="assetDetail" text="Detail" link-type="anchor-button"/></default-field>
+            </field>
+
+            <form-list-column><field-ref name="submitButton"/></form-list-column>
+            <form-list-column><field-ref name="assetId"/><field-ref name="statusId"/><field-ref name="ownerPartyId"/></form-list-column>
+            <form-list-column><field-ref name="productTypeEnumId"/><field-ref name="pseudoId"/><field-ref name="productName"/></form-list-column>
+            <form-list-column><field-ref name="receivedDate"/><field-ref name="manufacturedDate"/>
+                <field-ref name="quantityOnHandTotal"/><field-ref name="availableToPromiseTotal"/></form-list-column>
+            <form-list-column><field-ref name="facilityId"/><field-ref name="locationSeqId"/></form-list-column>
+        </form-list>
+    </widgets>
+</screen>
