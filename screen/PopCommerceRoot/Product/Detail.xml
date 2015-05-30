@@ -28,6 +28,33 @@ along with this software (see the LICENSE.md file). If not, see
         <error-response url="."/>
     </transition>
 
+    <transition name="productReviewList"><default-response url="../Detail/ProductReviewList"/></transition>
+
+    <transition name="createProductReview">
+        <actions>
+            <if condition="ec.user.userId != null">
+                <set field="userId" from="ec.user.userAccount.userId"/>
+                <set field="postedAnonymous" value="N"/>
+            <else>
+                <set field="userId" value="_NA_"/>
+                <set field="postedAnonymous" value="Y"/>
+            </else>
+            </if>
+
+            <service-call name="create#ProductReview" web-send-json-response="true">
+                <field-map field-name="productStoreId" value="${productStoreId}"/>
+                <field-map field-name="productId" from="productId"/>
+                <field-map field-name="userId" from="userId"/>
+                <field-map field-name="statusId" value="PrvwPending"/>
+                <field-map field-name="postedAnonymous" from="postedAnonymous"/>
+                <field-map field-name="postedDateTime" from="ec.user.nowTimestamp" />
+                <field-map field-name="productRating" from="productRating" />
+                <field-map field-name="productReview" from="productReview" />
+            </service-call>
+        </actions>
+        <default-response type="none"/>
+    </transition>
+
     <pre-actions>
         <set field="extraPathNameList" from="sri.screenUrlInfo.extraPathNameList"/>
         <if condition="extraPathNameList &amp;&amp; !productId">
@@ -35,7 +62,10 @@ along with this software (see the LICENSE.md file). If not, see
         </if>
         <entity-find-one entity-name="mantle.product.Product" value-field="product"/>
         <set field="html_title" from="product?.productName ?: ''"/>
+        <script>html_stylesheets.add("static/rating/star-rating.min.css")</script>
+        <script>footer_scripts.add("static/rating/star-rating.min.js")</script>
     </pre-actions>
+
     <actions>
         <service-call name="mantle.product.PriceServices.get#ProductPrice" out-map="priceMap"
                 in-map="[productId:productId, priceUomId:priceUomId, productStoreId:productStoreId,
@@ -57,5 +87,31 @@ along with this software (see the LICENSE.md file). If not, see
                 <field-row-big><field-ref name="price"/><field-ref name="quantity"/><field-ref name="add"/></field-row-big>
             </field-layout>
         </form-single>
+
+         <container-dialog id="AddProductReviewDialog" button-text="Add Review">
+            <form-single name="AddProductReview" transition="createProductReview" background-submit="true"
+                      background-reload-id="ProductReviewListContainer" background-message="Thanks for submitting review" background-hide-id="AddProductReviewDialog">
+                <auto-fields-entity entity-name="ProductReview" field-type="edit"/>
+                <field name="productReviewId"><default-field><ignored/></default-field></field>
+                <field name="productStoreId"><default-field><ignored/></default-field></field>
+                <field name="productId"><default-field><hidden/></default-field></field>
+                <field name="userId"><default-field><ignored/></default-field></field>
+                <field name="statusId"><default-field><ignored/></default-field></field>
+                <field name="postedAnonymous"><default-field><ignored/></default-field></field>
+                <field name="postedDateTime"><default-field><ignored/></default-field></field>
+                <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
+                <field name="productRating"><default-field>
+                    <render-mode>
+                       <text type="html"><![CDATA[
+                           <input name="productRating" id="productRating" value="0" type="number" class="rating" data-min=0 data-max=5 data-step=1 data-size="xs" data-stars=5 data-show-clear="false">
+                           <script language="javascript">$("#productRating").rating();</script>
+                       ]]></text>
+                    </render-mode>
+                </default-field></field>
+            </form-single>
+        </container-dialog>
+
+        <dynamic-container id="ProductReviewListContainer" transition="productReviewList"/>
+
     </widgets>
 </screen>
