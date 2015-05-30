@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-This Work is in the public domain and is provided on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,
-including, without limitation, any warranties or conditions of TITLE,
-NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE.
-You are solely responsible for determining the appropriateness of using
-this Work and assume any risks associated with your use of this Work.
+This software is in the public domain under CC0 1.0 Universal.
 
-This Work includes contributions authored by David E. Jones, not as a
-"work for hire", who hereby disclaims any copyright to the same.
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
@@ -17,36 +18,26 @@ This Work includes contributions authored by David E. Jones, not as a
     <parameter name="productId"/>
 
     <actions>
-        <entity-find entity-name="ProductReview" list="productReviewList">
-            <econdition field-name="productStoreId" value="${productStoreId}"/>
-            <econdition field-name="productId" from="productId"/>
+        <entity-find entity-name="mantle.product.ProductReview" list="productReviewList">
+            <econdition field-name="productStoreId"/><econdition field-name="productId"/>
             <econdition field-name="statusId" value="PrvwApproved"/>
         </entity-find>
     </actions>
 
     <widgets>
         <render-mode><text type="html"><![CDATA[<br/><br/>]]></text></render-mode>
-        <section name="reviews">
-            <condition><compare field="productReviewList" operator="not-empty"/></condition>
+        <section name="reviews" condition="productReviewList">
             <widgets>
-                <section-iterate name="ProductReviewList" list="productReviewList" entry="review">
-                    <widgets>
-                        <field name="productRating"><default-field>
-                        <render-mode>
-                        <text type="html"><![CDATA[
-                           <input id="productRating${review_index}" value="${review.productRating}" type="number" class="rating" data-min=0 data-max=5 data-step=1 data-size="xs" data-stars=5 data-show-clear="false" data-readonly="true">
-                           <script language="javascript">$("#productRating${review_index}").rating();</script>
-                        ]]></text>
-                        </render-mode>
-                        </default-field></field>
-                        <label text="${review.productReview}"/>
-                        <render-mode><text type="html"><![CDATA[<br/><br/><hr/>]]></text></render-mode>
-                    </widgets>
-                </section-iterate>
+                <section-iterate name="ProductReviewList" list="productReviewList" entry="review"><widgets>
+                    <render-mode><text type="html"><![CDATA[
+                       <input id="productRating${review_index}" value="${review.productRating}" type="number" class="rating" data-min=0 data-max=5 data-step=1 data-size="xs" data-stars=5 data-show-clear="false" data-readonly="true">
+                       <script>$("#productRating${review_index}").rating();</script>
+                       <span>${review.productReview}</span>
+                       <br/><br/><hr/>
+                    ]]></text></render-mode>
+                </widgets></section-iterate>
             </widgets>
-            <fail-widgets>
-                <label text="Be the first to review"/>
-            </fail-widgets>
+            <fail-widgets><label text="No reviews yet, be the first to review!" type="h5"/></fail-widgets>
         </section>
     </widgets>
 </screen>

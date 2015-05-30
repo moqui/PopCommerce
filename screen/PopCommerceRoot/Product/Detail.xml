@@ -31,27 +31,9 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="productReviewList"><default-response url="../Detail/ProductReviewList"/></transition>
 
     <transition name="createProductReview">
-        <actions>
-            <if condition="ec.user.userId != null">
-                <set field="userId" from="ec.user.userAccount.userId"/>
-                <set field="postedAnonymous" value="N"/>
-            <else>
-                <set field="userId" value="_NA_"/>
-                <set field="postedAnonymous" value="Y"/>
-            </else>
-            </if>
-
-            <service-call name="create#ProductReview" web-send-json-response="true">
-                <field-map field-name="productStoreId" value="${productStoreId}"/>
-                <field-map field-name="productId" from="productId"/>
-                <field-map field-name="userId" from="userId"/>
-                <field-map field-name="statusId" value="PrvwPending"/>
-                <field-map field-name="postedAnonymous" from="postedAnonymous"/>
-                <field-map field-name="postedDateTime" from="ec.user.nowTimestamp" />
-                <field-map field-name="productRating" from="productRating" />
-                <field-map field-name="productReview" from="productReview" />
-            </service-call>
-        </actions>
+        <service-call name="create#mantle.product.ProductReview" web-send-json-response="true"
+                in-map="context + [userId:(ec.user.userId ?: '_NA_'), statusId:'PrvwPending',
+                    postedAnonymous:(ec.user.userId ? 'N' : 'Y'), postedDateTime:ec.user.nowTimestamp]"/>
         <default-response type="none"/>
     </transition>
 
@@ -88,26 +70,20 @@ along with this software (see the LICENSE.md file). If not, see
             </field-layout>
         </form-single>
 
-         <container-dialog id="AddProductReviewDialog" button-text="Add Review">
+         <container-dialog id="AddProductReviewDialog" button-text="Add Review" width="800">
             <form-single name="AddProductReview" transition="createProductReview" background-submit="true"
-                      background-reload-id="ProductReviewListContainer" background-message="Thanks for submitting review" background-hide-id="AddProductReviewDialog">
-                <auto-fields-entity entity-name="ProductReview" field-type="edit"/>
-                <field name="productReviewId"><default-field><ignored/></default-field></field>
-                <field name="productStoreId"><default-field><ignored/></default-field></field>
+                    background-reload-id="ProductReviewListContainer" background-message="Thanks for submitting review"
+                    background-hide-id="AddProductReviewDialog">
                 <field name="productId"><default-field><hidden/></default-field></field>
-                <field name="userId"><default-field><ignored/></default-field></field>
-                <field name="statusId"><default-field><ignored/></default-field></field>
-                <field name="postedAnonymous"><default-field><ignored/></default-field></field>
-                <field name="postedDateTime"><default-field><ignored/></default-field></field>
-                <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
-                <field name="productRating"><default-field>
-                    <render-mode>
-                       <text type="html"><![CDATA[
-                           <input name="productRating" id="productRating" value="0" type="number" class="rating" data-min=0 data-max=5 data-step=1 data-size="xs" data-stars=5 data-show-clear="false">
-                           <script language="javascript">$("#productRating").rating();</script>
-                       ]]></text>
-                    </render-mode>
+                <field name="productRating"><default-field title="Rating">
+                    <render-mode><text type="html"><![CDATA[
+                       <input name="productRating" id="productRating" value="0" type="number" class="rating" data-min=0 data-max=5 data-step=1 data-size="xs" data-stars=5 data-show-clear="false">
+                       <script language="javascript">$("#productRating").rating();</script>
+                    ]]></text></render-mode>
                 </default-field></field>
+                <field name="productReview"><default-field title="Comments">
+                    <text-area cols="80" rows="10"/></default-field></field>
+                <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
             </form-single>
         </container-dialog>
 
