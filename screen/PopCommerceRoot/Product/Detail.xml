@@ -28,7 +28,7 @@ along with this software (see the LICENSE.md file). If not, see
         <error-response url="."/>
     </transition>
 
-    <transition name="productReviewList"><default-response url="../Detail/ProductReviewList"/></transition>
+    <transition name="productReviewList"><default-response url="ProductReviewList"/></transition>
 
     <transition name="createProductReview">
         <service-call name="create#mantle.product.ProductReview" web-send-json-response="true"
