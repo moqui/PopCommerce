@@ -88,8 +88,8 @@ along with this software (see the LICENSE.md file). If not, see
         </container-dialog>
 
         <container>
-            <link url="." text="Sales Orders Only" link-type="anchor" parameter-map="[vendorRoleTypeId:'OrgInternal']"/>
             <link url="." text="Purchase Orders Only" link-type="anchor" parameter-map="[customerRoleTypeId:'OrgInternal']"/>
+            <link url="." text="Sales Orders Only" link-type="anchor" parameter-map="[vendorRoleTypeId:'OrgInternal']"/>
         </container>
 
         <form-list name="OrderHistoryList" list="orderList">
