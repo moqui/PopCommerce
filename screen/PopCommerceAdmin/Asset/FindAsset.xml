@@ -41,6 +41,21 @@ along with this software (see the LICENSE.md file). If not, see
                 <header-field title="Asset ID" show-order-by="case-insensitive"><text-find size="15" hide-options="true"/></header-field>
                 <default-field><link url="assetDetail" text="${assetId}" link-type="anchor"/></default-field>
             </field>
+            <field name="ownerPartyId">
+                <header-field title="Owner Party"><text-line ac-transition="getPartyList" ac-min-length="2" size="15"/></header-field>
+                <default-field>
+                    <display-entity entity-name="mantle.party.PartyDetail" text="${organizationName?:''}${firstName?:''} ${lastName?:''} [${pseudoId}]"/>
+                </default-field>
+            </field>
+
+            <field name="assetTypeEnumId">
+                <header-field title="Asset Type" show-order-by="true">
+                    <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                        <set field="enumTypeId" value="AssetType"/><set field="allowEmpty" value="true"/>
+                        <set field="style" value=" "/></widget-template-include>
+                </header-field>
+                <default-field><display-entity entity-name="moqui.basic.Enumeration"/></default-field>
+            </field>
             <field name="statusId">
                 <header-field title="Status" show-order-by="true">
                     <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#statusDropDown">
@@ -49,17 +64,11 @@ along with this software (see the LICENSE.md file). If not, see
                 <default-field><display-entity entity-name="moqui.basic.StatusItem"/></default-field>
             </field>
 
-            <field name="ownerPartyId">
-                <header-field title="Owner Party"><text-line ac-transition="getPartyList" ac-min-length="2" size="15"/></header-field>
-                <default-field>
-                    <display-entity entity-name="mantle.party.PartyDetail" text="${organizationName?:''}${firstName?:''} ${lastName?:''} [${pseudoId}]"/>
-                </default-field>
-            </field>
-
             <field name="productTypeEnumId">
-                <header-field title="Type" show-order-by="true">
+                <header-field title="Product Type" show-order-by="true">
                     <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
-                        <set field="enumTypeId" value="ProductType"/><set field="allowEmpty" value="true"/></widget-template-include>
+                        <set field="enumTypeId" value="ProductType"/><set field="allowEmpty" value="true"/>
+                        <set field="style" value=" "/></widget-template-include>
                 </header-field>
                 <default-field><display-entity entity-name="moqui.basic.Enumeration"/></default-field>
             </field>
@@ -106,7 +115,8 @@ along with this software (see the LICENSE.md file). If not, see
             </field>
 
             <form-list-column><field-ref name="submitButton"/></form-list-column>
-            <form-list-column><field-ref name="assetId"/><field-ref name="statusId"/><field-ref name="ownerPartyId"/></form-list-column>
+            <form-list-column><field-ref name="assetId"/><field-ref name="ownerPartyId"/></form-list-column>
+            <form-list-column><field-ref name="assetTypeEnumId"/><field-ref name="statusId"/></form-list-column>
             <form-list-column><field-ref name="productTypeEnumId"/><field-ref name="pseudoId"/><field-ref name="productName"/></form-list-column>
             <form-list-column><field-ref name="receivedDate"/><field-ref name="manufacturedDate"/>
                 <field-ref name="quantityOnHandTotal"/><field-ref name="availableToPromiseTotal"/></form-list-column>

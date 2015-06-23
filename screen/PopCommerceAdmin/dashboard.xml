@@ -63,8 +63,9 @@ along with this software (see the LICENSE.md file). If not, see
                     <link text="Receiving" url="Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']"/>
                 </container>
                 <container>
-                    <link url="Asset" link-type="anchor"><image url="/popc/static/images/Inventory.png" url-type="plain"/></link>
-                    <link text="Inventory" url="Asset" link-type="anchor"/>
+                    <link url="Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']">
+                        <image url="/popc/static/images/Inventory.png" url-type="plain"/></link>
+                    <link text="Inventory" url="Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']"/>
                 </container>
 
                 <container>
