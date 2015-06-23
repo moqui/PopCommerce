@@ -21,8 +21,16 @@ along with this software (see the LICENSE.md file). If not, see
     <transition-include name="getPartyList" location="component://mantle-usl/template/party/PartyForms.xml"/>
 
     <actions>
+        <service-call name="org.moqui.impl.BasicServices.find#EnumerationByParent" out-map="incomingTypeOut"
+                in-map="[parentEnumId:'ShpTpIncoming']"/>
+        <service-call name="org.moqui.impl.BasicServices.find#EnumerationByParent" out-map="outgoingTypeOut"
+                in-map="[parentEnumId:'ShpTpOutgoing']"/>
+        <if condition="parentShipmentType == 'ShpTpIncoming'"><set field="shipmentTypeSet" from="incomingTypeOut.enumIdSet"/></if>
+        <if condition="parentShipmentType == 'ShpTpOutgoing'"><set field="shipmentTypeSet" from="outgoingTypeOut.enumIdSet"/></if>
+
         <entity-find entity-name="mantle.shipment.ShipmentFindView" list="shipmentList">
             <search-form-inputs default-order-by="-estimatedReadyDate,-estimatedShipDate,-shipmentId"/>
+            <econdition field-name="shipmentTypeEnumId" operator="in" from="shipmentTypeSet" ignore="!shipmentTypeSet"/>
             <select-field field-name="shipmentId"/><select-field field-name="shipmentTypeEnumId"/>
             <select-field field-name="originFacilityName"/><select-field field-name="destinationFacilityName"/>
             <select-field field-name="fromPartyId"/><select-field field-name="toPartyId"/>
@@ -33,11 +41,6 @@ along with this software (see the LICENSE.md file). If not, see
             <econdition field-name="facilityTypeEnumId" value="FcTpWarehouse"/>
             <order-by field-name="facilityName"/>
         </entity-find>
-
-        <service-call name="org.moqui.impl.BasicServices.find#EnumerationByParent" out-map="incomingTypeOut"
-                in-map="[parentEnumId:'ShpTpIncoming']"/>
-        <service-call name="org.moqui.impl.BasicServices.find#EnumerationByParent" out-map="outgoingTypeOut"
-                in-map="[parentEnumId:'ShpTpOutgoing']"/>
     </actions>
     <widgets>
         <container-dialog id="NewOutgoingShipmentDialog" button-text="New Outgoing Shipment">
