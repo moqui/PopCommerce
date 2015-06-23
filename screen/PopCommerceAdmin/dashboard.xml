@@ -15,6 +15,14 @@ along with this software (see the LICENSE.md file). If not, see
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         default-menu-title="Dashboard" default-menu-index="1">
 
+    <transition name="Supplier"><default-response url="../Supplier"/></transition>
+    <transition name="Customer"><default-response url="../Customer"/></transition>
+    <transition name="Order"><default-response url="../Order"/></transition>
+    <transition name="Shipment"><default-response url="../Shipment"/></transition>
+
+    <transition name="Catalog"><default-response url="../Catalog"/></transition>
+    <transition name="Facility"><default-response url="../Facility"/></transition>
+    <transition name="Asset"><default-response url="../Asset"/></transition>
     <transition name="Vendor"><default-response url="../Vendor"/></transition>
     <transition name="Accounting"><default-response url="../Accounting"/></transition>
     <transition name="Reports"><default-response url="//PopcAdmin/Accounting/Reports"/></transition>
@@ -39,20 +47,39 @@ along with this software (see the LICENSE.md file). If not, see
     <widgets>
         <container-panel id="dashboard-panel" dynamic="true">
             <panel-left>
-                <label text="Operate" type="h2"/>
+                <label text="Operate" type="h3"/>
                 <container>
-                    <link url="Accounting" link-type="anchor"><image url="/hmstatic/images/invoice-pay.png" url-type="plain"/></link>
-                    <link text="Accounting" url="Accounting" link-type="anchor"/>
+                    <link url="Supplier" link-type="anchor"><image url="/hmstatic/images/wiki-documents7.png" url-type="plain"/></link>
+                    <link text="Suppliers" url="Supplier" link-type="anchor"/>
                 </container>
                 <container>
-                    <link url="Reports" link-type="anchor"><image url="/hmstatic/images/reports-dollar116.png" url-type="plain"/></link>
-                    <link text="Reports" url="Reports" link-type="anchor"/>
+                    <link url="Order" link-type="anchor" parameter-map="[customerRoleTypeId:'OrgInternal']">
+                        <image url="/popc/static/images/Purchasing.png" url-type="plain"/></link>
+                    <link text="Purchasing" url="Order" link-type="anchor" parameter-map="[customerRoleTypeId:'OrgInternal']"/>
+                </container>
+                <container>
+                    <link url="Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']">
+                        <image url="/popc/static/images/Receiving.png" url-type="plain"/></link>
+                    <link text="Receiving" url="Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']"/>
+                </container>
+                <container>
+                    <link url="Asset" link-type="anchor"><image url="/popc/static/images/Inventory.png" url-type="plain"/></link>
+                    <link text="Inventory" url="Asset" link-type="anchor"/>
                 </container>
 
-                <label text="Setup" type="h2"/>
                 <container>
-                    <link url="Vendor" link-type="anchor"><image url="/hmstatic/images/vendor-person25.png" url-type="plain"/></link>
-                    <link text="Vendor(s)" url="Vendor" link-type="anchor"/>
+                    <link url="Customer" link-type="anchor"><image url="/hmstatic/images/wiki-documents7.png" url-type="plain"/></link>
+                    <link text="Customers" url="Customer" link-type="anchor"/>
+                </container>
+                <container>
+                    <link url="Order" link-type="anchor" parameter-map="[vendorRoleTypeId:'OrgInternal']">
+                        <image url="/popc/static/images/Sales.png" url-type="plain"/></link>
+                    <link text="Sales" url="Order" link-type="anchor" parameter-map="[vendorRoleTypeId:'OrgInternal']"/>
+                </container>
+                <container>
+                    <link url="Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']">
+                        <image url="/popc/static/images/Shipping.png" url-type="plain"/></link>
+                    <link text="Shipping" url="Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']"/>
                 </container>
             </panel-left>
 
@@ -95,6 +122,34 @@ along with this software (see the LICENSE.md file). If not, see
                     </default-field></field>
                 </form-list>
             </panel-center>
+
+            <panel-right>
+                <label text="Manage" type="h3"/>
+                <container>
+                    <link url="Catalog" link-type="anchor"><image url="/hmstatic/images/wiki-documents7.png" url-type="plain"/></link>
+                    <link text="Catalog" url="Catalog" link-type="anchor"/>
+                </container>
+                <container>
+                    <link url="Facility" link-type="anchor"><image url="/hmstatic/images/wiki-documents7.png" url-type="plain"/></link>
+                    <link text="Facilities" url="Facility" link-type="anchor"/>
+                </container>
+                <container>
+                    <link url="Asset" link-type="anchor"><image url="/hmstatic/images/wiki-documents7.png" url-type="plain"/></link>
+                    <link text="Assets" url="Asset" link-type="anchor"/>
+                </container>
+                <container>
+                    <link url="Vendor" link-type="anchor"><image url="/popc/static/images/Vendor.png" url-type="plain"/></link>
+                    <link text="Vendor(s)" url="Vendor" link-type="anchor"/>
+                </container>
+                <container>
+                    <link url="Accounting" link-type="anchor"><image url="/popc/static/images/Accounting.png" url-type="plain"/></link>
+                    <link text="Accounting" url="Accounting" link-type="anchor"/>
+                </container>
+                <container>
+                    <link url="Reports" link-type="anchor"><image url="/popc/static/images/Reports.png" url-type="plain"/></link>
+                    <link text="Reports" url="Reports" link-type="anchor"/>
+                </container>
+            </panel-right>
         </container-panel>
     </widgets>
 </screen>
