@@ -127,15 +127,15 @@ along with this software (see the LICENSE.md file). If not, see
             <panel-right>
                 <label text="Manage" type="h3"/>
                 <container>
-                    <link url="Catalog" link-type="anchor"><image url="/hmstatic/images/wiki-documents7.png" url-type="plain"/></link>
+                    <link url="Catalog" link-type="anchor"><image url="/popc/static/images/Catalog.png" url-type="plain"/></link>
                     <link text="Catalog" url="Catalog" link-type="anchor"/>
                 </container>
                 <container>
-                    <link url="Facility" link-type="anchor"><image url="/hmstatic/images/wiki-documents7.png" url-type="plain"/></link>
+                    <link url="Facility" link-type="anchor"><image url="/popc/static/images/Facility.png" url-type="plain"/></link>
                     <link text="Facilities" url="Facility" link-type="anchor"/>
                 </container>
                 <container>
-                    <link url="Asset" link-type="anchor"><image url="/hmstatic/images/wiki-documents7.png" url-type="plain"/></link>
+                    <link url="Asset" link-type="anchor"><image url="/popc/static/images/Asset.png" url-type="plain"/></link>
                     <link text="Assets" url="Asset" link-type="anchor"/>
                 </container>
                 <container>
