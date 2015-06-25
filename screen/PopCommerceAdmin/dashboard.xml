@@ -49,7 +49,7 @@ along with this software (see the LICENSE.md file). If not, see
             <panel-left>
                 <label text="Operate" type="h3"/>
                 <container>
-                    <link url="Supplier" link-type="anchor"><image url="/hmstatic/images/wiki-documents7.png" url-type="plain"/></link>
+                    <link url="Supplier" link-type="anchor"><image url="/popc/static/images/Supplier.png" url-type="plain"/></link>
                     <link text="Suppliers" url="Supplier" link-type="anchor"/>
                 </container>
                 <container>
@@ -69,7 +69,7 @@ along with this software (see the LICENSE.md file). If not, see
                 </container>
 
                 <container>
-                    <link url="Customer" link-type="anchor"><image url="/hmstatic/images/wiki-documents7.png" url-type="plain"/></link>
+                    <link url="Customer" link-type="anchor"><image url="/popc/static/images/Customer.png" url-type="plain"/></link>
                     <link text="Customers" url="Customer" link-type="anchor"/>
                 </container>
                 <container>
