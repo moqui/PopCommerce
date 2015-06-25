@@ -1,0 +1,25 @@
+
+POP Commerce - Retail and Wholesale ERP and eCommerce - Release Notes
+
+===========================================================================
+Release 1.0.0 - TBD
+===========================================================================
+
+POP Commerce 1.0.0 is the initial release of POP Commerce, an ERP and
+eCommerce package for Retail and Wholesale organizations.
+
+This release is based on Moqui Framework version TODO, Mantle Business
+Artifacts version TODO, and HiveMind version TODO.
+
+New Features:
+
+- New POP Commerce Admin Application with operations screens for Suppliers,
+  Purchasing, Receiving, Inventory, Customers, Sales, and Shipping and
+  manage screens for Catalog, Facilities, Assets, Vendors, Accounting
+  (invoice, payment, balance account, GL, etc), and Reports
+- Dashboard screen with icon images from flaticon.com
+
+Bug Fixes:
+
+TODO
+
