@@ -17,9 +17,17 @@ New Features:
   Purchasing, Receiving, Inventory, Customers, Sales, and Shipping and
   manage screens for Catalog, Facilities, Assets, Vendors, Accounting
   (invoice, payment, balance account, GL, etc), and Reports
-- Dashboard screen with icon images from flaticon.com
-
-Bug Fixes:
-
-TODO
-
+- Admin Dashboard screen with icon images from flaticon.com
+- eCommerce Application
+  - Find products by category and/or faceted search (built on Moqui
+    DataDocument and DataFeed with search using Elasticsearch)
+  - Product detail screen
+  - Cart and checkout process screens
+  - Customer profile and order history screens
+  - Flexible pricing plus price rules in Drools
+  - Shipping calculation through Mantle shipping interfaces, by default
+    uses a Drools rule set in a decision table spreadsheet and can also get
+    shipping charges through external APIs
+  - Tax calculation through Mantle tax interfaces
+  - Payment processing through Mantle payment processor interfaces,
+    Authorize.net AIM and CIM integrations currently available
