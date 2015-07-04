@@ -65,6 +65,13 @@ along with this software (see the LICENSE.md file). If not, see
 
     <transition-include name="getProductList" location="component://PopCommerce/screen/PopCommerceAdmin/Catalog/Product/EditAssocs.xml"/>
 
+    <transition name="PrintOrder.pdf">
+        <default-response url="${ec.web.getWebappRootUrl(false, null)}/fop/apps/${appRoot}/Order/PrintOrder" url-type="plain">
+            <parameter name="renderMode" value="xsl-fo"/><parameter name="pageNoLimit" value="true"/>
+            <parameter name="orderId"/><parameter name="filename" value="Order-${orderId}.pdf"/>
+        </default-response>
+    </transition>
+
     <actions>
         <service-call name="mantle.order.OrderServices.get#OrderDisplayInfo" in-map="[orderId:orderId]" out-map="context"/>
         <set field="firstPartInfo" from="orderPartInfoList[0]"/>
@@ -116,6 +123,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </section>
 
                     <link url="cloneOrder" text="Clone Order" parameter-map="[baseOrderId:orderId]"/>
+                    <link url="PrintOrder.pdf" text="Order PDF"/>
 
                     <section-iterate name="InvoiceLinks" list="invoiceIdSet" entry="invoiceId"><widgets>
                         <link url="editInvoice" text="Invoice #${invoiceId}" link-type="anchor-button"/>
