@@ -17,6 +17,8 @@ New Features:
   Purchasing, Receiving, Inventory, Customers, Sales, and Shipping and
   manage screens for Catalog, Facilities, Assets, Vendors, Accounting
   (invoice, payment, balance account, GL, etc), and Reports
+- PDF documents (from XSL-FO templates) for Invoice, Payment Check and
+  Payment Detail, Financial Account Statement, Order
 - Admin Dashboard screen with icon images from flaticon.com
 - eCommerce Application
   - Find products by category and/or faceted search (built on Moqui
