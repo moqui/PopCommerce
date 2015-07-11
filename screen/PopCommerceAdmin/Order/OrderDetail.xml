@@ -385,7 +385,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <container-box>
                             <box-header><label text="Choose a Shipping Address" type="h5"/></box-header>
                             <box-toolbar>
-                                <dynamic-dialog id="UpdatePostalInfo" button-text="Add Shipping Address"
+                                <dynamic-dialog id="AddPostalInfo" button-text="Add Shipping Address"
                                         transition="updateContactInfo" width="800"
                                         parameter-map="[partyId:customerPartyId, postalContactMechPurposeId:'PostalShippingDest', orderId:orderId]"/>
                             </box-toolbar>
