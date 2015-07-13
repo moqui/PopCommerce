@@ -23,10 +23,9 @@ along with this software (see the LICENSE.md file). If not, see
     <parameter name="emailContactMechId"/>
     <parameter name="emailContactMechPurposeId"/>
 
-    <transition name="storeContactInfo">
-        <service-call name="mantle.party.ContactServices.store#PartyContactInfo"/>
-        <default-response url=".."/>
-    </transition>
+    <transition name="storeContactInfo"><service-call name="mantle.party.ContactServices.store#PartyContactInfo"/>
+        <default-response url=".."/></transition>
+    <transition-include name="getGeoCountryStates" location="component://mantle-usl/template/party/PartyForms.xml"/>
 
     <actions>
         <if condition="postalContactMechId || telecomContactMechId || emailContactMechId">
