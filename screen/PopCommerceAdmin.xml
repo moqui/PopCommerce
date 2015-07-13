@@ -15,8 +15,6 @@ along with this software (see the LICENSE.md file). If not, see
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd">
     <always-actions><set field="appRoot" value="PopcAdmin"/></always-actions>
     <subscreens default-item="dashboard" always-use-full-path="true">
-        <subscreens-item name="Vendor" location="component://HiveMind/screen/HiveMindAdmin/Vendor.xml"
-                menu-index="20" menu-title="Vendors"/>
         <subscreens-item name="Accounting" location="component://HiveMind/screen/HiveMindAdmin/Accounting.xml"
                 menu-index="21" menu-title="Accounting"/>
     </subscreens>
