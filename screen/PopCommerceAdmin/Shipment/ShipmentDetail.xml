@@ -66,6 +66,19 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="packItemSource"><service-call name="mantle.shipment.ShipmentServices.pack#ShipmentItemSource"/><default-response url="."/></transition>
     <transition name="updatePackage"><service-call name="update#mantle.shipment.ShipmentPackage"/><default-response url="."/></transition>
 
+    <transition name="ShipmentPick.pdf">
+        <default-response url="${ec.web.getWebappRootUrl(false, null)}/fop/apps/${appRoot}/Shipment/ShipmentPick" url-type="plain">
+            <parameter name="renderMode" value="xsl-fo"/><parameter name="pageNoLimit" value="true"/>
+            <parameter name="shipmentId"/><parameter name="filename" value="ShipmentPick-${shipmentId}.pdf"/>
+        </default-response>
+    </transition>
+    <transition name="ShipmentPack.pdf">
+        <default-response url="${ec.web.getWebappRootUrl(false, null)}/fop/apps/${appRoot}/Shipment/ShipmentPack" url-type="plain">
+            <parameter name="renderMode" value="xsl-fo"/><parameter name="pageNoLimit" value="true"/>
+            <parameter name="shipmentId"/><parameter name="filename" value="ShipmentPack-${shipmentId}.pdf"/>
+        </default-response>
+    </transition>
+
     <actions>
         <service-call name="mantle.shipment.ShipmentServices.get#ShipmentDisplayInfo" in-map="[shipmentId:shipmentId]" out-map="context"/>
         <set field="shipmentRouteSegment" from="shipmentRouteSegmentList?.first"/>
@@ -107,18 +120,24 @@ along with this software (see the LICENSE.md file). If not, see
                         <link url="pickShipment" text="Set Picked" link-type="hidden-form"><parameter name="shipmentId"/></link>
                         <link url="packShipment" text="Set Packed" link-type="hidden-form" condition="allItemsPacked"><parameter name="shipmentId"/></link>
                         <link url="cancelShipment" text="Cancel Shipment" link-type="hidden-form"><parameter name="shipmentId"/></link>
+                        <link url="ShipmentPick.pdf" text="Pick PDF"/>
+                        <link url="ShipmentPack.pdf" text="Pack PDF"/>
                     </widgets>
                 </section>
                 <section name="ShipPickedSection" condition="shipment.statusId == 'ShipPicked'">
                     <widgets>
                         <link url="packShipment" text="Set Packed" link-type="hidden-form" condition="allItemsPacked"><parameter name="shipmentId"/></link>
                         <link url="cancelShipment" text="Cancel Shipment" link-type="hidden-form"><parameter name="shipmentId"/></link>
+                        <link url="ShipmentPick.pdf" text="Pick PDF"/>
+                        <link url="ShipmentPack.pdf" text="Pack PDF"/>
                     </widgets>
                 </section>
                 <section name="ShipPackedSection" condition="shipment.statusId == 'ShipPacked'">
                     <widgets>
                         <link url="shipShipment" text="Set Shipped" link-type="hidden-form"><parameter name="shipmentId"/></link>
                         <link url="deliverShipment" text="Set Delivered" link-type="hidden-form"><parameter name="shipmentId"/></link>
+                        <link url="ShipmentPick.pdf" text="Pick PDF"/>
+                        <link url="ShipmentPack.pdf" text="Pack PDF"/>
                     </widgets>
                 </section>
                 <section name="ShipShippedSection" condition="shipment.statusId == 'ShipShipped'">
