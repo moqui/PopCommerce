@@ -35,24 +35,6 @@ along with this software (see the LICENSE.md file). If not, see
 
     <subscreens default-item="Home"/>
 
-    <pre-actions>
-        <set field="html_scripts" from="new LinkedHashSet(['/assets/lib/jquery/jquery.min.js',
-            '/assets/lib/jquery-ui/jquery-ui.min.js', '/assets/lib/bootstrap/js/bootstrap.min.js',
-            '/assets/lib/form/jquery.form.js'])"/>
-        <set field="footer_scripts" from="new LinkedHashSet([
-            '/assets/lib/datetimepicker/js/bootstrap-datetimepicker.min.js',
-            '/assets/lib/jquery-validation-1.11.1/dist/jquery.validate.min.js',
-            '/assets/lib/chosen/chosen.jquery.min.js',
-            '/assets/lib/autosize/jquery.autosize.min.js',
-            '/assets/lib/jasny/js/jasny-bootstrap.min.js',
-            '/js/jquery-jeditable-1.7.1.min.js',
-            '/js/jstree-3.0.3/jstree.min.js',
-            '/assets/js/main.min.js','/assets/js/minHeight.js'])"/>
-
-        <!-- See PopCommerceAaaSetupData.xml for CSS references -->
-        <set field="html_stylesheets" from="new LinkedHashSet()"/>
-    </pre-actions>
-    
     <actions>
         <service-call name="mantle.order.OrderServices.get#OrderItemsTotalCount" in-map="[orderId:cartOrderId]" out-map="context"/>
     </actions>
