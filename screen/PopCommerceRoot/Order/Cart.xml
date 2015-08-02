@@ -24,7 +24,9 @@ along with this software (see the LICENSE.md file). If not, see
         <set field="html_title" value="Shopping Cart${cartOrderId ? ' for Order #' + cartOrderId : ''}"/>
     </pre-actions>
     <actions>
-        <service-call name="mantle.order.OrderServices.get#OrderDisplayInfo" in-map="[orderId:cartOrderId]" out-map="context"/>
+        <if condition="cartOrderId">
+            <service-call name="mantle.order.OrderServices.get#OrderDisplayInfo" in-map="[orderId:cartOrderId]" out-map="context"/>
+        </if>
     </actions>
     <widgets>
         <form-list name="CartItems" list="orderItemList" list-entry="orderItem" multi="true" transition="updateCartItems">
