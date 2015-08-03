@@ -37,6 +37,10 @@ along with this software (see the LICENSE.md file). If not, see
                     <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
                         <set field="enumTypeId" value="ProductPriceType"/><set field="noCurrentSelectedKey" value="PptCurrent"/></widget-template-include>
                 </default-field></field>
+                <field name="pricePurposeEnumId"><default-field title="Purpose">
+                    <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                        <set field="enumTypeId" value="ProductPricePurpose"/><set field="noCurrentSelectedKey" value="PppPurchase"/></widget-template-include>
+                </default-field></field>
                 <field name="vendorPartyId"><default-field title="Vendor">
                     <text-line ac-transition="getPartyList" ac-min-length="2" size="50" parameter-map="[roleTypeId:'Vendor,Supplier']"/>
                 </default-field></field>
@@ -48,11 +52,18 @@ along with this software (see the LICENSE.md file). If not, see
                 
                 <field name="minQuantity"><default-field><text-line size="10" default-value="1"/></default-field></field>
                 <field name="price"><default-field><text-line size="10"/></default-field></field>
-                <field name="priceUomId"><default-field><drop-down no-current-selected-key="USD">
+                <field name="priceUomId"><default-field><drop-down no-current-selected-key="USD" style="chosen-wide">
                     <entity-options key="${uomId}" text="${description} [${uomId}]">
                         <entity-find entity-name="moqui.basic.Uom">
                             <econdition field-name="uomTypeEnumId" value="UT_CURRENCY_MEASURE"/>
                             <order-by field-name="description"/>
+                        </entity-find></entity-options>
+                </drop-down></default-field></field>
+                <field name="termUomId"><default-field><drop-down allow-empty="true" style="chosen-wider">
+                    <entity-options key="${uomId}" text="${typeDescription}: ${description}">
+                        <entity-find entity-name="moqui.basic.UomAndType">
+                            <econdition field-name="uomTypeEnumId" operator="in" value="UT_TIME_FREQ_MEASURE,UT_DATA_MEASURE,UT_ENERGY_MEASURE,UT_VOLUME_LIQ_MEAS"/>
+                            <order-by field-name="typeDescription,description"/>
                         </entity-find></entity-options>
                 </drop-down></default-field></field>
 
@@ -67,11 +78,18 @@ along with this software (see the LICENSE.md file). If not, see
                 <default-field><hidden/></default-field>
             </field>
             <field name="priceTypeEnumId">
-                <header-field show-order-by="true">
+                <header-field title="Type" show-order-by="true">
                     <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
                         <set field="enumTypeId" value="ProductPriceType"/><set field="allowEmpty" value="true"/><set field="style" value=" "/></widget-template-include>
                 </header-field>
-                <default-field title="Type"><display-entity entity-name="moqui.basic.Enumeration"/></default-field>
+                <default-field><display-entity entity-name="moqui.basic.Enumeration"/></default-field>
+            </field>
+            <field name="pricePurposeEnumId">
+                <header-field title="Purpose" show-order-by="true">
+                    <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                        <set field="enumTypeId" value="ProductPricePurpose"/><set field="allowEmpty" value="true"/><set field="style" value=" "/></widget-template-include>
+                </header-field>
+                <default-field><display-entity entity-name="moqui.basic.Enumeration"/></default-field>
             </field>
 
             <field name="vendorPartyId">
@@ -108,16 +126,20 @@ along with this software (see the LICENSE.md file). If not, see
                 <header-field title="Currency" show-order-by="true"/>
                 <default-field><display/></default-field>
             </field>
+            <field name="termUomId">
+                <header-field title="Term" show-order-by="true"/>
+                <default-field><display-entity entity-name="moqui.basic.Uom"/></default-field>
+            </field>
 
             <field name="submitButton">
                 <header-field title="Find"><submit/></header-field>
                 <default-field title="Update"><submit/></default-field>
             </field>
 
-            <form-list-column><field-ref name="priceTypeEnumId"/></form-list-column>
+            <form-list-column><field-ref name="priceTypeEnumId"/><field-ref name="pricePurposeEnumId"/></form-list-column>
             <form-list-column><field-ref name="vendorPartyId"/><field-ref name="customerPartyId"/></form-list-column>
             <form-list-column><field-ref name="fromDate"/><field-ref name="thruDate"/></form-list-column>
-            <form-list-column><field-ref name="minQuantity"/></form-list-column>
+            <form-list-column><field-ref name="minQuantity"/><field-ref name="termUomId"/></form-list-column>
             <form-list-column><field-ref name="price"/><field-ref name="priceUomId"/></form-list-column>
             <form-list-column><field-ref name="submitButton"/></form-list-column>
         </form-list>
