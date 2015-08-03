@@ -35,6 +35,13 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response url="."/></transition>
     <transition name="editFeature"><default-response url="../../Feature/EditFeature"/></transition>
 
+    <transition name="createProductDimension"><service-call name="create#mantle.product.ProductDimension"/>
+        <default-response url="."/></transition>
+    <transition name="updateProductDimension"><service-call name="update#mantle.product.ProductDimension"/>
+        <default-response url="."/></transition>
+    <transition name="deleteProductDimension"><service-call name="delete#mantle.product.ProductDimension"/>
+        <default-response url="."/></transition>
+
     <actions>
         <entity-find-one entity-name="mantle.product.Product" value-field="product"/>
 
@@ -45,6 +52,9 @@ along with this software (see the LICENSE.md file). If not, see
         <entity-find entity-name="mantle.product.feature.ProductFeatureAndAppl" list="pfaaList">
             <date-filter/><econdition field-name="productId"/>
             <order-by field-name="productFeatureTypeEnumId"/><order-by field-name="description"/></entity-find>
+
+        <entity-find entity-name="mantle.product.ProductDimensionAndType" list="dimensionList">
+            <econdition field-name="productId"/><order-by field-name="description"/></entity-find>
     </actions>
     <widgets>
         <container-dialog id="CloneProductDialog" button-text="Clone Product">
@@ -66,6 +76,10 @@ along with this software (see the LICENSE.md file). If not, see
                     <field name="productTypeEnumId"><default-field title="Type">
                         <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
                             <set field="enumTypeId" value="ProductType"/></widget-template-include>
+                    </default-field></field>
+                    <field name="productClassEnumId"><default-field title="Class">
+                        <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                            <set field="enumTypeId" value="ProductClass"/><set field="allowEmpty" value="true"/></widget-template-include>
                     </default-field></field>
 
                     <field name="amountFixed"><default-field title="Amount"><text-line size="10" format="0.######"/></default-field></field>
@@ -164,6 +178,55 @@ along with this software (see the LICENSE.md file). If not, see
                             <field name="fromDate"><default-field><hidden/></default-field></field>
                             <field name="thruDate" entry-name="ec.user.nowTimestamp"><default-field><hidden/></default-field></field>
                             <field name="submitButton"><default-field title="Unapply"><submit/></default-field></field>
+                        </form-list>
+                    </box-body>
+                </container-box>
+
+                <container-box>
+                    <box-header><label text="Dimensions" type="h5"/></box-header>
+                    <box-toolbar>
+                        <container-dialog id="AddDimensionDialog" button-text="Add Dimension">
+                            <form-single name="AddDimensionForm" transition="createProductDimension">
+                                <field name="productId"><default-field><hidden/></default-field></field>
+                                <field name="dimensionTypeId"><default-field title="Type">
+                                    <drop-down style="chosen-wider">
+                                        <entity-options key="${dimensionTypeId}" text="${description}">
+                                            <entity-find entity-name="mantle.product.ProductDimensionType">
+                                                <order-by field-name="description"/></entity-find>
+                                        </entity-options></drop-down>
+                                </default-field></field>
+                                <field name="value"><default-field><text-line size="8"/></default-field></field>
+                                <field name="valueUomId"><default-field title="Unit">
+                                    <drop-down allow-empty="true">
+                                        <entity-options key="${uomId}" text="${typeDescription}: ${description}">
+                                            <entity-find entity-name="moqui.basic.UomAndType">
+                                                <order-by field-name="typeDescription,description"/>
+                                            </entity-find></entity-options>
+                                    </drop-down>
+                                </default-field></field>
+                                <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
+                            </form-single>
+                        </container-dialog>
+                    </box-toolbar>
+                    <box-body>
+                        <form-list name="DimensionsForm" list="dimensionList" transition="updateProductDimension">
+                            <field name="productId"><default-field><hidden/></default-field></field>
+                            <field name="dimensionTypeId"><default-field><hidden/></default-field></field>
+                            <field name="description"><default-field title="Type"><display/></default-field></field>
+                            <field name="value"><default-field><text-line size="8"/></default-field></field>
+                            <field name="valueUomId"><default-field title="Unit">
+                                <drop-down allow-empty="true">
+                                    <entity-options key="${uomId}" text="${typeDescription}: ${description}">
+                                        <entity-find entity-name="moqui.basic.UomAndType">
+                                            <order-by field-name="typeDescription,description"/>
+                                        </entity-find></entity-options>
+                                </drop-down>
+                            </default-field></field>
+                            <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+                            <field name="deleteButton"><default-field title="">
+                                <link url="deleteProductDimension" text="Delete"
+                                        parameter-map="[productId:productId, dimensionTypeId:dimensionTypeId]"/>
+                            </default-field></field>
                         </form-list>
                     </box-body>
                 </container-box>
