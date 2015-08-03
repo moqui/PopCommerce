@@ -54,6 +54,18 @@ along with this software (see the LICENSE.md file). If not, see
                     vendorPartyId:vendorPartyId, customerPartyId:customerPartyId]"/>
         <set field="price" from="priceMap?.price"/>
         <set field="priceUomId" from="priceMap?.priceUomId"/>
+
+        <entity-find-one entity-name="moqui.basic.Enumeration" value-field="productClassEnum">
+            <field-map field-name="enumId" from="product.productClassEnumId"/></entity-find-one>
+
+        <entity-find entity-name="mantle.product.feature.ProductFeatureAndAppl" list="pfaaList">
+            <date-filter/><econdition field-name="productId"/>
+            <econdition field-name="applTypeEnumId" value="PfatStandard"/>
+            <order-by field-name="productFeatureTypeEnumId"/><order-by field-name="description"/>
+        </entity-find>
+
+        <entity-find entity-name="mantle.product.ProductDimensionAndType" list="dimensionList">
+            <econdition field-name="productId"/><order-by field-name="description"/></entity-find>
     </actions>
     <widgets>
         <!-- <label text="${product.productName ?: ''}" type="h2"/> -->
@@ -70,7 +82,38 @@ along with this software (see the LICENSE.md file). If not, see
             </field-layout>
         </form-single>
 
-         <container-dialog id="AddProductReviewDialog" button-text="Add Review" width="800">
+        <label text="Class: ${productClassEnum.description}" condition="productClassEnum" type="strong"/>
+
+        <container-row>
+            <row-col lg="6" md="6">
+                <container-box>
+                    <box-header><label text="Features" type="h5"/></box-header>
+                    <box-body>
+                        <form-list name="FeaturesForm" list="pfaaList" skip-form="true" skip-header="true">
+                            <field name="productFeatureTypeEnumId"><default-field title="Type">
+                                <display-entity entity-name="moqui.basic.Enumeration"/></default-field></field>
+                            <field name="description"><default-field title="Feature"><display/></default-field></field>
+                        </form-list>
+                    </box-body>
+                </container-box>
+            </row-col>
+            <row-col lg="6" md="6">
+                <container-box>
+                    <box-header><label text="Dimensions" type="h5"/></box-header>
+                    <box-body>
+                        <form-list name="DimensionsForm" list="dimensionList" skip-form="true" skip-header="true">
+                            <field name="description"><default-field title="Type"><display/></default-field></field>
+                            <field name="value"><default-field><display/></default-field></field>
+                            <field name="valueUomId"><default-field title="Unit">
+                                <display-entity entity-name="moqui.basic.Uom"/>
+                            </default-field></field>
+                        </form-list>
+                    </box-body>
+                </container-box>
+            </row-col>
+        </container-row>
+
+        <container-dialog id="AddProductReviewDialog" button-text="Add Review" width="800">
             <form-single name="AddProductReview" transition="createProductReview" background-submit="true"
                     background-reload-id="ProductReviewListContainer" background-message="Thanks for submitting review"
                     background-hide-id="AddProductReviewDialog">
