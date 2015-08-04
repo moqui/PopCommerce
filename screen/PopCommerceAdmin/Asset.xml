@@ -17,6 +17,6 @@ along with this software (see the LICENSE.md file). If not, see
 
     <subscreens default-item="FindAsset"/>
     <widgets>
-        <subscreens-panel id="AssetPanel" type="popup"/>
+        <subscreens-panel id="AssetPanel" type="tab"/>
     </widgets>
 </screen>
