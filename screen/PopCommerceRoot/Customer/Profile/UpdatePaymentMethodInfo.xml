@@ -19,10 +19,8 @@ along with this software (see the LICENSE.md file). If not, see
     <parameter name="paymentMethodId"/>
     <parameter name="paymentMethodTypeEnumId"/>
 
-    <transition name="storePaymentMethodInfo">
-        <service-call name="mantle.account.PaymentMethodServices.store#PaymentMethodInfo"/>
-        <default-response url=".."/>
-    </transition>
+    <transition name="storePaymentMethodInfo"><service-call name="mantle.account.PaymentMethodServices.store#PaymentMethodInfo"/>
+        <default-response url=".."/></transition>
 
     <actions>
         <if condition="paymentMethodId">

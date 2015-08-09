@@ -15,10 +15,8 @@ along with this software (see the LICENSE.md file). If not, see
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         require-authentication="true">
 
-    <transition name="setOrderBillingShippingInfo">
-        <service-call name="mantle.order.OrderServices.set#OrderBillingShippingInfo"/>
-        <default-response url="../Review"/>
-    </transition>
+    <transition name="setOrderBillingShippingInfo"><service-call name="mantle.order.OrderServices.set#OrderBillingShippingInfo"/>
+        <default-response url="../Review"/></transition>
 
     <transition name="updateContactInfo"><default-response url="UpdateContactInfo"/></transition>
     <transition name="updatePaymentMethodInfo"><default-response url="UpdatePaymentMethodInfo"/></transition>
@@ -43,11 +41,9 @@ along with this software (see the LICENSE.md file). If not, see
                     postalContactMechId:shippingContactListInfo.postalAddressList?.first?.postalContactMechId]"/>
 
         <entity-find-one entity-name="mantle.order.OrderHeader" value-field="orderHeader">
-            <field-map field-name="orderId" from="cartOrderId"/>
-        </entity-find-one>
+            <field-map field-name="orderId" from="cartOrderId"/></entity-find-one>
         <entity-find-one entity-name="mantle.order.OrderPart" value-field="orderPart">
-            <field-map field-name="orderId" from="cartOrderId"/>
-        </entity-find-one>
+            <field-map field-name="orderId" from="cartOrderId"/></entity-find-one>
         <entity-find entity-name="mantle.account.payment.Payment" list="paymentList">
             <econdition field-name="orderId" from="orderPart.orderId"/>
             <econdition field-name="orderPartSeqId" from="orderPart.orderPartSeqId"/>

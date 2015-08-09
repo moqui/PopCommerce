@@ -28,15 +28,12 @@ along with this software (see the LICENSE.md file). If not, see
 
     <actions>
         <entity-find entity-name="ProductStoreCategory" list="pscList" cache="true">
-            <date-filter/>
-            <econdition field-name="productStoreId"/>
+            <date-filter/><econdition field-name="productStoreId"/>
             <econdition field-name="storeCategoryTypeEnumId" value="PsctHomePage"/>
         </entity-find>
         <entity-find entity-name="ProductCategoryMemberProduct" list="pcmpList" cache="true">
-            <date-filter/>
-            <econdition field-name="productCategoryId" from="pscList?.getAt(0)?.productCategoryId"/>
-            <order-by field-name="sequenceNum"/>
-            <order-by field-name="productName"/>
+            <date-filter/><econdition field-name="productCategoryId" from="pscList?.getAt(0)?.productCategoryId"/>
+            <order-by field-name="sequenceNum"/><order-by field-name="productName"/>
         </entity-find>
     </actions>
     <widgets>

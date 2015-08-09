@@ -11,25 +11,17 @@ You should have received a copy of the CC0 Public Domain Dedication
 along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
-<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         require-authentication="true">
 
-    <transition name="updateUser">
-        <service-call name="mantle.party.PartyServices.update#Account" in-map="context"/>
-        <default-response url="."/>
-    </transition>
-    <transition name="changePassword">
-        <service-call name="org.moqui.impl.UserServices.update#Password"/>
-        <default-response url="."/>
-        <error-response url="."/>
-    </transition>
+    <transition name="updateUser"><service-call name="mantle.party.PartyServices.update#Account" in-map="context"/>
+        <default-response url="."/></transition>
+    <transition name="changePassword"><service-call name="org.moqui.impl.UserServices.update#Password"/>
+        <default-response url="."/><error-response url="."/></transition>
 
     <transition name="updateContactInfo"><default-response url="UpdateContactInfo"/></transition>
-    <transition name="removeContactInfo">
-        <service-call name="mantle.party.ContactServices.delete#PartyContactMech"/>
-        <default-response url="."/>
-    </transition>
+    <transition name="removeContactInfo"><service-call name="mantle.party.ContactServices.delete#PartyContactMech"/>
+        <default-response url="."/></transition>
 
     <transition name="updatePaymentMethodInfo"><default-response url="UpdatePaymentMethodInfo"/></transition>
     <transition name="removePaymentMethodInfo">

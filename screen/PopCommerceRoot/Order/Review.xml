@@ -20,9 +20,7 @@ along with this software (see the LICENSE.md file). If not, see
             <service-call name="mantle.order.OrderServices.place#Order" in-map="[orderId:cartOrderId]"/>
             <script>ec.web.sessionAttributes.remove("cartOrderId")</script>
         </actions>
-        <default-response url="../../Customer/OrderDetail">
-            <parameter name="orderId" from="cartOrderId"/>
-        </default-response>
+        <default-response url="../../Customer/OrderDetail"><parameter name="orderId" from="cartOrderId"/></default-response>
     </transition>
 
     <pre-actions>

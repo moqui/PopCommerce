@@ -15,9 +15,7 @@ along with this software (see the LICENSE.md file). If not, see
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
         require-authentication="true">
 
-    <transition name="orderDetail">
-        <default-response url="../OrderDetail"/>
-    </transition>
+    <transition name="orderDetail"><default-response url="../OrderDetail"/></transition>
 
     <actions>
         <entity-find entity-name="mantle.order.OrderHeaderAndPart" list="orderList">
