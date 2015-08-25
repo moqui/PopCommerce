@@ -18,6 +18,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="Supplier"><default-response url="../Supplier"/></transition>
     <transition name="Customer"><default-response url="../Customer"/></transition>
     <transition name="Order"><default-response url="../Order"/></transition>
+    <transition name="Picking"><default-response url="../Picking"/></transition>
     <transition name="Shipment"><default-response url="../Shipment"/></transition>
 
     <transition name="Catalog"><default-response url="../Catalog"/></transition>
@@ -76,6 +77,11 @@ along with this software (see the LICENSE.md file). If not, see
                     <link url="Order" link-type="anchor" parameter-map="[vendorRoleTypeId:'OrgInternal']">
                         <image url="/popc/static/images/Sales.png" url-type="plain"/></link>
                     <link text="Sales" url="Order" link-type="anchor" parameter-map="[vendorRoleTypeId:'OrgInternal']"/>
+                </container>
+                <container>
+                    <link url="Picking" link-type="anchor">
+                        <image url="/popc/static/images/Picking.png" url-type="plain"/></link>
+                    <link text="Picking" url="Picking" link-type="anchor"/>
                 </container>
                 <container>
                     <link url="Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']">
