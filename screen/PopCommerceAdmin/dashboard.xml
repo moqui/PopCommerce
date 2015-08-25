@@ -25,10 +25,10 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="Asset"><default-response url="../Asset"/></transition>
     <transition name="Vendor"><default-response url="../Vendor"/></transition>
     <transition name="Accounting"><default-response url="../Accounting"/></transition>
-    <transition name="Reports"><default-response url="//PopcAdmin/Accounting/Reports"/></transition>
+    <transition name="Reports"><default-response url="../Accounting/Reports"/></transition>
 
     <transition name="editVendor"><default-response url="../Vendor/EditVendor"/></transition>
-    <transition name="findInvoice"><default-response url="//PopcAdmin/Accounting/FindInvoice"/></transition>
+    <transition name="findInvoice"><default-response url="../Accounting/Invoice/FindInvoice"/></transition>
 
     <pre-actions>
         <script>html_scripts.add('/assets/lib/sparkline/jquery.sparkline.min.js')</script>
