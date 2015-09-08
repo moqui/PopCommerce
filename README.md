@@ -1,11 +1,12 @@
 
 ## POP (Plain-Old-Product) Commerce - Retail and Wholesale ERP and eCommerce
 
-**Commerce that Pops**
+[![license](http://img.shields.io/badge/license-CC0%201.0%20Universal-blue.svg)](https://github.com/moqui/PopCommerce/blob/master/LICENSE.md)
+[![release](http://img.shields.io/github/release/moqui/PopCommerce.svg)](https://github.com/moqui/PopCommerce/releases)
+[![commits since release](http://img.shields.io/github/commits-since/moqui/PopCommerce/1.0.0.svg)](https://github.com/moqui/PopCommerce/commits/master)
+[![downloads](http://img.shields.io/github/downloads/moqui/PopCommerce/latest/total.svg)](https://github.com/moqui/PopCommerce/releases)
 
-### Design Goals
-
-The goal for POP Commerce is to be a simple eCommerce application and an 
+POP Commerce is a simple eCommerce application and an 
 admin app to administer the eCommerce site and manage various aspects of a 
 retail or wholesale business, from customer service and fulfillment
 to accounting. The goal is for POP Commerce to include all functionality a 
