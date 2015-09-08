@@ -90,7 +90,7 @@ along with this software (see the LICENSE.md file). If not, see
             </field>
             <field name="combinedName">
                 <header-field title="Name" show-order-by="case-insensitive"><text-find size="20" hide-options="true"/></header-field>
-                <default-field><display text="${party.organizationName?:''}${party.firstName?:''} ${party.lastName?:''}"/></default-field>
+                <default-field><display text="PartyNameOnlyTemplate" text-map="party"/></default-field>
             </field>
             <field name="username"><default-field><display text="${userAccount?.username?:''}"/></default-field></field>
 
