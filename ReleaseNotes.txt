@@ -2,21 +2,26 @@
 POP Commerce - Retail and Wholesale ERP and eCommerce - Release Notes
 
 ===========================================================================
-Release 1.0.0 - TBD
+Release 1.0.0 - 11 Sep 2015
 ===========================================================================
 
 POP Commerce 1.0.0 is the initial release of POP Commerce, an ERP and
 eCommerce package for Retail and Wholesale organizations.
 
-This release is based on Moqui Framework version TODO, Mantle Business
-Artifacts version TODO, and HiveMind version TODO.
+This release is based on Moqui Framework version 1.5.3, Mantle Business
+Artifacts version 1.1.0, and HiveMind version 1.1.2.
 
-New Features:
+The eCommerce application currently has 16 screens and 20 forms. The admin
+application currently has 70 screens and 204 forms. POP Commerce has around
+7.3k lines of text, mostly in XML files (a small number in FTL). It reuses
+various screens from HiveMind, keeping the code base smaller.
 
-- New POP Commerce Admin Application with operations screens for Suppliers,
-  Purchasing, Receiving, Inventory, Customers, Sales, and Shipping and
-  manage screens for Catalog, Facilities, Assets, Vendors, Accounting
-  (invoice, payment, balance account, GL, etc), and Reports
+Features:
+
+- New POP Commerce Admin Application with operation screens for Suppliers,
+  Purchasing, Receiving, Inventory, Customers, Sales, Picking, and
+  Shipping, and manage screens for Catalog, Facilities, Assets, Vendors,
+  Accounting (invoice, payment, balance account, GL, etc), and Reports
 - PDF documents (from XSL-FO templates) for Invoice, Payment Check and
   Payment Detail, Financial Account Statement, Order
 - Admin Dashboard screen with icon images from flaticon.com
