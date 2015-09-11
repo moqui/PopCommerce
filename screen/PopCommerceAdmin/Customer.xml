@@ -12,7 +12,7 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.5.xsd"
-        default-menu-title="Customers" default-menu-index="3">
+        default-menu-title="Customers" default-menu-index="3" menu-image="/popc/static/images/Customer.png">
     <subscreens default-item="FindCustomer"/>
     <widgets>
         <subscreens-panel id="CustomerPanel" type="tab"/>
