@@ -17,7 +17,7 @@ along with this software (see the LICENSE.md file). If not, see
     <parameter name="productId" required="true"/>
 
     <transition name="editProduct"><default-response url="../EditProduct"/></transition>
-    <transition name="editFeatureGroup"><default-response url="."/></transition><!-- TODO: ../../FeatureGroup/EditFeatureGroup -->
+    <transition name="editFeatureGroup"><default-response url="../../FeatureGroup/EditFeatureGroup"/></transition>
 
     <transition name="getProductList">
         <actions>

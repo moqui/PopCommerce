@@ -16,7 +16,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <parameter name="facilityId" required="true"/>
 
-    <transition name="findAsset"><default-response url="."/></transition><!-- TODO ../../Inventory/FindAsset -->
+    <transition name="findAsset"><default-response url="../../Asset/FindAsset"/></transition>
     <transition name="createFacilityLocation"><service-call name="mantle.facility.FacilityServices.create#FacilityLocation"/>
         <default-response url="."/></transition>
     <transition name="updateFacilityLocation"><service-call name="update#mantle.facility.FacilityLocation"/>

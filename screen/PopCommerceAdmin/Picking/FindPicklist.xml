@@ -18,7 +18,7 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response url="../PicklistDetail"/></transition>
     <transition name="shipmentDetail"><default-response url="../../Shipment/ShipmentDetail"/></transition>
     <transition name="picklistDetail"><default-response url="../PicklistDetail"/></transition>
-    <transition name="equipmentDetail"><default-response url="."/></transition><!-- TODO EquipmentDetail once implemented -->
+    <transition name="equipmentDetail"><default-response url="../../Asset/AssetDetail"/></transition>
 
     <actions>
         <entity-find entity-name="mantle.work.effort.WorkEffortShipmentLoadFind" list="picklistList">

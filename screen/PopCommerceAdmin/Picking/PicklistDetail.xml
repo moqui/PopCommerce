@@ -25,7 +25,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="updateShipment"><service-call name="update#mantle.shipment.Shipment"/>
         <default-response url="."/></transition>
 
-    <transition name="equipmentDetail"><default-response url="."/></transition><!-- TODO EquipmentDetail once implemented -->
+    <transition name="equipmentDetail"><default-response url="../../Asset/AssetDetail"/></transition>
 
     <transition name="addAssetAssign"><service-call name="create#mantle.work.effort.WorkEffortAssetAssign"/>
         <default-response url="."/></transition>

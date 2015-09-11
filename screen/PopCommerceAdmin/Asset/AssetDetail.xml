@@ -24,6 +24,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="findTransactionEntry"><default-response url="//${appRoot}/Accounting/Transaction/FindTransactionEntry"/></transition>
 
     <transition-include name="getPartyList" location="component://mantle-usl/template/party/PartyForms.xml"/>
+    <transition-include name="getProductList" location="component://PopCommerce/screen/PopCommerceAdmin/Catalog/Product/EditAssocs.xml"/>
 
     <actions>
         <service-call name="mantle.product.AssetServices.get#AssetDisplayInfo" in-map="context" out-map="context"/>
@@ -84,7 +85,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <field name="acquireCostUomId"><default-field><display-entity entity-name="moqui.basic.Uom"/></default-field></field>
                     <field name="acquireCost"><default-field>
                         <text-line size="8"/>
-                        <link url="poDetail" text="PO #${asset.acquireOrderId?:'N/A'}" parameter-map="[orderId:asset.acquireOrderId]"
+                        <link url="orderDetail" text="PO #${asset.acquireOrderId?:'N/A'}" parameter-map="[orderId:asset.acquireOrderId]"
                               link-type="anchor" condition="asset.acquireOrderId"/>
                     </default-field></field>
                     <field name="salvageValue"><default-field><text-line size="8"/></default-field></field>

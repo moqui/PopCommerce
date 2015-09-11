@@ -16,7 +16,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <parameter name="partyId" required="true"/>
 
-    <transition name="findOrder"><default-response url="."/></transition><!-- TODO ../../Order/FindOrder -->
+    <transition name="findOrder"><default-response url="../../Order/FindOrder"/></transition>
     <transition name="updateParty"><service-call name="mantle.party.PartyServices.update#PartyDetail"/>
         <default-response url="."/></transition>
 

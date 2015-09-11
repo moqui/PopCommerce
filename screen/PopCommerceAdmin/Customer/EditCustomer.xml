@@ -17,7 +17,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <parameter name="partyId" required="true"/>
 
-    <transition name="findOrder"><default-response url="."/></transition><!-- TODO ../../Order/FindOrder -->
+    <transition name="findOrder"><default-response url="../../Order/FindOrder"/></transition>
     <transition name="updateParty"><service-call name="mantle.party.PartyServices.update#PartyDetail"/>
         <default-response url="."/></transition>
 
@@ -55,7 +55,7 @@ along with this software (see the LICENSE.md file). If not, see
     <widgets>
         <container-row>
             <row-col lg="6">
-                <link url="findOrder" text="Orders" parameter-map="[vendorPartyId:partyId]"/>
+                <link url="findOrder" text="Orders" parameter-map="[customerPartyId:partyId]"/>
 
                 <section name="NonUserPerson" condition="party?.partyTypeEnumId == 'PtyPerson' &amp;&amp; !userAccount">
                     <actions>
