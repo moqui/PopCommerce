@@ -455,13 +455,9 @@ along with this software (see the LICENSE.md file). If not, see
                         <!-- <field name="itemDescription"><default-field><text-line size="60"/></default-field></field> -->
                         <field name="itemTypeEnumId"><default-field title="Item Type">
                             <drop-down no-current-selected-key="ItemInventory">
-                                <entity-options key="${enumId}" text="${description}">
-                                    <entity-find entity-name="moqui.basic.Enumeration">
-                                        <!-- TODO: based on order type (vendor org internal?) or in separate dialogs limit item types -->
-                                        <econdition field-name="parentEnumId" operator="in" value="ItemPurchase,ItemExpense,ItemSales"/>
-                                        <order-by field-name="description"/>
-                                    </entity-find>
-                                </entity-options>
+                                <option key="ItemInventory" text="Inventory"/>
+                                <option key="ItemAsset" text="Fixed Asset"/>
+                                <option key="ItemExpSupplies" text="Expense - Supplies"/>
                             </drop-down>
                         </default-field></field>
                         <field name="quantity"><default-field><text-line size="8"/></default-field></field>

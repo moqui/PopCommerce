@@ -94,6 +94,14 @@ along with this software (see the LICENSE.md file). If not, see
                         <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
                             <set field="enumTypeId" value="ProductClass"/><set field="allowEmpty" value="true"/></widget-template-include>
                     </default-field></field>
+                    <field name="assetTypeEnumId"><default-field title="Asset Type">
+                        <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                            <set field="enumTypeId" value="AssetType"/><set field="allowEmpty" value="true"/></widget-template-include>
+                    </default-field></field>
+                    <field name="assetClassEnumId"><default-field title="Asset Class">
+                        <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                            <set field="enumTypeId" value="AssetClass"/><set field="allowEmpty" value="true"/></widget-template-include>
+                    </default-field></field>
 
                     <field name="amountFixed"><default-field title="Amount"><text-line size="10" format="0.######"/></default-field></field>
                     <field name="amountUomId">

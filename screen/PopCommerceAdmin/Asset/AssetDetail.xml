@@ -21,6 +21,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="editProduct"><default-response url="../../Catalog/Product/EditProduct"/></transition>
     <transition name="orderDetail"><default-response url="../../Order/OrderDetail"/></transition>
     <transition name="shipmentDetail"><default-response url="../../Shipment/ShipmentDetail"/></transition>
+    <transition name="findTransactionEntry"><default-response url="//${appRoot}/Accounting/Transaction/FindTransactionEntry"/></transition>
 
     <transition-include name="getPartyList" location="component://mantle-usl/template/party/PartyForms.xml"/>
 
@@ -31,34 +32,20 @@ along with this software (see the LICENSE.md file). If not, see
     <widgets>
         <container-row>
             <row-col lg="5">
+                <link url="findTransactionEntry" text="TX Entries" link-type="anchor-button" parameter-map="[assetId:assetId]"/>
+
                 <form-single name="EditAsset" map="asset" transition="updateAsset">
                     <field name="assetId"><default-field><display/></default-field></field>
 
                     <field name="assetTypeEnumId"><default-field title="Type">
                         <display-entity entity-name="moqui.basic.Enumeration"/></default-field></field>
 
-                    <field name="ownerPartyId"><default-field title="Owner Party">
-                        <display-entity entity-name="mantle.party.PartyDetail" text="${organizationName?:''}${firstName?:''} ${lastName?:''} [${pseudoId}]"/>
-                    </default-field></field>
-
-                    <field name="productId"><default-field title="Product">
-                        <link url="editProduct" text="${product.productName} [${product.pseudoId}]" link-type="anchor"
-                                parameter-map="[productId:product.productId]"/>
-                    </default-field></field>
                     <field name="receivedDate"><default-field title="Received"><display/></default-field></field>
                     <field name="quantityOnHandTotal">
                         <default-field title="QOH"><display text="${ec.l10n.format(asset.quantityOnHandTotal, null)} (${product.'Amount#moqui.basic.Uom'?.description?:'each'})"/></default-field>
                     </field>
                     <field name="availableToPromiseTotal">
                         <default-field title="ATP"><display text="${ec.l10n.format(asset.availableToPromiseTotal, null)} (${product.'Amount#moqui.basic.Uom'?.description?:'each'})"/></default-field>
-                    </field>
-                    <field name="acquireCost">
-                        <conditional-field condition="asset.acquireCost || asset.acquireOrderId">
-                            <display currency-unit-field="acquireCostUomId"/>
-                            <link url="orderDetail" text="PO #${asset.acquireOrderId}" link-type="anchor"
-                                    parameter-map="[orderId:asset.acquireOrderId]" condition="asset.acquireOrderId"/>
-                        </conditional-field>
-                        <default-field><ignored/></default-field>
                     </field>
 
                     <field name="facilityId"><default-field title="Facility">
@@ -72,12 +59,45 @@ along with this software (see the LICENSE.md file). If not, see
                     <field name="acquireShipmentId"><default-field title="From Shipment">
                         <link url="shipmentDetail" text="${asset.acquireShipmentId}" link-type="anchor" condition="asset.acquireShipmentId"
                                 parameter-map="[shipmentId:asset.acquireShipmentId]"/></default-field></field>
-                </form-single>
+                    <field name="acquireWorkEffortId"><default-field title="From Run">
+                        <link url="productionRun" text="${asset.acquireWorkEffortId}" link-type="anchor" condition="asset.acquireWorkEffortId"
+                                parameter-map="[workEffortId:asset.acquireWorkEffortId]"/></default-field></field>
 
-                <section-include name="StatusChangeSection" location="component://mantle-usl/template/basic/StatusWidgets.xml"/>
-                <section-include name="StatusHistorySection" location="component://mantle-usl/template/basic/StatusWidgets.xml"/>
+
+                    <field name="classEnumId"><default-field title="Class">
+                        <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                            <set field="enumTypeId" value="AssetClass"/><set field="allowEmpty" value="true"/></widget-template-include>
+                    </default-field></field>
+                    <field name="productId"><default-field title="Product">
+                        <text-line ac-transition="getProductList" size="50"/>
+                        <link url="editProduct" text="Edit Product" parameter-map="[productId:asset.productId]" condition="asset.productId"/>
+                    </default-field></field>
+                    <field name="ownerPartyId"><default-field title="Owner Party">
+                        <text-line ac-transition="getPartyList" size="50"/></default-field></field>
+                    <field name="acquiredDate"><default-field><date-time/></default-field></field>
+                    <field name="expectedEndOfLife"><default-field><date-time type="date"/></default-field></field>
+
+                    <field name="depreciationTypeEnumId"><default-field title="Depreciation Type">
+                        <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                            <set field="enumTypeId" value="DepreciationType"/><set field="allowEmpty" value="true"/></widget-template-include>
+                    </default-field></field>
+                    <field name="acquireCostUomId"><default-field><display-entity entity-name="moqui.basic.Uom"/></default-field></field>
+                    <field name="acquireCost"><default-field>
+                        <text-line size="8"/>
+                        <link url="poDetail" text="PO #${asset.acquireOrderId?:'N/A'}" parameter-map="[orderId:asset.acquireOrderId]"
+                              link-type="anchor" condition="asset.acquireOrderId"/>
+                    </default-field></field>
+                    <field name="salvageValue"><default-field><text-line size="8"/></default-field></field>
+                    <field name="depreciation"><default-field><display currency-unit-field="acquireCostUomId"/></default-field></field>
+                    <field name="yearBeginDepreciation"><default-field><display currency-unit-field="acquireCostUomId"/></default-field></field>
+
+                    <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+                </form-single>
             </row-col>
             <row-col lg="7">
+                <section-include name="StatusChangeSection" location="component://mantle-usl/template/basic/StatusWidgets.xml"/>
+                <section-include name="StatusHistorySection" location="component://mantle-usl/template/basic/StatusWidgets.xml"/>
+
                 <section name="DetailSection">
                     <widgets>
                         <container-box>
@@ -146,6 +166,65 @@ along with this software (see the LICENSE.md file). If not, see
                         </form-list>
                     </box-body>
                 </container-box>
+
+                <section name="AssetDepreciation" condition="asset.depreciationTypeEnumId">
+                    <actions>
+                        <service-call name="mantle.ledger.AssetAutoPostServices.calculate#FixedAssetDepreciation"
+                                in-map="[assetId:assetId]" out-map="curDepOut"/>
+                        <entity-find entity-name="mantle.product.asset.AssetDepreciation" list="assetDepreciationList">
+                            <econdition field-name="assetId"/></entity-find>
+                    </actions>
+                    <widgets>
+                        <container-box>
+                            <box-header><label text="Depreciation" type="h5"/></box-header>
+                            <box-body>
+                                <label text="Current Depreciation" type="h5"/>
+                                <container-row>
+                                    <row-col lg="3"><label text="Useful Years" type="strong"/></row-col>
+                                    <row-col lg="1"><label text="${curDepOut.usefulLifeYears}"/></row-col>
+                                    <row-col lg="3"><label text="Remaining" type="strong"/></row-col>
+                                    <row-col lg="1"><label text="${curDepOut.yearsRemaining}"/></row-col>
+                                    <row-col lg="3"><label text="Last Year Period?" type="strong"/></row-col>
+                                    <row-col lg="1"><label text="${curDepOut.isLastYearPeriod ? 'Y' : 'N'}"/></row-col>
+                                </container-row>
+                                <container-row>
+                                    <row-col lg="3"><label text="Annual Depr." type="strong"/></row-col>
+                                    <row-col lg="3"><label text="${ec.l10n.formatCurrency(curDepOut.annualDepreciation, asset.acquireCostUomId, 2)}"/></row-col>
+                                    <row-col lg="3"><label text="Monthly Depr." type="strong"/></row-col>
+                                    <row-col lg="3"><label text="${ec.l10n.formatCurrency(curDepOut.monthlyDepreciation, asset.acquireCostUomId, 2)}"/></row-col>
+                                </container-row>
+                                <container-row>
+                                    <row-col lg="3"><label text="Net Book Value" type="strong"/></row-col>
+                                    <row-col lg="3"><label text="${ec.l10n.formatCurrency(curDepOut.netBookValue, asset.acquireCostUomId, 2)}"/></row-col>
+                                    <row-col lg="3"><label text="Year Begin Net Book" type="strong"/></row-col>
+                                    <row-col lg="3"><label text="${ec.l10n.formatCurrency(curDepOut.yearBeginNetBookValue, asset.acquireCostUomId, 2)}"/></row-col>
+                                </container-row>
+
+                                <label text="Depreciation History" type="h5"/>
+                                <form-list name="AssetDepreciationList" list="assetDepreciationList">
+                                    <field name="timePeriodId"><default-field title="Period">
+                                        <display-entity entity-name="mantle.party.time.TimePeriod" text="${periodName}"/>
+                                    </default-field></field>
+                                    <field name="usefulLifeYears"><default-field title="Useful Years"><display/></default-field></field>
+                                    <field name="yearsRemaining"><default-field title="Remaining"><display/></default-field></field>
+                                    <field name="isLastYearPeriod"><default-field title="Last Year Period"><display/></default-field></field>
+                                    <field name="monthlyDepreciation"><default-field title="Monthly">
+                                        <display currency-unit-field="asset.acquireCostUomId"/></default-field></field>
+                                    <field name="annualDepreciation"><default-field title="Annual">
+                                        <display currency-unit-field="asset.acquireCostUomId"/></default-field></field>
+                                    <field name="yearBeginDepreciation"><default-field title="Year Begin">
+                                        <display currency-unit-field="asset.acquireCostUomId"/></default-field></field>
+                                    <field name="acctgTransId"><default-field title="TX"><link url="editTransaction"
+                                            text="${acctgTransId}" link-type="anchor" parameter-map="[acctgTransId:acctgTransId]"/></default-field></field>
+                                    <form-list-column><field-ref name="timePeriodId"/></form-list-column>
+                                    <form-list-column><field-ref name="usefulLifeYears"/><field-ref name="yearsRemaining"/></form-list-column>
+                                    <form-list-column><field-ref name="monthlyDepreciation"/><field-ref name="annualDepreciation"/></form-list-column>
+                                    <form-list-column><field-ref name="yearBeginDepreciation"/><field-ref name="acctgTransId"/></form-list-column>
+                                </form-list>
+                            </box-body>
+                        </container-box>
+                    </widgets>
+                </section>
             </row-col>
         </container-row>
     </widgets>
