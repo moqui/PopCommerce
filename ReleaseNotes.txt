@@ -2,6 +2,23 @@
 POP Commerce - Retail and Wholesale ERP and eCommerce - Release Notes
 
 ===========================================================================
+Release 1.0.1 - TBD
+===========================================================================
+
+POP Commerce 1.0.1 is a minor new feature and bug fix release.
+
+This release is based on Moqui Framework version TODO, Mantle Business
+Artifacts version TODO, and HiveMind version TODO.
+
+TODO
+
+New Features:
+
+
+Bug Fixes:
+
+
+===========================================================================
 Release 1.0.0 - 11 Sep 2015
 ===========================================================================
 
@@ -25,6 +42,7 @@ Features:
 - PDF documents (from XSL-FO templates) for Invoice, Payment Check and
   Payment Detail, Financial Account Statement, Order
 - Admin Dashboard screen with icon images from flaticon.com
+
 - eCommerce Application
   - Find products by category and/or faceted search (built on Moqui
     DataDocument and DataFeed with search using Elasticsearch)
