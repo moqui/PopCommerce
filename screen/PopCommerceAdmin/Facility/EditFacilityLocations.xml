@@ -87,6 +87,23 @@ along with this software (see the LICENSE.md file). If not, see
             <field name="positionId">
                 <header-field title="Position" show-order-by="true"><text-find size="6" hide-options="true"/></header-field>
                 <default-field><text-line size="6"/></default-field></field>
+            <field name="capacity"><header-field show-order-by="true"/>
+                <default-field><text-line size="6"/></default-field></field>
+            <field name="capacityUomId">
+                <header-field title="Capacity UOM" show-order-by="true"/>
+                <default-field>
+                    <drop-down allow-empty="true">
+                        <entity-options key="${uomId}" text="${typeDescription} - ${description}">
+                            <entity-find entity-name="moqui.basic.UomAndType">
+                                <econdition field-name="uomId" value="OTH_ea"/></entity-find></entity-options>
+                        <entity-options key="${uomId}" text="${typeDescription} - ${description}">
+                            <entity-find entity-name="moqui.basic.UomAndType">
+                                <econdition field-name="uomTypeEnumId" operator="in"
+                                        value="UT_AREA_MEASURE,UT_VOLUME_DRY_MEAS,UT_VOLUME_LIQ_MEAS,UT_WEIGHT_MEASURE"/>
+                                <order-by field-name="typeDescription,description"/></entity-find></entity-options>
+                    </drop-down>
+                </default-field>
+            </field>
 
             <field name="submitButton"><header-field title="Find"><submit/></header-field>
                 <default-field title="Update"><submit/></default-field></field>

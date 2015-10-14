@@ -64,7 +64,9 @@ along with this software (see the LICENSE.md file). If not, see
                     <field name="facilitySizeUomId"><default-field title="" tooltip="Size UOM">
                         <drop-down allow-empty="true"><entity-options key="${uomId}" text="${description}">
                             <entity-find entity-name="moqui.basic.Uom">
-                                <econdition field-name="uomTypeEnumId" value="UT_AREA_MEASURE"/></entity-find>
+                                <econdition field-name="uomTypeEnumId" value="UT_AREA_MEASURE"/>
+                                <order-by field-name="description"/>
+                            </entity-find>
                         </entity-options></drop-down>
                     </default-field></field>
 

@@ -16,21 +16,32 @@ along with this software (see the LICENSE.md file). If not, see
 
     <parameter name="orderId" required="true"/>
 
-    <transition name="placeOrder"><service-call name="mantle.order.OrderServices.place#Order"/><default-response url="."/></transition>
-    <transition name="approveOrder"><service-call name="mantle.order.OrderServices.approve#Order"/><default-response url="."/></transition>
-    <transition name="completeOrderPart"><service-call name="mantle.order.OrderServices.complete#OrderPart"/><default-response url="."/></transition>
-    <transition name="cancelOrder"><service-call name="mantle.order.OrderServices.cancel#Order"/><default-response url="."/></transition>
-    <transition name="cloneOrder"><service-call name="mantle.order.OrderServices.clone#Order"/><default-response url="."/></transition>
+    <transition name="updateOrderHeader"><service-call name="mantle.order.OrderServices.update#OrderHeader"/>
+        <default-response url="."/></transition>
+    <transition name="placeOrder"><service-call name="mantle.order.OrderServices.place#Order"/>
+        <default-response url="."/></transition>
+    <transition name="approveOrder"><service-call name="mantle.order.OrderServices.approve#Order"/>
+        <default-response url="."/></transition>
+    <transition name="completeOrderPart"><service-call name="mantle.order.OrderServices.complete#OrderPart"/>
+        <default-response url="."/></transition>
+    <transition name="cancelOrder"><service-call name="mantle.order.OrderServices.cancel#Order"/>
+        <default-response url="."/></transition>
+    <transition name="cloneOrder"><service-call name="mantle.order.OrderServices.clone#Order"/>
+        <default-response url="."/></transition>
 
-    <transition name="shipOrderPart"><service-call name="mantle.shipment.ShipmentServices.create#OrderPartShipment"/><default-response url="."/></transition>
-    <transition name="addOrderPartToShipment"><service-call name="mantle.shipment.ShipmentServices.add#OrderPartToShipment"/><default-response url="."/></transition>
+    <transition name="shipOrderPart"><service-call name="mantle.shipment.ShipmentServices.create#OrderPartShipment"/>
+        <default-response url="."/></transition>
+    <transition name="addOrderPartToShipment"><service-call name="mantle.shipment.ShipmentServices.add#OrderPartToShipment"/>
+        <default-response url="."/></transition>
     <transition name="shipmentDetail"><default-response url="//PopcAdmin/Shipment/ShipmentDetail"/></transition>
 
     <transition name="createNote"><service-call name="create#mantle.order.OrderNote"/><default-response url="."/></transition>
     <transition name="updateNote"><service-call name="update#mantle.order.OrderNote"/><default-response url="."/></transition>
 
-    <transition name="createContent"><service-call name="mantle.order.OrderServices.create#OrderContent"/><default-response url="."/></transition>
-    <transition name="updateContent"><service-call name="mantle.order.OrderServices.update#OrderContent"/><default-response url="."/></transition>
+    <transition name="createContent"><service-call name="mantle.order.OrderServices.create#OrderContent"/>
+        <default-response url="."/></transition>
+    <transition name="updateContent"><service-call name="mantle.order.OrderServices.update#OrderContent"/>
+        <default-response url="."/></transition>
     <transition name="downloadContent"><parameter name="orderContentId"/>
         <actions>
             <entity-find-one entity-name="mantle.order.OrderContent" value-field="orderContent"/>
@@ -53,15 +64,29 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="editInvoice"><default-response url="//PopcAdmin/Accounting/EditInvoice"/></transition>
     <transition name="editPayment"><default-response url="//PopcAdmin/Accounting/EditPayment"/></transition>
 
-    <transition name="createOrderPart"><service-call name="mantle.order.OrderServices.create#OrderPart"/><default-response url="."/></transition>
-    <transition name="updateOrderPart"><service-call name="mantle.order.OrderServices.update#OrderPart"/><default-response url="."/></transition>
-    <transition name="addOrderPartPayment"><service-call name="mantle.order.OrderServices.add#OrderPartPayment"/><default-response url="."/></transition>
-    <transition name="updatePayment"><service-call name="update#mantle.account.payment.Payment"/><default-response url="."/></transition>
+    <transition name="createOrderPart"><service-call name="mantle.order.OrderServices.create#OrderPart"/>
+        <default-response url="."/></transition>
+    <transition name="updateOrderPart"><service-call name="mantle.order.OrderServices.update#OrderPart"/>
+        <default-response url="."/></transition>
+    <transition name="addOrderPartPayment"><service-call name="mantle.order.OrderServices.add#OrderPartPayment"/>
+        <default-response url="."/></transition>
+    <transition name="updatePayment"><service-call name="update#mantle.account.payment.Payment"/>
+        <default-response url="."/></transition>
 
-    <transition name="addProductItem"><service-call name="mantle.order.OrderServices.add#OrderProductQuantity"/><default-response url="."/></transition>
-    <transition name="createItem"><service-call name="mantle.order.OrderServices.create#OrderItem"/><default-response url="."/></transition>
-    <transition name="updateItem"><service-call name="mantle.order.OrderServices.update#OrderItem"/><default-response url="."/></transition>
-    <transition name="deleteItem"><service-call name="mantle.order.OrderServices.delete#OrderItem"/><default-response url="."/></transition>
+    <transition name="createOrderPartParty"><service-call name="create#mantle.order.OrderPartParty"/>
+        <default-response url="."/></transition>
+    <transition name="deleteOrderPartParty"><service-call name="delete#mantle.order.OrderPartParty"/>
+        <default-response url="."/></transition>
+    <transition-include name="getPartyList" location="component://mantle-usl/template/party/PartyForms.xml"/>
+
+    <transition name="addProductItem"><service-call name="mantle.order.OrderServices.add#OrderProductQuantity"/>
+        <default-response url="."/></transition>
+    <transition name="createItem"><service-call name="mantle.order.OrderServices.create#OrderItem"/>
+        <default-response url="."/></transition>
+    <transition name="updateItem"><service-call name="mantle.order.OrderServices.update#OrderItem"/>
+        <default-response url="."/></transition>
+    <transition name="deleteItem"><service-call name="mantle.order.OrderServices.delete#OrderItem"/>
+        <default-response url="."/></transition>
 
     <transition-include name="getProductList" location="component://PopCommerce/screen/PopCommerceAdmin/Catalog/Product/EditAssocs.xml"/>
 
@@ -78,13 +103,13 @@ along with this software (see the LICENSE.md file). If not, see
 
         <set field="vendorRole" value="OrgInternal,Supplier,Vendor"/>
         <set field="customerRole" value="OrgInternal,Customer"/>
+        <set field="productItemTypes" from="['ItemProduct', 'ItemInventory', 'ItemAsset', 'ItemExpSupplies']"/>
     </actions>
     <widgets>
-        <section name="OrderLinksSection"><widgets>
+        <section name="OrderHeaderSection"><widgets>
             <container-row>
                 <row-col lg="6">
                     <label text="Order #${orderId}" type="h2"/>
-                    <label text="Status: ${statusItem.description}, placed ${ec.l10n.format(orderHeader.placedDate ?: orderHeader.entryDate, 'yyyy-MM-dd HH:mm')}" type="p"/>
 
                     <section name="OpenSection" condition="orderHeader.statusId == 'OrderOpen'">
                         <widgets>
@@ -129,53 +154,81 @@ along with this software (see the LICENSE.md file). If not, see
                         <link url="editInvoice" text="Invoice #${invoiceId}" link-type="anchor-button"/>
                     </widgets></section-iterate>
 
-                    <section-include name="StatusHistorySection" location="component://mantle-usl/template/basic/StatusWidgets.xml"/>
+                    <form-single name="HeaderForm" transition="updateOrderHeader" map="orderHeader">
+                        <field name="orderId"><default-field><hidden/></default-field></field>
+                        <field name="statusId"><default-field title="Status">
+                            <display text="${statusItem.description}"/></default-field></field>
+                        <field name="entryDate"><default-field title="Entry"><display/></default-field></field>
+                        <field name="placedDate"><default-field title="Placed"><display/></default-field></field>
+                        <field name="orderName"><default-field title="Name"><text-line size="40"/></default-field></field>
+                        <field name="orderRevision"><default-field title="Revision"><display/></default-field></field>
+                        <field name="salesChannelEnumId"><default-field title="Channel">
+                            <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                                <set field="enumTypeId" value="SalesChannel"/><set field="allowEmpty" value="true"/>
+                                <set field="style" value=" "/></widget-template-include>
+                        </default-field></field>
+                        <field name="externalId"><default-field><display/></default-field></field>
+                        <field name="externalRevision"><default-field title="Ext Rev"><display/></default-field></field>
+                        <field name="systemMessageRemoteId"><default-field title="Message Remote">
+                            <drop-down allow-empty="true">
+                                <entity-options key="${systemMessageRemoteId}" text="${description}">
+                                    <entity-find entity-name="moqui.service.message.SystemMessageRemote">
+                                        <order-by field-name="description"/></entity-find></entity-options>
+                            </drop-down>
+                        </default-field></field>
+                        <field name="submitButton"><default-field title="Update Header"><submit/></default-field></field>
+
+                        <field-layout>
+                            <field-row><field-ref name="statusId"/><field-ref name="orderRevision"/></field-row>
+                            <field-row><field-ref name="entryDate"/><field-ref name="placedDate"/></field-row>
+                            <field-ref name="orderName"/>
+                            <field-row><field-ref name="salesChannelEnumId"/><field-ref name="systemMessageRemoteId"/></field-row>
+                            <field-row><field-ref name="externalId"/><field-ref name="externalRevision"/></field-row>
+                            <field-ref name="submitButton"/>
+                        </field-layout>
+                    </form-single>
                 </row-col>
                 <row-col lg="6">
-                    <section name="NotesSection">
-                        <actions>
-                            <entity-find entity-name="mantle.order.OrderNote" list="noteList">
-                                <econdition field-name="orderId"/><order-by field-name="-noteDate"/></entity-find>
-                        </actions>
-                        <widgets>
-                            <container-box>
-                                <box-header><label text="Notes" type="h5"/></box-header>
-                                <box-toolbar>
-                                    <container-dialog id="NewNoteDialog" button-text="Add Note">
-                                        <form-single name="NewNoteForm" transition="createNote">
-                                            <field name="orderId"><default-field><hidden/></default-field></field>
-                                            <field name="noteText"><default-field title="Note"><text-area cols="60" rows="6"/></default-field></field>
-                                            <field name="submitButton"><default-field title="Add Note"><submit/></default-field></field>
-                                        </form-single>
-                                    </container-dialog>
-                                </box-toolbar>
-                                <box-body>
-                                    <section-iterate name="NoteIterateSection" list="noteList" entry="note">
-                                        <actions>
-                                            <entity-find-one entity-name="mantle.party.PersonAndUserAccount" value-field="paua">
-                                                <field-map field-name="userId" from="note.userId"/></entity-find-one>
-                                        </actions>
-                                        <widgets>
-                                            <label text="By ${paua?.firstName?:''} ${paua?.lastName?:''} (${paua?.username ?: note.userId}) at ${ec.l10n.format(note.noteDate, 'yyyy-MM-dd HH:mm')}" type="strong"/>
-                                            <section name="UpdateNoteSection" condition="note.userId == ec.user.userId">
-                                                <widgets>
-                                                    <container-dialog id="UpdateNoteContainer" button-text="Edit Note">
-                                                        <form-single name="UpdateNoteForm" transition="updateNote" map="note">
-                                                            <field name="orderId"><default-field><hidden/></default-field></field>
-                                                            <field name="noteDate"><default-field><hidden/></default-field></field>
-                                                            <field name="noteText"><default-field title="Note"><text-area cols="60" rows="6"/></default-field></field>
-                                                            <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
-                                                        </form-single>
-                                                    </container-dialog>
-                                                </widgets>
-                                            </section>
-                                            <label text="${note.noteText}" type="p"/>
-                                        </widgets>
-                                    </section-iterate>
-                                </box-body>
-                            </container-box>
-                        </widgets>
-                    </section>
+                    <section-include name="StatusHistorySection" location="component://mantle-usl/template/basic/StatusWidgets.xml"/>
+
+                    <section name="NotesSection"><widgets>
+                        <container-box>
+                            <box-header><label text="Notes" type="h5"/></box-header>
+                            <box-toolbar>
+                                <container-dialog id="NewNoteDialog" button-text="Add Note">
+                                    <form-single name="NewNoteForm" transition="createNote">
+                                        <field name="orderId"><default-field><hidden/></default-field></field>
+                                        <field name="noteText"><default-field title="Note"><text-area cols="60" rows="6"/></default-field></field>
+                                        <field name="submitButton"><default-field title="Add Note"><submit/></default-field></field>
+                                    </form-single>
+                                </container-dialog>
+                            </box-toolbar>
+                            <box-body>
+                                <section-iterate name="NoteIterateSection" list="orderNoteList" entry="note">
+                                    <actions>
+                                        <entity-find-one entity-name="mantle.party.PersonAndUserAccount" value-field="paua">
+                                            <field-map field-name="userId" from="note.userId"/></entity-find-one>
+                                    </actions>
+                                    <widgets>
+                                        <label text="By ${paua?.firstName?:''} ${paua?.lastName?:''} (${paua?.username ?: note.userId}) at ${ec.l10n.format(note.noteDate, 'yyyy-MM-dd HH:mm')}" type="strong"/>
+                                        <section name="UpdateNoteSection" condition="note.userId == ec.user.userId">
+                                            <widgets>
+                                                <container-dialog id="UpdateNoteContainer" button-text="Edit Note">
+                                                    <form-single name="UpdateNoteForm" transition="updateNote" map="note">
+                                                        <field name="orderId"><default-field><hidden/></default-field></field>
+                                                        <field name="noteDate"><default-field><hidden/></default-field></field>
+                                                        <field name="noteText"><default-field title="Note"><text-area cols="60" rows="6"/></default-field></field>
+                                                        <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+                                                    </form-single>
+                                                </container-dialog>
+                                            </widgets>
+                                        </section>
+                                        <label text="${note.noteText}" type="p"/>
+                                    </widgets>
+                                </section-iterate>
+                            </box-body>
+                        </container-box>
+                    </widgets></section>
                     <section name="ContentSection">
                         <actions>
                             <entity-find entity-name="mantle.order.OrderContent" list="contentList">
@@ -232,15 +285,21 @@ along with this software (see the LICENSE.md file). If not, see
                 <set field="contactInfo" from="orderPartInfo.facilityContactInfo"/>
                 <set field="orderPart" from="orderPartInfo.orderPart"/>
                 <set field="customerPartyId" from="orderPartInfo.customerDetail.partyId"/>
+                <set field="customerShipToPartyId" from="orderPartInfo.customerShipToDetail?.partyId"/>
 
-                <service-call name="mantle.party.ContactServices.get#PartyContactInfoList" out-map="shippingContactListInfo"
-                        in-map="[partyId:customerPartyId, postalContactMechPurposeId:'PostalShippingDest',
-                            telecomContactMechPurposeId:'PhoneShippingDest']"/>
+                <service-call name="mantle.party.ContactServices.get#PartyContactInfoList" out-map="customerShippingInfo"
+                        in-map="[partyId:customerPartyId, postalContactMechPurposeId:'PostalShippingDest']"/>
+                <set field="shippingPostalAddressList" from="customerShippingInfo.postalAddressList ?: []"/>
+                <if condition="customerShipToPartyId">
+                    <service-call name="mantle.party.ContactServices.get#PartyContactInfoList" out-map="shipToShippingInfo"
+                            in-map="[partyId:customerShipToPartyId, postalContactMechPurposeId:'PostalShippingDest']"/>
+                    <script>shippingPostalAddressList.addAll(shipToShippingInfo.postalAddressList ?: [])</script>
+                </if>
 
                 <!-- TODO: get shipping options with or without store
                 <service-call name="mantle.product.StoreServices.get#StoreShippingOptions" out-map="context"
                         in-map="[productStoreId:productStoreId, orderId:orderId,
-                            postalContactMechId:shippingContactListInfo?.postalAddressList?.first?.postalContactMechId]"/>
+                            postalContactMechId:shippingPostalAddressList?.first?.postalContactMechId]"/>
                 -->
             </actions>
             <widgets>
@@ -265,6 +324,24 @@ along with this software (see the LICENSE.md file). If not, see
                                 <field name="shipBeforeDate"><default-field><date-time/></default-field></field>
                                 <field name="estimatedDeliveryDate"><default-field title="Delivery Date"><date-time/></default-field></field>
                                 <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
+                            </form-single>
+                        </container-dialog>
+                        <container-dialog id="AddPartPartyDialog" button-text="Add Party">
+                            <form-single name="CreateOrderPartParty" transition="createOrderPartParty" map="orderPartInfo.orderPart">
+                                <field name="orderId"><default-field><hidden/></default-field></field>
+                                <field name="orderPartSeqId"><default-field><hidden/></default-field></field>
+                                <field name="partyId"><default-field title="Party">
+                                    <text-line ac-transition="getPartyList" ac-min-length="2" size="60"/>
+                                </default-field></field>
+                                <field name="roleTypeId"><default-field title="Role">
+                                    <drop-down>
+                                        <entity-options key="${roleTypeId}" text="${description}">
+                                            <entity-find entity-name="mantle.party.RoleGroupMemberAndType" cache="true">
+                                                <econdition field-name="roleGroupEnumId" value="RgpOrder"/>
+                                                <order-by field-name="description"/></entity-find></entity-options>
+                                    </drop-down>
+                                </default-field></field>
+                                <field name="submitButton"><default-field title="Add"><submit/></default-field></field>
                             </form-single>
                         </container-dialog>
                         <section name="PartApprovedSection" condition="orderPartInfo.orderPart.statusId == 'OrderApproved'">
@@ -328,8 +405,9 @@ along with this software (see the LICENSE.md file). If not, see
                                     link-type="anchor" parameter-map="[partyId:orderPartInfo.customerDetail.partyId]" condition="!orderPartInfo.isCustomerInternalOrg"/>
                         </container>
                         <label text="${orderPartInfo.shipmentMethodEnum?.description ?: ''}" type="p"/>
-                        <label text="Ship Before: ${ec.l10n.format(orderPartInfo.orderPart.shipBeforeDate, 'yyyy-MM-dd HH:mm') ?: ''}" type="p"/>
-                        <label text="Delivery Date: ${ec.l10n.format(orderPartInfo.orderPart.estimatedDeliveryDate, 'yyyy-MM-dd HH:mm') ?: ''}" type="p"/>
+                        <container><label text="Ship Before: ${ec.l10n.format(orderPartInfo.orderPart.shipBeforeDate, 'yyyy-MM-dd HH:mm') ?: ''}"/></container>
+                        <container><label text="Delivery Date: ${ec.l10n.format(orderPartInfo.orderPart.estimatedDeliveryDate, 'yyyy-MM-dd HH:mm') ?: ''}"/></container>
+                        <container><label text="Pick Up Date: ${ec.l10n.format(orderPartInfo.orderPart.estimatedPickUpDate, 'yyyy-MM-dd HH:mm') ?: ''}"/></container>
                         <container>
                             <label text="To Facility: " type="strong"/>
                             <link url="editFacility" text="${orderPartInfo.facility.facilityName} [${orderPartInfo.facility.pseudoId}]"
@@ -337,6 +415,16 @@ along with this software (see the LICENSE.md file). If not, see
                                     condition="orderPartInfo.facility"/>
                         </container>
                         <widgets><render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
+                        <section-iterate name="OrderPartRoleSection" list="orderPartInfo.orderPartPartyList" entry="orderPartParty"><widgets>
+                            <container>
+                                <link url="deleteOrderPartParty" text="X" link-type="hidden-form-link"
+                                        parameter-map="[orderId:orderPartParty.orderId, orderPartSeqId:orderPartParty.orderPartSeqId,
+                                            partyId:orderPartParty.partyId, roleTypeId:orderPartParty.roleTypeId]"/>
+                                <label text="${orderPartParty.description}: " type="strong"/>
+                                <label text="PartyNameTemplate" text-map="orderPartParty" type="span"/>
+                                <!-- TODO: would be nice to have a general editParty screen to link to from here and elsewhere -->
+                            </container>
+                        </widgets></section-iterate>
                     </container>
                     <container style="col-lg-6">
                         <section name="PaymentInfoSection"><widgets>
@@ -391,7 +479,7 @@ along with this software (see the LICENSE.md file). If not, see
                             </box-toolbar>
                             <box-body>
                                 <container style="float-box" type="ul">
-                                    <section-iterate name="ShippingAddressList" list="shippingContactListInfo.postalAddressList" entry="postalAddressInfo">
+                                    <section-iterate name="ShippingAddressList" list="shippingPostalAddressList" entry="postalAddressInfo">
                                         <actions>
                                             <set field="contactInfo" from="postalAddressInfo"/>
                                             <set field="checkRadio" from="(orderPart.postalContactMechId &amp;&amp; orderPart.postalContactMechId == contactInfo.postalContactMechId) || (!orderPart.postalContactMechId &amp;&amp; postalAddressInfo_index == 0)"/>
@@ -427,6 +515,13 @@ along with this software (see the LICENSE.md file). If not, see
                                             text="${carrierPartyId == '_NA_' ? '' : (carrierName + ' - ') }${shipmentMethodDescription} ${shippingTotal != null ? ec.l10n.formatCurrency(shippingTotal, orderHeader.currencyUomId, 2) : ''}"/>
                                 </drop-down>
                             </default-field></field>
+                            <!--
+                            <field name="shipmentMethodEnumId"><default-field title="Shipment Method">
+                                <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#enumDropDown">
+                                    <set field="enumTypeId" value="ShipmentMethod"/><set field="allowEmpty" value="true"/>
+                                    <set field="style" value=" "/></widget-template-include>
+                            </default-field></field>
+                            -->
 
                             <field name="submitButton">
                                 <default-field title="Set Shipping Info"><submit/></default-field>
@@ -455,6 +550,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <!-- <field name="itemDescription"><default-field><text-line size="60"/></default-field></field> -->
                         <field name="itemTypeEnumId"><default-field title="Item Type">
                             <drop-down no-current-selected-key="ItemInventory">
+                                <option key="ItemProduct" text="Sales - Product"/>
                                 <option key="ItemInventory" text="Inventory"/>
                                 <option key="ItemAsset" text="Fixed Asset"/>
                                 <option key="ItemExpSupplies" text="Expense - Supplies"/>
@@ -512,7 +608,7 @@ along with this software (see the LICENSE.md file). If not, see
 
                     <field name="orderItemSeqId"><default-field title="Item"><display/></default-field></field>
                     <field name="parentItemSeqId">
-                        <conditional-field condition="orderItem.productId || orderItemWithChildrenSet.contains(orderItem.orderItemSeqId)">
+                        <conditional-field condition="orderItem.itemTypeEnumId in productItemTypes || orderItemWithChildrenSet.contains(orderItem.orderItemSeqId)">
                             <display text="N/A"/></conditional-field>
                         <default-field title="Parent Item"><drop-down allow-empty="true">
                                 <list-options list="applicableParentItems" key="${orderItemSeqId}"
@@ -529,14 +625,20 @@ along with this software (see the LICENSE.md file). If not, see
                         </entity-find></entity-options></drop-down>
                     </default-field></field>
                     <field name="productId">
-                        <conditional-field condition="productId">
-                            <display-entity entity-name="mantle.product.Product" text="${productName} [${productId}]"/>
-                            <link url="editProduct" text="Edit" link-type="anchor"/>
+                        <conditional-field condition="orderItem.itemTypeEnumId in productItemTypes">
+                            <text-line ac-transition="getProductList" ac-min-length="2" size="35"/>
+                            <link url="editProduct" text="ProductNameTemplate" entity-name="mantle.product.Product"
+                                    link-type="anchor" condition="productId"/>
                         </conditional-field>
-                        <default-field title="Product"><display text=" " also-hidden="false"/></default-field>
+                        <default-field title="Product">
+                            <link url="editProduct" text="ProductNameTemplate" entity-name="mantle.product.Product"
+                                    link-type="anchor" condition="productId"/>
+                        </default-field>
                     </field>
+                    <field name="otherPartyProductId"><default-field><text-line size="25"/></default-field></field>
                     <field name="itemDescription"><default-field title="Description">
-                        <text-line size="30"/></default-field></field>
+                        <text-line size="40"/></default-field></field>
+                    <field name="comments"><default-field><text-line size="40"/></default-field></field>
                     <field name="requiredByDate"><default-field><date-time/></default-field></field>
                     <field name="unitAmount"><default-field title="Price"><text-line size="8" format="#0.00"/></default-field></field>
                     <field name="quantity"><default-field><text-line size="5"/></default-field></field>
@@ -566,8 +668,8 @@ along with this software (see the LICENSE.md file). If not, see
 
                     <form-list-column><field-ref name="orderItemSeqId"/></form-list-column>
                     <form-list-column><field-ref name="orderPartSeqId"/><field-ref name="parentItemSeqId"/></form-list-column>
-                    <form-list-column><field-ref name="itemTypeEnumId"/><field-ref name="productId"/></form-list-column>
-                    <form-list-column><field-ref name="itemDescription"/><field-ref name="requiredByDate"/></form-list-column>
+                    <form-list-column><field-ref name="itemTypeEnumId"/><field-ref name="productId"/><field-ref name="otherPartyProductId"/></form-list-column>
+                    <form-list-column><field-ref name="itemDescription"/><field-ref name="comments"/><field-ref name="requiredByDate"/></form-list-column>
                     <form-list-column><field-ref name="unitAmount"/><field-ref name="quantity"/></form-list-column>
                     <form-list-column><field-ref name="assetReservations"/></form-list-column>
                     <form-list-column><field-ref name="itemTotal"/><field-ref name="itemPlusChildrenTotal"/></form-list-column>
