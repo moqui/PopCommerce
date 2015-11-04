@@ -32,7 +32,7 @@ along with this software (see the LICENSE.md file). If not, see
 
                 <else>
                     <service-call name="org.moqui.impl.EntityServices.search#DataDocuments" out-map="context"
-                            in-map="[queryString:(term + '*'), indexName:'popc', documentType:'PopcProduct']"/>
+                            in-map="[queryString:(StupidUtilities.escapeElasticQueryString(term) + '*'), indexName:'popc', documentType:'PopcProduct']"/>
                     <script>
                         def outList = []
                         for (def document in documentList)
