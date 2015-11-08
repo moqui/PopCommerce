@@ -24,10 +24,8 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response url="."/></transition>
 
     <transition name="updatePaymentMethodInfo"><default-response url="UpdatePaymentMethodInfo"/></transition>
-    <transition name="removePaymentMethodInfo">
-        <service-call name="update#mantle.account.method.PaymentMethod" in-map="[paymentMethodId:paymentMethodId, thruDate:ec.user.nowTimestamp]"/>
-        <default-response url="."/>
-    </transition>
+    <transition name="removePaymentMethod"><service-call name="mantle.account.PaymentMethodServices.delete#PaymentMethod"/>
+        <default-response url="."/></transition>
 
     <actions>
         <set field="partyId" from="ec.user.userAccount.partyId"/>
@@ -94,7 +92,7 @@ along with this software (see the LICENSE.md file). If not, see
                                                 <dynamic-dialog id="UpdatePaymentMethodDialog" button-text="Update"
                                                         transition="updatePaymentMethodInfo" width="800"
                                                         parameter-map="[partyId:partyId, paymentMethodId:methodInfo.paymentMethodId]"/>
-                                                <link url="removePaymentMethodInfo" text="Remove"
+                                                <link url="removePaymentMethod" text="Remove"
                                                         parameter-map="[paymentMethodId:methodInfo.paymentMethodId]"/>
                                             </container>
                                         </widgets>

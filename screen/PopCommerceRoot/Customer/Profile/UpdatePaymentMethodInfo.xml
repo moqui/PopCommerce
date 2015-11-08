@@ -23,13 +23,12 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response url=".."/></transition>
 
     <actions>
-        <if condition="paymentMethodId">
-            <service-call name="mantle.account.PaymentMethodServices.get#PartyPaymentMethodInfo" out-map="methodInfo" in-map="context"/>
-            <set field="methodInfoFlat" from="StupidUtilities.flattenNestedMap(methodInfo)"/>
-            <else>
-                <set field="methodInfoFlat" from="[paymentMethodTypeEnumId:paymentMethodTypeEnumId]"/>
-            </else>
-        </if>
+        <service-call name="mantle.account.PaymentMethodServices.get#PartyPaymentMethodInfo" out-map="methodInfo" in-map="context"/>
+        <set field="methodInfoFlat" from="StupidUtilities.flattenNestedMap(methodInfo)"/>
+        <entity-find entity-name="mantle.party.contact.PartyContactMechPostalAddress" list="partyPostalAddressList">
+            <date-filter/><econdition field-name="partyId"/></entity-find>
+        <entity-find entity-name="mantle.party.contact.PartyContactMechTelecomNumber" list="partyTelecomNumberList">
+            <date-filter/><econdition field-name="partyId"/></entity-find>
     </actions>
     <widgets>
         <form-single name="PaymentMethodInfoForm" transition="storePaymentMethodInfo" map="methodInfoFlat"
