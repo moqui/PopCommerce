@@ -38,6 +38,10 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="updateUserAccount"><service-call name="mantle.party.PartyServices.update#PartyUserAccount"/>
         <default-response url="."/></transition>
 
+    <transition name="updatePaymentMethodInfo"><default-response url="UpdatePaymentMethodInfo"/></transition>
+    <transition name="removePaymentMethod"><service-call name="mantle.account.PaymentMethodServices.delete#PaymentMethod"/>
+        <default-response url="."/></transition>
+
     <transition name="updateContactInfo"><default-response url="UpdateContactInfo"/></transition>
     <transition name="removeContactInfo"><service-call name="mantle.party.ContactServices.delete#PartyContactMech"/>
         <default-response url="."/></transition>
@@ -241,6 +245,41 @@ along with this software (see the LICENSE.md file). If not, see
                 </section>
             </row-col>
             <row-col lg="6">
+                <section name="PaymentMethodSection">
+                    <actions>
+                        <service-call name="mantle.account.PaymentMethodServices.get#PartyPaymentMethodInfoList"
+                                in-map="[partyId:partyId]" out-map="ppmiOut"/>
+                    </actions>
+                    <widgets>
+                        <container-box>
+                            <box-header><label text="Payment Methods" type="h5"/></box-header>
+                            <box-toolbar>
+                                <dynamic-dialog id="CreateCreditCardDialog" button-text="Create Credit Card"
+                                        transition="updatePaymentMethodInfo" width="800"
+                                        parameter-map="[partyId:partyId, paymentMethodTypeEnumId:'PmtCreditCard']"/>
+                                <dynamic-dialog id="CreateBankAccountDialog" button-text="Create Bank Account"
+                                        transition="updatePaymentMethodInfo" width="800"
+                                        parameter-map="[partyId:partyId, paymentMethodTypeEnumId:'PmtBankAccount']"/>
+                            </box-toolbar>
+                            <box-body>
+                                <container style="float-box" type="ul">
+                                    <section-iterate name="BillingInfoSection" list="ppmiOut.methodInfoList" entry="methodInfo">
+                                        <widgets>
+                                            <container type="li">
+                                                <render-mode><text type="html" location="component://mantle-usl/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
+                                                <dynamic-dialog id="UpdatePaymentMethodDialog" button-text="Update"
+                                                        transition="updatePaymentMethodInfo" width="800"
+                                                        parameter-map="[partyId:partyId, paymentMethodId:methodInfo.paymentMethodId]"/>
+                                                <link url="removePaymentMethod" text="Remove"
+                                                        parameter-map="[paymentMethodId:methodInfo.paymentMethodId]"/>
+                                            </container>
+                                        </widgets>
+                                    </section-iterate>
+                                </container>
+                            </box-body>
+                        </container-box>
+                    </widgets>
+                </section>
                 <section name="ContactInfoSection">
                     <actions>
                         <service-call name="mantle.party.ContactServices.get#PartyContactInfoList" out-map="contactOut"
