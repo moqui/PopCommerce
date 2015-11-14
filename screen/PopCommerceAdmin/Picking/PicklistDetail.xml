@@ -215,6 +215,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 <entity-options key="${partyId}" text="PartyNameTemplate">
                                     <entity-find entity-name="mantle.party.PartyDetailAndRole">
                                         <econdition field-name="roleTypeId" value="Employee"/>
+                                        <econdition field-name="disabled" value="N" or-null="true"/>
                                         <order-by field-name="firstName,lastName"/>
                                     </entity-find>
                                 </entity-options>

@@ -97,6 +97,8 @@ along with this software (see the LICENSE.md file). If not, see
                             <field name="partyId"><default-field><hidden/></default-field></field>
                             <field name="pseudoId"><default-field title="ID"><text-line size="15"/></default-field></field>
                             <field name="organizationName"><default-field><text-line size="60"/></default-field></field>
+                            <field name="disabled"><default-field><drop-down>
+                                <option key="N"/><option key="Y"/></drop-down></default-field></field>
 
                             <field name="submitButton"><default-field title="Update Organization"><submit/></default-field></field>
                         </form-single>
@@ -109,6 +111,8 @@ along with this software (see the LICENSE.md file). If not, see
                             <field name="middleName"><default-field><text-line size="20"/></default-field></field>
                             <field name="lastName"><default-field><text-line size="30"/></default-field></field>
                             <field name="birthDate"><default-field><date-time type="date"/></default-field></field>
+                            <field name="disabled"><default-field><drop-down>
+                                <option key="N"/><option key="Y"/></drop-down></default-field></field>
 
                             <field name="submitButton"><default-field title="Update Person"><submit/></default-field></field>
                         </form-single>
@@ -181,11 +185,18 @@ along with this software (see the LICENSE.md file). If not, see
                             </box-toolbar>
                             <box-body>
                                 <form-list name="IdentificationsForm" list="partyIdentificationList" transition="updatePartyIdentification">
+                                    <row-actions>
+                                        <entity-find entity-name="mantle.party.PartyIdentification" list="dupIdList">
+                                            <econdition field-name="partyId" operator="not-equals"/>
+                                            <econdition field-name="partyIdTypeEnumId"/><econdition field-name="idValue"/></entity-find>
+                                    </row-actions>
                                     <field name="partyId"><default-field><hidden/></default-field></field>
                                     <field name="partyIdTypeEnumId"><default-field title="ID Type">
                                         <display-entity entity-name="moqui.basic.Enumeration"/>
                                     </default-field></field>
-                                    <field name="idValue"><default-field><text-line size="20"/></default-field></field>
+                                    <field name="idValue"><default-field><text-line size="20"/>
+                                        <label text="Duplicated in parties: ${dupIdList.partyId}" condition="dupIdList" style="text-danger"/>
+                                    </default-field></field>
                                     <field name="expireDate"><default-field><date-time type="date"/></default-field></field>
                                     <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
                                     <field name="removeButton"><default-field title="">
@@ -296,7 +307,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 <section-iterate name="EmailInfoSection" list="contactOut.emailAddressList" entry="contactInfo">
                                     <widgets>
                                         <container-row>
-                                            <row-col lg="4">
+                                            <row-col lg="6">
                                                 <dynamic-dialog id="UpdateEmailInfo" button-text="Update"
                                                         transition="updateContactInfo"
                                                         parameter-map="[partyId:partyId, emailContactMechId:contactInfo.emailContactMechId,
@@ -305,10 +316,8 @@ along with this software (see the LICENSE.md file). If not, see
                                                         parameter-map="[partyId:partyId, contactMechId:contactInfo.emailContactMechId,
                                                             contactMechPurposeId:contactInfo.emailContactMechPurposeId]"/>
                                             </row-col>
-                                            <row-col lg="4">
+                                            <row-col lg="6">
                                                 <label text="${contactInfo.emailContactMechPurpose.description}" type="p"/>
-                                            </row-col>
-                                            <row-col lg="4">
                                                 <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
                                             </row-col>
                                         </container-row>
@@ -327,7 +336,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 <section-iterate name="PhoneInfoSection" list="contactOut.telecomNumberList" entry="contactInfo">
                                     <widgets>
                                         <container-row>
-                                            <row-col lg="4">
+                                            <row-col lg="6">
                                                 <dynamic-dialog id="UpdatePhoneInfo" button-text="Update"
                                                         transition="updateContactInfo"
                                                         parameter-map="[partyId:partyId, telecomContactMechId:contactInfo.telecomContactMechId,
@@ -336,10 +345,8 @@ along with this software (see the LICENSE.md file). If not, see
                                                         parameter-map="[partyId:partyId, contactMechId:contactInfo.telecomContactMechId,
                                                             contactMechPurposeId:contactInfo.telecomContactMechPurposeId]"/>
                                             </row-col>
-                                            <row-col lg="4">
+                                            <row-col lg="6">
                                                 <label text="${contactInfo.telecomContactMechPurpose.description}" type="p"/>
-                                            </row-col>
-                                            <row-col lg="4">
                                                 <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
                                             </row-col>
                                         </container-row>
@@ -366,9 +373,9 @@ along with this software (see the LICENSE.md file). If not, see
                                                 <link url="removeContactInfo" text="Remove"
                                                         parameter-map="[partyId:partyId, contactMechId:contactInfo.postalContactMechId,
                                                             contactMechPurposeId:contactInfo.postalContactMechPurposeId]"/>
-                                                <label text="${contactInfo.postalContactMechPurpose.description}" type="p"/>
                                             </row-col>
                                             <row-col lg="6">
+                                                <label text="${contactInfo.postalContactMechPurpose.description}" type="p"/>
                                                 <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
                                             </row-col>
                                         </container-row>

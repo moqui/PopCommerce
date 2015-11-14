@@ -36,7 +36,10 @@ along with this software (see the LICENSE.md file). If not, see
                 <field name="ownerPartyId"><default-field title="Owner"><drop-down>
                     <entity-options key="${partyId}" text="${organizationName?:''}${firstName?:''} ${lastName?:''}">
                         <entity-find entity-name="mantle.party.PartyDetailAndRole">
-                            <econdition field-name="roleTypeId" value="OrgInternal"/></entity-find></entity-options>
+                            <econdition field-name="roleTypeId" value="OrgInternal"/>
+                            <econdition field-name="disabled" value="N" or-null="true"/>
+                            <order-by field-name="organizationName"/>
+                        </entity-find></entity-options>
                 </drop-down></default-field></field>
 
                 <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
@@ -64,7 +67,10 @@ along with this software (see the LICENSE.md file). If not, see
                 <header-field title="Owner" show-order-by="true"><drop-down allow-empty="true">
                     <entity-options key="${partyId}" text="${organizationName?:''}${firstName?:''} ${lastName?:''} [${pseudoId}]">
                         <entity-find entity-name="mantle.party.PartyDetailAndRole">
-                            <econdition field-name="roleTypeId" value="OrgInternal"/></entity-find></entity-options>
+                            <econdition field-name="roleTypeId" value="OrgInternal"/>
+                            <econdition field-name="disabled" value="N" or-null="true"/>
+                            <order-by field-name="organizationName"/>
+                        </entity-find></entity-options>
                 </drop-down></header-field>
                 <default-field><display-entity entity-name="mantle.party.PartyDetail"
                         text="${organizationName?:''}${firstName?:''} ${lastName?:''}[${pseudoId}]]"/></default-field>

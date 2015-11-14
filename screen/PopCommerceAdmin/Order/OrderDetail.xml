@@ -435,11 +435,11 @@ along with this software (see the LICENSE.md file). If not, see
                                     <field name="orderId"><default-field><hidden/></default-field></field>
                                     <field name="orderPartSeqId" entry-name="orderPartInfo.orderPart.orderPartSeqId"><default-field><hidden/></default-field></field>
 
-                                    <field name="paymentMethodTypeEnumId"><default-field title="Payment Type">
-                                        <drop-down allow-empty="true" no-current-selected-key="PmtCompanyCheck">
+                                    <field name="paymentInstrumentEnumId"><default-field title="Instrument">
+                                        <drop-down allow-empty="true" no-current-selected-key="PiCompanyCheck">
                                             <entity-options key="${enumId}" text="${description}">
                                                 <entity-find entity-name="moqui.basic.Enumeration">
-                                                    <econdition field-name="enumTypeId" value="PaymentMethodType"/></entity-find>
+                                                    <econdition field-name="enumTypeId" value="PaymentInstrument"/></entity-find>
                                             </entity-options></drop-down>
                                     </default-field></field>
                                     <field name="paymentMethodId"><default-field title="Payment Method"><drop-down allow-empty="true">

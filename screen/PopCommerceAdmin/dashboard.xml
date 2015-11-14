@@ -41,6 +41,7 @@ along with this software (see the LICENSE.md file). If not, see
 
         <entity-find entity-name="mantle.party.PartyDetailAndRole" list="orgInternalList">
             <econdition field-name="roleTypeId" value="OrgInternal"/>
+            <econdition field-name="disabled" value="N" or-null="true"/>
             <order-by field-name="organizationName,firstName"/>
         </entity-find>
     </actions>
