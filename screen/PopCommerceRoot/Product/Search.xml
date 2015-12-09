@@ -19,7 +19,6 @@ along with this software (see the LICENSE.md file). If not, see
     <parameter name="category"/>
     <parameter name="keywords"/>
 
-    <transition name="search"><default-response url="."/></transition>
     <transition name="addToCart">
         <actions>
             <service-call name="mantle.order.OrderServices.add#OrderProductQuantity" out-map="addOut"
@@ -40,7 +39,7 @@ along with this software (see the LICENSE.md file). If not, see
         </if>
     </actions>
     <widgets>
-        <form-single name="HeaderSearch" focus-field="keywords" transition="search">
+        <form-single name="HeaderSearch" focus-field="keywords" transition=".">
             <field name="category"><default-field title="">
                 <drop-down allow-empty="true">
                     <entity-options key="${productCategoryId}" text="${categoryName}">
