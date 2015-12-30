@@ -68,7 +68,7 @@ along with this software (see the LICENSE.md file). If not, see
                             </default-field></field>
                             <field name="description">
                                 <conditional-field condition="productId">
-                                    <link text="${itemDescription} [${productId}]" url="/popc/Product/Detail/${productId}/${itemDescription?.replace(' ', '-')}" url-type="plain" link-type="anchor"/>
+                                    <link text="${itemDescription} [${productId}]" url="/popc/Product/Detail/${productId}/${itemDescription?.replace(' ', '-')}" link-type="anchor"/>
                                     <!-- <display-entity entity-name="Product" text="${productName} [${productId}]" also-hidden="false"/> -->
                                 </conditional-field>
                                 <default-field title="Description"><display text="${itemDescription}"/></default-field>
