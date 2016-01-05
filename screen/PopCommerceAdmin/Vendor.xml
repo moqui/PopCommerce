@@ -16,13 +16,13 @@ along with this software (see the LICENSE.md file). If not, see
         default-menu-title="Vendors" default-menu-index="20" menu-image="/popc/static/images/Vendor.png">
 
     <subscreens default-item="FindVendor">
-        <subscreens-item name="FindVendor" location="component://HiveMind/screen/HiveMindAdmin/Vendor/FindVendor.xml"
+        <subscreens-item name="FindVendor" location="component://SimpleScreens/screen/SimpleScreens/Vendor/FindVendor.xml"
                 menu-include="false"/>
-        <subscreens-item name="EditVendor" location="component://HiveMind/screen/HiveMindAdmin/Vendor/EditVendor.xml"
+        <subscreens-item name="EditVendor" location="component://SimpleScreens/screen/SimpleScreens/Vendor/EditVendor.xml"
                 menu-index="1" menu-title="Vendor"/>
-        <subscreens-item name="EditUsers" location="component://HiveMind/screen/HiveMindAdmin/Vendor/EditUsers.xml"
+        <subscreens-item name="EditUsers" location="component://SimpleScreens/screen/SimpleScreens/Vendor/EditUsers.xml"
                 menu-index="2" menu-title="Users"/>
-        <subscreens-item name="Accounting" location="component://HiveMind/screen/HiveMindAdmin/Vendor/Accounting.xml"
+        <subscreens-item name="Accounting" location="component://SimpleScreens/screen/SimpleScreens/Vendor/Accounting.xml"
                 menu-index="3" menu-title="Accounting"/>
     </subscreens>
 

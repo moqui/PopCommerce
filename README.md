@@ -18,12 +18,12 @@ the use of Moqui Framework and Mantle Business Artifacts entities and services
 for building eCommerce applications.
 
 POP Commerce is based on the Moqui Framework and Mantle Business Artifacts 
-projects. It reuses various ERP screens from the HiveMind Service ERP project. 
+projects. It reuses various ERP screens from the SimpleScreens project. 
 
 ### Running POP Commerce
 
 To run POP Commerce you need Moqui Framework, Mantle Business Artifacts, 
-and HiveMind as well as POP Commerce itself. Moqui supports a few methods 
+and SimpleScreens as well as POP Commerce itself. Moqui supports a few methods 
 for setup and deployment as described in the documentation here:
 
 <http://www.moqui.org/framework/docs/RunDeploy.html>
@@ -42,13 +42,14 @@ Note that with JDK 8 you don't need the -XX:MaxPermSize argument.
 
 ### Build and Run Locally
 
-To get the latest Moqui, Mantle, and POP Commerce and run locally you'll 
-need JDK 7 or later (Sun JDK 8 recommended), Gradle 2 or later, and either
+To get and locally run the latest Moqui, Mantle, SimpleScreens, and POP 
+Commerce you'll need JDK 7 or later (Oracle JDK 8 recommended), and either
 a git client or you can use the **ZIP** download links on each project page 
 on GitHub. The GitHub project pages are at:
 
 <https://github.com/moqui/moqui>
 <https://github.com/moqui/mantle>
+<https://github.com/moqui/SimpleScreens>
 <https://github.com/moqui/PopCommerce>
 
 Java can be downloaded here (make sure to use the Download button under
@@ -56,9 +57,9 @@ the **JDK** column, not the under the **JRE** column):
 
 <http://www.oracle.com/technetwork/java/javase/downloads/index.html>
 
-Gradle can be downloaded here (use a release before 2.0 in the Previous Releases section):
-
-<http://www.gradle.org/downloads>
+The following instructions use the Gradle Wrapper to build. You can 
+optionally download and install Gradle (from <http://www.gradle.org/downloads>)
+and use **gradle** instead of **./gradlew** in the example commands.
 
 To download Moqui/Mantle/PopCommerce source and build/run locally use the
 following steps:
@@ -84,16 +85,16 @@ located at **moqui/runtime/mantle**. If you use the Zip download change the
 name of the directory from **mantle-master** to **mantle** to make sure the
 directory under the **moqui/runtime** directory has the correct name.
 
-#### Step 3: Download HiveMind
+#### Step 3: Download SimpleScreens
 
-Zip: <https://github.com/moqui/HiveMind/archive/master.zip>
+Zip: <https://github.com/moqui/SimpleScreens/archive/master.zip>
 
-Git: <git://github.com/moqui/HiveMind.git>
+Git: <git://github.com/moqui/SimpleScreens.git>
 
-Put the **HiveMind** directory in the **moqui/runtime/component** directory so
-it is located at **moqui/runtime/component/HiveMind**. If you use the Zip
-download change the name of the directory from **HiveMind-master** to
-**HiveMind** to make sure the directory under the **moqui/runtime/component**
+Put the **SimpleScreens** directory in the **moqui/runtime/component** directory so
+it is located at **moqui/runtime/component/SimpleScreens**. If you use the Zip
+download change the name of the directory from **SimpleScreens-master** to
+**SimpleScreens** to make sure the directory under the **moqui/runtime/component**
 directory has the correct name.
 
 #### Step 4: Download POP Commerce
@@ -110,18 +111,18 @@ directory has the correct name.
 
 #### Step 5: Build and load seed and demo data
 
-From the **moqui** directory run **gradle load**.
+From the **moqui** directory run **./gradlew load**.
 
-This will build Moqui and load data from Moqui, Mantle, HiveMind, and POP 
+This will build Moqui and load data from Moqui, Mantle, SimpleScreens, and POP 
 Commerce into an embedded H2 database.
 
-#### Step 5: Run Moqui
+#### Step 6: Run Moqui
 
-From the **moqui** directory run **gradle run**.
+From the **moqui** directory run **./gradlew run**.
 
-#### Step 6: Access the POP Commerce application
+#### Step 7: Access the POP Commerce application
 
-In your browser go to:
+For the eCommerce application, in your browser go to:
 
 <http://localhost:8080/popc>
 
@@ -135,19 +136,17 @@ Use the button in the lower-left corner of the screen login as John Doe.
 
 Java 8 is recommended: <http://www.oracle.com/technetwork/java/javase/downloads/index.html>
 
-Gradle 2 or later recommended: <http://www.gradle.org/downloads>
-
 Here are command line steps, and you can do the same thing with a Git desktop app:
 
-    $ git clone git@github.com:moqui/moqui.git moqui
+    $ git clone git@github.com:moqui/moqui.git
     $ cd moqui/runtime/
-    $ git clone git@github.com:moqui/mantle.git mantle
+    $ git clone git@github.com:moqui/mantle.git
     $ cd component/
-    $ git clone git@github.com:moqui/HiveMind.git HiveMind
-    $ git clone git@github.com:moqui/PopCommerce.git PopCommerce
+    $ git clone git@github.com:moqui/SimpleScreens.git
+    $ git clone git@github.com:moqui/PopCommerce.git
     $ cd ../.. (to the moqui directory)
-    $ gradle load
-    $ gradle run
+    $ ./gradlew load
+    $ ./gradlew run
 
 Here are steps for a basic update:
 
@@ -155,14 +154,14 @@ Here are steps for a basic update:
     $ git pull
     $ cd runtime/mantle
     $ git pull
-    $ cd ../component/HiveMind
+    $ cd ../component/SimpleScreens
     $ git pull
     $ cd ../PopCommerce
     $ git pull
     $ cd ../../.. (to the moqui directory)
-    $ gradle cleanAll
-    $ gradle load
-    $ gradle run
+    $ ./gradlew cleanAll
+    $ ./gradlew load
+    $ ./gradlew run
 
 To access the eCommerce app go to something like <http://localhost:8080/popc> in a
 web browser. To access the admin app go to <http://localhost:8080/PopcAdmin>.

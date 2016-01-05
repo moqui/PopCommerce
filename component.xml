@@ -4,6 +4,4 @@
     <depends-on name="mantle-udm"/>
     <depends-on name="mantle-usl"/>
     <depends-on name="SimpleScreens"/>
-    <!-- TODO remove this dependency once screens are moved to SimpleScreens -->
-    <depends-on name="HiveMind"/>
 </component>

@@ -8,12 +8,13 @@ Release 1.0.1 - TBD
 POP Commerce 1.0.1 is a minor new feature and bug fix release.
 
 This release is based on Moqui Framework version TODO, Mantle Business
-Artifacts version TODO, and HiveMind version TODO.
+Artifacts version TODO, and SimpleScreens version TODO.
 
 TODO
 
 New Features:
 
+- Now uses the SimpleScreens project instead of HiveMind
 
 Bug Fixes:
 

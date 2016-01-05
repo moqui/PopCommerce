@@ -17,9 +17,9 @@ along with this software (see the LICENSE.md file). If not, see
         default-menu-title="Users" default-menu-index="4">
 
     <subscreens default-item="FindUser">
-        <subscreens-item name="FindUser" location="component://HiveMind/screen/HiveMindAdmin/User/FindUser.xml"
+        <subscreens-item name="FindUser" location="component://SimpleScreens/screen/SimpleScreens/User/FindUser.xml"
                 menu-include="false"/>
-        <subscreens-item name="EditUser" location="component://HiveMind/screen/HiveMindAdmin/User/EditUser.xml"
+        <subscreens-item name="EditUser" location="component://SimpleScreens/screen/SimpleScreens/User/EditUser.xml"
                 menu-index="1" menu-title="User"/>
     </subscreens>
 
