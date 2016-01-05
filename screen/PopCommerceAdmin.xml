@@ -16,7 +16,7 @@ along with this software (see the LICENSE.md file). If not, see
         menu-image="glyphicon glyphicon-shopping-cart" menu-image-type="icon">
     <always-actions><set field="appRoot" value="PopcAdmin"/></always-actions>
     <subscreens default-item="dashboard" always-use-full-path="true">
-        <subscreens-item name="Accounting" location="component://HiveMind/screen/HiveMindAdmin/Accounting.xml"
+        <subscreens-item name="Accounting" location="component://SimpleScreens/screen/SimpleScreens/Accounting.xml"
                 menu-index="21" menu-title="Accounting"/>
     </subscreens>
     <widgets>
