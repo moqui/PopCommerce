@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-This software is in the public domain under CC0 1.0 Universal plus a 
+This software is in the public domain under CC0 1.0 Universal plus a
 Grant of Patent License.
 
 To the extent possible under law, the author(s) have dedicated all
@@ -14,7 +14,13 @@ along with this software (see the LICENSE.md file). If not, see
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.6.xsd"
         default-menu-title="Catalog" default-menu-index="5" menu-image="/popc/static/images/Catalog.png">
-    <subscreens default-item="Product"/>
+    <subscreens default-item="Product">
+        <subscreens-item name="Category" location="component://SimpleScreens/screen/SimpleScreens/Catalog/Category.xml"/>
+        <subscreens-item name="Feature" location="component://SimpleScreens/screen/SimpleScreens/Catalog/Feature.xml"/>
+        <subscreens-item name="FeatureGroup" location="component://SimpleScreens/screen/SimpleScreens/Catalog/FeatureGroup.xml"/>
+        <subscreens-item name="Product" location="component://SimpleScreens/screen/SimpleScreens/Catalog/Product.xml"/>
+        <subscreens-item name="Search" location="component://SimpleScreens/screen/SimpleScreens/Catalog/Search.xml"/>
+    </subscreens>
     <widgets>
         <subscreens-panel id="CatalogPanel" type="popup"/>
     </widgets>
