@@ -23,7 +23,7 @@ along with this software (see the LICENSE.md file). If not, see
     </actions>
     <widgets>
         <render-mode>
-            <text type="xsl-fo" location="component://mantle-usl/template/order/Order.xsl-fo.ftl"
+            <text type="xsl-fo" location="component://SimpleScreens/template/order/Order.xsl-fo.ftl"
                     template="true" encode="false" no-boundary-comment="true"/>
         </render-mode>
     </widgets>

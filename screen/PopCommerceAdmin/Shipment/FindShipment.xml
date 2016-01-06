@@ -19,7 +19,7 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response url="../ShipmentDetail"/></transition>
     <transition name="shipmentDetail"><default-response url="../ShipmentDetail"/></transition>
 
-    <transition-include name="getPartyList" location="component://mantle-usl/template/party/PartyForms.xml"/>
+    <transition-include name="getPartyList" location="component://SimpleScreens/template/party/PartyForms.xml"/>
 
     <actions>
         <service-call name="org.moqui.impl.BasicServices.find#EnumerationByParent" out-map="incomingTypeOut"

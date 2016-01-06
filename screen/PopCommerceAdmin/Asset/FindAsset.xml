@@ -18,7 +18,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="assetDetail"><default-response url="../AssetDetail"/></transition>
     <transition name="editProduct"><default-response url="../../Catalog/Product/EditProduct"/></transition>
 
-    <transition-include name="getPartyList" location="component://mantle-usl/template/party/PartyForms.xml"/>
+    <transition-include name="getPartyList" location="component://SimpleScreens/template/party/PartyForms.xml"/>
 
     <actions>
         <entity-find entity-name="mantle.product.asset.AssetFindView" list="assetList">

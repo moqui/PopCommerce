@@ -23,7 +23,7 @@ along with this software (see the LICENSE.md file). If not, see
     </actions>
     <widgets>
         <render-mode>
-            <text type="xsl-fo" location="component://mantle-usl/template/shipment/ShipmentLoadPickAndPack.xsl-fo.ftl"
+            <text type="xsl-fo" location="component://SimpleScreens/template/shipment/ShipmentLoadPickAndPack.xsl-fo.ftl"
                     template="true" encode="false" no-boundary-comment="true"/>
         </render-mode>
     </widgets>

@@ -78,7 +78,7 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response url="."/></transition>
     <transition name="deleteOrderPartParty"><service-call name="delete#mantle.order.OrderPartParty"/>
         <default-response url="."/></transition>
-    <transition-include name="getPartyList" location="component://mantle-usl/template/party/PartyForms.xml"/>
+    <transition-include name="getPartyList" location="component://SimpleScreens/template/party/PartyForms.xml"/>
 
     <transition name="addProductItem"><service-call name="mantle.order.OrderServices.add#OrderProductQuantity"/>
         <default-response url="."/></transition>
@@ -190,7 +190,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </form-single>
                 </row-col>
                 <row-col lg="6">
-                    <section-include name="StatusHistorySection" location="component://mantle-usl/template/basic/StatusWidgets.xml"/>
+                    <section-include name="StatusHistorySection" location="component://SimpleScreens/template/basic/StatusWidgets.xml"/>
 
                     <section name="NotesSection"><widgets>
                         <container-box>
@@ -415,7 +415,7 @@ along with this software (see the LICENSE.md file). If not, see
                                     parameter-map="[facilityId:orderPartInfo.facility.facilityId]" link-type="anchor"
                                     condition="orderPartInfo.facility"/>
                         </container>
-                        <widgets><render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
+                        <widgets><render-mode><text type="html" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
                         <section-iterate name="OrderPartRoleSection" list="orderPartInfo.orderPartPartyList" entry="orderPartParty"><widgets>
                             <container>
                                 <link url="deleteOrderPartParty" text="X" link-type="hidden-form-link"
@@ -466,7 +466,7 @@ along with this software (see the LICENSE.md file). If not, see
                                             </form-single>
                                         </container-dialog>
                                         <link url="editPayment" text="Edit Payment ${partPaymentInfo.partPayment.paymentId}" parameter-map="[paymentId:partPaymentInfo.partPayment.paymentId]"/>
-                                        <render-mode><text type="html" location="component://mantle-usl/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
+                                        <render-mode><text type="html" location="component://SimpleScreens/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
                                     </container>
                                 </widgets>
                             </section-iterate>
@@ -490,7 +490,7 @@ along with this software (see the LICENSE.md file). If not, see
                                                 <render-mode><text type="html"><![CDATA[
                                                     <div class="text-center"><input type="radio" name="shippingPostalContactMechId_${orderPartInfo_index}" value="${contactInfo.postalContactMechId}"<#if checkRadio> checked="checked"</#if>></div>
                                                 ]]></text></render-mode>
-                                                <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                                                <render-mode><text type="html" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/></render-mode>
                                                 <dynamic-dialog id="UpdatePostalInfo" button-text="Update Address"
                                                         transition="updateContactInfo" width="800"
                                                         parameter-map="[partyId:customerPartyId, postalContactMechId:contactInfo.postalContactMechId,

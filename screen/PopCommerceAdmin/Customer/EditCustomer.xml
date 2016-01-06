@@ -278,7 +278,7 @@ along with this software (see the LICENSE.md file). If not, see
                                     <section-iterate name="BillingInfoSection" list="ppmiOut.methodInfoList" entry="methodInfo">
                                         <widgets>
                                             <container type="li">
-                                                <render-mode><text type="html" location="component://mantle-usl/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
+                                                <render-mode><text type="html" location="component://SimpleScreens/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
                                                 <dynamic-dialog id="UpdatePaymentMethodDialog" button-text="Update"
                                                         transition="updatePaymentMethodInfo" width="800"
                                                         parameter-map="[partyId:partyId, paymentMethodId:methodInfo.paymentMethodId]"/>
@@ -319,7 +319,7 @@ along with this software (see the LICENSE.md file). If not, see
                                             </row-col>
                                             <row-col lg="6">
                                                 <label text="${contactInfo.emailContactMechPurpose.description}" type="p"/>
-                                                <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                                                <render-mode><text type="html" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/></render-mode>
                                             </row-col>
                                         </container-row>
                                     </widgets>
@@ -348,7 +348,7 @@ along with this software (see the LICENSE.md file). If not, see
                                             </row-col>
                                             <row-col lg="6">
                                                 <label text="${contactInfo.telecomContactMechPurpose.description}" type="p"/>
-                                                <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                                                <render-mode><text type="html" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/></render-mode>
                                             </row-col>
                                         </container-row>
                                     </widgets>
@@ -377,7 +377,7 @@ along with this software (see the LICENSE.md file). If not, see
                                             </row-col>
                                             <row-col lg="6">
                                                 <label text="${contactInfo.postalContactMechPurpose.description}" type="p"/>
-                                                <render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode>
+                                                <render-mode><text type="html" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/></render-mode>
                                             </row-col>
                                         </container-row>
                                     </widgets>

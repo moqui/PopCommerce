@@ -24,7 +24,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="shipmentDetail"><default-response url="//apps/${appRoot}/Shipment/ShipmentDetail"/></transition>
     <transition name="picklistDetail"><default-response url="../PicklistDetail"/></transition>
 
-    <transition-include name="getPartyList" location="component://mantle-usl/template/party/PartyForms.xml"/>
+    <transition-include name="getPartyList" location="component://SimpleScreens/template/party/PartyForms.xml"/>
 
     <actions>
         <entity-find-one entity-name="mantle.work.effort.WorkEffort" value-field="workEffort"/>

@@ -29,7 +29,7 @@ along with this software (see the LICENSE.md file). If not, see
     <parameter name="orderId"/>
 
     <transition name="storeContactInfo"><service-call name="mantle.party.ContactServices.store#PartyContactInfo"/><default-response url=".."/></transition>
-    <transition-include name="getGeoCountryStates" location="component://mantle-usl/template/party/PartyForms.xml"/>
+    <transition-include name="getGeoCountryStates" location="component://SimpleScreens/template/party/PartyForms.xml"/>
 
     <actions>
         <if condition="postalContactMechId || telecomContactMechId || emailContactMechId">
@@ -46,7 +46,7 @@ along with this software (see the LICENSE.md file). If not, see
     </actions>
     <widgets>
         <form-single name="UpdateContactInfo" transition="storeContactInfo" map="contactInfoFlat"
-                extends="component://mantle-usl/template/party/PartyForms.xml#ContactInfo">
+                extends="component://SimpleScreens/template/party/PartyForms.xml#ContactInfo">
             <!-- this is needed for use in the sales OrderDetail screen -->
             <field name="orderId"><default-field><hidden/></default-field></field>
         </form-single>

@@ -45,14 +45,14 @@ along with this software (see the LICENSE.md file). If not, see
 
                                 <!-- shipping info -->
                                 <label text="${orderPartInfo.shipmentMethodEnum?.description ?: ''}" type="p"/>
-                                <widgets><render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
+                                <widgets><render-mode><text type="html" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
                             </container>
                             <container style="col-lg-4">
                                 <!-- payment info -->
                                 <section-iterate name="payment-info" list="orderPartInfo.partPaymentInfoList" entry="partPaymentInfo">
                                     <actions><set field="methodInfo" from="partPaymentInfo"/></actions>
                                     <widgets>
-                                        <render-mode><text type="html" location="component://mantle-usl/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
+                                        <render-mode><text type="html" location="component://SimpleScreens/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
                                     </widgets>
                                 </section-iterate>
                             </container>

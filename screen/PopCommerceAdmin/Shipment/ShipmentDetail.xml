@@ -17,7 +17,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <parameter name="shipmentId" required="true"/>
 
-    <transition-include name="getPartyList" location="component://mantle-usl/template/party/PartyForms.xml"/>
+    <transition-include name="getPartyList" location="component://SimpleScreens/template/party/PartyForms.xml"/>
     <transition name="updateShipment"><service-call name="mantle.shipment.ShipmentServices.update#ShipmentAndRouteSegment"/>
         <default-response url="."/></transition>
 
@@ -213,7 +213,7 @@ along with this software (see the LICENSE.md file). If not, see
                 </section>
             </row-col>
             <row-col lg="6">
-                <section-include name="StatusHistorySection" location="component://mantle-usl/template/basic/StatusWidgets.xml"/>
+                <section-include name="StatusHistorySection" location="component://SimpleScreens/template/basic/StatusWidgets.xml"/>
 
                 <container-box>
                     <box-header><label text="Content" type="h5"/></box-header>

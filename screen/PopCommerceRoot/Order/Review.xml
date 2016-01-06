@@ -42,7 +42,7 @@ along with this software (see the LICENSE.md file). If not, see
 
                         <!-- shipping info -->
                         <label text="${orderPartInfo.shipmentMethodEnum?.description ?: ''}" type="p"/>
-                        <widgets><render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
+                        <widgets><render-mode><text type="html" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
                     </panel-left>
                     <panel-center>
                         <!-- payment info -->
@@ -59,7 +59,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 <label text="${partPaymentInfo.creditCard?.firstNameOnCard} ${partPaymentInfo.creditCard?.lastNameOnCard}" type="p"/>
                                 <label text="${partPaymentInfo.creditCardTypeEnum?.description} ${cardNumber} ${partPaymentInfo.creditCard?.expireDate}" type="p"/>
 
-                                <widgets><render-mode><text type="html" location="component://mantle-usl/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
+                                <widgets><render-mode><text type="html" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/></render-mode></widgets>
                             </widgets>
                         </section-iterate>
                     </panel-center>

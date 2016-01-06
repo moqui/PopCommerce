@@ -107,7 +107,7 @@ along with this software (see the LICENSE.md file). If not, see
                 </form-single>
             </row-col>
             <row-col lg="8">
-                <section-include name="StatusChangeAndHistorySection" location="component://mantle-usl/template/basic/StatusWidgets.xml"/>
+                <section-include name="StatusChangeAndHistorySection" location="component://SimpleScreens/template/basic/StatusWidgets.xml"/>
             </row-col>
         </container-row>
 
@@ -183,7 +183,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 <container-row>
                                     <row-col lg="5">
                                         <section-include name="AssetStatusChangeAndHistorySection"
-                                                location="component://mantle-usl/template/basic/StatusWidgets.xml#StatusChangeSection"/>
+                                                location="component://SimpleScreens/template/basic/StatusWidgets.xml#StatusChangeSection"/>
                                     </row-col>
                                     <row-col lg="7">
                                         <form-single name="UpdateAssetAssign" transition="updateAssetAssign" map="assetAssign">
