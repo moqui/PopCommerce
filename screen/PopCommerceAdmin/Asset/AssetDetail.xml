@@ -25,7 +25,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="findTransactionEntry"><default-response url="//${appRoot}/Accounting/Transaction/FindTransactionEntry"/></transition>
 
     <transition-include name="getPartyList" location="component://mantle-usl/template/party/PartyForms.xml"/>
-    <transition-include name="getProductList" location="component://PopCommerce/screen/PopCommerceAdmin/Catalog/Product/EditAssocs.xml"/>
+    <transition-include name="getProductList" location="component://SimpleScreens/screen/SimpleScreens/Catalog/Product/EditAssocs.xml"/>
 
     <actions>
         <service-call name="mantle.product.AssetServices.get#AssetDisplayInfo" in-map="context" out-map="context"/>
