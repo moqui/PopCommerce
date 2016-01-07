@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a 
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.6.xsd"
+        default-menu-index="13" menu-image="/popc/static/images/Accounting.png">
+
+    <subscreens default-item="Invoice">
+        <subscreens-item name="Invoice" menu-index="1"
+                location="component://SimpleScreens/screen/SimpleScreens/Accounting/Invoice.xml"/>
+        <subscreens-item name="Payment" menu-index="2"
+                location="component://SimpleScreens/screen/SimpleScreens/Accounting/Payment.xml"/>
+        <subscreens-item name="FinancialAccount" menu-index="3" menu-title="Financial Accounts"
+                location="component://SimpleScreens/screen/SimpleScreens/Accounting/FinancialAccount.xml"/>
+        <subscreens-item name="Transaction" menu-index="4"
+                location="component://SimpleScreens/screen/SimpleScreens/Accounting/Transaction.xml"/>
+        <subscreens-item name="FindJournal" menu-index="5"
+                location="component://SimpleScreens/screen/SimpleScreens/Accounting/FindJournal.xml"/>
+        <subscreens-item name="TimePeriod" menu-index="6"
+                location="component://SimpleScreens/screen/SimpleScreens/Accounting/TimePeriod.xml"/>
+        <subscreens-item name="GlAccount" menu-index="10"
+                location="component://SimpleScreens/screen/SimpleScreens/Accounting/GlAccount.xml"/>
+        <subscreens-item name="Reports" menu-index="20"
+                location="component://SimpleScreens/screen/SimpleScreens/Accounting/Reports.xml"/>
+    </subscreens>
+
+    <widgets>
+        <subscreens-panel id="accounting-panel" type="popup"/>
+    </widgets>
+</screen>
