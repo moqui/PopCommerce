@@ -15,7 +15,16 @@ along with this software (see the LICENSE.md file). If not, see
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.6.xsd"
         default-menu-index="10" menu-image="/popc/static/images/Facility.png">
 
-    <subscreens default-item="FindFacility"/>
+    <subscreens default-item="FindFacility">
+        <subscreens-item name="FindFacility" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Facility/FindFacility.xml"/>
+        <subscreens-item name="EditFacility" menu-index="1"
+                location="component://SimpleScreens/screen/SimpleScreens/Facility/EditFacility.xml"/>
+        <subscreens-item name="EditFacilityLocations" menu-index="2"
+                location="component://SimpleScreens/screen/SimpleScreens/Facility/EditFacilityLocations.xml"/>
+        <subscreens-item name="FacilityCalendar" menu-index="3"
+                location="component://SimpleScreens/screen/SimpleScreens/Facility/FacilityCalendar.xml"/>
+    </subscreens>
     <widgets>
         <subscreens-panel id="FacilityPanel" type="tab"/>
     </widgets>
