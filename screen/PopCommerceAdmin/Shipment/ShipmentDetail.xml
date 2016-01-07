@@ -60,7 +60,8 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response type="none"/>
     </transition>
 
-    <transition-include name="getProductList" location="component://PopCommerce/screen/PopCommerceAdmin/Catalog/Product/EditAssocs.xml"/>
+    <transition-include name="getProductList" location="component://SimpleScreens/screen/SimpleScreens/Catalog/Product/EditAssocs.xml"/>
+
     <transition name="addItem"><service-call name="mantle.shipment.ShipmentServices.create#ShipmentItem"/><default-response url="."/></transition>
     <transition name="updateItem"><service-call name="mantle.shipment.ShipmentServices.update#ShipmentItem"/><default-response url="."/></transition>
     <transition name="packItem"><service-call name="mantle.shipment.ShipmentServices.pack#ShipmentProduct"/><default-response url="."/></transition>
