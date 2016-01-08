@@ -15,25 +15,10 @@ along with this software (see the LICENSE.md file). If not, see
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.6.xsd"
         default-menu-title="Dashboard" default-menu-index="1" menu-image="glyphicon glyphicon-dashboard" menu-image-type="icon">
 
-    <transition name="Supplier"><default-response url="../Supplier"/></transition>
-    <transition name="Customer"><default-response url="../Customer"/></transition>
-    <transition name="Order"><default-response url="../Order"/></transition>
-    <transition name="Picking"><default-response url="../Picking"/></transition>
-    <transition name="Shipment"><default-response url="../Shipment"/></transition>
-
-    <transition name="Catalog"><default-response url="../Catalog"/></transition>
-    <transition name="Facility"><default-response url="../Facility"/></transition>
-    <transition name="Asset"><default-response url="../Asset"/></transition>
-    <transition name="Vendor"><default-response url="../Vendor"/></transition>
-    <transition name="Accounting"><default-response url="../Accounting"/></transition>
     <transition name="Reports"><default-response url="../Accounting/Reports"/></transition>
-
     <transition name="editVendor"><default-response url="../Vendor/EditVendor"/></transition>
     <transition name="findInvoice"><default-response url="../Accounting/Invoice/FindInvoice"/></transition>
 
-    <pre-actions>
-        <script>html_scripts.add('/assets/lib/sparkline/jquery.sparkline.min.js')</script>
-    </pre-actions>
     <actions>
         <entity-find entity-name="mantle.work.effort.WorkEffort" list="projectList">
             <econdition field-name="workEffortTypeEnumId" value="WetProject"/>
@@ -51,43 +36,43 @@ along with this software (see the LICENSE.md file). If not, see
             <panel-left>
                 <label text="Operate" type="h3"/>
                 <container>
-                    <link url="Supplier" link-type="anchor"><image url="/popc/static/images/Supplier.png" url-type="screen"/></link>
-                    <link text="Suppliers" url="Supplier" link-type="anchor"/>
+                    <link url="../Supplier" link-type="anchor"><image url="/popc/static/images/Supplier.png" url-type="screen"/></link>
+                    <link text="Suppliers" url="../Supplier" link-type="anchor"/>
                 </container>
                 <container>
-                    <link url="Order" link-type="anchor" parameter-map="[customerRoleTypeId:'OrgInternal']">
+                    <link url="../Order" link-type="anchor" parameter-map="[customerRoleTypeId:'OrgInternal']">
                         <image url="/popc/static/images/Purchasing.png" url-type="screen"/></link>
-                    <link text="Purchasing" url="Order" link-type="anchor" parameter-map="[customerRoleTypeId:'OrgInternal']"/>
+                    <link text="Purchasing" url="../Order" link-type="anchor" parameter-map="[customerRoleTypeId:'OrgInternal']"/>
                 </container>
                 <container>
-                    <link url="Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']">
+                    <link url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']">
                         <image url="/popc/static/images/Receiving.png" url-type="screen"/></link>
-                    <link text="Receiving" url="Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']"/>
+                    <link text="Receiving" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']"/>
                 </container>
                 <container>
-                    <link url="Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']">
+                    <link url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']">
                         <image url="/popc/static/images/Inventory.png" url-type="screen"/></link>
-                    <link text="Inventory" url="Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']"/>
+                    <link text="Inventory" url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']"/>
                 </container>
 
                 <container>
-                    <link url="Customer" link-type="anchor"><image url="/popc/static/images/Customer.png" url-type="screen"/></link>
-                    <link text="Customers" url="Customer" link-type="anchor"/>
+                    <link url="../Customer" link-type="anchor"><image url="/popc/static/images/Customer.png" url-type="screen"/></link>
+                    <link text="Customers" url="../Customer" link-type="anchor"/>
                 </container>
                 <container>
-                    <link url="Order" link-type="anchor" parameter-map="[vendorRoleTypeId:'OrgInternal']">
+                    <link url="../Order" link-type="anchor" parameter-map="[vendorRoleTypeId:'OrgInternal']">
                         <image url="/popc/static/images/Sales.png" url-type="screen"/></link>
-                    <link text="Sales" url="Order" link-type="anchor" parameter-map="[vendorRoleTypeId:'OrgInternal']"/>
+                    <link text="Sales" url="../Order" link-type="anchor" parameter-map="[vendorRoleTypeId:'OrgInternal']"/>
                 </container>
                 <container>
-                    <link url="Picking" link-type="anchor">
+                    <link url="../Picking" link-type="anchor">
                         <image url="/popc/static/images/Picking.png" url-type="screen"/></link>
-                    <link text="Picking" url="Picking" link-type="anchor"/>
+                    <link text="Picking" url="../Picking" link-type="anchor"/>
                 </container>
                 <container>
-                    <link url="Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']">
+                    <link url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']">
                         <image url="/popc/static/images/Shipping.png" url-type="screen"/></link>
-                    <link text="Shipping" url="Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']"/>
+                    <link text="Shipping" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']"/>
                 </container>
             </panel-left>
 
@@ -134,24 +119,24 @@ along with this software (see the LICENSE.md file). If not, see
             <panel-right>
                 <label text="Manage" type="h3"/>
                 <container>
-                    <link url="Catalog" link-type="anchor"><image url="/popc/static/images/Catalog.png" url-type="screen"/></link>
-                    <link text="Catalog" url="Catalog" link-type="anchor"/>
+                    <link url="../Catalog" link-type="anchor"><image url="/popc/static/images/Catalog.png" url-type="screen"/></link>
+                    <link text="Catalog" url="../Catalog" link-type="anchor"/>
                 </container>
                 <container>
-                    <link url="Facility" link-type="anchor"><image url="/popc/static/images/Facility.png" url-type="screen"/></link>
-                    <link text="Facilities" url="Facility" link-type="anchor"/>
+                    <link url="../Facility" link-type="anchor"><image url="/popc/static/images/Facility.png" url-type="screen"/></link>
+                    <link text="Facilities" url="../Facility" link-type="anchor"/>
                 </container>
                 <container>
-                    <link url="Asset" link-type="anchor"><image url="/popc/static/images/Asset.png" url-type="screen"/></link>
-                    <link text="Assets" url="Asset" link-type="anchor"/>
+                    <link url="../Asset" link-type="anchor"><image url="/popc/static/images/Asset.png" url-type="screen"/></link>
+                    <link text="Assets" url="../Asset" link-type="anchor"/>
                 </container>
                 <container>
-                    <link url="Vendor" link-type="anchor"><image url="/popc/static/images/Vendor.png" url-type="screen"/></link>
-                    <link text="Vendor(s)" url="Vendor" link-type="anchor"/>
+                    <link url="../Vendor" link-type="anchor"><image url="/popc/static/images/Vendor.png" url-type="screen"/></link>
+                    <link text="Vendor(s)" url="../Vendor" link-type="anchor"/>
                 </container>
                 <container>
-                    <link url="Accounting" link-type="anchor"><image url="/popc/static/images/Accounting.png" url-type="screen"/></link>
-                    <link text="Accounting" url="Accounting" link-type="anchor"/>
+                    <link url="../Accounting" link-type="anchor"><image url="/popc/static/images/Accounting.png" url-type="screen"/></link>
+                    <link text="Accounting" url="../Accounting" link-type="anchor"/>
                 </container>
                 <container>
                     <link url="Reports" link-type="anchor"><image url="/popc/static/images/Reports.png" url-type="screen"/></link>
