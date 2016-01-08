@@ -16,7 +16,6 @@ along with this software (see the LICENSE.md file). If not, see
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.6.xsd"
         default-menu-include="false">
 
-    <transition name="findCustomer"><default-response url="."/></transition>
     <transition name="editCustomer"><default-response url="../EditCustomer"/></transition>
     <transition name="findOrder"><default-response url="../../Order/FindOrder"/></transition>
 
@@ -31,70 +30,23 @@ along with this software (see the LICENSE.md file). If not, see
     </actions>
     <widgets>
         <container-dialog id="FindOptionsDialog" button-text="Find Options">
-            <form-single name="FindOptionsForm" transition="findCustomer">
-                <field name="roleTypeId"><default-field><hidden/></default-field></field>
-                <field name="partyId"><default-field><text-line size="20"/></default-field></field>
-
-                <field name="combinedName"><default-field><text-line size="40"/></default-field></field>
-                <field name="organizationName"><default-field><text-line size="40"/></default-field></field>
-                <field name="firstName"><default-field><text-line size="40"/></default-field></field>
-                <field name="lastName"><default-field><text-line size="40"/></default-field></field>
-                <field name="username"><default-field><text-line size="40"/></default-field></field>
-
-                <field name="address1"><default-field><text-line size="40"/></default-field></field>
-                <field name="city"><default-field><text-line size="30"/></default-field></field>
-                <field name="stateProvinceGeoId">
-                    <default-field title="State">
-                        <drop-down allow-empty="true"><entity-options key="${toGeoId}" text="${geoName}">
-                            <entity-find entity-name="moqui.basic.GeoAssocAndToDetail">
-                                <econdition field-name="geoId" value="USA"/>
-                                <econdition field-name="geoAssocTypeEnumId" value="GAT_REGIONS"/>
-                                <order-by field-name="geoName"/>
-                            </entity-find>
-                        </entity-options></drop-down>
-                    </default-field>
-                </field>
-                <field name="postalCode"><default-field><text-line size="10"/></default-field></field>
-
-                <field name="emailAddress"><default-field><text-line size="40"/></default-field></field>
-                <field name="areaCode"><default-field><text-line size="5"/></default-field></field>
-                <field name="contactNumber"><default-field><text-line size="10"/></default-field></field>
-
-                <field name="submitButton"><default-field title="Find"><submit/></default-field></field>
-            </form-single>
+            <form-single name="FindOptionsForm" transition="."
+                    extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#FindOptionsForm"/>
         </container-dialog>
+
         <container-dialog id="CreatePersonDialog" button-text="New Person Customer">
-            <form-single name="CreatePersonForm" transition="createPerson">
-                <field name="roleTypeId"><default-field><hidden/></default-field></field>
-                <field name="firstName"><default-field><text-line size="30"/></default-field></field>
-                <field name="lastName"><default-field><text-line size="30"/></default-field></field>
-                <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
-            </form-single>
+            <form-single name="CreatePersonForm" transition="createPerson"
+                    extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#CreatePersonForm"/>
         </container-dialog>
         <container-dialog id="CreateOrganizationDialog" button-text="New Organization Customer">
-            <form-single name="CreateOrganizationForm" transition="createOrganization">
-                <field name="roleTypeId"><default-field><hidden/></default-field></field>
-                <field name="organizationName"><default-field><text-line size="30"/></default-field></field>
-                <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
-            </form-single>
+            <form-single name="CreateOrganizationForm" transition="createOrganization"
+                    extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#CreateOrganizationForm"/>
         </container-dialog>
 
-        <form-list name="CustomerListForm" list="partyIdList" list-entry="partyId" skip-form="true">
-            <row-actions>
-                <entity-find-one entity-name="mantle.party.PartyDetail" value-field="party"/>
-                <entity-find-one entity-name="moqui.security.UserAccount" value-field="userAccount">
-                    <field-map field-name="partyId"/></entity-find-one>
-            </row-actions>
-            <field name="pseudoId">
-                <header-field title="ID" show-order-by="case-insensitive"><text-find size="10" hide-options="true"/></header-field>
-                <default-field><link url="editCustomer" text="${party.pseudoId}"/></default-field>
-            </field>
-            <field name="combinedName">
-                <header-field title="Name" show-order-by="case-insensitive"><text-find size="20" hide-options="true"/></header-field>
-                <default-field><display text="PartyNameOnlyTemplate" text-map="party"/></default-field>
-            </field>
-            <field name="username"><default-field><display text="${userAccount?.username?:''}"/></default-field></field>
-
+        <form-list name="CustomerListForm" list="partyIdList" list-entry="partyId" skip-form="true"
+                extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#PartyListForm">
+            <field name="pseudoId"><default-field>
+                <link url="editCustomer" text="${party.pseudoId}"/></default-field></field>
             <field name="submitButton">
                 <header-field title="Find"><submit/></header-field>
                 <default-field><link url="findOrder" text="Sales Orders" parameter-map="[customerPartyId:partyId]"

@@ -14,7 +14,11 @@ along with this software (see the LICENSE.md file). If not, see
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.6.xsd"
         default-menu-title="Customers" default-menu-index="3" menu-image="/popc/static/images/Customer.png">
+
     <subscreens default-item="FindCustomer"/>
+
+    <pre-actions><set field="roleTypeId" value="Customer"/></pre-actions>
+
     <widgets>
         <subscreens-panel id="CustomerPanel" type="tab"/>
     </widgets>

@@ -43,24 +43,21 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response url="."/></transition>
 
     <subscreens><subscreens-item name="UpdateContactInfo"
-            location="component://PopCommerce/screen/PopCommerceAdmin/Customer/EditCustomer/UpdateContactInfo.xml"/></subscreens>
+            location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty/UpdateContactInfo.xml"/></subscreens>
 
     <actions>
         <entity-find-one entity-name="mantle.party.PartyDetail" value-field="party"/>
     </actions>
     <widgets>
-        <container-row>
-            <row-col lg="6">
-                <link url="findOrder" text="Orders" parameter-map="[vendorPartyId:partyId]"/>
+        <container-row><row-col lg="6">
+            <link url="findOrder" text="Orders" parameter-map="[vendorPartyId:partyId]"/>
 
-                <section-include name="EditPartySection" location="component://PopCommerce/screen/PopCommerceAdmin/Customer/EditCustomer.xml"/>
-                <section-include name="RolesSection" location="component://PopCommerce/screen/PopCommerceAdmin/Customer/EditCustomer.xml"/>
-                <section-include name="PartyIdentificationSection" location="component://PopCommerce/screen/PopCommerceAdmin/Customer/EditCustomer.xml"/>
-            </row-col>
-            <row-col lg="6">
-                <section-include name="ContactInfoSection" location="component://PopCommerce/screen/PopCommerceAdmin/Customer/EditCustomer.xml"/>
-                <section-include name="NotesSection" location="component://PopCommerce/screen/PopCommerceAdmin/Customer/EditCustomer.xml"/>
-            </row-col>
-        </container-row>
+            <section-include name="EditPartySection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="RolesSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="PartyIdentificationSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+        </row-col><row-col lg="6">
+            <section-include name="ContactInfoSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="NotesSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+        </row-col></container-row>
     </widgets>
 </screen>

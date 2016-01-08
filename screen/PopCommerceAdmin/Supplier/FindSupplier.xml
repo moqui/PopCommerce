@@ -15,7 +15,6 @@ along with this software (see the LICENSE.md file). If not, see
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.6.xsd"
         default-menu-include="false">
 
-    <transition name="findSupplier"><default-response url="."/></transition>
     <transition name="editSupplier"><default-response url="../EditSupplier"/></transition>
     <transition name="findOrder"><default-response url="../../Order/FindOrder"/></transition>
 
@@ -30,33 +29,23 @@ along with this software (see the LICENSE.md file). If not, see
     </actions>
     <widgets>
         <container-dialog id="FindOptionsDialog" button-text="Find Options">
-            <form-single name="FindOptionsForm" transition="findSupplier"
-                    extends="component://PopCommerce/screen/PopCommerceAdmin/Customer/FindCustomer.xml#FindOptionsForm">
-            </form-single>
+            <form-single name="FindOptionsForm" transition="."
+                    extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#FindOptionsForm"/>
         </container-dialog>
 
         <container-dialog id="CreatePersonDialog" button-text="New Person Supplier">
             <form-single name="CreatePersonForm" transition="createPerson"
-                    extends="component://PopCommerce/screen/PopCommerceAdmin/Customer/FindCustomer.xml#CreatePersonForm">
-            </form-single>
+                    extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#CreatePersonForm"/>
         </container-dialog>
         <container-dialog id="CreateOrganizationDialog" button-text="New Organization Supplier">
             <form-single name="CreateOrganizationForm" transition="createOrganization"
-                    extends="component://PopCommerce/screen/PopCommerceAdmin/Customer/FindCustomer.xml#CreateOrganizationForm">
-            </form-single>
+                    extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#CreateOrganizationForm"/>
         </container-dialog>
 
         <form-list name="SupplierListForm" list="partyIdList" list-entry="partyId" skip-form="true"
-                extends="component://PopCommerce/screen/PopCommerceAdmin/Customer/FindCustomer.xml#CustomerListForm">
-            <row-actions>
-                <entity-find-one entity-name="mantle.party.PartyDetail" value-field="party"/>
-                <entity-find-one entity-name="moqui.security.UserAccount" value-field="userAccount">
-                    <field-map field-name="partyId"/></entity-find-one>
-            </row-actions>
-
-            <field name="pseudoId">
-                <default-field><link url="editSupplier" text="${party.pseudoId}"/></default-field>
-            </field>
+                extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#PartyListForm">
+            <field name="pseudoId"><default-field>
+                <link url="editSupplier" text="${party.pseudoId}"/></default-field></field>
             <field name="submitButton">
                 <header-field title="Find"><submit/></header-field>
                 <default-field><link url="findOrder" text="Purchase Orders" parameter-map="[vendorPartyId:partyId]"
