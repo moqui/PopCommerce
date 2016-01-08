@@ -15,7 +15,16 @@ along with this software (see the LICENSE.md file). If not, see
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.6.xsd"
         default-menu-title="Shipments" default-menu-index="8" menu-image="/popc/static/images/Shipping.png">
 
-    <subscreens default-item="FindShipment"/>
+    <subscreens default-item="FindShipment">
+        <subscreens-item name="FindShipment" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Shipment/FindShipment.xml"/>
+        <subscreens-item name="ShipmentDetail" menu-index="1"
+                location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentDetail.xml"/>
+        <subscreens-item name="ShipmentPack" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentPack.xml"/>
+        <subscreens-item name="ShipmentPick" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentPick.xml"/>
+    </subscreens>
 
     <widgets>
         <subscreens-active id="ShipmentPanel"/>
