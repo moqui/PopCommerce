@@ -1,3 +1,7 @@
+# gradle/build files
+build/
+.gradle
+
 # OSX auto files
 .DS_Store
 .AppleDouble

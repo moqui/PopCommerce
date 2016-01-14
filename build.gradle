@@ -1,0 +1,62 @@
+/*
+ * This software is in the public domain under CC0 1.0 Universal plus a 
+ * Grant of Patent License.
+ * 
+ * To the extent possible under law, the author(s) have dedicated all
+ * copyright and related and neighboring rights to this software to the
+ * public domain worldwide. This software is distributed without any
+ * warranty.
+ * 
+ * You should have received a copy of the CC0 Public Domain Dedication
+ * along with this software (see the LICENSE.md file). If not, see
+ * <http://creativecommons.org/publicdomain/zero/1.0/>.
+ */
+
+apply plugin: 'groovy'
+
+sourceCompatibility = '1.7'
+def moquiDir = file(projectDir.absolutePath + '/../../..')
+def frameworkDir = file(moquiDir.absolutePath + '/framework')
+
+// maybe in the future: repositories { mavenCentral() }
+repositories {
+    flatDir name: 'localLib', dirs: frameworkDir.absolutePath + '/lib'
+    flatDir name: 'localLibCamel', dirs: frameworkDir.absolutePath + '/lib/camel'
+    flatDir name: 'localLibFop', dirs: frameworkDir.absolutePath + '/lib/fop'
+    flatDir name: 'localLibSearch', dirs: frameworkDir.absolutePath + '/lib/search'
+    flatDir name: 'localLibKie', dirs: frameworkDir.absolutePath + '/lib/kie'
+    flatDir name: 'localLibOrientDb', dirs: frameworkDir.absolutePath + '/lib/orientdb'
+    flatDir name: 'moquiLib', dirs: frameworkDir.absolutePath + '/build/libs'
+}
+
+dependencies {
+    compile fileTree(dir: frameworkDir.absolutePath + '/lib', includes: ['*.jar'])
+    compile fileTree(dir: frameworkDir.absolutePath + '/lib/camel', includes: ['*.jar'])
+    compile fileTree(dir: frameworkDir.absolutePath + '/lib/fop', includes: ['*.jar'])
+    compile fileTree(dir: frameworkDir.absolutePath + '/lib/search', includes: ['*.jar'])
+    compile fileTree(dir: frameworkDir.absolutePath + '/lib/kie', includes: ['*.jar'])
+    compile fileTree(dir: frameworkDir.absolutePath + '/lib/orientdb', includes: ['*.jar'])
+    compile name: 'moqui-framework', version: version // CC0
+}
+
+// by default the Java plugin runs test on build, change to not do that (only run test if explicit task)
+check.dependsOn.remove(test)
+
+test {
+    dependsOn clean
+    dependsOn ':runtime/mantle/mantle-usl:test'
+
+    systemProperty 'moqui.runtime', moquiDir.absolutePath + '/runtime'
+    systemProperty 'moqui.conf', 'conf/MoquiDevTestConf.xml'
+    systemProperty 'moqui.init.static', 'true'
+    maxHeapSize = "256M"
+    jvmArgs '-XX:MaxPermSize=128m'
+
+    // show standard out and standard error of the test JVM(s) on the console
+    testLogging.showStandardStreams = true
+    testLogging.showExceptions = true
+
+    classpath += files(sourceSets.main.output.classesDir)
+
+    beforeTest { descriptor -> logger.lifecycle("Running test: ${descriptor}") }
+}
