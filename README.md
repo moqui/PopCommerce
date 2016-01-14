@@ -2,6 +2,7 @@
 ## POP (Plain-Old-Product) Commerce - Retail and Wholesale ERP and eCommerce
 
 [![license](http://img.shields.io/badge/license-CC0%201.0%20Universal-blue.svg)](https://github.com/moqui/PopCommerce/blob/master/LICENSE.md)
+[![build](https://travis-ci.org/moqui/PopCommerce.svg)](https://travis-ci.org/moqui/PopCommerce)
 [![release](http://img.shields.io/github/release/moqui/PopCommerce.svg)](https://github.com/moqui/PopCommerce/releases)
 [![commits since release](http://img.shields.io/github/commits-since/moqui/PopCommerce/v1.0.0.svg)](https://github.com/moqui/PopCommerce/commits/master)
 [![downloads](http://img.shields.io/github/downloads/moqui/PopCommerce/latest/total.svg)](https://github.com/moqui/PopCommerce/releases)
