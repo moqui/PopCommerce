@@ -32,8 +32,9 @@ along with this software (see the LICENSE.md file). If not, see
             <date-filter/><econdition field-name="productStoreId"/>
             <econdition field-name="storeCategoryTypeEnumId" value="PsctHomePage"/>
         </entity-find>
+        <set field="productCategoryId" from="pscList?.getAt(0)?.productCategoryId"/>
         <entity-find entity-name="ProductCategoryMemberProduct" list="pcmpList" cache="true">
-            <date-filter/><econdition field-name="productCategoryId" from="pscList?.getAt(0)?.productCategoryId"/>
+            <date-filter/><econdition field-name="productCategoryId" from="productCategoryId"/>
             <order-by field-name="sequenceNum"/><order-by field-name="productName"/>
         </entity-find>
     </actions>
@@ -50,7 +51,8 @@ along with this software (see the LICENSE.md file). If not, see
             
             <field name="productId"><default-field><hidden/></default-field></field>
             <field name="productName"><default-field title="">
-                <link text="${productName}" url="/popc/Product/Detail/${productId}/${productName?.replace(' ', '-')}" link-type="anchor"/>
+                <link text="${productName}" url="/popc/Product/Detail/${productId}/${productName?.replace(' ', '-')}"
+                        url-noparam="true" link-type="anchor"/>
             </default-field></field>
             <field name="price"><default-field title=""><display also-hidden="false" currency-unit-field="priceUomId"/></default-field></field>
             <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>

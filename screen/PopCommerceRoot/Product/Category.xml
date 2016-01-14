@@ -12,10 +12,56 @@ You should have received a copy of the CC0 Public Domain Dedication
 along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
-<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.6.xsd"
-        require-authentication="false">
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.6.xsd"
+        require-authentication="false" allow-extra-path="true">
+
+    <parameter name="productCategoryId" required="true"/>
+
+    <transition name="addToCart">
+        <actions>
+            <service-call name="mantle.order.OrderServices.add#OrderProductQuantity" out-map="addOut"
+                    in-map="[orderId:cartOrderId, productId:productId, quantity:quantity, customerPartyId:customerPartyId,
+                            currencyUomId:currencyUomId, productStoreId:productStoreId]"/>
+            <set field="ec.web.sessionAttributes.cartOrderId" from="addOut.orderId"/>
+        </actions>
+        <default-response url="../../Order/Cart"/>
+        <error-response url="."/>
+    </transition>
+
+    <pre-actions>
+        <set field="extraPathNameList" from="sri.screenUrlInfo.extraPathNameList"/>
+        <if condition="extraPathNameList &amp;&amp; !productCategoryId">
+            <set field="productCategoryId" from="extraPathNameList[0]"/></if>
+
+        <entity-find-one entity-name="mantle.product.category.ProductCategory" value-field="productCategory"/>
+        <set field="html_title" from="productCategory?.categoryName ?: ''"/>
+    </pre-actions>
+    <actions>
+        <entity-find entity-name="ProductCategoryMemberProduct" list="pcmpList" cache="true">
+            <date-filter/><econdition field-name="productCategoryId" from="productCategoryId"/>
+            <order-by field-name="sequenceNum"/><order-by field-name="productName"/>
+        </entity-find>
+    </actions>
     <widgets>
-        <label text="Category Listing" type="h1"/>
+        <label text="${productCategory.description ?: ''}" type="p"/>
+
+        <form-list name="CategoryProductList" list="pcmpList" transition="addToCart">
+            <row-actions>
+                <service-call name="mantle.product.PriceServices.get#ProductPrice" out-map="priceMap"
+                        in-map="[productId:productId, priceUomId:priceUomId, productStoreId:productStoreId,
+                                vendorPartyId:vendorPartyId, customerPartyId:customerPartyId]"/>
+                <set field="price" from="priceMap?.price"/>
+                <set field="priceUomId" from="priceMap?.priceUomId"/>
+            </row-actions>
+
+            <field name="productId"><default-field><hidden/></default-field></field>
+            <field name="productName"><default-field title="">
+                <link text="${productName}" url="/popc/Product/Detail/${productId}/${productName?.replace(' ', '-')}"
+                        url-noparam="true" link-type="anchor"/>
+            </default-field></field>
+            <field name="price"><default-field title=""><display also-hidden="false" currency-unit-field="priceUomId"/></default-field></field>
+            <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>
+            <field name="add"><default-field title="Add to Cart"><submit/></default-field></field>
+        </form-list>
     </widgets>
 </screen>
