@@ -104,9 +104,21 @@ class PopcAdminScreenTests extends Specification {
         // User
         "User/EditUser?partyId=EX_JOHN_DOE" | ['john.doe@test.com', 'John']
 
-        // TODO Catalog
+        // Catalog
+        "Catalog/Category/EditCategory?productCategoryId=DEMO_ONE" | ['Demo Category One']
+        "Catalog/Category/EditProducts?productCategoryId=DEMO_ONE" | ['Demo Product One-One', 'Asset (Good)']
+
+        "Catalog/Product/EditProduct?productId=DEMO_1_1" | ['Demo Product One-One', 'Shipping Weight']
+        "Catalog/Product/EditCategories?productId=DEMO_1_1" | ['Demo Category One', 'Catalog']
+        "Catalog/Product/EditAssocs?productId=DEMO_1_1" | []
+        "Catalog/Product/EditPrices?productId=DEMO_1_1" | ['ZiddlemanInc', '16.99']
+        "Catalog/Search?queryString=demo" | ['Demo Product One-One', 'Asset (Good)']
+
+        // TODO: Feature and FeatureGroup, need to add demo data
 
         // TODO Order
+        "Order/OrderDetail?orderId=55400" | ['$23,795.00', 'Shipment #55400', 'Demo Product One-One'] // Purchase Order
+        "Order/OrderDetail?orderId=55401" | ['Part Total $9,000.00', 'Shipment #55401', 'Picker Bot 2000'] // Sales Order
 
         // TODO Picking
 
