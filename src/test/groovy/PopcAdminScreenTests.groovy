@@ -116,13 +116,16 @@ class PopcAdminScreenTests extends Specification {
 
         // TODO: Feature and FeatureGroup, need to add demo data
 
-        // TODO Order
+        // Order
         "Order/OrderDetail?orderId=55400" | ['$23,795.00', 'Shipment #55400', 'Demo Product One-One'] // Purchase Order
-        "Order/OrderDetail?orderId=55401" | ['Part Total $9,000.00', 'Shipment #55401', 'Picker Bot 2000'] // Sales Order
+        "Order/PrintOrder?orderId=55400&renderMode=xsl-fo" | ['Ziziwork Retail', 'Demo Product', '$23,795.00']
+        "Order/OrderDetail?orderId=55401" | ['$9,000.00', 'Shipment #55401', 'Picker Bot 2000'] // Sales Order
 
-        // TODO Picking
+        // TODO Picking, call transitions or add other tests to create picklists, etc
 
-        // TODO Shipment
+        // Shipment
+        "Shipment/ShipmentDetail?shipmentId=55400" | ['Invoice #55400', 'Demo Product One-One'] // Incoming Shipment
+        "Shipment/ShipmentDetail?shipmentId=55401" | ['Order #55401', 'Picker Bot 2000'] // Outgoing Shipment
 
         // TODO Facility
 
