@@ -127,9 +127,14 @@ class PopcAdminScreenTests extends Specification {
         "Shipment/ShipmentDetail?shipmentId=55400" | ['Invoice #55400', 'Demo Product One-One'] // Incoming Shipment
         "Shipment/ShipmentDetail?shipmentId=55401" | ['Order #55401', 'Picker Bot 2000'] // Outgoing Shipment
 
-        // TODO Facility
+        // Facility
+        "Facility/EditFacility?facilityId=ORG_ZIZI_RETAIL_WH" | ['Ziziwork Retail Warehouse', '51 W. Center St.']
+        "Facility/EditFacilityLocations?facilityId=ORG_ZIZI_RETAIL_WH" | []
+        "Facility/FacilityCalendar?facilityId=ORG_ZIZI_RETAIL_WH" | []
 
-        // TODO Asset
+        // Asset
+        "Asset/AssetDetail?assetId=55400" | ['DEMO_1_1', 'ORG_ZIZI_RETAIL', 'Current: Available']
+        "Asset/AssetCalendar?assetId=55400" | []
 
         // Accounting/Invoice
         "Accounting/Invoice/FindInvoice?statusId_op=in&statusId=InvoiceReceived,InvoiceApproved&toPartyId=ORG_ZIZI_RETAIL" |
