@@ -15,7 +15,12 @@ along with this software (see the LICENSE.md file). If not, see
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.6.xsd"
         menu-image="glyphicon glyphicon-shopping-cart" menu-image-type="icon">
 
-    <always-actions><set field="appRoot" value="PopcAdmin"/></always-actions>
+    <always-actions>
+        <set field="appRoot" value="PopcAdmin"/>
+
+        <set field="searchIndexName" value="popc"/>
+        <set field="searchProductDocType" value="MantleProduct"/>
+    </always-actions>
     <subscreens default-item="dashboard" always-use-full-path="true"/>
 
     <widgets>
