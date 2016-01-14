@@ -7,17 +7,27 @@ Release 1.0.1 - TBD
 
 POP Commerce 1.0.1 is a minor new feature and bug fix release.
 
-This release is based on Moqui Framework version TODO, Mantle Business
-Artifacts version TODO, and SimpleScreens version TODO.
+This release is based on Moqui Framework version 1.6.0, Mantle Business
+Artifacts version 1.2.0, and SimpleScreens version 1.0.0.
 
 TODO
 
 New Features:
 
-- Now uses the SimpleScreens project instead of HiveMind
+- Added screen render tests, initially TODO renders
+- Added Travis CI configuration and setup automated builds
+- Various cleanups and fixes done while screen testing
+- Added financial reports based on newer report templates in SimpleScreens
+  and services in Mantle, improved existing reports; now includes Balance
+  Sheet, Cash Flow Statement, Income Statement, Retained Earnings, and
+  Financial Ratios/Metrics
+- Now uses the SimpleScreens project instead of HiveMind for Accounting,
+  Vendor, etc screens (new dependency on SimpleScreens, no longer depends
+  on HiveMind)
 
 Bug Fixes:
 
+- Fixed product search index and doc type to match DataDocument setup data
 
 ===========================================================================
 Release 1.0.0 - 11 Sep 2015
