@@ -2,7 +2,7 @@
 POP Commerce - Retail and Wholesale ERP and eCommerce - Release Notes
 
 ===========================================================================
-Release 1.0.1 - TBD
+Release 1.0.1 - 16 Jan 2016
 ===========================================================================
 
 POP Commerce 1.0.1 is a minor new feature and bug fix release.
@@ -10,11 +10,14 @@ POP Commerce 1.0.1 is a minor new feature and bug fix release.
 This release is based on Moqui Framework version 1.6.0, Mantle Business
 Artifacts version 1.2.0, and SimpleScreens version 1.0.0.
 
-TODO
+While there are a few new screens and improvements to the admin and
+ecommerce apps the main changes in this release are quality related. There
+are now screen render tests, run on every git push though Travis CI, and
+there were various fixes and improvements done while writing these tests.
 
 New Features:
 
-- Added screen render tests, initially TODO renders
+- Added screen render tests, initially 80 renders
 - Added Travis CI configuration and setup automated builds
 - Various cleanups and fixes done while screen testing
 - Added financial reports based on newer report templates in SimpleScreens
@@ -24,6 +27,7 @@ New Features:
 - Now uses the SimpleScreens project instead of HiveMind for Accounting,
   Vendor, etc screens (new dependency on SimpleScreens, no longer depends
   on HiveMind)
+- Added simple Category screen in ecommerce app
 
 Bug Fixes:
 
