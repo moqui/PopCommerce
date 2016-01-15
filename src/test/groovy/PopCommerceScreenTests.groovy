@@ -79,6 +79,24 @@ class PopCommerceScreenTests extends Specification {
 
         where:
         screenPath | containsTextList
+        // Home and Product
         "Home" | ['Search products', 'Demo Product One-Two', '$10,007.99']
+        "Product/Detail/DEMO_1_1/Demo-Product-One-One" | ['Demo Product One-One', '$16.99', 'Shipping Weight']
+        "Product/Category/DEMO_ONE" | ['Demo Product One Unit', '$1.00', 'Add to Cart']
+        "Product/Search?keywords=demo" | ['Demo Tenant 1 Month Subscription', '$12.12', 'Demo Category One']
+
+        // Customer
+        "Customer/Profile" | ['joe@public.com', 'Visa ************1111', '1350 E. Flamingo Rd. #2345']
+        "Customer/OrderHistory" | ['Completed', 'Approved', '55401']
+        "Customer/OrderDetail?orderId=55401" | ['$9,000.00', '1-702-234-5678', 'Picker Bot 2000']
+
+        // Checkout
+        "Home/addToCart?productId=DEMO_2_1&quantity=10" | []
+        "Order/Cart" | ['Demo Product Two-One', '$121.20']
+        "Order/Checkout" | ['Visa ************1111', '1350 E. Flamingo Rd. #2345', 'Ground Parcel $5.00']
+        "Order/Checkout/setOrderBillingShippingInfo?paymentMethodId=CustJqpCc&shippingPostalContactMechId=CustJqpAddr&carrierAndShipmentMethod=_NA_:ShMthGround" | []
+        "Order/Review" | ['Joe Q. Public', 'Demo Product Two-One', 'Shipping and Handling', 'Order Total: $126.20']
+        "Order/Review/placeOrder" | []
+        "Customer/OrderDetail?orderId=63200" | ['$126.20', '1-702-234-5678', 'Demo Product Two-One', 'Ground Parcel']
     }
 }
