@@ -56,7 +56,7 @@ along with this software (see the LICENSE.md file). If not, see
                                 <label text="${partPaymentInfo.paymentMethodTypeEnum?.description}" type="p"/>
                                 <label text="${ec.l10n.formatCurrency(partPaymentInfo.partPayment.amount, partPaymentInfo.partPayment.amountUomId, 2)}" type="p"/>
 
-                                <label text="${partPaymentInfo.creditCard?.firstNameOnCard} ${partPaymentInfo.creditCard?.lastNameOnCard}" type="p"/>
+                                <label text="${partPaymentInfo.paymentMethod?.firstNameOnAccount} ${partPaymentInfo.paymentMethod?.lastNameOnAccount}" type="p"/>
                                 <label text="${partPaymentInfo.creditCardTypeEnum?.description} ${cardNumber} ${partPaymentInfo.creditCard?.expireDate}" type="p"/>
 
                                 <widgets><render-mode><text type="html" location="component://SimpleScreens/template/party/ContactInfo.html.gstring"/></render-mode></widgets>

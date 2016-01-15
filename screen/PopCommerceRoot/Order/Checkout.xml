@@ -16,8 +16,10 @@ along with this software (see the LICENSE.md file). If not, see
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-1.6.xsd"
         require-authentication="true">
 
-    <transition name="setOrderBillingShippingInfo"><service-call name="mantle.order.OrderServices.set#OrderBillingShippingInfo"/>
-        <default-response url="../Review"/></transition>
+    <transition name="setOrderBillingShippingInfo">
+        <service-call name="mantle.order.OrderServices.set#OrderBillingShippingInfo" in-map="context + [orderId:cartOrderId]"/>
+        <default-response url="../Review"/>
+    </transition>
 
     <transition name="updateContactInfo"><default-response url="UpdateContactInfo"/></transition>
     <transition name="updatePaymentMethodInfo"><default-response url="UpdatePaymentMethodInfo"/></transition>
@@ -113,7 +115,6 @@ along with this software (see the LICENSE.md file). If not, see
         </container-box>
 
         <form-single name="SetOrderInfoForm" transition="setOrderBillingShippingInfo">
-            <field name="orderId" entry-name="cartOrderId"><default-field><hidden/></default-field></field>
             <field name="paymentMethodId"><default-field><hidden/></default-field></field>
             <field name="shippingPostalContactMechId"><default-field><hidden/></default-field></field>
             <field name="shippingTelecomContactMechId"><default-field><hidden/></default-field></field>

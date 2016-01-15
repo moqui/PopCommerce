@@ -29,6 +29,8 @@ along with this software (see the LICENSE.md file). If not, see
         <!-- some settings used when adding to cart, etc -->
         <set field="cartOrderId" from="ec.web.sessionAttributes.cartOrderId" set-if-empty="false"/>
         <set field="customerPartyId" from="ec.user.userAccount?.partyId"/>
+
+        <!-- <log message="cartOrderId=${cartOrderId}, customerPartyId=${customerPartyId}, vendorPartyId=${vendorPartyId}"/> -->
     </always-actions>
 
     <transition name="search"><default-response url="/popc/Product/Search"/></transition>
