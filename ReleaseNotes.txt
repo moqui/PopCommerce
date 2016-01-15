@@ -24,7 +24,7 @@ SimpleScreens.
 
 The eCommerce application currently has 16 screens and 20 forms. The admin
 application currently has 71 screens and 210 forms. POP Commerce has around
-3.5k lines of text, mostly in XML files (a small number in FTL).
+3.7k lines of text, mostly in XML files (a small number in FTL, Groovy).
 
 New Features:
 
