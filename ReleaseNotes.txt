@@ -15,6 +15,17 @@ ecommerce apps the main changes in this release are quality related. There
 are now screen render tests, run on every git push though Travis CI, and
 there were various fixes and improvements done while writing these tests.
 
+Many screens (around 4800 lines) were moved to the SimpleScreens project
+for more generic reuse. These changes help POP Commerce focus on being an
+industry specific suite of applications while making it easier for other
+applications to reuse more generic functionality that was in POP Commerce.
+POP Commerce also no longer depends on HiveMind with this move to
+SimpleScreens.
+
+The eCommerce application currently has 16 screens and 20 forms. The admin
+application currently has 71 screens and 210 forms. POP Commerce has around
+3.5k lines of text, mostly in XML files (a small number in FTL).
+
 New Features:
 
 - Added screen render tests, initially 80 renders
