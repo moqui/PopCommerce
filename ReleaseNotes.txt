@@ -2,7 +2,7 @@
 POP Commerce - Retail and Wholesale ERP and eCommerce - Release Notes
 
 ===========================================================================
-Release 1.0.1 - 16 Jan 2016
+Release 1.0.1 - 17 Jan 2016
 ===========================================================================
 
 POP Commerce 1.0.1 is a minor new feature and bug fix release.
