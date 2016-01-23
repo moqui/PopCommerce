@@ -2,6 +2,35 @@
 build/
 .gradle
 
+# IntelliJ IDEA files
+.idea/
+out/
+*.ipr
+*.iws
+*.iml
+
+# Eclipse files (and some general ones also used by Eclipse)
+.metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+
+# NetBeans files
+nbproject/private/
+nbbuild/
+.nb-gradle/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
 # OSX auto files
 .DS_Store
 .AppleDouble
