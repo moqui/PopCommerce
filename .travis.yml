@@ -3,6 +3,8 @@ language: groovy
 jdk:
   - oraclejdk7
 
+install: true
+
 before_script:
   - cd ..
   - git clone https://github.com/moqui/moqui.git
