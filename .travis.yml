@@ -7,17 +7,13 @@ install: true
 
 before_script:
   - cd ..
-  - git clone https://github.com/moqui/moqui.git
-  - cd moqui/runtime
-  - git clone https://github.com/moqui/mantle.git
-  - cd component
-  - git clone https://github.com/moqui/SimpleScreens.git
-  - git clone https://github.com/moqui/PopCommerce.git
-  - cd ../..
+  - git clone https://github.com/moqui/moqui-framework.git moqui
+  - cd moqui
 
 env:
   - TERM=dumb
 
 script:
+  - gradle getGit -Pcomponent=PopCommerce
   - gradle load
   - gradle runtime/component/PopCommerce:test
