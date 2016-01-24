@@ -34,7 +34,7 @@ check.dependsOn.remove(test)
 
 test {
     dependsOn clean
-    dependsOn ':runtime/mantle/mantle-usl:test'
+    dependsOn ':runtime/component/mantle-usl:test'
 
     systemProperty 'moqui.runtime', moquiDir.absolutePath + '/runtime'
     systemProperty 'moqui.conf', 'conf/MoquiDevTestConf.xml'
