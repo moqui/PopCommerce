@@ -2,10 +2,23 @@
 POP Commerce - Retail and Wholesale ERP and eCommerce - Release Notes
 
 ===========================================================================
+Release 1.0.3 - TBD
+===========================================================================
+
+POP Commerce Retail and Wholesale ERP and eCommerce 1.0.3 is a minor new
+feature and bug fix release.
+
+This release is based on Moqui Framework version TODO, mantle-udm TODO,
+mantle-usl TODO, and SimpleScreens TODO.
+
+TODO
+
+===========================================================================
 Release 1.0.2 - 24 Jan 2016
 ===========================================================================
 
-POP Commerce 1.0.2 is a minor new feature and bug fix release.
+POP Commerce Retail and Wholesale ERP and eCommerce 1.0.2 is a minor new
+feature and bug fix release.
 
 This release is based on Moqui Framework version 1.6.1, mantle-udm 1.0.0,
 mantle-usl 1.0.0, and SimpleScreens 1.0.1.
