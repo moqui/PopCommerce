@@ -7,8 +7,8 @@ Release 1.0.2 - 24 Jan 2016
 
 POP Commerce 1.0.2 is a minor new feature and bug fix release.
 
-This release is based on Moqui Framework version 1.6.1, Mantle Business
-Artifacts version 1.2.1, and Simple Screens version 1.0.1.
+This release is based on Moqui Framework version 1.6.1, mantle-udm 1.0.0,
+mantle-usl 1.0.0, and SimpleScreens 1.0.1.
 
 This release has only minor changes from the last, but has updates for the
 new Moqui Framework component management features and use of Bintray
