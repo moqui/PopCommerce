@@ -2,19 +2,17 @@
 POP Commerce - Retail and Wholesale ERP and eCommerce - Release Notes
 
 ===========================================================================
-Release 1.0.2 - TBD
+Release 1.0.2 - 24 Jan 2016
 ===========================================================================
 
 POP Commerce 1.0.2 is a minor new feature and bug fix release.
 
-This release is based on Moqui Framework version TODO, Mantle Business
-Artifacts version TODO, and Simple Screens version TODO.
+This release is based on Moqui Framework version 1.6.1, Mantle Business
+Artifacts version 1.2.1, and Simple Screens version 1.0.1.
 
-TODO
-
-New Features
-
-Bug Fixes
+This release has only minor changes from the last, but has updates for the
+new Moqui Framework component management features and use of Bintray
+JCenter for jar files instead of local ones (used in automated tests).
 
 ===========================================================================
 Release 1.0.1 - 17 Jan 2016
