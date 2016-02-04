@@ -4,7 +4,7 @@
 [![license](http://img.shields.io/badge/license-CC0%201.0%20Universal-blue.svg)](https://github.com/moqui/PopCommerce/blob/master/LICENSE.md)
 [![build](https://travis-ci.org/moqui/PopCommerce.svg)](https://travis-ci.org/moqui/PopCommerce)
 [![release](http://img.shields.io/github/release/moqui/PopCommerce.svg)](https://github.com/moqui/PopCommerce/releases)
-[![commits since release](http://img.shields.io/github/commits-since/moqui/PopCommerce/v1.0.1.svg)](https://github.com/moqui/PopCommerce/commits/master)
+[![commits since release](http://img.shields.io/github/commits-since/moqui/PopCommerce/v1.0.2.svg)](https://github.com/moqui/PopCommerce/commits/master)
 [![downloads](http://img.shields.io/github/downloads/moqui/PopCommerce/total.svg)](https://github.com/moqui/PopCommerce/releases)
 
 POP Commerce is a simple eCommerce application and an admin app to administer the eCommerce site and manage various 
