@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/moqui-conf-1.6.xsd"
-        name="PopCommerce" version="1.0.3">
+        name="PopCommerce" version="1.0.4">
     <depends-on name="mantle-udm"/>
     <depends-on name="mantle-usl"/>
     <depends-on name="SimpleScreens"/>
