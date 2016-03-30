@@ -32,8 +32,10 @@ along with this software (see the LICENSE.md file). If not, see
         </entity-find>
     </actions>
     <widgets>
-        <container-panel id="dashboard-panel" dynamic="true">
-            <panel-left>
+        <container-row>
+
+
+            <row-col md="2">
                 <label text="Operate" type="h3"/>
                 <container>
                     <link url="../Supplier" link-type="anchor"><image url="/popc/static/images/Supplier.png" url-type="screen"/></link>
@@ -74,9 +76,9 @@ along with this software (see the LICENSE.md file). If not, see
                         <image url="/popc/static/images/Shipping.png" url-type="screen"/></link>
                     <link text="Shipping" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']"/>
                 </container>
-            </panel-left>
+            </row-col>
 
-            <panel-center>
+            <row-col md="8">
                 <form-list name="OrgInternalForm" list="orgInternalList" skip-form="true">
                     <row-actions>
                         <entity-find entity-name="mantle.account.invoice.InvoiceSummary" list="recInvList">
@@ -114,9 +116,9 @@ along with this software (see the LICENSE.md file). If not, see
                                 parameter-map="[toPartyId:partyId, statusId:'InvoiceReceived,InvoiceApproved', statusId_op:'in']"/>
                     </default-field></field>
                 </form-list>
-            </panel-center>
+            </row-col>
 
-            <panel-right>
+            <row-col md="2">
                 <label text="Manage" type="h3"/>
                 <container>
                     <link url="../Catalog" link-type="anchor"><image url="/popc/static/images/Catalog.png" url-type="screen"/></link>
@@ -142,7 +144,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <link url="Reports" link-type="anchor"><image url="/popc/static/images/Reports.png" url-type="screen"/></link>
                     <link text="Reports" url="Reports" link-type="anchor"/>
                 </container>
-            </panel-right>
-        </container-panel>
+            </row-col>
+        </container-row>
     </widgets>
 </screen>

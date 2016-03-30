@@ -46,30 +46,16 @@ along with this software (see the LICENSE.md file). If not, see
     <moqui.screen.ScreenTheme screenThemeId="POPC_DEFAULT" screenThemeTypeEnumId="STT_POP_COMMERCE"
             description="POP Commerce Default Theme"/>
     <!-- NOTE: these default resources are from the Moqui default runtime webroot component -->
-    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="1" resourceTypeEnumId="STRT_STYLESHEET"
-            resourceValue="/assets/lib/bootstrap/css/bootstrap.min.css"/>
-    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="2" resourceTypeEnumId="STRT_STYLESHEET"
-            resourceValue="/assets/lib/Font-Awesome/css/font-awesome.min.css"/>
-    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="3" resourceTypeEnumId="STRT_STYLESHEET"
-            resourceValue="/assets/lib/jquery-ui/jquery-ui.min.css"/>
-    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="6" resourceTypeEnumId="STRT_STYLESHEET"
-            resourceValue="/assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css"/>
-    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="7" resourceTypeEnumId="STRT_STYLESHEET"
-            resourceValue="/assets/lib/chosen/chosen.min.css"/>
-    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="8" resourceTypeEnumId="STRT_STYLESHEET"
-            resourceValue="/assets/lib/jasny/css/jasny-bootstrap.min.css"/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="10" resourceTypeEnumId="STRT_STYLESHEET"
-            resourceValue="/assets/css/main.min.css"/>
-    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="11" resourceTypeEnumId="STRT_STYLESHEET"
-            resourceValue="/assets/css/theme.css"/>
+            resourceValue="/lib/jquery/themes/smoothness/theme.css"/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="20" resourceTypeEnumId="STRT_STYLESHEET"
-            resourceValue="/css/default.css"/>
+            resourceValue="/css/webroot-theme.css"/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="100" resourceTypeEnumId="STRT_HEADER_LOGO"
             resourceValue="/images/MoquiLogoSmall.png"/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="101" resourceTypeEnumId="STRT_SHORTCUT_ICON"
             resourceValue="/moqui.ico"/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="102" resourceTypeEnumId="STRT_BODY_CLASS"
-            resourceValue="bg-light lter"/>
+            resourceValue="bg-light"/>
 
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="110" resourceTypeEnumId="STRT_HEADER_TITLE"
             resourceValue="POP Commerce"/>
@@ -77,7 +63,7 @@ along with this software (see the LICENSE.md file). If not, see
             resourceValue="/popc/css/PopcDefault.css"/>
 
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="200" resourceTypeEnumId="STRT_FOOTER_ITEM">
-        <resourceValue><![CDATA[<h6><a href="http://www.moqui.org/" target="_blank">Built on Moqui Framework 1.6.3</a></h6>]]></resourceValue>
+        <resourceValue><![CDATA[<p><a href="http://www.moqui.org/" target="_blank">Built on Moqui Framework 1.6.3</a></p>]]></resourceValue>
     </moqui.screen.ScreenThemeResource>
 
     <!-- A skeleton record for the default store; this record is here just in case no demo/config data is loaded -->
