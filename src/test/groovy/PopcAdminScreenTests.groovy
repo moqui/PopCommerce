@@ -171,7 +171,7 @@ class PopcAdminScreenTests extends Specification {
         "Accounting/Reports/CashFlowStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100&detail=true" |
                 ["111100000: GENERAL CHECKING ACCOUNT", "182000000: ACCUMULATED DEPRECIATION - EQUIPMENT"]
         "Accounting/Reports/RetainedEarningsStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100" |
-                ["Net Earnings", "Ziziwork Retail Fiscal Month"]
+                ["Net Earnings", "Ziziwork Retail Fiscal"]
         "Accounting/Reports/FinancialRatios?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100" |
                 ["Total Assets", "Accounts Receivable"]
 
