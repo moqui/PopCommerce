@@ -1,7 +1,6 @@
 
 <div class="form-signin">
 
-<#-- <div class="text-center"><img src="assets/img/logo.png" alt="Metis Logo"></div> -->
 <div class="tab-content">
     <div id="login" class="tab-pane active">
         <form method="post" action="${sri.makeUrlByType("login", "transition", null, "false").getUrl()}" class="">
@@ -52,16 +51,3 @@
 </div>
 
 </div>
-
-<script>
-  $(document).ready(function() {
-    $('.list-inline li > a').click(function() {
-        var activeForm = $(this).attr('href') + ' > form';
-        $(activeForm).addClass('animated fadeIn');
-        //set timer to 1 seconds, after that, unload the magic animation
-        setTimeout(function() {
-            $(activeForm).removeClass('animated fadeIn');
-        }, 1000);
-    });
-  });
-</script>

@@ -56,27 +56,16 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response type="screen-last"/>
         <error-response url="."/>
     </transition>
-    <transition name="logout">
-        <actions><script>ec.user.logoutUser()</script></actions>
-        <default-response url="/popc"/>
-        <error-response url="."/>
-    </transition>
-    <transition name="resetPassword">
-        <service-call name="org.moqui.impl.UserServices.reset#Password"/>
-        <default-response url="."/>
-    </transition>
-    <transition name="changePassword">
-        <service-call name="org.moqui.impl.UserServices.update#Password"/>
-        <default-response url="../Login"/>
-        <error-response url="."/>
-    </transition>
-    <transition name="createAccount">
+    <transition name="logout"><actions><script>ec.user.logoutUser()</script></actions>
+        <default-response url="/popc"/><error-response url="."/></transition>
+    <transition name="resetPassword" require-session-token="false"><service-call name="org.moqui.impl.UserServices.reset#Password"/>
+        <default-response url="."/></transition>
+    <transition name="changePassword" require-session-token="false"><service-call name="org.moqui.impl.UserServices.update#Password"/>
+        <default-response url="../Login"/><error-response url="."/></transition>
+    <transition name="createAccount" require-session-token="false">
         <service-call name="mantle.party.PartyServices.create#Account" in-map="context + [roleTypeId:'Customer']"/>
-        <default-response type="screen-last"/>
-        <error-response url="."/>
+        <default-response type="screen-last"/><error-response url="."/>
     </transition>
-
-    <pre-actions><script>html_stylesheets.add('/assets/lib/animate/animate.min.css')</script></pre-actions>
 
     <widgets>
         <container style="login">

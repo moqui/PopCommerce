@@ -73,133 +73,108 @@ along with this software (see the LICENSE.md file). If not, see
         <service-call name="mantle.order.OrderServices.get#OrderItemsTotalCount" in-map="[orderId:cartOrderId]" out-map="context"/>
     </actions>
     <widgets>
-        <render-mode>
-            <text type="html" location="component://webroot/screen/includes/Header.html.ftl"/>
-        </render-mode>
+        <render-mode><text type="html" location="component://webroot/screen/includes/Header.html.ftl"/></render-mode>
 
-        <container id="wrap">
-            <container id="top">
+        <container id="top">
+            <render-mode><text type="html"><![CDATA[
+                <nav class="navbar navbar-inverse navbar-fixed-top"><#-- navbar-static-top -->
+                  <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <header class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <#assign headerLogoList = sri.getThemeValues("STRT_HEADER_LOGO")>
+                        <#if headerLogoList?has_content><a href="/popc/" class="navbar-brand"><img src="${headerLogoList?first}" alt="Home" height="50"></a></#if>
+                        <#assign headerTitleList = sri.getThemeValues("STRT_HEADER_TITLE")>
+                        <#if headerTitleList?has_content><a href="/popc" class="navbar-title">${headerTitleList?first}</a></#if>
+                    </header>
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+            ]]></text></render-mode>
+
+            <section name="CheckoutLink"><condition><expression>itemCount</expression></condition>
+                <widgets><link text="Checkout" url="/popc/Order/Checkout" link-type="anchor-button" icon="glyphicon glyphicon-circle-arrow-right" style="btn-success navbar-btn navbar-right"/></widgets>
+            </section>
+            <link text="Cart${itemCount ? ' (' + ec.l10n.format(itemCount, null) + (itemCount > 1 ? ' items)' : ' item)') : ''}"
+                    url="/popc/Order/Cart" link-type="anchor-button" icon="glyphicon glyphicon-shopping-cart" style="btn-success navbar-btn navbar-right"/>
+            <link text="Orders" url="/popc/Customer/OrderHistory" link-type="anchor-button" icon="glyphicon glyphicon-folder-open" style="navbar-btn navbar-right"/>
+            <link text="Profile" url="/popc/Customer/Profile" link-type="anchor-button" icon="glyphicon glyphicon-user" style="navbar-btn navbar-right"/>
+
+            <section name="HeaderUser"><condition><expression>ec.user.userId</expression></condition><widgets>
                 <render-mode><text type="html"><![CDATA[
-<nav class="navbar navbar-inverse navbar-fixed-top"><#-- navbar-static-top -->
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <header class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <#assign headerLogoList = sri.getThemeValues("STRT_HEADER_LOGO")>
-        <#if headerLogoList?has_content><a href="/popc/" class="navbar-brand"><img src="${headerLogoList?first}" alt="Home" height="50"></a></#if>
-        <#assign headerTitleList = sri.getThemeValues("STRT_HEADER_TITLE")>
-        <#if headerTitleList?has_content><a href="/popc" class="navbar-title">${headerTitleList?first}</a></#if>
-    </header>
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    ]]></text></render-mode>
+                    <a href="${sri.buildUrl("/popc/Login/logout").url}" data-toggle="tooltip" data-original-title="Logout ${(ec.getUser().getUserAccount().userFullName)!!}" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
+                        <i class="glyphicon glyphicon-off"></i></a>
+                ]]></text></render-mode>
 
-                <section name="CheckoutLink"><condition><expression>itemCount</expression></condition>
-                    <widgets><link text="Checkout" url="/popc/Order/Checkout" link-type="anchor-button" icon="glyphicon glyphicon-circle-arrow-right" style="btn-success navbar-btn navbar-right"/></widgets>
-                </section>
-                <link text="Cart${itemCount ? ' (' + ec.l10n.format(itemCount, null) + (itemCount > 1 ? ' items)' : ' item)') : ''}"
-                        url="/popc/Order/Cart" link-type="anchor-button" icon="glyphicon glyphicon-shopping-cart" style="btn-success navbar-btn navbar-right"/>
-                <link text="Orders" url="/popc/Customer/OrderHistory" link-type="anchor-button" icon="glyphicon glyphicon-folder-open" style="navbar-btn navbar-right"/>
-                <link text="Profile" url="/popc/Customer/Profile" link-type="anchor-button" icon="glyphicon glyphicon-user" style="navbar-btn navbar-right"/>
+                <!-- <link text="" url="/popc/Login/logout" link-type="hidden-form" icon="glyphicon glyphicon-off" style="btn-danger navbar-btn navbar-right"/> -->
+                <label text="Welcome ${ec.user.userAccount?.userFullName}!" style="navbar-text navbar-right"/>
+            </widgets></section>
 
-                <section name="HeaderUser"><condition><expression>ec.user.userId</expression></condition>
-                    <widgets>
-                        <render-mode><text type="html"><![CDATA[
-<a href="#" onclick="switchDarkLight();" data-toggle="tooltip" data-original-title="Switch Dark/Light" data-placement="bottom" class="btn btn-default btn-sm navbar-btn navbar-right">
-    <i class="glyphicon glyphicon-adjust"></i>
-</a>
-<script>
-    function switchDarkLight() {
-        $("body").toggleClass("bg-dark dk");
-        $("body").toggleClass("bg-light lter");
-        var currentStyle = $("body").hasClass("bg-dark dk") ? "bg-dark dk" : "bg-light lter";
-        $.ajax({ type:'POST', url:'/apps/setPreference', data:{ 'preferenceKey': 'OUTER_STYLE', 'preferenceValue': currentStyle }, dataType:'json' });
-    }
-</script>
-<a href="/popc/Login/logout" data-toggle="tooltip" data-original-title="Logout ${(ec.getUser().getUserAccount().userFullName)!!}" data-placement="bottom" class="btn btn-danger btn-sm navbar-btn navbar-right">
-    <i class="glyphicon glyphicon-off"></i>
-</a>
-                        ]]></text></render-mode>
-
-                        <!-- <link text="" url="/popc/Login/logout" link-type="hidden-form" icon="glyphicon glyphicon-off" style="btn-danger navbar-btn navbar-right"/> -->
-                        <label text="Welcome ${ec.user.userAccount?.userFullName}!" style="navbar-text navbar-right"/>
-                    </widgets>
-                </section>
-
-                <render-mode><text type="html"><![CDATA[
-    </div>
-  </div> <!-- container-fluid -->
-</nav><!-- /.navbar -->
-                    ]]></text></render-mode>
-
-                <render-mode><text type="html"><![CDATA[
-<header class="head bg-dark dk">
-  <div class="search-bar">
-    <form class="main-search" action="${sri.makeUrlByType('search', 'transition', null, null).url}">
-      <div class="input-group">
-        <input type="text" name="keywords" class="form-control" placeholder="Search products...">
-        <span class="input-group-btn"><button class="btn btn-primary btn-sm text-muted" type="button"><i class="fa fa-search"></i></button></span>
-      </div>
-    </form><!-- /.main-search -->
-  </div><!-- /.search-bar -->
-  <div class="main-bar">
-    <h3><i class="fa fa-building"></i>${html_title!((sri.screenUrlInfo.targetScreen.getDefaultMenuName())!"Page")}</h3>
-  </div><!-- /.main-bar -->
-</header>
-                    ]]></text></render-mode>
-            </container>
-
-            <!-- <container id="left"></container> -->
-            <container id="content">
-                <!-- <container style="outer"> -->
-                    <container style="inner">
-                        <section-iterate name="headerMessages" list="ec.message.messages" entry="message">
-                            <widgets><container style="message"><label text="${message}"/></container></widgets>
-                        </section-iterate>
-                        <section-iterate name="headerErrors" list="ec.message.errors" entry="errorMessage">
-                            <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
-                        </section-iterate>
-                        <section-iterate name="headerValidationErrors" list="ec.message.validationErrors" entry="validationError">
-                            <!-- TODO: put these by fields instead of in header -->
-                            <widgets><container style="message error"><label text="${validationError.message} (for field ${validationError.field})"/></container></widgets>
-                        </section-iterate>
-
-                        <section-iterate name="headerSavedMessages" list="ec.web?.savedMessages" entry="message">
-                            <widgets><container style="message"><label text="${message}"/></container></widgets>
-                        </section-iterate>
-                        <section-iterate name="headerSavedErrors" list="ec.web?.savedErrors" entry="errorMessage">
-                            <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
-                        </section-iterate>
-                        <section-iterate name="headerSavedValidationErrors" list="ec.web?.savedValidationErrors" entry="validationError">
-                            <!-- TODO: put these by fields instead of in header -->
-                            <widgets><container style="message error"><label text="${validationError.message} (for field ${validationError.field})"/></container></widgets>
-                        </section-iterate>
-
-                        <!-- the subscreen goes here -->
-                        <subscreens-active id="pop-commerce-root"/>
-                    </container>
-                <!-- </container> -->
-            </container>
-        </container>
-        <container id="footer" style="Footer bg-dark dker">
-            <render-mode><text type="html" template="true"><![CDATA[
-                    <#assign footerItemList = sri.getThemeValues("STRT_FOOTER_ITEM")>
-                    <div id="apps-footer-content">
-                        <#list footerItemList?if_exists as footerItem>
-                            ${footerItem}
-                        </#list>
+            <render-mode><text type="html"><![CDATA[
                     </div>
-                    <!-- productStoreId=${productStoreId}, currencyUomId=${currencyUomId}, priceUomId=${priceUomId}, defaultLocale=${defaultLocale} -->
-                    <!-- organizationPartyId=${organizationPartyId!!}, vendorPartyId=${vendorPartyId!!}, cartOrderId=${cartOrderId!!}, customerPartyId=${customerPartyId!!} -->
-                    ]]></text></render-mode>
+                  </div> <!-- container-fluid -->
+                </nav><!-- /.navbar -->
+            ]]></text></render-mode>
+        </container>
+        <container id="content">
+            <render-mode><text type="html"><![CDATA[
+                <header class="head bg-dark">
+                  <div class="search-bar">
+                    <form class="main-search" action="${sri.buildUrl('search').url}">
+                      <div class="input-group">
+                        <input type="text" name="keywords" class="form-control" placeholder="Search products...">
+                        <span class="input-group-btn"><button class="btn btn-primary text-muted" type="submit"><i class="fa fa-search"></i></button></span>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="main-bar"><h3>${html_title!((sri.screenUrlInfo.targetScreen.getDefaultMenuName())!"Page")}</h3></div>
+                </header>
+            ]]></text></render-mode>
+
+            <container style="inner"><container style="container-fluid">
+                <section-iterate name="headerMessages" list="ec.message.messages" entry="message">
+                    <widgets><container style="message"><label text="${message}"/></container></widgets>
+                </section-iterate>
+                <section-iterate name="headerErrors" list="ec.message.errors" entry="errorMessage">
+                    <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
+                </section-iterate>
+                <section-iterate name="headerValidationErrors" list="ec.message.validationErrors" entry="validationError">
+                    <!-- TODO: put these by fields instead of in header -->
+                    <widgets><container style="message error"><label text="${validationError.message} (for field ${validationError.field})"/></container></widgets>
+                </section-iterate>
+
+                <section-iterate name="headerSavedMessages" list="ec.web?.savedMessages" entry="message">
+                    <widgets><container style="message"><label text="${message}"/></container></widgets>
+                </section-iterate>
+                <section-iterate name="headerSavedErrors" list="ec.web?.savedErrors" entry="errorMessage">
+                    <widgets><container style="message error"><label text="${errorMessage}"/></container></widgets>
+                </section-iterate>
+                <section-iterate name="headerSavedValidationErrors" list="ec.web?.savedValidationErrors" entry="validationError">
+                    <!-- TODO: put these by fields instead of in header -->
+                    <widgets><container style="message error"><label text="${validationError.message} (for field ${validationError.field})"/></container></widgets>
+                </section-iterate>
+
+                <!-- the subscreen goes here -->
+                <subscreens-active/>
+            </container></container>
+        </container>
+        <container id="footer" style="bg-dark">
+            <render-mode><text type="html" template="true"><![CDATA[
+                <#assign footerItemList = sri.getThemeValues("STRT_FOOTER_ITEM")>
+                <div id="apps-footer-content">
+                    <#list footerItemList! as footerItem>
+                        <#assign footerItemTemplate = footerItem?interpret>
+                        <@footerItemTemplate/>
+                    </#list>
+                </div>
+                <!-- productStoreId=${productStoreId}, currencyUomId=${currencyUomId}, priceUomId=${priceUomId}, defaultLocale=${defaultLocale} -->
+                <!-- organizationPartyId=${organizationPartyId!!}, vendorPartyId=${vendorPartyId!!}, cartOrderId=${cartOrderId!!}, customerPartyId=${customerPartyId!!} -->
+            ]]></text></render-mode>
         </container>
 
-        <render-mode>
-            <text type="html" location="component://webroot/screen/includes/Footer.html.ftl"/>
-        </render-mode>
+        <render-mode><text type="html" location="component://webroot/screen/includes/Footer.html.ftl"/></render-mode>
     </widgets>
 </screen>
