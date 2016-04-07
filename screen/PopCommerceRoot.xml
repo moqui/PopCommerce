@@ -53,7 +53,7 @@ along with this software (see the LICENSE.md file). If not, see
         html_scripts.add('/lib/jquery-validation/additional-methods.min.js')
         html_scripts.add('/lib/jquery-form/jquery.form.min.js')
         // Date/Time (Moment, bootstrap-datetimepicker)
-        html_scripts.add('/lib/moment/moment.min.js')
+        html_scripts.add('/lib/moment/moment-with-locales.min.js')
         html_scripts.add('/lib/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')
         html_stylesheets.add('/lib/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')
         // Drop-down (Select2)
