@@ -35,7 +35,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <label text="Order #${orderId}, placed ${ec.l10n.format(orderHeader.placedDate ?: orderHeader.entryDate, 'd MMM yyyy')}" type="h2"/>
 
                 <!-- NOTE: this section-iterate is the same as on Review.xml -->
-                <section-iterate name="order-part-section" list="orderPartInfoList" entry="orderPartInfo">
+                <section-iterate name="OrderPartSection" list="orderPartInfoList" entry="orderPartInfo">
                     <actions><set field="contactInfo" from="orderPartInfo"/></actions>
                     <widgets>
                         <container style="row shaded-area">
@@ -49,7 +49,7 @@ along with this software (see the LICENSE.md file). If not, see
                             </container>
                             <container style="col-lg-4">
                                 <!-- payment info -->
-                                <section-iterate name="payment-info" list="orderPartInfo.partPaymentInfoList" entry="partPaymentInfo">
+                                <section-iterate name="PaymentInfoSection" list="orderPartInfo.partPaymentInfoList" entry="partPaymentInfo">
                                     <actions><set field="methodInfo" from="partPaymentInfo"/></actions>
                                     <widgets>
                                         <render-mode><text type="html" location="component://SimpleScreens/template/party/PaymentMethodInfo.html.gstring"/></render-mode>
