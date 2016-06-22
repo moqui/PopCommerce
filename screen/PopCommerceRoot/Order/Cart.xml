@@ -61,6 +61,6 @@ along with this software (see the LICENSE.md file). If not, see
             </default-field></field>
             <field name="updateCartButton"><default-field title="Update Cart"><submit/></default-field></field>
         </form-list>
-        <label text="Order Total: ${ec.l10n.formatCurrency(orderHeader?.grandTotal ?: 0, orderHeader?.currencyUomId, 2)}" type="h3"/>
+        <label text="Order Total: ${ec.l10n.formatCurrency(orderHeader?.grandTotal ?: 0, orderHeader?.currencyUomId)}" type="h3"/>
     </widgets>
 </screen>

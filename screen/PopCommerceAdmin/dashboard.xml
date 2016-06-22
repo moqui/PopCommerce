@@ -90,7 +90,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <set field="recDesc" value=""/>
                         <iterate list="recInvList" entry="recInv">
                             <if condition="recDesc"><set field="recDesc" from="recDesc + ', '"/></if>
-                            <set field="recDesc" from="recDesc + recInv.invoiceCount + ' Invoice' + (recInv.invoiceCount ? 's ' : ' ') + ec.l10n.formatCurrency(recInv.grandTotal, recInv.currencyUomId, 2)"/>
+                            <set field="recDesc" from="recDesc + recInv.invoiceCount + ' Invoice' + (recInv.invoiceCount ? 's ' : ' ') + ec.l10n.formatCurrency(recInv.grandTotal, recInv.currencyUomId)"/>
                         </iterate>
                         <entity-find entity-name="mantle.account.invoice.InvoiceSummary" list="pblInvList">
                             <econdition field-name="toPartyId" from="partyId"/>
@@ -101,7 +101,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <set field="pblDesc" value=""/>
                         <iterate list="pblInvList" entry="pblInv">
                             <if condition="pblDesc"><set field="pblDesc" from="pblDesc + ', '"/></if>
-                            <set field="pblDesc" from="pblDesc + pblInv.invoiceCount + ' Invoice' + (pblInv.invoiceCount ? 's ' : ' ') + ec.l10n.formatCurrency(pblInv.grandTotal, pblInv.currencyUomId, 2)"/>
+                            <set field="pblDesc" from="pblDesc + pblInv.invoiceCount + ' Invoice' + (pblInv.invoiceCount ? 's ' : ' ') + ec.l10n.formatCurrency(pblInv.grandTotal, pblInv.currencyUomId)"/>
                         </iterate>
                     </row-actions>
                     <field name="name"><default-field title="Internal Organization">

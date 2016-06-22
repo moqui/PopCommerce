@@ -38,7 +38,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <container-panel id="order-panel-${orderPartInfo.orderPart.orderPartSeqId}">
                     <panel-left>
                         <label text="Order Part ${orderPartInfo.orderPart.orderPartSeqId}" type="strong"/>
-                        <label text="Part Total ${ec.l10n.formatCurrency(orderHeader?.grandTotal ?: 0, orderHeader?.currencyUomId, 2)}" type="p"/>
+                        <label text="Part Total ${ec.l10n.formatCurrency(orderHeader?.grandTotal ?: 0, orderHeader?.currencyUomId)}" type="p"/>
 
                         <!-- shipping info -->
                         <label text="${orderPartInfo.shipmentMethodEnum?.description ?: ''}" type="p"/>
@@ -54,7 +54,7 @@ along with this software (see the LICENSE.md file). If not, see
                             </actions>
                             <widgets>
                                 <label text="${partPaymentInfo.paymentMethodTypeEnum?.description}" type="p"/>
-                                <label text="${ec.l10n.formatCurrency(partPaymentInfo.partPayment.amount, partPaymentInfo.partPayment.amountUomId, 2)}" type="p"/>
+                                <label text="${ec.l10n.formatCurrency(partPaymentInfo.partPayment.amount, partPaymentInfo.partPayment.amountUomId)}" type="p"/>
 
                                 <label text="${partPaymentInfo.paymentMethod?.firstNameOnAccount} ${partPaymentInfo.paymentMethod?.lastNameOnAccount}" type="p"/>
                                 <label text="${partPaymentInfo.creditCardTypeEnum?.description} ${cardNumber} ${partPaymentInfo.creditCard?.expireDate}" type="p"/>
@@ -88,7 +88,7 @@ along with this software (see the LICENSE.md file). If not, see
             </widgets>
         </section-iterate>
 
-        <label text="Order Total: ${ec.l10n.formatCurrency(orderHeader?.grandTotal ?: 0, orderHeader?.currencyUomId, 2)}" type="h3"/>
+        <label text="Order Total: ${ec.l10n.formatCurrency(orderHeader?.grandTotal ?: 0, orderHeader?.currencyUomId)}" type="h3"/>
 
         <container>
             <link text="Place Order" link-type="hidden-form" url="placeOrder"/>
