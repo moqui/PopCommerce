@@ -41,7 +41,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <container style="row shaded-area">
                             <container style="col-lg-4">
                                 <label text="Order Part ${orderPartInfo.orderPart.orderPartSeqId}" type="strong"/>
-                                <label text="Part Total ${ec.l10n.formatCurrency(orderPartInfo.orderPart.partTotal ?: 0, orderHeader?.currencyUomId, 2)}" type="p"/>
+                                <label text="Part Total ${ec.l10n.formatCurrency(orderPartInfo.orderPart.partTotal ?: 0, orderHeader?.currencyUomId)}" type="p"/>
 
                                 <!-- shipping info -->
                                 <label text="${orderPartInfo.shipmentMethodEnum?.description ?: ''}" type="p"/>
