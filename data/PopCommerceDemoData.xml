@@ -16,5 +16,5 @@ along with this software (see the LICENSE.md file). If not, see
     <!-- NOTE: other store/product demo data on Mantle in ZzcProductDemoData.xml -->
 
     <!-- index for search -->
-    <org.moqui.impl.EntityServices.indexDataFeedDocuments dataFeedId="PopCommerceSearch"/>
+    <org.moqui.elasticsearch.SearchServices.indexDataFeedDocuments dataFeedId="PopCommerceSearch"/>
 </entity-facade-xml>

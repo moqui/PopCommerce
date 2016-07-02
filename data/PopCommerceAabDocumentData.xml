@@ -26,7 +26,7 @@ along with this software (see the LICENSE.md file). If not, see
     <!-- ================ -->
     <!-- Search Data Feed -->
     <moqui.entity.feed.DataFeed dataFeedId="PopCommerceSearch" dataFeedTypeEnumId="DTFDTP_RT_PUSH"
-            feedName="PopCommerce Search" feedReceiveServiceName="org.moqui.impl.EntityServices.index#DataDocuments">
+            feedName="PopCommerce Search" feedReceiveServiceName="org.moqui.elasticsearch.SearchServices.index#DataDocuments">
         <documents dataDocumentId="PopcProduct"/>
     </moqui.entity.feed.DataFeed>
 </entity-facade-xml>

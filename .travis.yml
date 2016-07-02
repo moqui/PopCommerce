@@ -14,6 +14,7 @@ before_script:
   - cd moqui
   - git clone https://github.com/moqui/moqui-runtime.git runtime
   - cd runtime/component
+  - git clone https://github.com/moqui/moqui-elasticsearch.git
   - git clone https://github.com/moqui/moqui-fop.git
   - git clone https://github.com/moqui/moqui-kie.git
   - git clone https://github.com/moqui/mantle-udm.git

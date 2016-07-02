@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/moqui-conf-2.0.xsd"
         name="PopCommerce" version="1.0.4">
+    <depends-on name="moqui-elasticsearch"/>
     <depends-on name="moqui-fop"/>
     <depends-on name="moqui-kie"/>
     <depends-on name="mantle-udm"/>
