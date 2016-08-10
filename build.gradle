@@ -14,7 +14,7 @@
 
 apply plugin: 'groovy'
 
-sourceCompatibility = '1.7'
+sourceCompatibility = '1.8'
 def moquiDir = file(projectDir.absolutePath + '/../../..')
 def frameworkDir = file(moquiDir.absolutePath + '/framework')
 
@@ -40,7 +40,6 @@ test {
     systemProperty 'moqui.conf', 'conf/MoquiDevTestConf.xml'
     systemProperty 'moqui.init.static', 'true'
     maxHeapSize = "512M"
-    jvmArgs '-XX:MaxPermSize=192m'
 
     // show standard out and standard error of the test JVM(s) on the console
     testLogging.showStandardStreams = true
