@@ -7,28 +7,17 @@ jdk:
 
 install: true
 
-# NOTE: using git clone instead of gradle getGit for file order, causing problems on Travis with test class run order
 before_script:
   - cd ..
   - git clone https://github.com/moqui/moqui-framework.git moqui
   - cd moqui
-  - git clone https://github.com/moqui/moqui-runtime.git runtime
-  - cd runtime/component
-  - git clone https://github.com/moqui/moqui-elasticsearch.git
-  - git clone https://github.com/moqui/moqui-fop.git
-  - git clone https://github.com/moqui/moqui-kie.git
-  - git clone https://github.com/moqui/mantle-udm.git
-  - git clone https://github.com/moqui/mantle-usl.git
-  - git clone https://github.com/moqui/SimpleScreens.git
-  - git clone https://github.com/moqui/PopCommerce.git
-  - cd ../..
   - chmod +x gradlew
 
 env:
   - TERM=dumb
 
 script:
-# using git commands instead:  - ./gradlew getGit -Pcomponent=PopCommerce
+  - ./gradlew getGit -Pcomponent=PopCommerce
   - ./gradlew load
   - ./gradlew runtime/component/PopCommerce:test
 
