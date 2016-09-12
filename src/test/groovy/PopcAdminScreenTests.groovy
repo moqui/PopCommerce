@@ -34,7 +34,7 @@ class PopcAdminScreenTests extends Specification {
 
     def setupSpec() {
         ec = Moqui.getExecutionContext()
-        ec.user.loginUser("john.doe", "moqui", null)
+        ec.user.loginUser("john.doe", "moqui")
         screenTest = ec.screen.makeTest().baseScreenPath("apps/PopcAdmin")
 
         ec.entity.tempSetSequencedIdPrimary("mantle.order.OrderHeader", 63100, 10)

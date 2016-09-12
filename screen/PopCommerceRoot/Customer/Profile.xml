@@ -34,7 +34,7 @@ along with this software (see the LICENSE.md file). If not, see
         <service-call name="mantle.party.ContactServices.get#PrimaryEmailAddress" out-map="primaryEmail"
                 in-map="[partyId:partyId]"/>
 
-        <!-- TODO: limit to locales for tenant (or store?) -->
+        <!-- TODO: limit to locales for store? -->
         <set field="localeStringList" from="[]"/>
         <iterate list="Locale.getAvailableLocales()" entry="lcl"><script>localeStringList.add([locale:lcl.toString(), name:lcl.getDisplayName(ec.user.locale)])</script></iterate>
         <order-map-list list="localeStringList"><order-by field-name="name"/></order-map-list>
@@ -63,7 +63,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <drop-down allow-empty="true"><list-options list="localeStringList" key="${locale}" text="${name}"/></drop-down>
                     </default-field></field>
                     <field name="timeZone"><default-field>
-                        <!-- TODO: limit time zones to tenant (or store?) zones -->
+                        <!-- TODO: limit time zones for store? -->
                         <drop-down allow-empty="true"><list-options list="new TreeSet(TimeZone.getAvailableIDs().collect())"/></drop-down>
                     </default-field></field>
 

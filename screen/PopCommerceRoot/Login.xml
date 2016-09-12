@@ -18,7 +18,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <transition name="login" require-session-token="false">
         <actions>
-            <script>ec.user.loginUser(username, password, null)</script>
+            <script>ec.user.loginUser(username, password)</script>
             <if condition="ec.user.userAccount">
                 <!-- TODO: move this to a service so that screen.@require-authentication can be false instead of anonymous-all (slightly tighter security) -->
                 <!-- see if there is an open order for user and get that ID into session -->
@@ -74,7 +74,7 @@ along with this software (see the LICENSE.md file). If not, see
             </container>
         </container>
 
-        <!-- pre-Metis login screen stuff:
+        <!-- old widget-based login screen forms:
         <container id="login-box">
             <form-single name="login" transition="login">
                 <field name="username"><default-field><text-line size="20"/></default-field></field>
@@ -93,9 +93,6 @@ along with this software (see the LICENSE.md file). If not, see
                     <field name="oldPassword"><default-field><password size="20"/></default-field></field>
                     <field name="newPassword"><default-field><password size="20"/></default-field></field>
                     <field name="newPasswordVerify"><default-field><password size="20"/></default-field></field>
-                    <field name="tenantId"><conditional-field
-                            condition="ec.web == null || ec.web.session.getAttribute('moqui.tenantAllowOverride') != 'N'">
-                        <text-line size="20"/></conditional-field></field>
                     <field name="submitButton"><default-field title="Update"><submit/></default-field></field>
                 </form-single>
             </container-dialog>

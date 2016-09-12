@@ -37,7 +37,7 @@ along with this software (see the LICENSE.md file). If not, see
 
             numOrders = (numOrders ?: 10) as int
 
-            ec.user.loginUser("joe@public.com", "moqui", null)
+            ec.user.loginUser("joe@public.com", "moqui")
 
             long startTime = System.currentTimeMillis()
             for (int i = 0; i < numOrders; i++) {
@@ -47,7 +47,7 @@ along with this software (see the LICENSE.md file). If not, see
                 // boolean beganTransaction = tf.begin()
                 // ec.transaction.initTransactionCache()
                 try {
-                    // ec.user.loginUser("joe@public.com", "moqui", null)
+                    // ec.user.loginUser("joe@public.com", "moqui")
 
                     Map addOut1 = ec.service.sync().name("mantle.order.OrderServices.add#OrderProductQuantity")
                             .parameters([productId:'DEMO_1_1', quantity:1, customerPartyId:customerPartyId,
@@ -73,7 +73,7 @@ along with this software (see the LICENSE.md file). If not, see
                     ec.service.sync().name("mantle.order.OrderServices.place#Order").parameters([orderId:cartOrderId]).call()
 
                     // ec.user.logoutUser()
-                    // ec.user.loginUser("john.doe", "moqui", null)
+                    // ec.user.loginUser("john.doe", "moqui")
 
                     ec.service.sync().name("mantle.shipment.ShipmentServices.ship#OrderPart")
                             .parameters([orderId:cartOrderId, orderPartSeqId:orderPartSeqId]).call()

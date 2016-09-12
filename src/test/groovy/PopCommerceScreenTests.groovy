@@ -34,7 +34,7 @@ class PopCommerceScreenTests extends Specification {
 
     def setupSpec() {
         ec = Moqui.getExecutionContext()
-        ec.user.loginUser("joe@public.com", "moqui", null)
+        ec.user.loginUser("joe@public.com", "moqui")
         screenTest = ec.screen.makeTest().baseScreenPath("popc")
 
         ec.entity.tempSetSequencedIdPrimary("mantle.order.OrderHeader", 63200, 10)
@@ -83,7 +83,7 @@ class PopCommerceScreenTests extends Specification {
         "Home" | ['Search products', 'Demo Product One-Two', '$10,007.99']
         "Product/Detail/DEMO_1_1/Demo-Product-One-One" | ['Demo Product One-One', '$16.99', 'Shipping Weight']
         "Product/Category/DEMO_ONE" | ['Demo Product One Unit', '$1.00', 'Add to Cart']
-        "Product/Search?keywords=demo" | ['Demo Tenant 1 Month Subscription', '$12.12', 'Demo Category One']
+        "Product/Search?keywords=demo" | ['Demo Product One Unit', '$1.00', 'Demo Category One']
 
         // Customer
         "Customer/Profile" | ['joe@public.com', 'Visa ************1111', '1350 E. Flamingo Rd. #2345']
