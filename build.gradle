@@ -37,7 +37,7 @@ test {
     dependsOn ':runtime/component/mantle-usl:test'
 
     systemProperty 'moqui.runtime', moquiDir.absolutePath + '/runtime'
-    systemProperty 'moqui.conf', 'conf/MoquiDevTestConf.xml'
+    systemProperty 'moqui.conf', 'conf/MoquiDevConf.xml'
     systemProperty 'moqui.init.static', 'true'
     maxHeapSize = "512M"
 
