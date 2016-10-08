@@ -57,7 +57,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <field name="firstName"><default-field><text-line size="15"/></default-field></field>
                     <field name="middleName"><default-field><text-line size="15"/></default-field></field>
                     <field name="lastName"><default-field><text-line size="15"/></default-field></field>
-                    <field name="emailAddress" entry-name="primaryEmail.emailAddress"><default-field><text-line size="40"/></default-field></field>
+                    <field name="emailAddress" from="primaryEmail.emailAddress"><default-field><text-line size="40"/></default-field></field>
 
                     <field name="locale"><default-field>
                         <drop-down allow-empty="true"><list-options list="localeStringList" key="${locale}" text="${name}"/></drop-down>

@@ -75,7 +75,7 @@ along with this software (see the LICENSE.md file). If not, see
                             </field>
                             <field name="unitAmount"><default-field><display currency-unit-field="orderHeader.currencyUomId"/></default-field></field>
                             <field name="quantity"><default-field><display/></default-field></field>
-                            <field name="itemTotal" entry-name="orderItemTotalOut.itemTotal"><default-field>
+                            <field name="itemTotal" from="orderItemTotalOut.itemTotal"><default-field>
                                 <display currency-unit-field="orderHeader.currencyUomId" also-hidden="false"/>
                             </default-field></field>
                         </form-list>

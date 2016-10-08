@@ -56,7 +56,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <text-line size="4"/></conditional-field>
                 <default-field><display/></default-field>
             </field>
-            <field name="itemTotal" entry-name="orderItemTotalOut.itemTotal"><default-field>
+            <field name="itemTotal" from="orderItemTotalOut.itemTotal"><default-field>
                 <display currency-unit-field="orderHeader.currencyUomId" also-hidden="false"/>
             </default-field></field>
             <field name="updateCartButton"><default-field title="Update Cart"><submit/></default-field></field>

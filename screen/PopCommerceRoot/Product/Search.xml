@@ -73,7 +73,7 @@ along with this software (see the LICENSE.md file). If not, see
             </row-actions>
 
             <field name="productId"><default-field><hidden/></default-field></field>
-            <field name="productName" entry-name="product.productName"><default-field title="">
+            <field name="productName" from="product.productName"><default-field title="">
                 <link text="${product.productName}" url="/popc/Product/Detail/${productId}/${product.productName?.replace(' ', '-')}"
                         url-noparam="true" link-type="anchor"/>
             </default-field></field>
