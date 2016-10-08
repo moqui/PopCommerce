@@ -60,7 +60,7 @@ along with this software (see the LICENSE.md file). If not, see
         </container>
 
 
-        <form-list name="ListPicklists" list="picklistList" skip-form="true">
+        <form-list name="ListPicklists" list="picklistList" skip-form="true" header-dialog="true" select-columns="true" saved-finds="true">
             <row-actions>
                 <entity-find entity-name="mantle.work.effort.WorkEffortAssetAndAssign" list="assetList">
                     <date-filter/><econdition field-name="workEffortId"/><order-by field-name="assetName"/></entity-find>
@@ -84,7 +84,8 @@ along with this software (see the LICENSE.md file). If not, see
             <field name="statusId">
                 <header-field title="Status" show-order-by="true">
                     <widget-template-include location="component://webroot/template/screen/BasicWidgetTemplates.xml#statusDropDown">
-                        <set field="statusTypeId" value="Shipment"/><set field="allowEmpty" value="true"/></widget-template-include>
+                        <set field="statusTypeId" value="Shipment"/><set field="allowMultiple" value="true"/>
+                        <set field="allowEmpty" value="true"/></widget-template-include>
                 </header-field>
                 <default-field><display-entity entity-name="moqui.basic.StatusItem"/></default-field>
             </field>
