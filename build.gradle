@@ -33,8 +33,9 @@ dependencies {
 check.dependsOn.remove(test)
 
 test {
-    dependsOn clean
+    dependsOn cleanTest
     dependsOn ':runtime/component/mantle-usl:test'
+    include '**/PopCommerceSuite.class'
 
     systemProperty 'moqui.runtime', moquiDir.absolutePath + '/runtime'
     systemProperty 'moqui.conf', 'conf/MoquiDevConf.xml'
@@ -42,8 +43,7 @@ test {
     maxHeapSize = "512M"
 
     // show standard out and standard error of the test JVM(s) on the console
-    testLogging.showStandardStreams = true
-    testLogging.showExceptions = true
+    testLogging.showStandardStreams = true; testLogging.showExceptions = true;
 
     classpath += files(sourceSets.main.output.classesDir)
     // filter out classpath entries that don't exist (gradle adds a bunch of these), or ElasticSearch JarHell will blow up
