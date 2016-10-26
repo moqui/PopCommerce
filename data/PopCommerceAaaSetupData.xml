@@ -24,7 +24,6 @@ along with this software (see the LICENSE.md file). If not, see
     <moqui.security.ArtifactGroup artifactGroupId="POPC" description="POP Commerce App (via root screen)"/>
     <moqui.security.ArtifactGroupMember artifactGroupId="POPC" artifactName="component://PopCommerce/screen/PopCommerceRoot.xml"
             artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
-
     <moqui.security.ArtifactAuthz artifactAuthzId="POPC_ALL" userGroupId="ALL_USERS" artifactGroupId="POPC"
             authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
 
@@ -32,14 +31,15 @@ along with this software (see the LICENSE.md file). If not, see
     <moqui.security.ArtifactGroup artifactGroupId="POP_COMMERCE_ADMIN" description="PopCommerce Admin (via root screen)"/>
     <moqui.security.ArtifactGroupMember artifactGroupId="POP_COMMERCE_ADMIN" artifactName="component://PopCommerce/screen/PopCommerceAdmin.xml"
             artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
-
     <moqui.security.ArtifactAuthz artifactAuthzId="POP_COMMERCE_ADM_ADM" userGroupId="ADMIN" artifactGroupId="POP_COMMERCE_ADMIN"
             authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
+    <moqui.security.ArtifactAuthzFilter artifactAuthzId="POP_COMMERCE_ADM_ADM" entityFilterSetId="MANTLE_ACTIVE_ORG"/>
 
     <!-- authz/permission for POP_COMMERCE_ADMIN users -->
     <moqui.security.UserGroup userGroupId="POP_COMMERCE_ADMIN" description="POP Commerce Administrators"/>
     <moqui.security.ArtifactAuthz artifactAuthzId="POP_COMMERCE_ADM_PCADM" userGroupId="POP_COMMERCE_ADMIN" artifactGroupId="POP_COMMERCE_ADMIN"
             authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
+    <moqui.security.ArtifactAuthzFilter artifactAuthzId="POP_COMMERCE_ADM_PCADM" entityFilterSetId="MANTLE_USER_ORG"/>
 
     <!-- Theme Type and Default Theme -->
     <moqui.basic.Enumeration description="POP Commerce Theme Type" enumId="STT_POP_COMMERCE" enumTypeId="ScreenThemeType"/>
