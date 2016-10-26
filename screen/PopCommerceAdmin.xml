@@ -21,9 +21,31 @@ along with this software (see the LICENSE.md file). If not, see
         <set field="searchIndexName" value="popc"/>
         <set field="searchProductDocType" value="PopcProduct"/>
     </always-actions>
+    <pre-actions>
+        <!-- in pre-actions so only runs for screen renders, not for transitions -->
+        <!-- TODO this is good for the MANTLE_ACTIVE_ORG filter, but consider putting in always actions for the MANTLE_USER_ORG filter (somehow) -->
+        <service-call name="mantle.party.PartyServices.setup#UserOrganizationInfo" out-map="context"/>
+    </pre-actions>
     <subscreens default-item="dashboard" always-use-full-path="true"/>
 
     <widgets>
+        <section name="OrgChooserSection" condition="hideNav != 'true'"><widgets>
+            <render-mode><text type="html"><![CDATA[
+            <div id="active-org-menu" class="nav navbar-right dropdown">
+                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
+                    <i class="glyphicon glyphicon-globe"></i> ${(activeOrg.pseudoId)!}</a>
+                <ul class="dropdown-menu">
+                    <#if activeOrg?has_content>
+                        <li><a href="${sri.buildUrl('/apps/setPrefGoLast').url}?preferenceKey=ACTIVE_ORGANIZATION&preferenceValue=">Clear Active Organization</a></li>
+                    </#if>
+                    <#if userOrgList?has_content><#list userOrgList as userOrg>
+                        <li><a href="${sri.buildUrl('/apps/setPrefGoLast').url}?preferenceKey=ACTIVE_ORGANIZATION&preferenceValue=${userOrg.partyId}">${userOrg.pseudoId}: ${userOrg.organizationName}</a></li>
+                    </#list></#if>
+                </ul>
+            </div>
+            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>
+            ]]></text></render-mode>
+        </widgets></section>
         <subscreens-panel id="PopCommerceAdminPanel" type="popup" title="POP Commerce Admin"/>
     </widgets>
 </screen>
