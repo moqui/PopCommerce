@@ -25,7 +25,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <actions>
         <service-call name="mantle.account.PaymentMethodServices.get#PartyPaymentMethodInfo" out-map="methodInfo" in-map="context"/>
-        <set field="methodInfoFlat" from="StupidUtilities.flattenNestedMap(methodInfo)"/>
+        <set field="methodInfoFlat" from="flattenNestedMap(methodInfo)"/>
         <entity-find entity-name="mantle.party.contact.PartyContactMechPostalAddress" list="partyPostalAddressList">
             <date-filter/><econdition field-name="partyId"/></entity-find>
         <entity-find entity-name="mantle.party.contact.PartyContactMechTelecomNumber" list="partyTelecomNumberList">

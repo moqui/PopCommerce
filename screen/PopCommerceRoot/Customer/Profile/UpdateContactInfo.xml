@@ -31,7 +31,7 @@ along with this software (see the LICENSE.md file). If not, see
     <actions>
         <if condition="postalContactMechId || telecomContactMechId || emailContactMechId">
             <service-call name="mantle.party.ContactServices.get#PartyContactInfo" out-map="contactInfo" in-map="context"/>
-            <set field="contactInfoFlat" from="StupidUtilities.flattenNestedMap(contactInfo)"/>
+            <set field="contactInfoFlat" from="flattenNestedMap(contactInfo)"/>
             <else>
                 <set field="contactInfoFlat" from="[postalContactMechPurposeId:postalContactMechPurposeId,
                         telecomContactMechPurposeId:telecomContactMechPurposeId, emailContactMechPurposeId:emailContactMechPurposeId]"/>
