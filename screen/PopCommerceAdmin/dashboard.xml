@@ -33,8 +33,6 @@ along with this software (see the LICENSE.md file). If not, see
     </actions>
     <widgets>
         <container-row>
-
-
             <row-col md="2">
                 <label text="Operate" type="h3"/>
                 <container>
@@ -42,9 +40,9 @@ along with this software (see the LICENSE.md file). If not, see
                     <link text="Suppliers" url="../Supplier" link-type="anchor"/>
                 </container>
                 <container>
-                    <link url="../Order" link-type="anchor" parameter-map="[customerRoleTypeId:'OrgInternal']">
+                    <link url="../Order" link-type="anchor" parameter-map="[orderType:'Purchase']">
                         <image url="/popc/static/images/Purchasing.png" url-type="screen" style="invertible"/></link>
-                    <link text="Purchasing" url="../Order" link-type="anchor" parameter-map="[customerRoleTypeId:'OrgInternal']"/>
+                    <link text="Purchasing" url="../Order" link-type="anchor" parameter-map="[orderType:'Purchase']"/>
                 </container>
                 <container>
                     <link url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']">
@@ -62,9 +60,9 @@ along with this software (see the LICENSE.md file). If not, see
                     <link text="Customers" url="../Customer" link-type="anchor"/>
                 </container>
                 <container>
-                    <link url="../Order" link-type="anchor" parameter-map="[vendorRoleTypeId:'OrgInternal']">
+                    <link url="../Order" link-type="anchor" parameter-map="[orderType:'Sales']">
                         <image url="/popc/static/images/Sales.png" url-type="screen" style="invertible"/></link>
-                    <link text="Sales" url="../Order" link-type="anchor" parameter-map="[vendorRoleTypeId:'OrgInternal']"/>
+                    <link text="Sales" url="../Order" link-type="anchor" parameter-map="[orderType:'Sales']"/>
                 </container>
                 <container>
                     <link url="../Picking" link-type="anchor">

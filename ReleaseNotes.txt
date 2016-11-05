@@ -14,7 +14,7 @@ moqui-elasticsearch (1.0.0), moqui-fop (1.0.0), and moqui-kie (1.0.0) tool
 components.
 
 This release includes various improvements from SimpleScreens and updates
-for the various changes in Moqui Framework 2.0.0.
+for the new features and improvements in Moqui Framework 2.0.0.
 
 TODO
 
