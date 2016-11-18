@@ -15,6 +15,11 @@ along with this software (see the LICENSE.md file). If not, see
 <entity-facade-xml type="demo">
     <!-- NOTE: other store/product demo data on Mantle in ZzcProductDemoData.xml -->
 
+    <!-- General admin filter on active org only -->
+    <moqui.security.ArtifactAuthzFilter artifactAuthzId="POP_COMMERCE_ADM_ADM" entityFilterSetId="MANTLE_ACTIVE_ORG"/>
+    <!-- PopCommerce admin filter on active or applicable organizations for the user -->
+    <moqui.security.ArtifactAuthzFilter artifactAuthzId="POP_COMMERCE_ADM_PCADM" entityFilterSetId="MANTLE_USER_ORG"/>
+
     <!-- index for search -->
     <org.moqui.search.SearchServices.indexDataFeedDocuments dataFeedId="PopCommerceSearch"/>
 </entity-facade-xml>
