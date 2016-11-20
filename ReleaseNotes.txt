@@ -10,13 +10,19 @@ feature and bug fix release.
 
 This release is based on Moqui Framework version 2.0.0, mantle-udm 1.1.0,
 mantle-usl 1.1.0, and SimpleScreens 1.1.0. It also uses the
-moqui-elasticsearch (1.0.0), moqui-fop (1.0.0), and moqui-kie (1.0.0) tool
+moqui-elasticsearch 1.0.0, moqui-fop 1.0.0, and moqui-kie 1.0.0 tool
 components.
 
 This release includes various improvements from SimpleScreens and updates
 for the new features and improvements in Moqui Framework 2.0.0.
 
-TODO
+Using new framework features and SimpleScreens improvements there are now
+cleaner search forms, saved finds, column selection and CSV export options
+on various find screens.
+
+There are small i18n improvements, better handling of sales/purchase order
+finds, active organization selector and demo for filtering finds by active
+or restricted organizations for users with limited permissions.
 
 ===========================================================================
 Release 1.0.3 - 26 Mar 2016
