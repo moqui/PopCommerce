@@ -17,16 +17,20 @@ along with this software (see the LICENSE.md file). If not, see
 
     <always-actions>
         <set field="appRoot" value="PopcAdmin"/>
-
         <set field="searchIndexName" value="popc"/>
         <set field="searchProductDocType" value="PopcProduct"/>
     </always-actions>
+
+    <subscreens default-item="dashboard" always-use-full-path="true">
+        <subscreens-item name="Search" location="component://SimpleScreens/screen/SimpleScreens/Search.xml" menu-index="2"/>
+        <subscreens-item name="QuickLookup" location="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml" menu-index="2"/>
+    </subscreens>
+
     <pre-actions>
         <!-- in pre-actions so only runs for screen renders, not for transitions -->
         <!-- TODO this is good for the MANTLE_ACTIVE_ORG filter, but consider putting in always actions for the MANTLE_USER_ORG filter (somehow) -->
         <service-call name="mantle.party.PartyServices.setup#UserOrganizationInfo" out-map="context"/>
     </pre-actions>
-    <subscreens default-item="dashboard" always-use-full-path="true"/>
 
     <widgets>
         <section name="OrgChooserSection" condition="hideNav != 'true'"><widgets>

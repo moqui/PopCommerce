@@ -15,16 +15,14 @@ along with this software (see the LICENSE.md file). If not, see
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
         default-menu-title="Dashboard" default-menu-index="1" menu-image="glyphicon glyphicon-dashboard" menu-image-type="icon">
 
+    <transition name="search"><default-response url="../Search"/></transition>
+    <transition name="quickLookup"><default-response url="../QuickLookup"/></transition>
+
     <transition name="Reports"><default-response url="../Accounting/Reports"/></transition>
     <transition name="editVendor"><default-response url="../Vendor/EditVendor"/></transition>
     <transition name="findInvoice"><default-response url="../Accounting/Invoice/FindInvoice"/></transition>
 
     <actions>
-        <entity-find entity-name="mantle.work.effort.WorkEffort" list="projectList">
-            <econdition field-name="workEffortTypeEnumId" value="WetProject"/>
-            <econdition field-name="statusId" value="WeInProgress"/>
-        </entity-find>
-
         <entity-find entity-name="mantle.party.PartyDetailAndRole" list="orgInternalList">
             <econdition field-name="roleTypeId" value="OrgInternal"/>
             <econdition field-name="disabled" value="N" or-null="true"/>
@@ -32,6 +30,17 @@ along with this software (see the LICENSE.md file). If not, see
         </entity-find>
     </actions>
     <widgets>
+        <container-row>
+            <row-col lg="6" style="text-center">
+                <form-single name="SearchOptions" transition="search" extends="component://SimpleScreens/screen/SimpleScreens/Search.xml#SearchOptions">
+                    <field name="queryString"><default-field><text-line size="30"/></default-field></field>
+                </form-single>
+            </row-col>
+            <row-col lg="6" style="text-center">
+                <form-single name="QuickLookupForm" transition="quickLookup" extends="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml#QuickLookupForm"/>
+            </row-col>
+        </container-row>
+
         <container-row>
             <row-col md="2">
                 <label text="Operate" type="h3"/>
