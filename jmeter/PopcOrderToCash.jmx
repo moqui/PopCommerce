@@ -9,7 +9,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="LoopCount" elementType="Argument">
             <stringProp name="Argument.name">LoopCount</stringProp>
-            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.value">10</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="RampUpSeconds" elementType="Argument">
@@ -19,7 +19,7 @@
           </elementProp>
           <elementProp name="SalesThreads" elementType="Argument">
             <stringProp name="Argument.name">SalesThreads</stringProp>
-            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.value">5</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="productId" elementType="Argument">
