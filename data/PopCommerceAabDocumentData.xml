@@ -13,13 +13,37 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <entity-facade-xml type="seed">
+    <!-- Party -->
+    <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleParty" newDataDocumentId="PopcSupplier" newIndexName="popc"/>
+    <moqui.entity.document.DataDocument dataDocumentId="PopcSupplier" documentName="Supplier"/>
+    <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcSupplier" fieldNameAlias="roleTypeId" fieldValue="Supplier" postQuery="Y"/>
+    <moqui.entity.document.DataDocumentLink dataDocumentId="PopcSupplier" label="Edit Supplier" urlType="screen"
+                                            linkUrl="//apps/PopcAdmin/Supplier/EditSupplier?partyId=${partyId}"/>
+
+    <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleParty" newDataDocumentId="PopcCustomer" newIndexName="popc"/>
+    <moqui.entity.document.DataDocument dataDocumentId="PopcCustomer" documentName="Customer"/>
+    <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcCustomer" fieldNameAlias="roleTypeId" fieldValue="Customer" postQuery="Y"/>
+    <moqui.entity.document.DataDocumentLink dataDocumentId="PopcCustomer" label="Edit Customer" urlType="screen"
+                                            linkUrl="//apps/PopcAdmin/Customer/EditCustomer?partyId=${partyId}"/>
+
+    <!--
+    <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleParty" newDataDocumentId="PopcParty" newIndexName="popc"/>
+    <moqui.entity.document.DataDocumentLink dataDocumentId="PopcParty" label="Edit Party" urlType="screen"
+                                            linkUrl="//apps/PopcAdmin/Setup/Party/EditParty?partyId=${partyId}"/>
+    -->
+
+    <!-- Facility -->
+    <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleFacility" newDataDocumentId="PopcFacility" newIndexName="popc"/>
+    <moqui.entity.document.DataDocumentLink dataDocumentId="PopcFacility" label="Edit Facility" urlType="screen"
+                                            linkUrl="//apps/PopcAdmin/Facility/EditFacility?facilityId=${facilityId}"/>
+
     <!-- Product -->
     <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleProduct" newDataDocumentId="PopcProduct" newIndexName="popc"/>
-
     <!-- for now do all: <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcProduct"
             fieldNameAlias="productTypeEnumId" fieldValue="PtFinishedGood"/> -->
     <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcProduct"
             fieldNameAlias="productStoreId" fieldValue="POPC_DEFAULT" postQuery="Y"/>
+    <!-- TODO: somehow setup separate PopcAdmin and popc (ecommerce) links -->
     <moqui.entity.document.DataDocumentLink dataDocumentId="PopcProduct" label="Product Detail"
             linkUrl="/popc/Product/Detail?productId=${productId}"/>
 
@@ -27,6 +51,9 @@ along with this software (see the LICENSE.md file). If not, see
     <!-- Search Data Feed -->
     <moqui.entity.feed.DataFeed dataFeedId="PopCommerceSearch" dataFeedTypeEnumId="DTFDTP_RT_PUSH"
             feedName="PopCommerce Search" feedReceiveServiceName="org.moqui.search.SearchServices.index#DataDocuments">
+        <documents dataDocumentId="PopcSupplier"/>
+        <documents dataDocumentId="PopcCustomer"/>
+        <documents dataDocumentId="PopcFacility"/>
         <documents dataDocumentId="PopcProduct"/>
     </moqui.entity.feed.DataFeed>
 </entity-facade-xml>
