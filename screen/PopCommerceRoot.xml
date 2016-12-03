@@ -43,28 +43,28 @@ along with this software (see the LICENSE.md file). If not, see
         // Font Awesome
         html_stylesheets.add('/libs/font-awesome/css/font-awesome.min.css')
         // Bootstrap
-        html_scripts.add('/libs/bootstrap/bootstrap.min.js')
-        html_stylesheets.add('/libs/bootstrap/bootstrap.min.css')
+        html_scripts.add('/libs/twitter-bootstrap/js/bootstrap.min.js')
+        html_stylesheets.add('/libs/twitter-bootstrap/css/bootstrap.min.css')
         // Twitter TypeAhead
-        html_scripts.add('/libs/typeahead/typeahead.jquery.min.js')
+        html_scripts.add('/libs/typeahead.js/typeahead.jquery.min.js')
 
         // Form Validation and AJAX (jquery-validation, jquery-form)
-        html_scripts.add('/libs/jquery-validation/jquery.validate.min.js')
-        html_scripts.add('/libs/jquery-validation/additional-methods.min.js')
-        html_scripts.add('/libs/jquery-form/jquery.form.min.js')
+        html_scripts.add('/libs/jquery-validate/jquery.validate.min.js')
+        html_scripts.add('/libs/jquery-validate/additional-methods.min.js')
+        html_scripts.add('/libs/jquery.form/jquery.form.min.js')
         // Date/Time (Moment, bootstrap-datetimepicker)
-        html_scripts.add('/libs/moment/moment-with-locales.min.js')
-        html_scripts.add('/libs/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')
-        html_stylesheets.add('/libs/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css')
+        html_scripts.add('/libs/moment.js/moment-with-locales.min.js')
+        html_scripts.add('/libs/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')
+        html_stylesheets.add('/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')
         // Drop-down (Select2)
         html_scripts.add('/js/select2/select2.min.js')
         html_stylesheets.add('/libs/select2/select2.min.css')
-        html_stylesheets.add('/libs/select2/select2-bootstrap.min.css')
+        html_stylesheets.add('/libs/select2-bootstrap-theme/select2-bootstrap.min.css')
         // Tree (JSTree)
         html_scripts.add('/libs/jstree/jstree.min.js')
         html_stylesheets.add('/libs/jstree/themes/default/style.min.css')
         // Inline Editable
-        html_scripts.add('/libs/jeditable/jquery.jeditable.min.js')
+        html_scripts.add('/libs/jeditable.js/jeditable.min.js')
 
         // Moqui webroot layout
         html_stylesheets.add('/css/webroot-layout.css')
