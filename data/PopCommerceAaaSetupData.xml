@@ -44,10 +44,10 @@ along with this software (see the LICENSE.md file). If not, see
     <moqui.screen.ScreenTheme screenThemeId="POPC_DEFAULT" screenThemeTypeEnumId="STT_POP_COMMERCE"
             description="POP Commerce Default Theme"/>
     <!-- NOTE: these default resources are from the Moqui default runtime webroot component -->
-    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="10" resourceTypeEnumId="STRT_STYLESHEET"
-            resourceValue="/lib/jquery/themes/smoothness/theme.css"/>
+    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="10" resourceTypeEnumId="STRT_STYLESHEET" resourceValue=""/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="20" resourceTypeEnumId="STRT_STYLESHEET"
             resourceValue="/css/webroot-theme.css"/>
+
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="100" resourceTypeEnumId="STRT_HEADER_LOGO"
             resourceValue="/images/MoquiLogoSmall.png"/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="101" resourceTypeEnumId="STRT_SHORTCUT_ICON"

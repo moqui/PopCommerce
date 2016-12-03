@@ -38,15 +38,15 @@ along with this software (see the LICENSE.md file). If not, see
     <subscreens default-item="Home"/>
 
     <pre-actions><script><![CDATA[
-        // jQuery/UI
+        // jQuery
         html_scripts.add('/lib/jquery/jquery.min.js')
-        html_scripts.add('/lib/jquery/jquery-ui.min.js')
-        html_stylesheets.add('/lib/jquery/jquery-ui.min.css')
         // Font Awesome
         html_stylesheets.add('/lib/font-awesome/css/font-awesome.min.css')
         // Bootstrap
         html_scripts.add('/lib/bootstrap/bootstrap.min.js')
         html_stylesheets.add('/lib/bootstrap/bootstrap.min.css')
+        // Twitter TypeAhead
+        html_scripts.add('/lib/typeahead/typeahead.jquery.min.js')
 
         // Form Validation and AJAX (jquery-validation, jquery-form)
         html_scripts.add('/lib/jquery-validation/jquery.validate.min.js')
