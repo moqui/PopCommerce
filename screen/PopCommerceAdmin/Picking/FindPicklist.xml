@@ -44,14 +44,13 @@ along with this software (see the LICENSE.md file). If not, see
             <container-dialog id="NewPicklistContainer" button-text="New Picklist">
                 <form-single name="NewPicklist" transition="createPicklist">
                     <field name="facilityId"><default-field title="Facility">
-                        <drop-down style="chosen-wider">
-                            <list-options list="facilityList" key="${facilityId}" text="FacilityNameTemplate"/></drop-down>
+                        <drop-down><list-options list="facilityList" key="${facilityId}" text="FacilityNameTemplate"/></drop-down>
                     </default-field></field>
                     <field name="workEffortName"><default-field title="Name"><text-line size="40"/></default-field></field>
                     <field name="estimatedStartDate"><default-field title="Ship Date"><date-time/></default-field></field>
                     <field name="estimatedWorkDuration"><default-field title="Est. Hours"><text-line size="8"/></default-field></field>
                     <field name="assetIdList"><default-field title="Truck / Equipment">
-                        <drop-down allow-empty="true" style="chosen-wider" allow-multiple="true">
+                        <drop-down allow-empty="true" allow-multiple="true">
                             <list-options list="allEquipmentList" key="${assetId}" text="AssetNameTemplate"/></drop-down>
                     </default-field></field>
                     <field name="submitButton"><default-field title="Create"><submit/></default-field></field>

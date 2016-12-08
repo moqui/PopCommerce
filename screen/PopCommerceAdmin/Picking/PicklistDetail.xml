@@ -144,7 +144,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <form-single name="AddAsset" transition="addAssetAssign">
                         <field name="workEffortId"><default-field><hidden/></default-field></field>
                         <field name="assetId"><default-field title="Truck / Equipment">
-                            <drop-down style="chosen-wider">
+                            <drop-down>
                                 <list-options list="allEquipmentList" key="${assetId}" text="AssetNameTemplate"/></drop-down>
                         </default-field></field>
                         <field name="statusId" from="null"><default-field>
