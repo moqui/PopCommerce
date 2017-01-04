@@ -15,18 +15,20 @@ along with this software (see the LICENSE.md file). If not, see
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
         default-menu-index="13" menu-image="/popc/static/images/Accounting.png">
 
-    <subscreens default-item="Invoice">
-        <subscreens-item name="Invoice" menu-index="1"
+    <subscreens default-item="dashboard">
+        <subscreens-item name="dashboard" menu-index="1"
+                location="component://SimpleScreens/screen/SimpleScreens/Accounting/dashboard.xml"/>
+        <subscreens-item name="Invoice" menu-index="2"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/Invoice.xml"/>
-        <subscreens-item name="Payment" menu-index="2"
+        <subscreens-item name="Payment" menu-index="3"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/Payment.xml"/>
-        <subscreens-item name="FinancialAccount" menu-index="3" menu-title="Financial Accounts"
+        <subscreens-item name="FinancialAccount" menu-index="4" menu-title="Financial Accounts"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/FinancialAccount.xml"/>
-        <subscreens-item name="Transaction" menu-index="4"
+        <subscreens-item name="Transaction" menu-index="5"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/Transaction.xml"/>
-        <subscreens-item name="FindJournal" menu-index="5"
+        <subscreens-item name="FindJournal" menu-index="6"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/FindJournal.xml"/>
-        <subscreens-item name="TimePeriod" menu-index="6"
+        <subscreens-item name="TimePeriod" menu-index="7"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/TimePeriod.xml"/>
         <subscreens-item name="GlAccount" menu-index="10"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/GlAccount.xml"/>
