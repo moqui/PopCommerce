@@ -20,6 +20,7 @@ along with this software (see the LICENSE.md file). If not, see
     <pre-actions><set field="roleTypeId" value="Customer"/></pre-actions>
 
     <widgets>
-        <subscreens-panel id="CustomerPanel" type="tab"/>
+        <!-- <subscreens-panel id="CustomerPanel" type="tab"/> -->
+        <subscreens-active/>
     </widgets>
 </screen>
