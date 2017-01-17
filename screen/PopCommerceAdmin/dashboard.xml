@@ -98,6 +98,10 @@ along with this software (see the LICENSE.md file). If not, see
                     <link url="../Vendor" link-type="anchor"><image url="/popc/static/images/Vendor.png" url-type="screen" style="invertible"/></link>
                 </container>
                 <container>
+                    <link text="Parties" url="../Party" link-type="anchor"/>
+                    <link url="../Party" link-type="anchor"><image url="/popc/static/images/Parties.png" url-type="screen" style="invertible"/></link>
+                </container>
+                <container>
                     <link text="Accounting" url="../Accounting" link-type="anchor"/>
                     <link url="../Accounting" link-type="anchor"><image url="/popc/static/images/Accounting.png" url-type="screen" style="invertible"/></link>
                 </container>
