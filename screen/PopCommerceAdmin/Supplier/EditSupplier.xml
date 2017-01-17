@@ -33,6 +33,10 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="deletePartyIdentification"><parameter name="partyIdTypeEnumId"/>
         <service-call name="delete#mantle.party.PartyIdentification"/><default-response url="."/></transition>
 
+    <transition name="updatePaymentMethodInfo"><default-response url="UpdatePaymentMethodInfo"/></transition>
+    <transition name="removePaymentMethod"><service-call name="mantle.account.PaymentMethodServices.delete#PaymentMethod"/>
+        <default-response url="."/></transition>
+
     <transition name="updateContactInfo"><default-response url="UpdateContactInfo"/></transition>
     <transition name="removeContactInfo"><service-call name="mantle.party.ContactServices.delete#PartyContactMech"/>
         <default-response url="."/></transition>
@@ -42,8 +46,16 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="updatePartyNote"><service-call name="update#mantle.party.PartyNote"/>
         <default-response url="."/></transition>
 
-    <subscreens><subscreens-item name="UpdateContactInfo"
-            location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty/UpdateContactInfo.xml"/></subscreens>
+    <transition-include name="createContent" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+    <transition-include name="updateContent" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+    <transition-include name="downloadContent" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+
+    <subscreens>
+        <subscreens-item name="UpdateContactInfo"
+            location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty/UpdateContactInfo.xml"/>
+        <subscreens-item name="UpdatePaymentMethodInfo"
+            location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty/UpdatePaymentMethodInfo.xml"/>
+    </subscreens>
 
     <actions>
         <entity-find-one entity-name="mantle.party.PartyDetail" value-field="party"/>
@@ -56,8 +68,10 @@ along with this software (see the LICENSE.md file). If not, see
             <section-include name="RolesSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="PartyIdentificationSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
         </row-col><row-col lg="6">
-            <section-include name="ContactInfoSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="NotesSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="PaymentMethodSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="ContactInfoSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="ContentSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
         </row-col></container-row>
     </widgets>
 </screen>

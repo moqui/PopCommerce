@@ -46,8 +46,8 @@ along with this software (see the LICENSE.md file). If not, see
 
         <form-list name="CustomerListForm" list="partyIdList" list-entry="partyId" skip-form="true"
                 extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#PartyListForm">
-            <field name="pseudoId"><default-field>
-                <link url="editCustomer" text="${party.pseudoId}"/></default-field></field>
+            <field name="pseudoId"><default-field><link url="editCustomer" text="${party.pseudoId}" link-type="anchor"/></default-field></field>
+            <field name="combinedName"><default-field><link url="editCustomer" text="PartyNameOnlyTemplate" text-map="party" link-type="anchor"/></default-field></field>
             <field name="submitButton">
                 <header-field title="Find"><submit/></header-field>
                 <default-field><link url="findOrder" text="Sales Orders" parameter-map="[customerPartyId:partyId]"
