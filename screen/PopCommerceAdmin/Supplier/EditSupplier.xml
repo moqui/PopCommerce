@@ -55,6 +55,8 @@ along with this software (see the LICENSE.md file). If not, see
             location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty/UpdateContactInfo.xml"/>
         <subscreens-item name="UpdatePaymentMethodInfo"
             location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty/UpdatePaymentMethodInfo.xml"/>
+        <subscreens-item name="FindDuplicates"
+            location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty/FindDuplicates.xml"/>
     </subscreens>
 
     <actions>
@@ -63,6 +65,7 @@ along with this software (see the LICENSE.md file). If not, see
     <widgets>
         <container-row><row-col lg="6">
             <link url="findOrder" text="Orders" parameter-map="[vendorPartyId:partyId]"/>
+            <dynamic-dialog id="FindDuplicatesDialog" button-text="Find Duplicates" transition="FindDuplicates" width="960"/>
 
             <section-include name="EditPartySection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="RolesSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
