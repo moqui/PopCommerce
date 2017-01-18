@@ -60,10 +60,10 @@ class PopcAdminScreenTests extends Specification {
 
     def "render POP Commerce Admin screens with no required parameters"() {
         when:
-        Set<String> screensToSkip = new HashSet()
+        Set<String> screensToSkip = new HashSet(['wiki', 'EditWikiPage', 'WikiCommentNested', 'WikiCommentReply'])
         List<String> screenPaths = screenTest.getNoRequiredParameterPaths(screensToSkip)
         for (String screenPath in screenPaths) {
-            ScreenTestRender str = screenTest.render(screenPath, null, null)
+            ScreenTestRender str = screenTest.render(screenPath, [lastStandalone:"-2"], null)
             logger.info("Rendered ${screenPath} in ${str.getRenderTime()}ms, ${str.output?.length()} characters")
         }
 
@@ -74,7 +74,7 @@ class PopcAdminScreenTests extends Specification {
     @Unroll
     def "render POP Commerce Admin screen (#screenPath, #containsTextList)"() {
         setup:
-        ScreenTestRender str = screenTest.render(screenPath, null, null)
+        ScreenTestRender str = screenTest.render(screenPath, [lastStandalone:"-2"], null)
         // logger.info("Rendered ${screenPath} in ${str.getRenderTime()}ms, output:\n${str.output}")
         boolean containsAll = true
         for (String containsText in containsTextList) {
