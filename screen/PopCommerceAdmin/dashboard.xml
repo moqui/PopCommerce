@@ -74,6 +74,11 @@ along with this software (see the LICENSE.md file). If not, see
                         <image url="/popc/static/images/Shipping.png" url-type="screen" style="invertible"/></link>
                     <link text="Shipping" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']"/>
                 </container>
+                <container>
+                    <link url="../Return" link-type="anchor">
+                        <image url="/popc/static/images/Return.png" url-type="screen" style="invertible"/></link>
+                    <link text="Returns" url="../Return" link-type="anchor"/>
+                </container>
             </row-col>
 
             <row-col md="8">
@@ -84,6 +89,10 @@ along with this software (see the LICENSE.md file). If not, see
                 <container>
                     <link text="Catalog" url="../Catalog" link-type="anchor"/>
                     <link url="../Catalog" link-type="anchor"><image url="/popc/static/images/Catalog.png" url-type="screen" style="invertible"/></link>
+                </container>
+                <container>
+                    <link text="Wiki/Content" url="../Wiki" link-type="anchor"/>
+                    <link url="../Wiki" link-type="anchor"><image url="/popc/static/images/Wiki.png" url-type="screen" style="invertible"/></link>
                 </container>
                 <container>
                     <link text="Facilities" url="../Facility" link-type="anchor"/>
