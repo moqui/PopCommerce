@@ -70,7 +70,7 @@ along with this software (see the LICENSE.md file). If not, see
         html_stylesheets.add('/css/webroot-layout.css')
         ]]></script></pre-actions>
     <actions>
-        <service-call name="mantle.order.OrderServices.get#OrderItemsTotalCount" in-map="[orderId:cartOrderId]" out-map="context"/>
+        <if condition="cartOrderId"><service-call name="mantle.order.OrderServices.get#OrderItemsTotalCount" in-map="[orderId:cartOrderId]" out-map="context"/></if>
     </actions>
     <widgets>
         <render-mode><text type="html" location="component://webroot/screen/includes/Header.html.ftl"/></render-mode>
