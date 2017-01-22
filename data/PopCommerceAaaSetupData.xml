@@ -66,6 +66,9 @@ along with this software (see the LICENSE.md file). If not, see
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="200" resourceTypeEnumId="STRT_FOOTER_ITEM">
         <resourceValue><![CDATA[<p><a href="http://www.moqui.org/" target="_blank">${ec.l10n.localize('Built on Moqui Framework ${ec.factory.moquiVersion}')}</a></p>]]></resourceValue>
     </moqui.screen.ScreenThemeResource>
+    <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="201" resourceTypeEnumId="STRT_FOOTER_ITEM">
+        <resourceValue><![CDATA[<p><a href="/popc/content/about">About</a> <a href="/popc/content/contact">Contact</a></p>]]></resourceValue>
+    </moqui.screen.ScreenThemeResource>
 
     <!-- A skeleton record for the default store; this record is here just in case no demo/config data is loaded -->
     <mantle.product.store.ProductStore productStoreId="POPC_DEFAULT" defaultLocale="en_US" defaultCurrencyUomId="USD"/>

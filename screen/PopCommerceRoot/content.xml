@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
+        require-authentication="anonymous-view" allow-extra-path="true" default-menu-include="false">
+    <transition name="attachment"><actions>
+        <set field="extraPathNameList" from="new ArrayList(sri.screenUrlInfo.extraPathNameList)"/>
+        <if condition="!extraPathNameList"><script>ec.web.response.sendError(404)</script></if>
+        <set field="filename" from="extraPathNameList.remove(extraPathNameList.size()-1)"/>
+        <service-call name="org.moqui.impl.WikiServices.get#WikiPageAttachment" out-map="context"
+                      in-map="[wikiSpaceId:wikiSpaceId, pagePath:extraPathNameList?.join('/'), filename:filename]"/>
+        <script>ec.web.sendResourceResponse(attachmentReference.location)</script>
+    </actions><default-response type="none"/></transition>
+    <actions>
+        <set field="extraPathNameList" from="sri.screenUrlInfo.extraPathNameList"/>
+        <service-call name="org.moqui.impl.WikiServices.get#PublishedWikiPageText" out-map="context"
+                      in-map="[wikiSpaceId:wikiSpaceId, pagePath:extraPathNameList?.join('/'), versionName:ver]"/>
+        <!-- TODO: consider removing versionName:ver above in production so only published versions can be seen -->
+    </actions>
+    <widgets>
+        <section name="PageTextSection" condition="pageText">
+            <widgets><label text="${pageText}" type="div" style="content-page" encode="false"/></widgets>
+            <fail-widgets>
+                <label text="Sorry, we couldn't find that page!" type="h2" style="text-center"/>
+            </fail-widgets>
+        </section>
+    </widgets>
+</screen>

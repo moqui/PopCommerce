@@ -25,6 +25,7 @@ along with this software (see the LICENSE.md file). If not, see
         <set field="defaultLocale" from="productStore?.defaultLocale"/>
         <set field="organizationPartyId" from="productStore?.organizationPartyId"/>
         <set field="vendorPartyId" from="productStore?.organizationPartyId"/>
+        <set field="wikiSpaceId" from="productStore?.wikiSpaceId"/>
 
         <!-- some settings used when adding to cart, etc -->
         <set field="cartOrderId" from="ec.web.sessionAttributes.cartOrderId" set-if-empty="false"/>
