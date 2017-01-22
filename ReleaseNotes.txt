@@ -2,6 +2,26 @@
 POP Commerce - Retail and Wholesale ERP and eCommerce - Release Notes
 
 ===========================================================================
+Release 1.2.0 - Not Yet Released
+===========================================================================
+
+POP Commerce Retail and Wholesale ERP and eCommerce 1.2.0 is a minor
+new feature and bug fix release.
+
+This release is based on Moqui Framework version TODO, mantle-udm TODO,
+mantle-usl TODO, and SimpleScreens TODO. It also uses the
+moqui-elasticsearch TODO, moqui-fop TODO, and moqui-kie TODO tool
+components.
+
+The admin app has new screens for SimpleScreens for comprehensive general
+party management, returns management, and wiki/content management.
+
+The ecommerce app (/popc) has a new content screen which is the root page
+for managed content pages that can be added and edited (with version
+history and published version management) in the admin app, along with
+attachments, for display on the ecommerce site.
+
+===========================================================================
 Release 1.1.0 - 24 Nov 2016
 ===========================================================================
 
