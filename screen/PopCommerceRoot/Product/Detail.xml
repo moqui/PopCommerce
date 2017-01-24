@@ -59,14 +59,20 @@ along with this software (see the LICENSE.md file). If not, see
         <entity-find-one entity-name="moqui.basic.Enumeration" value-field="productClassEnum">
             <field-map field-name="enumId" from="product.productClassEnumId"/></entity-find-one>
 
-        <entity-find entity-name="mantle.product.feature.ProductFeatureAndAppl" list="pfaaList">
+        <entity-find entity-name="mantle.product.feature.ProductFeatureAndAppl" list="pfaaList" cache="true">
             <date-filter/><econdition field-name="productId"/>
             <econdition field-name="applTypeEnumId" value="PfatStandard"/>
             <order-by field-name="productFeatureTypeEnumId"/><order-by field-name="description"/>
         </entity-find>
 
-        <entity-find entity-name="mantle.product.ProductDimensionAndType" list="dimensionList">
+        <entity-find entity-name="mantle.product.ProductDimensionAndType" list="dimensionList" cache="true">
             <econdition field-name="productId"/><order-by field-name="description"/></entity-find>
+
+        <entity-find entity-name="mantle.product.ProductContent" list="contentList" cache="true">
+            <date-filter/><econdition field-name="productId"/><order-by field-name="sequenceNum,-fromDate"/></entity-find>
+        <!-- some content types may have more than one record, long description just has one -->
+        <set field="descLongLocation" from="contentList.find({ 'PcntDescriptionLong' == it.productContentTypeEnumId })?.contentLocation"/>
+        <if condition="descLongLocation"><set field="descriptionLong" from="ec.resource.getLocationText(descLongLocation, true)"/></if>
     </actions>
     <widgets>
         <!-- <label text="${product.productName ?: ''}" type="h2"/> -->
@@ -84,6 +90,8 @@ along with this software (see the LICENSE.md file). If not, see
         </form-single>
 
         <label text="Class: ${productClassEnum.description}" condition="productClassEnum" type="strong"/>
+
+        <label text="${descriptionLong}" encode="false" type="div"/>
 
         <container-row><row-col lg="6" md="6">
             <container-box>
