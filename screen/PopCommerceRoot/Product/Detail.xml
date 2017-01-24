@@ -18,6 +18,23 @@ along with this software (see the LICENSE.md file). If not, see
 
     <parameter name="productId" required="true"/>
 
+    <transition name="image" read-only="true">
+        <parameter name="productContentId"/>
+        <actions>
+            <set field="extraPathNameList" from="sri.screenUrlInfo.extraPathNameList"/>
+            <if condition="extraPathNameList &amp;&amp; !productContentId">
+                <set field="productContentId" from="extraPathNameList[0]"/></if>
+            <entity-find-one entity-name="mantle.product.ProductContent" value-field="productContent" cache="true">
+                <field-map field-name="productContentId"/></entity-find-one>
+            <if condition="productContent == null"><then>
+                <!-- NOTE: consider returning a default image instead of 404 -->
+                <script>ec.web.response.sendError(404)</script>
+            </then><else>
+                <script>ec.web.sendResourceResponse(productContent.contentLocation)</script>
+            </else></if>
+        </actions>
+        <default-response type="none"/>
+    </transition>
     <transition name="addToCart">
         <actions>
             <service-call name="mantle.order.OrderServices.add#OrderProductQuantity" out-map="addOut"
@@ -28,9 +45,6 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response url="../../Order/Cart"/>
         <error-response url="."/>
     </transition>
-
-    <transition name="productReviewList"><default-response url="ProductReviewList"/></transition>
-
     <transition name="createProductReview">
         <service-call name="create#mantle.product.ProductReview" web-send-json-response="true"
                 in-map="context + [userId:(ec.user.userId ?: '_NA_'), statusId:'PrvwPending',
@@ -73,23 +87,30 @@ along with this software (see the LICENSE.md file). If not, see
         <!-- some content types may have more than one record, long description just has one -->
         <set field="descLongLocation" from="contentList.find({ 'PcntDescriptionLong' == it.productContentTypeEnumId })?.contentLocation"/>
         <if condition="descLongLocation"><set field="descriptionLong" from="ec.resource.getLocationText(descLongLocation, true)"/></if>
+        <set field="imageSmallList" from="contentList.findAll({ 'PcntImageSmall' == it.productContentTypeEnumId })"/>
     </actions>
     <widgets>
         <!-- <label text="${product.productName ?: ''}" type="h2"/> -->
         <label text="${product.description ?: ''}" type="p"/>
 
-        <form-single name="ProductAddToCartForm" transition="addToCart">
-            <field name="productId"><default-field><hidden/></default-field></field>
-            <field name="price"><default-field title=""><display also-hidden="false" currency-unit-field="priceUomId"/></default-field></field>
-            <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>
-            <field name="add"><default-field title="Add to Cart"><submit/></default-field></field>
+        <container-row><row-col md="6">
+            <form-single name="ProductAddToCartForm" transition="addToCart">
+                <field name="productId"><default-field><hidden/></default-field></field>
+                <field name="price"><default-field title=""><display also-hidden="false" currency-unit-field="priceUomId"/></default-field></field>
+                <field name="quantity"><default-field title=""><text-line size="2" default-value="1"/></default-field></field>
+                <field name="add"><default-field title="Add to Cart"><submit/></default-field></field>
 
-            <field-layout>
-                <field-row-big><field-ref name="price"/><field-ref name="quantity"/><field-ref name="add"/></field-row-big>
-            </field-layout>
-        </form-single>
+                <field-layout>
+                    <field-row-big><field-ref name="price"/><field-ref name="quantity"/><field-ref name="add"/></field-row-big>
+                </field-layout>
+            </form-single>
 
-        <label text="Class: ${productClassEnum.description}" condition="productClassEnum" type="strong"/>
+            <label text="Class: ${productClassEnum.description}" condition="productClassEnum" type="strong"/>
+        </row-col><row-col md="6">
+            <section-iterate name="ImageSmallSection" list="imageSmallList" entry="imageSmall"><widgets>
+                <image url="image/${imageSmall.productContentId}" url-type="transition" alt="${imageSmall.description}" width="64" parameter-map="[productId:null]"/>
+            </widgets></section-iterate>
+        </row-col></container-row>
 
         <label text="${descriptionLong}" encode="false" type="div"/>
 
@@ -136,7 +157,7 @@ along with this software (see the LICENSE.md file). If not, see
             </form-single>
         </container-dialog>
 
-        <dynamic-container id="ProductReviewListContainer" transition="productReviewList"/>
+        <dynamic-container id="ProductReviewListContainer" transition="ProductReviewList"/>
 
     </widgets>
 </screen>
