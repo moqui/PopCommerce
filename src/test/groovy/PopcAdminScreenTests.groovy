@@ -138,7 +138,7 @@ class PopcAdminScreenTests extends Specification {
 
         // Accounting/Invoice
         "Accounting/Invoice/FindInvoice?statusId_op=in&statusId=InvoiceReceived,InvoiceApproved&toPartyId=ORG_ZIZI_RETAIL" |
-                ['Ziddleman Incorporated', 'Ziziwork Retail', 'Sales/Purchase']
+                ['Ziddleman', 'Ziziwork Retail', 'Sales/Purchase']
         "Accounting/Invoice/EditInvoice?invoiceId=55100" | ['Current: Approved', 'Unpaid $1,824.25', 'ORG_ZIZI_RETAIL']
         "Accounting/Invoice/EditInvoice?invoiceId=55400" |
                 ['ORG_ZIZI_RETAIL', 'Current: Payment Sent', 'Applied Payments $23,830.00']
@@ -149,10 +149,10 @@ class PopcAdminScreenTests extends Specification {
         // Accounting/Payment
         "Accounting/Payment/EditPayment?paymentId=55400" |
                 ['ORG_ZIZI_RETAIL', 'Applied $23,830.00', 'Current: Delivered']
-        "Accounting/Payment/PaymentCheck?paymentIds=55400&renderMode=xsl-fo" | ['Ziddleman Incorporated',
+        "Accounting/Payment/PaymentCheck?paymentIds=55400&renderMode=xsl-fo" | ['Ziddleman',
                 'Twenty three thousand eight hundred thirty and 00/100', 'Picker Bot 2000']
         "Accounting/Payment/PaymentDetail?paymentIds=55400&renderMode=xsl-fo" |
-                ['Ziddleman Incorporated', '$23,830.00', 'Picker Bot 2000']
+                ['Ziddleman', '$23,830.00', 'Picker Bot 2000']
 
         // Accounting Other
         "Accounting/FinancialAccount/EditFinancialAccount?finAccountId=55700" |
