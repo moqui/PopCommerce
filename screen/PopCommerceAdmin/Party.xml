@@ -15,7 +15,7 @@ along with this software (see the LICENSE.md file). If not, see
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
         default-menu-title="Parties" default-menu-index="3" menu-image="/popc/static/images/Parties.png">
     <subscreens default-item="FindParty">
-        <subscreens-item name="FindParty" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml" menu-include="false"/>
+        <subscreens-item name="FindParty" location="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml" menu-include="false"/>
         <subscreens-item name="EditParty" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml" menu-index="1"/>
         <subscreens-item name="PartyCalendar" location="component://SimpleScreens/screen/SimpleScreens/Party/PartyCalendar.xml" menu-index="2"/>
         <subscreens-item name="PartyMessages" location="component://SimpleScreens/screen/SimpleScreens/Party/PartyMessages.xml" menu-index="3"/>
