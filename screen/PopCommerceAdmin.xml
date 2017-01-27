@@ -19,6 +19,7 @@ along with this software (see the LICENSE.md file). If not, see
         <set field="appRoot" value="PopcAdmin"/>
         <set field="searchIndexName" value="popc"/>
         <set field="searchProductDocType" value="PopcProduct"/>
+        <set field="searchPartyDocType" value="PopcParty"/>
     </always-actions>
 
     <subscreens default-item="dashboard" always-use-full-path="true">
