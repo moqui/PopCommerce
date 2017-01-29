@@ -21,10 +21,12 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="updateParty"><service-call name="mantle.party.PartyServices.update#PartyDetail"/>
         <default-response url="."/></transition>
 
-    <transition name="createPartyRole"><service-call name="create#mantle.party.PartyRole"/>
-        <default-response url="."/></transition>
-    <transition name="deletePartyRole"><service-call name="delete#mantle.party.PartyRole"/>
-        <default-response url="."/></transition>
+    <transition name="createPartyRole"><service-call name="create#mantle.party.PartyRole"/><default-response url="."/></transition>
+    <transition name="deletePartyRole"><service-call name="delete#mantle.party.PartyRole"/><default-response url="."/></transition>
+
+    <transition-include name="setPartyClassification" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+    <transition-include name="removePartyClassification" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+    <transition-include name="getPartyClassificationList" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
 
     <transition name="createPartyIdentification"><service-call name="create#mantle.party.PartyIdentification"/>
         <default-response url="."/></transition>
@@ -46,10 +48,8 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="removeContactInfo"><service-call name="mantle.party.ContactServices.delete#PartyContactMech"/>
         <default-response url="."/></transition>
 
-    <transition name="createPartyNote"><service-call name="create#mantle.party.PartyNote"/>
-        <default-response url="."/></transition>
-    <transition name="updatePartyNote"><service-call name="update#mantle.party.PartyNote"/>
-        <default-response url="."/></transition>
+    <transition name="createPartyNote"><service-call name="create#mantle.party.PartyNote"/><default-response url="."/></transition>
+    <transition name="updatePartyNote"><service-call name="update#mantle.party.PartyNote"/><default-response url="."/></transition>
 
     <transition-include name="createContent" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
     <transition-include name="updateContent" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
@@ -75,6 +75,7 @@ along with this software (see the LICENSE.md file). If not, see
 
             <section-include name="EditPartySection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="RolesSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="PartyClassificationSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="PartyIdentificationSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="UserSecuritySection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
         </row-col><row-col lg="6">
