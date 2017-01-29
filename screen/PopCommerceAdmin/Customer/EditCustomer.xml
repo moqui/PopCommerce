@@ -28,6 +28,10 @@ along with this software (see the LICENSE.md file). If not, see
     <transition-include name="removePartyClassification" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
     <transition-include name="getPartyClassificationList" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
 
+    <transition-include name="createPartySetting" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+    <transition-include name="deletePartySetting" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+    <transition-include name="getPartySettingList" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+
     <transition name="createPartyIdentification"><service-call name="create#mantle.party.PartyIdentification"/>
         <default-response url="."/></transition>
     <transition name="updatePartyIdentification"><service-call name="update#mantle.party.PartyIdentification"/>
@@ -76,6 +80,7 @@ along with this software (see the LICENSE.md file). If not, see
             <section-include name="EditPartySection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="RolesSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="PartyClassificationSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="PartySettingSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="PartyIdentificationSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="UserSecuritySection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
         </row-col><row-col lg="6">
