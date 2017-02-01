@@ -15,9 +15,11 @@ along with this software (see the LICENSE.md file). If not, see
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
         default-menu-index="11" menu-image="/popc/static/images/Asset.png">
 
-    <subscreens default-item="FindAsset">
+    <subscreens default-item="FindSummary">
         <subscreens-item name="FindAsset" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Asset/FindAsset.xml"/>
+        <subscreens-item name="FindSummary" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Asset/FindSummary.xml"/>
         <subscreens-item name="AssetDetail" menu-index="1"
                 location="component://SimpleScreens/screen/SimpleScreens/Asset/AssetDetail.xml"/>
         <subscreens-item name="AssetCalendar" menu-index="2"
