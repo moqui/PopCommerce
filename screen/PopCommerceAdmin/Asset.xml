@@ -20,10 +20,15 @@ along with this software (see the LICENSE.md file). If not, see
                 location="component://SimpleScreens/screen/SimpleScreens/Asset/FindAsset.xml"/>
         <subscreens-item name="FindSummary" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Asset/FindSummary.xml"/>
+        <subscreens-item name="SelectAsset" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Asset/SelectAsset.xml"/>
+
         <subscreens-item name="AssetDetail" menu-index="1"
                 location="component://SimpleScreens/screen/SimpleScreens/Asset/AssetDetail.xml"/>
         <subscreens-item name="AssetCalendar" menu-index="2"
                 location="component://SimpleScreens/screen/SimpleScreens/Asset/AssetCalendar.xml"/>
+        <subscreens-item name="MoveAsset" menu-index="4"
+                location="component://SimpleScreens/screen/SimpleScreens/Asset/MoveAsset.xml"/>
     </subscreens>
     <widgets>
         <subscreens-panel id="AssetPanel" type="tab"/>
