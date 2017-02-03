@@ -20,6 +20,18 @@ along with this software (see the LICENSE.md file). If not, see
     <!-- PopCommerce admin filter on active or applicable organizations for the user -->
     <moqui.security.ArtifactAuthzFilter artifactAuthzId="POP_COMMERCE_ADM_PCADM" entityFilterSetId="MANTLE_USER_ORG"/>
 
-    <!-- index for search -->
+    <!-- run index for search -->
     <org.moqui.search.SearchServices.indexDataFeedDocuments dataFeedId="PopCommerceSearch"/>
+
+    <!-- demo store emails -->
+    <moqui.basic.email.EmailTemplate emailTemplateId="PopcOrderPlaced" description="POPC Order Placed"
+            emailServerId="SYSTEM" bodyScreenLocation="component://SimpleScreens/screen/email/OrderPlaced.xml" webappName="webroot"
+            fromAddress="${fromAddress}" fromName="${storeName}" ccAddresses="" bccAddresses="" sendPartial="Y"
+            subject="${storeName} Order ${orderId}"/>
+    <moqui.basic.email.EmailTemplate emailTemplateId="PopcShipmentShipped" description="POPC Shipment Shipped"
+            emailServerId="SYSTEM" bodyScreenLocation="component://SimpleScreens/screen/email/ShipmentShipped.xml" webappName="webroot"
+            fromAddress="${fromAddress}" fromName="${storeName}" ccAddresses="" bccAddresses="" sendPartial="Y"
+            subject="${storeName} Shipment ${shipmentId}"/>
+    <mantle.product.store.ProductStoreEmail productStoreId="POPC_DEFAULT" emailTypeEnumId="PsetOrderPlaced" emailTemplateId="PopcOrderPlaced"/>
+    <mantle.product.store.ProductStoreEmail productStoreId="POPC_DEFAULT" emailTypeEnumId="PsetShipmentShipped" emailTemplateId="PopcShipmentShipped"/>
 </entity-facade-xml>
