@@ -20,7 +20,7 @@ along with this software (see the LICENSE.md file). If not, see
             subscreenName="PopcAdmin" subscreenLocation="component://PopCommerce/screen/PopCommerceAdmin.xml"
             menuTitle="POP Commerce Admin" menuIndex="9" menuInclude="Y"/>
 
-    <!-- authz/permission for ALL users -->
+    <!-- ecommerce authz/permission for ALL users -->
     <moqui.security.ArtifactGroup artifactGroupId="POPC" description="POP Commerce App (via root screen)"/>
     <moqui.security.ArtifactGroupMember artifactGroupId="POPC" artifactName="component://PopCommerce/screen/PopCommerceRoot.xml"
             artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>

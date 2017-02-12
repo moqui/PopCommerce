@@ -22,7 +22,7 @@ along with this software (see the LICENSE.md file). If not, see
             <if condition="ec.user.userAccount">
                 <!-- TODO: move this to a service so that screen.@require-authentication can be false instead of anonymous-all (slightly tighter security) -->
                 <!-- see if there is an open order for user and get that ID into session -->
-                <entity-find entity-name="OrderHeaderAndPart" list="existingOrderList">
+                <entity-find entity-name="mantle.order.OrderHeaderAndPart" list="existingOrderList">
                     <econdition field-name="statusId" value="OrderOpen"/>
                     <econdition field-name="customerPartyId" from="ec.user.userAccount.partyId"/>
                     <select-field field-name="orderId"/><select-field field-name="orderPartSeqId"/>
