@@ -20,8 +20,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="addToCart">
         <actions>
             <service-call name="mantle.order.OrderServices.add#OrderProductQuantity" out-map="addOut"
-                    in-map="[orderId:cartOrderId, productId:productId, quantity:quantity, customerPartyId:customerPartyId,
-                            currencyUomId:currencyUomId, productStoreId:productStoreId]"/>
+                    in-map="defaultOrderParameters + [productId:productId, quantity:quantity]"/>
             <set field="ec.web.sessionAttributes.cartOrderId" from="addOut.orderId"/>
         </actions>
         <default-response url="../../Order/Cart"/>

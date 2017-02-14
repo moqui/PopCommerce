@@ -16,7 +16,8 @@ along with this software (see the LICENSE.md file). If not, see
         xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
         require-authentication="false">
 
-    <transition name="updateCartItems"><service-call name="mantle.order.OrderServices.update#OrderProductQuantity"/>
+    <transition name="updateCartItems">
+        <service-call name="mantle.order.OrderServices.update#OrderProductQuantity" multi="true" in-map="context + [orderId:cartOrderId]"/>
         <default-response url="."/></transition>
 
     <pre-actions>
@@ -33,10 +34,11 @@ along with this software (see the LICENSE.md file). If not, see
                 <service-call name="mantle.order.OrderServices.get#OrderItemTotal" in-map="[orderItem:orderItem]" out-map="orderItemTotalOut"/>
                 <script>context.putAll(orderItem)</script>
             </row-actions>
-            <field name="orderId"><default-field><hidden/></default-field></field>
-            <field name="orderItemSeqId"><default-field><hidden/></default-field></field>
+            <field name="orderItemSeqId">
+                <conditional-field condition="productId"><hidden/></conditional-field>
+                <default-field><ignored/></default-field></field>
             <field name="itemTypeEnumId"><default-field title="Type">
-                <display-entity entity-name="moqui.basic.Enumeration" key-field-name="enumId" text="${description}"/>
+                <display-entity entity-name="moqui.basic.Enumeration" key-field-name="enumId" text="${description}" also-hidden="false"/>
             </default-field></field>
             <field name="description">
                 <conditional-field condition="productId">
@@ -54,7 +56,7 @@ along with this software (see the LICENSE.md file). If not, see
             <field name="quantity">
                 <conditional-field condition="orderItem?.itemTypeEnumId == 'ItemProduct'">
                     <text-line size="4"/></conditional-field>
-                <default-field><display/></default-field>
+                <default-field><display also-hidden="false"/></default-field>
             </field>
             <field name="itemTotal" from="orderItemTotalOut.itemTotal"><default-field>
                 <display currency-unit-field="orderHeader.currencyUomId" also-hidden="false"/>
