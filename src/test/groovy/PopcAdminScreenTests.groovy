@@ -142,7 +142,7 @@ class PopcAdminScreenTests extends Specification {
         "Accounting/Invoice/EditInvoice?invoiceId=55100" | ['Current: Approved', 'Unpaid $1,824.25', 'ORG_ZIZI_RETAIL']
         "Accounting/Invoice/EditInvoice?invoiceId=55400" |
                 ['ORG_ZIZI_RETAIL', 'Current: Payment Sent', 'Applied Payments $23,830.00']
-        "Accounting/Invoice/EditInvoiceItems?invoiceId=55400" | ['Demo Product One-One', 'Sales - Shipping and Handling']
+        "Accounting/Invoice/EditInvoiceItems?invoiceId=55400" | ['Demo Product One-One', 'Shipping and Handling']
         "Accounting/Invoice/PrintInvoice?invoiceId=55400&renderMode=xsl-fo" |
                 ['1350 E. Flamingo Rd. #9876, Las Vegas, NV 89119-5263', 'Asset - Inventory']
 
