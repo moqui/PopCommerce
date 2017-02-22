@@ -15,15 +15,15 @@ along with this software (see the LICENSE.md file). If not, see
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
         default-menu-title="Orders" default-menu-index="6" menu-image="/popc/static/images/Sales.png">
 
-    <subscreens default-item="FindOrder">
-        <subscreens-item name="FindOrder" menu-include="false"
-                location="component://SimpleScreens/screen/SimpleScreens/Order/FindOrder.xml"/>
-        <subscreens-item name="OrderDetail" menu-index="1"
-                location="component://SimpleScreens/screen/SimpleScreens/Order/OrderDetail.xml"/>
-        <subscreens-item name="PrintOrder" menu-include="false"
-                location="component://SimpleScreens/screen/SimpleScreens/Order/PrintOrder.xml"/>
+    <subscreens default-item="FindReturn">
+        <subscreens-item name="FindReturn" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Return/FindReturn.xml"/>
+        <subscreens-item name="EditReturn" menu-index="1"
+                location="component://SimpleScreens/screen/SimpleScreens/Return/EditReturn.xml"/>
+        <subscreens-item name="EditReturnItems" menu-index="2"
+                location="component://SimpleScreens/screen/SimpleScreens/Return/EditReturnItems.xml"/>
+        <subscreens-item name="AddOrderItems" menu-index="3"
+                location="component://SimpleScreens/screen/SimpleScreens/Return/AddOrderItems.xml"/>
     </subscreens>
-    <widgets>
-        <subscreens-active id="OrderPanel"/>
-    </widgets>
+    <widgets><widgets><subscreens-panel id="ReturnPanel" type="tab"/></widgets></widgets>
 </screen>
