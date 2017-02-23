@@ -13,7 +13,7 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
-        default-menu-title="Vendors" default-menu-index="20" menu-image="/popc/static/images/Vendor.png">
+        default-menu-title="Vendors" default-menu-index="25" menu-image="/popc/static/images/Vendor.png">
 
     <subscreens default-item="FindVendor">
         <subscreens-item name="FindVendor" location="component://SimpleScreens/screen/SimpleScreens/Vendor/FindVendor.xml"
@@ -28,7 +28,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <widgets>
         <!-- use a dynamic panel here since a subscreen uses a dynamic panel and this way the heights are correct -->
-        <container-panel id="vendor-panel" dynamic="true">
+        <container-panel id="vendor-panel">
             <panel-header spacing="0"><subscreens-menu id="vendor-menu" type="tab"/></panel-header>
             <panel-center><subscreens-active/></panel-center>
         </container-panel>
