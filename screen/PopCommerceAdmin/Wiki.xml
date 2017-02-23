@@ -13,7 +13,7 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
-        default-menu-title="Orders" default-menu-index="6" menu-image="/popc/static/images/Sales.png">
+        default-menu-title="Wiki/Content" default-menu-index="6" menu-image="/popc/static/images/Wiki.png">
 
     <subscreens default-item="WikiSpaces">
         <subscreens-item name="WikiSpaces" menu-include="false"
