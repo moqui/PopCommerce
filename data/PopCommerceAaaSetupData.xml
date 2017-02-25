@@ -28,6 +28,7 @@ along with this software (see the LICENSE.md file). If not, see
             authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
 
     <!-- PopCommerce Admin screens admin authz -->
+    <moqui.basic.Enumeration description="POPC Admin App" enumId="UgtPopcAdmin" enumTypeId="UserGroupType"/>
     <moqui.security.UserGroup userGroupId="POP_COMMERCE_ADMIN" description="POPC Administrators" groupTypeEnumId="UgtPopcAdmin"/>
     <artifactGroups artifactGroupId="POP_COMMERCE_ADMIN" description="PopCommerce Admin (via root screen)">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
@@ -76,7 +77,6 @@ along with this software (see the LICENSE.md file). If not, see
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Wiki.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
 
     <!-- ========== User Groups for POP Commerce Admin App ========== -->
-    <moqui.basic.Enumeration description="POPC Admin App" enumId="UgtPopcAdmin" enumTypeId="UserGroupType"/>
 
     <userGroups userGroupId="PopcAdminAccounting" description="POPC Accounting" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="POPC_ACC_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
