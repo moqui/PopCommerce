@@ -76,8 +76,9 @@ along with this software (see the LICENSE.md file). If not, see
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Wiki.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
 
     <!-- ========== User Groups for POP Commerce Admin App ========== -->
+    <moqui.basic.Enumeration description="POPC Admin App" enumId="UgtPopcAdmin" enumTypeId="UserGroupType"/>
 
-    <userGroups userGroupId="PopcAdminAccounting" description="POPC Accounting">
+    <userGroups userGroupId="PopcAdminAccounting" description="POPC Accounting" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="POPC_ACC_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_ACC_ACC" artifactGroupId="PopcAdminAccounting" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
@@ -95,7 +96,7 @@ along with this software (see the LICENSE.md file). If not, see
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
     </userGroups>
 
-    <userGroups userGroupId="PopcAdminCatalogContent" description="POPC Catalog and Content">
+    <userGroups userGroupId="PopcAdminCatalogContent" description="POPC Catalog and Content" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="POPC_CATCON_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_CATCON_CAT" artifactGroupId="PopcAdminCatalog" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
@@ -103,7 +104,7 @@ along with this software (see the LICENSE.md file). If not, see
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
     </userGroups>
 
-    <userGroups userGroupId="PopcAdminPurchasing" description="POPC Purchasing">
+    <userGroups userGroupId="PopcAdminPurchasing" description="POPC Purchasing" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="POPC_PURCH_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_PURCH_ORD" artifactGroupId="PopcAdminOrder" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
@@ -118,7 +119,7 @@ along with this software (see the LICENSE.md file). If not, see
         <authz artifactAuthzId="POPC_PURCH_SHP" artifactGroupId="PopcAdminShipment" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_VIEW">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
     </userGroups>
-    <userGroups userGroupId="PopcAdminPurchasingSup" description="POPC Purchasing Supervisors">
+    <userGroups userGroupId="PopcAdminPurchasingSup" description="POPC Purchasing Supervisors" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="POPC_PURSUP_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_PURSUP_ORD" artifactGroupId="PopcAdminOrder" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
@@ -135,7 +136,7 @@ along with this software (see the LICENSE.md file). If not, see
         <permissions userPermissionId="ORDER_APPROVE"/>
     </userGroups>
 
-    <userGroups userGroupId="PopcAdminSales" description="POPC Sales">
+    <userGroups userGroupId="PopcAdminSales" description="POPC Sales" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="POPC_SALES_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_SALES_ORD" artifactGroupId="PopcAdminOrder" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
@@ -150,7 +151,7 @@ along with this software (see the LICENSE.md file). If not, see
         <authz artifactAuthzId="POPC_SALES_SHP" artifactGroupId="PopcAdminShipment" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_VIEW">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
     </userGroups>
-    <userGroups userGroupId="PopcAdminSalesSup" description="POPC Sales Supervisors">
+    <userGroups userGroupId="PopcAdminSalesSup" description="POPC Sales Supervisors" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="POPC_SALSUP_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_SALSUP_ORD" artifactGroupId="PopcAdminOrder" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
@@ -167,7 +168,7 @@ along with this software (see the LICENSE.md file). If not, see
         <permissions userPermissionId="ORDER_APPROVE"/>
     </userGroups>
 
-    <userGroups userGroupId="PopcAdminWarehouse" description="POPC Warehouse">
+    <userGroups userGroupId="PopcAdminWarehouse" description="POPC Warehouse" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="POPC_SHIP_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_SHIP_AST" artifactGroupId="PopcAdminAsset" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
