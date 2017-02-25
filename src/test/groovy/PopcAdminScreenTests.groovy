@@ -101,8 +101,8 @@ class PopcAdminScreenTests extends Specification {
         "Customer/EditCustomer?partyId=CustJqp" |
                 ['Joe', 'joe@public.com', 'Visa ************1111', '1-702-234-5678', '1350 E. Flamingo Rd. #2345']
 
-        // User
-        "User/EditUser?partyId=EX_JOHN_DOE" | ['john.doe@moqui.org', 'John']
+        // Party
+        "Party/EditParty?partyId=EX_JOHN_DOE" | ['john.doe@moqui.org', 'John']
 
         // Catalog
         "Catalog/Category/EditCategory?productCategoryId=DEMO_ONE" | ['Demo Category One']

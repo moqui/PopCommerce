@@ -20,6 +20,7 @@ along with this software (see the LICENSE.md file). If not, see
         <set field="searchIndexName" value="popc"/>
         <set field="searchProductDocType" value="PopcProduct"/>
         <set field="searchPartyDocType" value="PopcParty"/>
+        <set field="appUserGroupTypeEnumId" value="UgtPopcAdmin"/>
     </always-actions>
 
     <subscreens default-item="dashboard" always-use-full-path="true">
