@@ -27,9 +27,13 @@ along with this software (see the LICENSE.md file). If not, see
     <moqui.security.ArtifactAuthz artifactAuthzId="POPC_ALL" userGroupId="ALL_USERS" artifactGroupId="POPC"
             authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
 
-    <!-- PopCommerce Admin screens admin authz -->
+    <!-- PopCommerce Admin App Administrators -->
     <moqui.basic.Enumeration description="POPC Admin App" enumId="UgtPopcAdmin" enumTypeId="UserGroupType"/>
-    <moqui.security.UserGroup userGroupId="POP_COMMERCE_ADMIN" description="POPC Administrators" groupTypeEnumId="UgtPopcAdmin"/>
+    <userGroups userGroupId="POP_COMMERCE_ADMIN" description="POPC Administrators" groupTypeEnumId="UgtPopcAdmin">
+        <permissions userPermissionId="CARD_NUMBER_EDIT"/>
+    </userGroups>
+
+    <!-- PopCommerce Admin screens admin authz -->
     <artifactGroups artifactGroupId="POP_COMMERCE_ADMIN" description="PopCommerce Admin (via root screen)">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
         <authz artifactAuthzId="POP_COMMERCE_ADM_ADM" userGroupId="ADMIN"  authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL">
@@ -166,6 +170,7 @@ along with this software (see the LICENSE.md file). If not, see
         <authz artifactAuthzId="POPC_SALSUP_SHP" artifactGroupId="PopcAdminShipment" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
         <permissions userPermissionId="ORDER_APPROVE"/>
+        <permissions userPermissionId="CARD_NUMBER_EDIT"/>
     </userGroups>
 
     <userGroups userGroupId="PopcAdminWarehouse" description="POPC Warehouse" groupTypeEnumId="UgtPopcAdmin">
