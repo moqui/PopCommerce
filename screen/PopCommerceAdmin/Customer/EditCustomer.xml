@@ -88,8 +88,9 @@ along with this software (see the LICENSE.md file). If not, see
             <section-include name="UserSecuritySection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
         </row-col><row-col lg="6">
             <section-include name="NotesSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
-            <section-include name="PaymentMethodSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="ContactInfoSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="PaymentMethodSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="FinancialAccountSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="ContentSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
         </row-col></container-row>
     </widgets>
