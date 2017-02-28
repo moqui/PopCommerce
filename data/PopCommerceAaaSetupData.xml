@@ -18,7 +18,7 @@ along with this software (see the LICENSE.md file). If not, see
             subscreenLocation="component://PopCommerce/screen/PopCommerceRoot.xml"/>
     <moqui.screen.SubscreensItem screenLocation="component://webroot/screen/webroot/apps.xml"
             subscreenName="PopcAdmin" subscreenLocation="component://PopCommerce/screen/PopCommerceAdmin.xml"
-            menuTitle="POP Commerce Admin" menuIndex="9" menuInclude="Y"/>
+            menuTitle="POPC Admin" menuIndex="9" menuInclude="Y"/>
 
     <!-- ecommerce authz/permission for ALL users -->
     <moqui.security.ArtifactGroup artifactGroupId="POPC" description="POP Commerce App (via root screen)"/>
