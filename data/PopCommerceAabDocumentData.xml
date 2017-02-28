@@ -14,26 +14,34 @@ along with this software (see the LICENSE.md file). If not, see
 -->
 <entity-facade-xml type="seed">
     <!-- Party -->
+
+    <!-- TODO: remove Supplier and Customer, use Party search, add conditional links to EditSupplier and EditCustomer -->
+    <!-- framework feature: condition expression attr on DataDocumentLink, change Search screens to only show link if user has permission and condition passes (if there is one) -->
     <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleParty" newDataDocumentId="PopcSupplier" newIndexName="popc"/>
     <moqui.entity.document.DataDocument dataDocumentId="PopcSupplier" documentName="Supplier"/>
     <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcSupplier" fieldNameAlias="roleTypeId" fieldValue="Supplier" postQuery="Y"/>
     <moqui.entity.document.DataDocumentLink dataDocumentId="PopcSupplier" label="Edit Supplier" urlType="screen"
-                                            linkUrl="//apps/PopcAdmin/Supplier/EditSupplier?partyId=${partyId}"/>
+            linkUrl="//apps/PopcAdmin/Supplier/EditSupplier?partyId=${partyId}"/>
 
     <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleParty" newDataDocumentId="PopcCustomer" newIndexName="popc"/>
     <moqui.entity.document.DataDocument dataDocumentId="PopcCustomer" documentName="Customer"/>
     <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcCustomer" fieldNameAlias="roleTypeId" fieldValue="Customer" postQuery="Y"/>
     <moqui.entity.document.DataDocumentLink dataDocumentId="PopcCustomer" label="Edit Customer" urlType="screen"
-                                            linkUrl="//apps/PopcAdmin/Customer/EditCustomer?partyId=${partyId}"/>
+            linkUrl="//apps/PopcAdmin/Customer/EditCustomer?partyId=${partyId}"/>
 
     <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleParty" newDataDocumentId="PopcParty" newIndexName="popc"/>
     <moqui.entity.document.DataDocumentLink dataDocumentId="PopcParty" label="Edit Party" urlType="screen"
-                                            linkUrl="//apps/PopcAdmin/Party/EditParty?partyId=${partyId}"/>
+            linkUrl="//apps/PopcAdmin/Party/EditParty?partyId=${partyId}"/>
 
     <!-- Facility -->
     <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleFacility" newDataDocumentId="PopcFacility" newIndexName="popc"/>
     <moqui.entity.document.DataDocumentLink dataDocumentId="PopcFacility" label="Edit Facility" urlType="screen"
-                                            linkUrl="//apps/PopcAdmin/Facility/EditFacility?facilityId=${facilityId}"/>
+            linkUrl="//apps/PopcAdmin/Facility/EditFacility?facilityId=${facilityId}"/>
+
+    <!-- Request -->
+    <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleRequest" newDataDocumentId="PopcRequest" newIndexName="popc"/>
+    <moqui.entity.document.DataDocumentLink dataDocumentId="PopcRequest" label="Edit Request"
+            linkUrl="/apps/PopcAdmin/Request/EditRequest?requestId=${requestId}"/>
 
     <!-- Product -->
     <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleProduct" newDataDocumentId="PopcProduct" newIndexName="popc"/>
