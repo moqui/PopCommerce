@@ -13,7 +13,7 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
-        default-menu-title="Catalog" default-menu-index="22" menu-image="/popc/static/images/Catalog.png">
+        default-menu-title="Catalog" default-menu-index="22" menu-image="/ssstatic/images/Catalog.png">
     <subscreens default-item="Product">
         <subscreens-item name="Category" location="component://SimpleScreens/screen/SimpleScreens/Catalog/Category.xml"/>
         <subscreens-item name="Feature" location="component://SimpleScreens/screen/SimpleScreens/Catalog/Feature.xml"/>

@@ -13,7 +13,7 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
-        default-menu-index="27" menu-image="/popc/static/images/Accounting.png">
+        default-menu-title="Accounting" default-menu-index="27" menu-image="/ssstatic/images/Accounting.png">
 
     <subscreens default-item="dashboard">
         <subscreens-item name="dashboard" menu-index="1"

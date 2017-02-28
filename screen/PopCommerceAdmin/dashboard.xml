@@ -20,111 +20,107 @@ along with this software (see the LICENSE.md file). If not, see
 
     <widgets>
         <container-row>
-            <row-col md="2">
-                <label text="Operate" type="h3"/>
+            <row-col md="6" style="text-center">
+                <form-single name="SearchOptions" transition="search" extends="component://SimpleScreens/screen/SimpleScreens/Search.xml#SearchOptions">
+                    <field name="queryString"><default-field><text-line size="25"/></default-field></field>
+                </form-single>
+            </row-col>
+            <row-col md="6" style="text-center">
+                <form-single name="QuickLookupForm" transition="quickLookup" extends="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml#QuickLookupForm"/>
+            </row-col>
+        </container-row>
+
+        <container-row><row-col sm="1"/><row-col sm="4" style="text-center">
+            <label text="Operate" type="h3"/>
+            <container-row><row-col sm="6">
                 <container>
-                    <link url="../Supplier" link-type="anchor"><image url="/popc/static/images/Supplier.png" url-type="screen" style="invertible"/></link>
-                    <link text="Suppliers" url="../Supplier" link-type="anchor"/>
+                    <link url="../Supplier" link-type="anchor"><image url="/ssstatic/images/Supplier.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Suppliers" url="../Supplier" link-type="anchor"/></container>
                 </container>
                 <container>
                     <link url="../Order" link-type="anchor" parameter-map="[orderType:'Purchase']">
-                        <image url="/popc/static/images/Purchasing.png" url-type="screen" style="invertible"/></link>
-                    <link text="Purchasing" url="../Order" link-type="anchor" parameter-map="[orderType:'Purchase']"/>
+                        <image url="/ssstatic/images/Purchasing.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Purchasing" url="../Order" link-type="anchor" parameter-map="[orderType:'Purchase']"/></container>
                 </container>
                 <container>
                     <link url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']">
-                        <image url="/popc/static/images/Receiving.png" url-type="screen" style="invertible"/></link>
-                    <link text="Receiving" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']"/>
+                        <image url="/ssstatic/images/Receiving.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Receiving" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']"/></container>
                 </container>
-
                 <label text="&amp;nbsp;" type="p" encode="false"/>
                 <container>
                     <link url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']">
-                        <image url="/popc/static/images/Inventory.png" url-type="screen" style="invertible"/></link>
-                    <link text="Inventory" url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']"/>
+                        <image url="/ssstatic/images/Inventory.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Inventory" url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']"/></container>
+                </container>
+                <container>
+                    <link url="../Return" link-type="anchor">
+                        <image url="/ssstatic/images/Return.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Returns" url="../Return" link-type="anchor"/></container>
                 </container>
                 <label text="&amp;nbsp;" type="p" encode="false"/>
-
+            </row-col><row-col sm="6">
                 <container>
-                    <link url="../Customer" link-type="anchor"><image url="/popc/static/images/Customer.png" url-type="screen" style="invertible"/></link>
-                    <link text="Customers" url="../Customer" link-type="anchor"/>
+                    <link url="../Customer" link-type="anchor"><image url="/ssstatic/images/Customer.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Customers" url="../Customer" link-type="anchor"/></container>
+                </container>
+                <container>
+                    <link url="../Request" link-type="anchor"><image url="/ssstatic/images/Request.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Requests" url="../Request" link-type="anchor"/></container>
                 </container>
                 <container>
                     <link url="../Order" link-type="anchor" parameter-map="[orderType:'Sales']">
-                        <image url="/popc/static/images/Sales.png" url-type="screen" style="invertible"/></link>
-                    <link text="Sales" url="../Order" link-type="anchor" parameter-map="[orderType:'Sales']"/>
+                        <image url="/ssstatic/images/Sales.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Sales" url="../Order" link-type="anchor" parameter-map="[orderType:'Sales']"/></container>
                 </container>
+                <label text="&amp;nbsp;" type="p" encode="false"/>
                 <container>
                     <link url="../Picking" link-type="anchor">
-                        <image url="/popc/static/images/Picking.png" url-type="screen" style="invertible"/></link>
-                    <link text="Picking" url="../Picking" link-type="anchor"/>
+                        <image url="/ssstatic/images/Picking.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Picking" url="../Picking" link-type="anchor"/></container>
                 </container>
                 <container>
                     <link url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']">
-                        <image url="/popc/static/images/Shipping.png" url-type="screen" style="invertible"/></link>
-                    <link text="Shipping" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']"/>
+                        <image url="/ssstatic/images/Shipping.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Shipping" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']"/></container>
+                </container>
+            </row-col></container-row>
+        </row-col><row-col sm="2"/><row-col sm="4" style="text-center">
+            <label text="Manage" type="h3"/>
+            <container-row><row-col sm="6">
+                <container>
+                    <link url="../Wiki" link-type="anchor"><image url="/ssstatic/images/Wiki.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Wiki/Content" url="../Wiki" link-type="anchor"/></container>
                 </container>
                 <label text="&amp;nbsp;" type="p" encode="false"/>
                 <container>
-                    <link url="../Return" link-type="anchor">
-                        <image url="/popc/static/images/Return.png" url-type="screen" style="invertible"/></link>
-                    <link text="Returns" url="../Return" link-type="anchor"/>
+                    <link url="../Catalog" link-type="anchor"><image url="/ssstatic/images/Catalog.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Catalog" url="../Catalog" link-type="anchor"/></container>
                 </container>
-            </row-col>
-
-            <row-col md="8">
-                <container-row>
-                    <row-col lg="6" style="text-center">
-                        <form-single name="SearchOptions" transition="search" extends="component://SimpleScreens/screen/SimpleScreens/Search.xml#SearchOptions">
-                            <field name="queryString"><default-field><text-line size="25"/></default-field></field>
-                        </form-single>
-                    </row-col>
-                    <row-col lg="6" style="text-center">
-                        <form-single name="QuickLookupForm" transition="quickLookup" extends="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml#QuickLookupForm"/>
-                    </row-col>
-                </container-row>
-            </row-col>
-
-            <row-col md="2" style="text-right">
-                <label text="Manage" type="h3"/>
                 <container>
-                    <link text="Wiki/Content" url="../Wiki" link-type="anchor"/>
-                    <link url="../Wiki" link-type="anchor"><image url="/popc/static/images/Wiki.png" url-type="screen" style="invertible"/></link>
+                    <link url="../Facility" link-type="anchor"><image url="/ssstatic/images/Facility.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Facilities" url="../Facility" link-type="anchor"/></container>
+                </container>
+                <container>
+                    <link url="../Asset" link-type="anchor"><image url="/ssstatic/images/Asset.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Assets" url="../Asset" link-type="anchor"/></container>
+                </container>
+                <label text="&amp;nbsp;" type="p" encode="false"/>
+            </row-col><row-col sm="6">
+                <container>
+                    <link url="../Party" link-type="anchor"><image url="/ssstatic/images/Parties.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Parties" url="../Party" link-type="anchor"/></container>
                 </container>
                 <label text="&amp;nbsp;" type="p" encode="false"/>
                 <container>
-                    <link text="Catalog" url="../Catalog" link-type="anchor"/>
-                    <link url="../Catalog" link-type="anchor"><image url="/popc/static/images/Catalog.png" url-type="screen" style="invertible"/></link>
+                    <link url="../Vendor" link-type="anchor"><image url="/ssstatic/images/Vendor.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Vendors" url="../Vendor" link-type="anchor"/></container>
                 </container>
                 <container>
-                    <link text="Facilities" url="../Facility" link-type="anchor"/>
-                    <link url="../Facility" link-type="anchor"><image url="/popc/static/images/Facility.png" url-type="screen" style="invertible"/></link>
+                    <link url="../Accounting" link-type="anchor"><image url="/ssstatic/images/Accounting.png" url-type="screen" style="invertible"/></link>
+                    <container><link text="Accounting" url="../Accounting" link-type="anchor"/></container>
                 </container>
-                <container>
-                    <link text="Assets" url="../Asset" link-type="anchor"/>
-                    <link url="../Asset" link-type="anchor"><image url="/popc/static/images/Asset.png" url-type="screen" style="invertible"/></link>
-                </container>
-                <label text="&amp;nbsp;" type="p" encode="false"/>
-                <container>
-                    <link text="Parties" url="../Party" link-type="anchor"/>
-                    <link url="../Party" link-type="anchor"><image url="/popc/static/images/Parties.png" url-type="screen" style="invertible"/></link>
-                </container>
-                <container>
-                    <link text="Vendors" url="../Vendor" link-type="anchor"/>
-                    <link url="../Vendor" link-type="anchor"><image url="/popc/static/images/Vendor.png" url-type="screen" style="invertible"/></link>
-                </container>
-                <label text="&amp;nbsp;" type="p" encode="false"/>
-                <container>
-                    <link text="Accounting" url="../Accounting" link-type="anchor"/>
-                    <link url="../Accounting" link-type="anchor"><image url="/popc/static/images/Accounting.png" url-type="screen" style="invertible"/></link>
-                </container>
-                <!-- will have more reports in other places so best not to link to the accounting ones:
-                <container>
-                    <link text="Reports" url="../Accounting/Reports" link-type="anchor"/>
-                    <link url="../Accounting/Reports" link-type="anchor"><image url="/popc/static/images/Reports.png" url-type="screen" style="invertible"/></link>
-                </container>
-                -->
-            </row-col>
-        </container-row>
+            </row-col></container-row>
+        </row-col><row-col sm="1"/></container-row>
     </widgets>
 </screen>

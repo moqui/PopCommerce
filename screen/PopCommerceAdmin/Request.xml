@@ -13,14 +13,13 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.0.xsd"
-        default-menu-title="Customers" default-menu-index="12" menu-image="/ssstatic/images/Customer.png">
+        default-menu-title="Requests" default-menu-index="5" menu-image="/ssstatic/images/Request.png">
 
-    <subscreens default-item="FindCustomer"/>
-
-    <pre-actions><set field="roleTypeId" value="Customer"/></pre-actions>
-
-    <widgets>
-        <!-- <subscreens-panel id="CustomerPanel" type="tab"/> -->
-        <subscreens-active/>
-    </widgets>
+    <subscreens default-item="FindRequest">
+        <subscreens-item name="FindRequest" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Request/FindRequest.xml"/>
+        <subscreens-item name="EditRequest" menu-index="1"
+                location="component://SimpleScreens/screen/SimpleScreens/Request/EditRequest.xml"/>
+    </subscreens>
+    <widgets><subscreens-active/></widgets>
 </screen>
