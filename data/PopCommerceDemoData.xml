@@ -19,7 +19,8 @@ along with this software (see the LICENSE.md file). If not, see
     <org.moqui.search.SearchServices.indexDataFeedDocuments dataFeedId="PopCommerceSearch"/>
 
     <!-- demo store settings for email/etc -->
-    <mantle.product.store.ProductStore productStoreId="POPC_DEFAULT" storeDomain="demo.moqui.org" profileUrlPath="popc/Customer/Profile"/>
+    <mantle.product.store.ProductStore productStoreId="POPC_DEFAULT" defaultLocale="en_US" defaultCurrencyUomId="USD"
+            storeDomain="demo.moqui.org" profileUrlPath="popc/Customer/Profile"/>
 
     <moqui.basic.email.EmailTemplate emailTemplateId="PopcOrderPlaced" description="POPC Order Placed"
             emailServerId="SYSTEM" bodyScreenLocation="component://SimpleScreens/screen/email/OrderPlaced.xml" webappName="webroot"

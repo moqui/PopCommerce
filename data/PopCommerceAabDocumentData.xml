@@ -45,13 +45,13 @@ along with this software (see the LICENSE.md file). If not, see
 
     <!-- Product -->
     <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleProduct" newDataDocumentId="PopcProduct" newIndexName="popc"/>
-    <!-- for now do all: <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcProduct"
+    <!-- do all, but here for reference like in ecommerce search: <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcProduct"
             fieldNameAlias="productTypeEnumId" fieldValue="PtFinishedGood"/> -->
-    <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcProduct"
-            fieldNameAlias="productStoreId" fieldValue="POPC_DEFAULT" postQuery="Y"/>
     <moqui.entity.document.DataDocumentLink dataDocumentId="PopcProduct" label="Edit Product"
             linkUrl="//apps/PopcAdmin/Catalog/Product/EditProduct?productId=${productId}"/>
 
+    <!-- NOTE: while PopcProduct is used in the /popc demo it should really use a separate and more constrained document with a condition like: -->
+    <!-- <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcProduct" fieldNameAlias="productStoreId" fieldValue="POPC_DEFAULT" postQuery="Y"/> -->
     <!-- NOTE: links are for PopcAdmin, for popc ecommerce search screen creates own links like /popc/Product/Detail/${productId} -->
 
     <!-- ================ -->
