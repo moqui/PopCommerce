@@ -164,13 +164,13 @@ class PopcAdminScreenTests extends Specification {
         "Accounting/GlAccount/EditGlAccount?glAccountId=110000000" | ['Cash and Equivalent Asset', 'Ziziwork Industries']
 
         // Accounting/Reports
-        // NOTE: these are designed to handle account masks of ###-###-### or the 6 digit ###-###
+        // NOTE: these are designed to handle account masks of ###-###-### or even down to the 5 digit ###-##
         "Accounting/Reports/BalanceSheet?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100&detail=true" |
-                ["Accounts Receivable", "210-000"]
+                ["Accounts Receivable", "210-00"]
         "Accounting/Reports/IncomeStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100&detail=true" |
-                ["Product Sales", "614-200"]
+                ["Product Sales", "614-20"]
         "Accounting/Reports/CashFlowStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100&detail=true" |
-                ["General Checking Account", "182-000"]
+                ["General Checking Account", "182-00"]
         "Accounting/Reports/RetainedEarningsStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100" |
                 ["Net Earnings", "Ziziwork Retail Fiscal"]
         "Accounting/Reports/FinancialRatios?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100" |
