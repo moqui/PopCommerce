@@ -18,6 +18,8 @@ along with this software (see the LICENSE.md file). If not, see
     <parameter name="partyId" required="true"/>
 
     <transition name="findOrder"><default-response url="../../Order/FindOrder"/></transition>
+    <transition name="findRequest"><default-response url="//${appRoot}/Request/FindRequest"/></transition>
+
     <transition name="updateParty"><service-call name="mantle.party.PartyServices.update#PartyDetail"/>
         <default-response url="."/></transition>
 
@@ -70,11 +72,14 @@ along with this software (see the LICENSE.md file). If not, see
         <entity-find-one entity-name="moqui.security.UserAccount" value-field="userAccount">
             <field-map field-name="partyId"/></entity-find-one>
 
+        <entity-find-count entity-name="mantle.request.RequestAndParty" count-field="requestCount">
+            <date-filter/><econdition field-name="partyId"/></entity-find-count>
         <entity-find-count entity-name="mantle.order.OrderPart" count-field="customerOrderPartCount">
             <econdition field-name="customerPartyId" from="partyId"/></entity-find-count>
     </actions>
     <widgets>
         <container-row><row-col lg="6">
+            <link url="findRequest" text="Requests (${requestCount})" parameter-map="[partyId:partyId]" condition="requestCount"/>
             <link url="findOrder" text="Orders (${customerOrderPartCount})" parameter-map="[customerPartyId:partyId]"/>
             <dynamic-dialog id="FindDuplicatesDialog" button-text="Find Duplicates" transition="FindDuplicates" width="960"/>
             <section-include name="NonUserPerson" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
