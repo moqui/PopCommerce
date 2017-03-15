@@ -87,7 +87,7 @@ class PopCommerceScreenTests extends Specification {
 
         // Customer
         "Customer/Profile" | ['joe@public.com', 'Visa ************1111', '1350 E. Flamingo Rd. #2345']
-        "Customer/OrderHistory" | ['Completed', 'Approved', '55401']
+        "Customer/OrderHistory" | ['Completed', 'Placed', '55401']
         "Customer/OrderDetail?orderId=55401" | ['$9,000.00', '1-702-234-5678', 'Picker Bot 2000']
 
         // Checkout
