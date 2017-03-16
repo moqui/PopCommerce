@@ -74,7 +74,8 @@ along with this software (see the LICENSE.md file). If not, see
         ]]></script></pre-actions>
     <actions>
         <if condition="productStore == null"><return error="true" message="No ProductStore found so application is disabled, tried ID ${productStoreId}"/></if>
-        <if condition="cartOrderId"><service-call name="mantle.order.OrderServices.get#OrderItemsTotalCount" in-map="[orderId:cartOrderId]" out-map="context"/></if>
+        <if condition="cartOrderId"><service-call name="mantle.order.OrderInfoServices.get#OrderItemsTotalCount"
+                in-map="[orderId:cartOrderId]" out-map="context"/></if>
     </actions>
     <widgets>
         <render-mode><text type="html" location="component://webroot/screen/includes/Header.html.ftl"/></render-mode>
