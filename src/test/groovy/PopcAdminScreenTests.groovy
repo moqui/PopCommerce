@@ -170,7 +170,7 @@ class PopcAdminScreenTests extends Specification {
         "Accounting/Reports/IncomeStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100&detail=true" |
                 ["Product Sales", "614-20"]
         "Accounting/Reports/CashFlowStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100&detail=true" |
-                ["General Checking Account", "182-00"]
+                ["General Checking Account", "121-00"]
         "Accounting/Reports/RetainedEarningsStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100" |
                 ["Net Earnings", "Ziziwork Retail Fiscal"]
         "Accounting/Reports/FinancialRatios?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100" |
