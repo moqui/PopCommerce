@@ -30,6 +30,11 @@ along with this software (see the LICENSE.md file). If not, see
     </subscreens>
 
     <actions>
+        <entity-find-one entity-name="mantle.order.OrderHeader" value-field="orderHeader">
+            <field-map field-name="orderId" from="cartOrderId"/></entity-find-one>
+        <entity-find-one entity-name="mantle.order.OrderPart" value-field="orderPart">
+            <field-map field-name="orderId" from="cartOrderId"/></entity-find-one>
+
         <set field="partyId" from="ec.user.userAccount.partyId"/>
 
         <service-call name="mantle.account.PaymentMethodServices.get#PartyPaymentMethodInfoList"
@@ -40,13 +45,9 @@ along with this software (see the LICENSE.md file). If not, see
                     telecomContactMechPurposeId:'PhoneShippingDest']"/>
 
         <service-call name="mantle.product.StoreServices.get#StoreShippingOptions" out-map="context"
-                in-map="[productStoreId:productStoreId, orderId:cartOrderId,
+                in-map="[productStoreId:productStoreId, orderId:cartOrderId, orderPartSeqId:orderPart.orderPartSeqId,
                     postalContactMechId:shippingContactListInfo.postalAddressList?.first?.postalContactMechId]"/>
 
-        <entity-find-one entity-name="mantle.order.OrderHeader" value-field="orderHeader">
-            <field-map field-name="orderId" from="cartOrderId"/></entity-find-one>
-        <entity-find-one entity-name="mantle.order.OrderPart" value-field="orderPart">
-            <field-map field-name="orderId" from="cartOrderId"/></entity-find-one>
         <entity-find entity-name="mantle.account.payment.Payment" list="paymentList">
             <econdition field-name="orderId" from="orderPart.orderId"/>
             <econdition field-name="orderPartSeqId" from="orderPart.orderPartSeqId"/>
