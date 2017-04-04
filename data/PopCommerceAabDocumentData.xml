@@ -40,14 +40,14 @@ along with this software (see the LICENSE.md file). If not, see
 
     <!-- Request -->
     <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleRequest" newDataDocumentId="PopcRequest" newIndexName="popc"/>
-    <moqui.entity.document.DataDocumentLink dataDocumentId="PopcRequest" label="Edit Request"
-            linkUrl="/apps/PopcAdmin/Request/EditRequest?requestId=${requestId}"/>
+    <moqui.entity.document.DataDocumentLink dataDocumentId="PopcRequest" label="Edit Request" urlType="screen"
+            linkUrl="//apps/PopcAdmin/Request/EditRequest?requestId=${requestId}"/>
 
     <!-- Product -->
     <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleProduct" newDataDocumentId="PopcProduct" newIndexName="popc"/>
     <!-- do all, but here for reference like in ecommerce search: <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcProduct"
             fieldNameAlias="productTypeEnumId" fieldValue="PtFinishedGood"/> -->
-    <moqui.entity.document.DataDocumentLink dataDocumentId="PopcProduct" label="Edit Product"
+    <moqui.entity.document.DataDocumentLink dataDocumentId="PopcProduct" label="Edit Product" urlType="screen"
             linkUrl="//apps/PopcAdmin/Catalog/Product/EditProduct?productId=${productId}"/>
 
     <!-- NOTE: while PopcProduct is used in the /popc demo it should really use a separate and more constrained document with a condition like: -->
@@ -62,6 +62,7 @@ along with this software (see the LICENSE.md file). If not, see
         <documents dataDocumentId="PopcCustomer"/>
         <documents dataDocumentId="PopcParty"/>
         <documents dataDocumentId="PopcFacility"/>
+        <documents dataDocumentId="PopcRequest"/>
         <documents dataDocumentId="PopcProduct"/>
     </moqui.entity.feed.DataFeed>
 </entity-facade-xml>
