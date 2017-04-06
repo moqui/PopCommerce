@@ -22,6 +22,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <transition name="storePaymentMethodInfo"><service-call name="mantle.account.PaymentMethodServices.store#PaymentMethodInfo"/>
         <default-response url=".."/></transition>
+    <transition-include name="getGeoCountryStates" location="component://SimpleScreens/template/party/PartyForms.xml"/>
 
     <actions>
         <service-call name="mantle.account.PaymentMethodServices.get#PartyPaymentMethodInfo" out-map="methodInfo" in-map="context"/>
