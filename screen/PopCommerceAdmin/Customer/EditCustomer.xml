@@ -46,9 +46,23 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="updateUserAccount"><service-call name="mantle.party.PartyServices.update#PartyUserAccount"/>
         <default-response url="."/></transition>
 
+    <transition name="createPartyRelationship"><service-call name="create#mantle.party.PartyRelationship"/>
+        <default-response url="."/></transition>
+    <transition name="updatePartyRelationship"><service-call name="update#mantle.party.PartyRelationship"/>
+        <default-response url="."/></transition>
+    <transition name="addContact"><service-call name="mantle.sales.AccountServices.add#Contact"/>
+        <default-response url="."/></transition>
+    <transition name="createContact"><service-call name="mantle.sales.AccountServices.create#Contact"/>
+        <default-response url="."/></transition>
+    <transition name="removeContact"><service-call name="mantle.sales.AccountServices.delete#Contact" in-map="[partyRelationshipId:partyRelationshipId]"/>
+        <default-response url="."/></transition>
+
     <transition name="updatePaymentMethodInfo"><default-response url="UpdatePaymentMethodInfo"/></transition>
     <transition name="removePaymentMethod"><service-call name="mantle.account.PaymentMethodServices.delete#PaymentMethod"/>
         <default-response url="."/></transition>
+    <transition name="editPaymentMethod"><default-response url="../PaymentMethod/EditPaymentMethod"/></transition>
+    <transition name="findFinancialAccount"><default-response url="//${appRoot}/Accounting/FinancialAccount/FindFinancialAccount"/></transition>
+    <transition name="editFinancialAccount"><default-response url="//${appRoot}/Accounting/FinancialAccount/EditFinancialAccount"/></transition>
 
     <transition name="removeContactInfo"><service-call name="mantle.party.ContactServices.delete#PartyContactMech"/>
         <default-response url="."/></transition>
@@ -77,13 +91,41 @@ along with this software (see the LICENSE.md file). If not, see
             <date-filter/><econdition field-name="partyId"/></entity-find-count>
         <entity-find-count entity-name="mantle.order.OrderPart" count-field="customerOrderPartCount">
             <econdition field-name="customerPartyId" from="partyId"/></entity-find-count>
+
+        <entity-find entity-name="mantle.party.PartyRole" list="partyRoleList">
+            <econdition field-name="partyId"/></entity-find>
+        <set field="roleTypeIdList" from="partyRoleList.roleTypeId"/>
+
+        <if condition="roleTypeIdList.contains('Account') || roleTypeIdList.contains('Supplier')">
+            <entity-find entity-name="mantle.party.PartyToAndRelationship" list="parentAccountRelList">
+                <date-filter/><econdition field-name="fromPartyId" from="partyId"/>
+                <econdition field-name="relationshipTypeEnumId" value="PrtOrgRollup"/>
+            </entity-find>
+            <entity-find entity-name="mantle.party.PartyFromAndRelationship" list="childAccountRelList">
+                <date-filter/><econdition field-name="toPartyId" from="partyId"/>
+                <econdition field-name="relationshipTypeEnumId" value="PrtOrgRollup"/>
+            </entity-find>
+            <entity-find entity-name="mantle.party.PartyFromAndRelationship" list="contactRelList">
+                <date-filter/><econdition field-name="toPartyId" from="partyId"/>
+                <econdition field-name="relationshipTypeEnumId" value="PrtContact"/>
+            </entity-find>
+        </if>
+        <if condition="roleTypeIdList.contains('Contact')">
+            <entity-find entity-name="mantle.party.PartyToAndRelationship" list="accountRelList">
+                <date-filter/><econdition field-name="fromPartyId" from="partyId"/>
+                <econdition field-name="relationshipTypeEnumId" value="PrtContact"/>
+            </entity-find>
+        </if>
     </actions>
     <widgets>
         <container-row><row-col lg="6">
             <link url="findRequest" text="Requests (${requestCount})" parameter-map="[partyId:partyId]" condition="requestCount"/>
             <link url="findOrder" text="Orders (${customerOrderPartCount})" parameter-map="[customerPartyId:partyId]"/>
-            <dynamic-dialog id="FindDuplicatesDialog" button-text="Find Duplicates" transition="FindDuplicates" width="960"/>
+
             <section-include name="NonUserPerson" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="AddContactSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+
+            <dynamic-dialog id="FindDuplicatesDialog" button-text="Find Duplicates" transition="FindDuplicates" width="960"/>
             <section-include name="HasDuplicatesSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
 
             <section-include name="EditPartySection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
@@ -92,6 +134,11 @@ along with this software (see the LICENSE.md file). If not, see
             <section-include name="PartySettingSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="PartyIdentificationSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="UserSecuritySection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+
+            <section-include name="AccountRelListSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="ContactRelListSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="ParentAccountRelListSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+            <section-include name="ChildAccountRelListSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
         </row-col><row-col lg="6">
             <section-include name="NotesSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="ContactInfoSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>

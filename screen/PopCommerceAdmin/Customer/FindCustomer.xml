@@ -21,9 +21,18 @@ along with this software (see the LICENSE.md file). If not, see
 
     <transition name="createPerson"><service-call name="mantle.party.PartyServices.create#Person"/>
         <default-response url="../EditCustomer"/></transition>
+    <transition name="createPersonCustomer"><service-call name="mantle.party.PartyServices.create#PersonCustomer"/>
+        <default-response url="../EditCustomer"/></transition>
     <transition name="createOrganization"><service-call name="mantle.party.PartyServices.create#Organization"/>
         <default-response url="../EditCustomer"/></transition>
+
+    <transition name="createAccount"><service-call name="mantle.sales.AccountServices.create#Account"/>
+        <default-response url="../EditCustomer"/></transition>
+    <transition name="createContact"><service-call name="mantle.sales.AccountServices.create#Contact"/>
+        <default-response url="../EditCustomer"/></transition>
+
     <transition-include name="searchPartyList" location="component://SimpleScreens/template/party/PartyForms.xml"/>
+    <transition-include name="getGeoCountryStates" location="component://SimpleScreens/template/party/PartyForms.xml"/>
 
     <pre-actions><set field="roleTypeId" value="Customer"/></pre-actions>
     <actions>
@@ -37,11 +46,22 @@ along with this software (see the LICENSE.md file). If not, see
 
         <container-dialog id="CreatePersonDialog" button-text="New Person Customer">
             <form-single name="CreatePersonForm" transition="createPerson"
-                    extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#CreatePersonForm"/>
+                    extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#CreatePersonCustForm">
+                <field name="roleTypeId"><default-field><hidden/></default-field></field>
+            </form-single>
         </container-dialog>
         <container-dialog id="CreateOrganizationDialog" button-text="New Organization Customer">
             <form-single name="CreateOrganizationForm" transition="createOrganization"
                     extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#CreateOrganizationForm"/>
+        </container-dialog>
+
+        <container-dialog id="CreateAccountDialog" button-text="New Sales Account">
+            <form-single name="CreateAccountForm" transition="createAccount"
+                    extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#CreateAccountForm"/>
+        </container-dialog>
+        <container-dialog id="CreateContactDialog" button-text="New Sales Contact">
+            <form-single name="CreateContactForm" transition="createContact"
+                    extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#CreateContactForm"/>
         </container-dialog>
 
         <form-list name="CustomerListForm" list="partyIdList" list-entry="partyId" skip-form="true"
