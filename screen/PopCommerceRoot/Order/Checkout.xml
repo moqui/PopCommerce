@@ -46,7 +46,7 @@ along with this software (see the LICENSE.md file). If not, see
 
         <service-call name="mantle.product.StoreServices.get#StoreShippingOptions" out-map="context"
                 in-map="[productStoreId:productStoreId, orderId:cartOrderId, orderPartSeqId:orderPart.orderPartSeqId,
-                    postalContactMechId:shippingContactListInfo.postalAddressList?.first?.postalContactMechId]"/>
+                    postalContactMechId:shippingContactListInfo.postalAddressList?.first?.postalContactMechId, getRates:true]"/>
 
         <entity-find entity-name="mantle.account.payment.Payment" list="paymentList">
             <econdition field-name="orderId" from="orderPart.orderId"/>
