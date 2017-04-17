@@ -128,9 +128,9 @@ class PopcAdminScreenTests extends Specification {
         "Shipment/ShipmentDetail?shipmentId=55401" | ['Order #55401', 'Picker Bot 2000'] // Outgoing Shipment
 
         // Facility
-        "Facility/EditFacility?facilityId=ORG_ZIZI_RETAIL_WH" | ['Ziziwork Retail Warehouse', '51 W. Center St.']
-        "Facility/EditFacilityLocations?facilityId=ORG_ZIZI_RETAIL_WH" | []
-        "Facility/FacilityCalendar?facilityId=ORG_ZIZI_RETAIL_WH" | []
+        "Facility/EditFacility?facilityId=ZIRET_WH" | ['Ziziwork Retail Warehouse', '51 W. Center St.']
+        "Facility/EditFacilityLocations?facilityId=ZIRET_WH" | []
+        "Facility/FacilityCalendar?facilityId=ZIRET_WH" | []
 
         // Asset
         "Asset/AssetDetail?assetId=55400" | ['DEMO_1_1', 'ORG_ZIZI_RETAIL', 'Current: Available']
