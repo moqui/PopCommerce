@@ -21,11 +21,11 @@ along with this software (see the LICENSE.md file). If not, see
     <transition-include name="getGeoCountryStates" location="component://SimpleScreens/template/party/PartyForms.xml"/>
 
     <actions>
-        <set field="partyTypeEnumId" from="partyTypeEnumId ?: 'PtyPerson'"/>
+        <!-- <set field="partyTypeEnumId" from="partyTypeEnumId ?: 'PtyPerson'"/> -->
         <set field="roleTypeId" from="roleTypeId ?: 'Customer'"/>
     </actions>
     <widgets>
-        <form-list name="PartyListForm" list="findPartyList" skip-form="true" select-columns="true" saved-finds="true"
+        <form-list name="CustomerDataList" list="findPartyList" skip-form="true" select-columns="true" saved-finds="true"
                 header-dialog="true" show-csv-button="true">
             <entity-find entity-name="mantle.party.FindPartyView" list="findPartyList">
                 <search-form-inputs default-order-by="lastName,firstName,organizationName,pseudoId"/>
@@ -35,8 +35,8 @@ along with this software (see the LICENSE.md file). If not, see
                 <select-field field-name="partyId,pseudoId,firstName,middleName,lastName,birthDate,organizationName"/>
             </entity-find>
 
-            <field name="partyTypeEnumId"><header-field title="Party Type"><drop-down><option key="PtyPerson" text="Person"/>
-                <option key="PtyOrganization" text="Organization"/></drop-down></header-field></field>
+            <field name="partyTypeEnumId"><header-field title="Party Type"><drop-down allow-empty="true">
+                <option key="PtyPerson" text="Person"/><option key="PtyOrganization" text="Organization"/></drop-down></header-field></field>
             <field name="roleTypeId"><header-field title="Role">
                 <drop-down><entity-options key="${roleTypeId}" text="${description}">
                     <entity-find entity-name="mantle.party.RoleType"><order-by field-name="description"/></entity-find>
@@ -92,6 +92,7 @@ along with this software (see the LICENSE.md file). If not, see
             <form-list-column><field-ref name="pseudoId"/></form-list-column>
             <form-list-column><field-ref name="firstName"/></form-list-column>
             <form-list-column><field-ref name="lastName"/></form-list-column>
+            <form-list-column><field-ref name="organizationName"/></form-list-column>
             <form-list-column><field-ref name="birthday"/></form-list-column>
             <form-list-column><field-ref name="partyClassificationId"/></form-list-column>
             <form-list-column><field-ref name="emailAddress"/></form-list-column>
