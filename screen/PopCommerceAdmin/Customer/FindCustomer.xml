@@ -39,6 +39,8 @@ along with this software (see the LICENSE.md file). If not, see
         <service-call name="mantle.party.PartyServices.find#Party" in-map="context + [leadingWildcard:true]" out-map="context"/>
     </actions>
     <widgets>
+        <link url="../CustomerData" text="Customer Data"/>
+
         <container-dialog id="FindOptionsDialog" button-text="Find Options">
             <form-single name="FindOptionsForm" transition="."
                     extends="component://SimpleScreens/screen/SimpleScreens/Party/FindParty.xml#FindOptionsForm"/>
