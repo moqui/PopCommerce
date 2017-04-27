@@ -87,6 +87,8 @@ along with this software (see the LICENSE.md file). If not, see
             <field name="emailAddress"><header-field><text-find/></header-field>
                 <default-field><display/></default-field></field>
 
+            <!-- TODO: add zip code and full address fields as per: http://kb.mailchimp.com/lists/growth/format-guidelines-for-your-import-file -->
+
             <field name="submitButton"><header-field title="Find"><submit/></header-field></field>
 
             <form-list-column><field-ref name="pseudoId"/></form-list-column>
