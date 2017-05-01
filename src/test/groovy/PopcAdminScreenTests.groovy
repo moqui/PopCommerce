@@ -172,14 +172,14 @@ class PopcAdminScreenTests extends Specification {
         "Accounting/Reports/CashFlowStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100&detail=true" |
                 ["General Checking Account", "121-00"]
         "Accounting/Reports/RetainedEarningsStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100" |
-                ["Net Earnings", "Ziziwork Retail Fiscal"]
+                ["Net Earnings", "ZIRET Fiscal"]
         "Accounting/Reports/FinancialRatios?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100" |
                 ["Total Assets", "Accounts Receivable"]
 
         "Accounting/Reports/PostedAmountSummary?organizationPartyId=ORG_ZIZI_RETAIL&dateRange_poffset=0&dateRange_period=Year" |
                 ["Accounts Payable", "Depreciation - Equipment"]
         "Accounting/Reports/PostedBalanceSummary?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodId=55100" |
-                ["Customer Service Credits (Contra Revenue)", "Net Income (Income)"]
+                ["Customer Service Credits (Contra Revenue)", "Net Income"]
 
         // Vendor
         "Vendor/EditVendor?partyId=ORG_ZIZI_RETAIL" |
