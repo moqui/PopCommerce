@@ -40,18 +40,18 @@ along with this software (see the LICENSE.md file). If not, see
                 <container>
                     <link url="../Order" link-type="anchor" parameter-map="[orderType:'Purchase']">
                         <image url="/ssstatic/images/Purchasing.png" url-type="screen" style="invertible"/></link>
-                    <container><link text="Purchasing" url="../Order" link-type="anchor" parameter-map="[orderType:'Purchase']"/></container>
+                    <container><link text="Purchase Orders" url="../Order" link-type="anchor" parameter-map="[orderType:'Purchase']"/></container>
                 </container>
                 <container>
                     <link url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']">
                         <image url="/ssstatic/images/Receiving.png" url-type="screen" style="invertible"/></link>
-                    <container><link text="Receiving" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']"/></container>
+                    <container><link text="Incoming Shipments" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']"/></container>
                 </container>
                 <label text="&amp;nbsp;" type="p" encode="false"/>
                 <container>
                     <link url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']">
                         <image url="/ssstatic/images/Inventory.png" url-type="screen" style="invertible"/></link>
-                    <container><link text="Inventory" url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']"/></container>
+                    <container><link text="Inventory Assets" url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']"/></container>
                 </container>
                 <container>
                     <link url="../Return" link-type="anchor">
@@ -71,7 +71,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <container>
                     <link url="../Order" link-type="anchor" parameter-map="[orderType:'Sales']">
                         <image url="/ssstatic/images/Sales.png" url-type="screen" style="invertible"/></link>
-                    <container><link text="Sales" url="../Order" link-type="anchor" parameter-map="[orderType:'Sales']"/></container>
+                    <container><link text="Sales Orders" url="../Order" link-type="anchor" parameter-map="[orderType:'Sales']"/></container>
                 </container>
                 <label text="&amp;nbsp;" type="p" encode="false"/>
                 <container>
@@ -82,7 +82,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <container>
                     <link url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']">
                         <image url="/ssstatic/images/Shipping.png" url-type="screen" style="invertible"/></link>
-                    <container><link text="Shipping" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']"/></container>
+                    <container><link text="Outgoing Shipments" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']"/></container>
                 </container>
             </row-col></container-row>
         </row-col><row-col sm="2"/><row-col sm="4" style="text-center">
