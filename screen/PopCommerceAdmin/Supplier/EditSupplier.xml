@@ -37,8 +37,11 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="removePaymentMethod"><service-call name="mantle.account.PaymentMethodServices.delete#PaymentMethod"/>
         <default-response url="."/></transition>
 
-    <transition name="updateContactInfo"><default-response url="UpdateContactInfo"/></transition>
+    <transition name="storePartyContactMech"><service-call name="mantle.party.ContactServices.store#PartyContactMech"/>
+        <default-response url="."/></transition>
     <transition name="removeContactInfo"><service-call name="mantle.party.ContactServices.delete#PartyContactMech"/>
+        <default-response url="."/></transition>
+    <transition name="validateAddress"><service-call name="mantle.shipment.CarrierServices.validate#PostalAddress"/>
         <default-response url="."/></transition>
 
     <transition name="createPartyNote"><service-call name="create#mantle.party.PartyNote"/>
