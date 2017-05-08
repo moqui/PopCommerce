@@ -65,6 +65,8 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="findFinancialAccount"><default-response url="//${appRoot}/Accounting/FinancialAccount/FindFinancialAccount"/></transition>
     <transition name="editFinancialAccount"><default-response url="//${appRoot}/Accounting/FinancialAccount/EditFinancialAccount"/></transition>
 
+    <transition name="storePartyContactMech"><service-call name="mantle.party.ContactServices.store#PartyContactMech"/>
+        <default-response url="."/></transition>
     <transition name="removeContactInfo"><service-call name="mantle.party.ContactServices.delete#PartyContactMech"/>
         <default-response url="."/></transition>
     <transition name="validateAddress"><service-call name="mantle.shipment.CarrierServices.validate#PostalAddress"/>
