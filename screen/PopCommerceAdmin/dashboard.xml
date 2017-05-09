@@ -22,11 +22,12 @@ along with this software (see the LICENSE.md file). If not, see
         <container-row>
             <row-col md="6" style="text-center">
                 <form-single name="SearchOptions" transition="search" extends="component://SimpleScreens/screen/SimpleScreens/Search.xml#SearchOptions">
-                    <field name="queryString"><default-field><text-line size="25"/></default-field></field>
+                    <field name="queryString"><default-field tooltip=""><text-line size="25"/></default-field></field>
                 </form-single>
             </row-col>
             <row-col md="6" style="text-center">
-                <form-single name="QuickLookupForm" transition="quickLookup" extends="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml#QuickLookupForm"/>
+                <form-single name="QuickLookupForm" transition="quickLookup" focus-field=""
+                        extends="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml#QuickLookupForm"/>
             </row-col>
         </container-row>
 
