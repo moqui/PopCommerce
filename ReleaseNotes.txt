@@ -8,18 +8,33 @@ Release 1.2.0 - Not Yet Released
 POP Commerce Retail and Wholesale ERP and eCommerce 1.2.0 is a minor
 new feature and bug fix release.
 
-This release is based on Moqui Framework version TODO, mantle-udm TODO,
-mantle-usl TODO, and SimpleScreens TODO. It also uses the
-moqui-elasticsearch TODO, moqui-fop TODO, and moqui-kie TODO tool
-components.
+This release is based on Moqui Framework version 2.1.0, mantle-udm 1.2.0,
+mantle-usl 1.2.0, and SimpleScreens 1.2.0. It also uses the
+moqui-elasticsearch 1.0.1 and moqui-fop 1.0.1 tool components.
 
-The admin app has new screens for SimpleScreens for comprehensive general
-party management, returns management, and wiki/content management.
+With this release the POP Commerce Admin (ERP) application has sufficient
+functionality for real world use out of the box as a retail/wholesale
+business management and ecommerce administration system. This is thanks to
+a company who decided not just to use POP Commerce but also to contribute
+all generic functionality they needed to the open source project.
+
+The admin app has new screens from SimpleScreens for comprehensive general
+party, request, returns, and wiki/content management.
 
 The ecommerce app (/popc) has a new content screen which is the root page
 for managed content pages that can be added and edited (with version
 history and published version management) in the admin app, along with
 attachments, for display on the ecommerce site.
+
+There are significant improvements in accounting including various new
+and improved reports and period closing automation.
+
+With the Mantle integrations for Authorize.NET and Shippo, and various user
+interface changes, the admin app also supports full payment processing and
+shipping/labels processes.
+
+TODO: add list of new screens/etc from SimpleScreens release notes
+
 
 ===========================================================================
 Release 1.1.0 - 24 Nov 2016
