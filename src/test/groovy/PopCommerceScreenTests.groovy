@@ -80,7 +80,7 @@ class PopCommerceScreenTests extends Specification {
         where:
         screenPath | containsTextList
         // Home and Product
-        "Home" | ['Search products', 'Demo Product One-Two', '$10,007.99']
+        "Home" | ['Search products', 'Demo Product One-Two']
         "Product/Detail/DEMO_1_1/Demo-Product-One-One" | ['Demo Product One-One', '$16.99', 'Shipping Weight']
         "Product/Category/DEMO_ONE" | ['Demo Product One Unit', '$1.00', 'Add to Cart']
         "Product/Search?keywords=demo" | ['Demo Product One Unit', '$1.00', 'Demo Category One']
@@ -93,10 +93,10 @@ class PopCommerceScreenTests extends Specification {
         // Checkout
         "Home/addToCart?productId=DEMO_2_1&quantity=10" | []
         "Order/Cart" | ['Demo Product Two-One', '$121.20']
-        "Order/Checkout" | ['Visa ************1111', '1350 E. Flamingo Rd. #2345', 'Ground Parcel $5.00']
+        "Order/Checkout" | ['Visa ************1111', '1350 E. Flamingo Rd. #2345', 'Ground Parcel']
         "Order/Checkout/setOrderBillingShippingInfo?paymentMethodId=CustJqpCc&shippingPostalContactMechId=CustJqpAddr&carrierAndShipmentMethod=_NA_:ShMthGround" | []
-        "Order/Review" | ['Joe Q. Public', 'Demo Product Two-One', 'Shipping and Handling', 'Order Total: $126.20']
+        "Order/Review" | ['Joe Q. Public', 'Demo Product Two-One', 'Order Total: $12']
         "Order/Review/placeOrder" | []
-        "Customer/OrderDetail?orderId=63200" | ['$126.20', '1-702-234-5678', 'Demo Product Two-One', 'Ground Parcel']
+        "Customer/OrderDetail?orderId=63200" | ['$12', '1-702-234-5678', 'Demo Product Two-One', 'Ground Parcel']
     }
 }
