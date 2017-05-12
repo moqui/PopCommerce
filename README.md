@@ -34,12 +34,12 @@ The easiest way to try POP Commerce is with the binary distribution available on
 
 If you don't have gradle or ant installed you can use this command line to run Java directly:
 
-    $ java -jar moqui-${version}.war
+    $ java -jar moqui.war
 
 ### Build and Run Locally
 
-To get and locally run the latest POP Commerce you'll need JDK 7 or later (Oracle JDK 8 recommended), and either a git 
-client or you can use the **ZIP** download link on GitHub.
+To get and locally run the latest POP Commerce you'll need JDK 8 or later, and either a git 
+client or you can use the binary download link on GitHub.
 
 Java can be downloaded here (make sure to use the Download button under the **JDK** column, NOT the under the JRE column):
 
@@ -83,7 +83,7 @@ This will build Moqui and load seed and demo data from all components into an em
 
 From the **moqui** directory run:
  
-    $ ./gradlew run
+    $ java -jar moqui.war
 
 #### Step 5: Access the POP Commerce applications
 
@@ -107,13 +107,13 @@ Here are command line steps for initial checkout, setup, and run:
     $ cd moqui
     $ ./gradlew getComponent -Pcomponent=PopCommerce
     $ ./gradlew load
-    $ ./gradlew run
+    $ java -jar moqui.war
 
-Here are steps for a basic update:
+Here are steps for a basic update (for development with clean out and rebuild of database):
 
     $ cd moqui
     $ ./gradlew cleanAll gitPullAll load
-    $ ./gradlew run
+    $ java -jar moqui.war
 
 To access the eCommerce app go to something like <http://localhost:8080/popc> in a web browser. To access the admin app 
 go to <http://localhost:8080/PopcAdmin>.
