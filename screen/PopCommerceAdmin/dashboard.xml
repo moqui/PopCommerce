@@ -31,7 +31,7 @@ along with this software (see the LICENSE.md file). If not, see
             </row-col>
         </container-row>
 
-        <container-row><row-col sm="1"/><row-col sm="4" style="text-center">
+        <container-row><row-col sm="1"><label text="&amp;nbsp;" encode="false"/></row-col><row-col sm="4" style="text-center">
             <label text="Operate" type="h3"/>
             <container-row><row-col sm="6">
                 <container>
@@ -86,7 +86,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <container><link text="Outgoing Shipments" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']"/></container>
                 </container>
             </row-col></container-row>
-        </row-col><row-col sm="2"/><row-col sm="4" style="text-center">
+        </row-col><row-col sm="2"><label text="&amp;nbsp;" encode="false"/></row-col><row-col sm="4" style="text-center">
             <label text="Manage" type="h3"/>
             <container-row><row-col sm="6">
                 <container>
@@ -122,6 +122,13 @@ along with this software (see the LICENSE.md file). If not, see
                     <container><link text="Accounting" url="../Accounting" link-type="anchor"/></container>
                 </container>
             </row-col></container-row>
-        </row-col><row-col sm="1"/></container-row>
+            
+            <label text="&amp;nbsp;" type="p" encode="false"/>
+            <container style="text-center">
+                <link url="../QuickViewReport" text="Custom Reports" link-type="anchor"/>
+                <label text=" - "/>
+                <link url="../SimpleReport" text="Report Builder" link-type="anchor"/>
+            </container>
+        </row-col><row-col sm="1"><label text="&amp;nbsp;" encode="false"/></row-col></container-row>
     </widgets>
 </screen>
