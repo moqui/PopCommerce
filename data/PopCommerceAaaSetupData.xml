@@ -48,6 +48,7 @@ along with this software (see the LICENSE.md file). If not, see
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/dashboard.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
         <artifacts artifactName="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
         <artifacts artifactName="component://SimpleScreens/screen/SimpleScreens/Search.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
+        <artifacts artifactName="component://SimpleScreens/screen/SimpleScreens/SimpleReport/QuickViewReport.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
     </artifactGroups>
 
     <!-- Artifact Groups for Parts of POP Commerce Admin App -->
