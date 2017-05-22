@@ -18,9 +18,9 @@ along with this software (see the LICENSE.md file). If not, see
     <moqui.entity.document.DataDocumentLink dataDocumentId="PopcParty" linkSeqId="01" label="Edit Party" urlType="screen"
             linkUrl="//apps/PopcAdmin/Party/EditParty?partyId=${partyId}"/>
     <moqui.entity.document.DataDocumentLink dataDocumentId="PopcParty" linkSeqId="02" label="Edit Customer" urlType="screen"
-            linkUrl="//apps/PopcAdmin/Customer/EditCustomer?partyId=${partyId}" condition="'Customer' in roles*.roleTypeId"/>
+            linkUrl="//apps/PopcAdmin/Customer/EditCustomer?partyId=${partyId}" linkCondition="'Customer' in roles*.roleTypeId"/>
     <moqui.entity.document.DataDocumentLink dataDocumentId="PopcParty" linkSeqId="03" label="Edit Supplier" urlType="screen"
-            linkUrl="//apps/PopcAdmin/Supplier/EditSupplier?partyId=${partyId}" condition="'Supplier' in roles*.roleTypeId"/>
+            linkUrl="//apps/PopcAdmin/Supplier/EditSupplier?partyId=${partyId}" linkCondition="'Supplier' in roles*.roleTypeId"/>
 
     <!-- Facility -->
     <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleFacility" newDataDocumentId="PopcFacility" newIndexName="popc"/>
