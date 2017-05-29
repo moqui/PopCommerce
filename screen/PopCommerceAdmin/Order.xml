@@ -20,6 +20,8 @@ along with this software (see the LICENSE.md file). If not, see
                 location="component://SimpleScreens/screen/SimpleScreens/Order/FindOrder.xml"/>
         <subscreens-item name="OrderDetail" menu-index="1"
                 location="component://SimpleScreens/screen/SimpleScreens/Order/OrderDetail.xml"/>
+        <subscreens-item name="QuickItems" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Order/QuickItems.xml"/>
         <subscreens-item name="PrintOrder" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Order/PrintOrder.xml"/>
     </subscreens>
