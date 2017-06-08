@@ -30,7 +30,9 @@ along with this software (see the LICENSE.md file). If not, see
     <!-- PopCommerce Admin App Administrators -->
     <moqui.basic.Enumeration description="POPC Admin App" enumId="UgtPopcAdmin" enumTypeId="UserGroupType"/>
     <userGroups userGroupId="POP_COMMERCE_ADMIN" description="POPC Administrators" groupTypeEnumId="UgtPopcAdmin">
-        <permissions userPermissionId="CARD_NUMBER_EDIT"/>
+        <permissions userPermissionId="CARD_NUMBER_EDIT" fromDate="0"/>
+        <permissions userPermissionId="ORDER_APPROVE" fromDate="0"/>
+        <permissions userPermissionId="FISCAL_REOPEN" fromDate="0"/>
     </userGroups>
 
     <!-- PopCommerce Admin screens admin authz -->
@@ -140,7 +142,7 @@ along with this software (see the LICENSE.md file). If not, see
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
         <authz artifactAuthzId="POPC_PURSUP_SHP" artifactGroupId="PopcAdminShipment" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
-        <permissions userPermissionId="ORDER_APPROVE"/>
+        <permissions userPermissionId="ORDER_APPROVE" fromDate="0"/>
     </userGroups>
 
     <userGroups userGroupId="PopcAdminSales" description="POPC Sales" groupTypeEnumId="UgtPopcAdmin">
@@ -176,8 +178,8 @@ along with this software (see the LICENSE.md file). If not, see
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
         <authz artifactAuthzId="POPC_SALSUP_SHP" artifactGroupId="PopcAdminShipment" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
-        <permissions userPermissionId="ORDER_APPROVE"/>
-        <permissions userPermissionId="CARD_NUMBER_EDIT"/>
+        <permissions userPermissionId="ORDER_APPROVE" fromDate="0"/>
+        <permissions userPermissionId="CARD_NUMBER_EDIT" fromDate="0"/>
     </userGroups>
 
     <userGroups userGroupId="PopcAdminWarehouse" description="POPC Warehouse" groupTypeEnumId="UgtPopcAdmin">
