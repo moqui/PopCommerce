@@ -30,7 +30,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition-include name="removePartyClassification" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
     <transition-include name="getPartyClassificationList" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
 
-    <transition-include name="createPartySetting" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
+    <transition-include name="storePartySetting" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
     <transition-include name="deletePartySetting" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
     <transition-include name="getPartySettingList" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
     <transition-include name="searchPartyList" location="component://SimpleScreens/template/party/PartyForms.xml"/>
