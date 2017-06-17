@@ -79,6 +79,13 @@ along with this software (see the LICENSE.md file). If not, see
     <transition-include name="updateContent" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
     <transition-include name="downloadContent" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
 
+    <transition name="receivableStatement">
+        <default-response url="${ec.web.getWebappRootUrl(false, null)}/fop/apps/${appRoot}/Accounting/Invoice/ReceivableStatement" url-type="plain">
+            <parameter name="renderMode" value="xsl-fo"/><parameter name="pageNoLimit" value="true"/>
+            <parameter name="toPartyId"/><parameter name="filename" value="Statement-${toPartyId}-${ec.l10n.format(ec.user.nowTimestamp, 'yyyy-MM-dd')}.pdf"/>
+        </default-response>
+    </transition>
+
     <subscreens>
         <subscreens-item name="UpdateContactInfo" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty/UpdateContactInfo.xml"/>
         <subscreens-item name="UpdatePaymentMethodInfo" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty/UpdatePaymentMethodInfo.xml"/>
@@ -124,6 +131,7 @@ along with this software (see the LICENSE.md file). If not, see
         <container-row><row-col lg="6">
             <link url="findRequest" text="Requests (${requestCount})" parameter-map="[partyId:partyId]" condition="requestCount"/>
             <link url="findOrder" text="Orders (${customerOrderPartCount})" parameter-map="[customerPartyId:partyId]"/>
+            <link url="receivableStatement" text="Statement PDF" parameter-map="[toPartyId:partyId]"/>
 
             <section-include name="NonUserPerson" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
             <section-include name="AddContactSection" location="component://SimpleScreens/screen/SimpleScreens/Party/EditParty.xml"/>
