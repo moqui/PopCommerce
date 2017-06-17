@@ -117,15 +117,15 @@ class PopcAdminScreenTests extends Specification {
         // TODO: Feature and FeatureGroup, need to add demo data
 
         // Order
-        "Order/OrderDetail?orderId=55400" | ['$23,795.00', 'Shipment #55400', 'Demo Product One-One'] // Purchase Order
+        "Order/OrderDetail?orderId=55400" | ['$23,795.00', 'Shipment 55400', 'Demo Product One-One'] // Purchase Order
         "Order/PrintOrder?orderId=55400&renderMode=xsl-fo" | ['Ziziwork Retail', 'Demo Product', '$23,795.00']
-        "Order/OrderDetail?orderId=55401" | ['$9,000.00', 'Shipment #55401', 'Picker Bot 2000'] // Sales Order
+        "Order/OrderDetail?orderId=55401" | ['$9,000.00', 'Shipment 55401', 'Picker Bot 2000'] // Sales Order
 
         // TODO Picking, call transitions or add other tests to create picklists, etc
 
         // Shipment
-        "Shipment/ShipmentDetail?shipmentId=55400" | ['Invoice #55400', 'Demo Product One-One'] // Incoming Shipment
-        "Shipment/ShipmentDetail?shipmentId=55401" | ['Order #55401', 'Picker Bot 2000'] // Outgoing Shipment
+        "Shipment/ShipmentDetail?shipmentId=55400" | ['Invoice 55400', 'Demo Product One-One'] // Incoming Shipment
+        "Shipment/ShipmentDetail?shipmentId=55401" | ['Order 55401', 'Picker Bot 2000'] // Outgoing Shipment
 
         // Facility
         "Facility/EditFacility?facilityId=ZIRET_WH" | ['Ziziwork Retail Warehouse', '51 W. Center St.']
