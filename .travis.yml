@@ -17,9 +17,9 @@ env:
   - TERM=dumb
 
 script:
-  - ./gradlew getGit -Pcomponent=PopCommerce
-  - ./gradlew load
-  - ./gradlew runtime/component/PopCommerce:test
+  - ./gradlew --no-daemon getGit -Pcomponent=PopCommerce
+  - ./gradlew --no-daemon load
+  - ./gradlew --no-daemon runtime/component/PopCommerce:test
 
 cache:
   directories:
