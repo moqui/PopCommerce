@@ -130,6 +130,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <link url="../Accounting" link-type="anchor">
                         <image url="/ssstatic/images/Accounting.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Accounting" url="../Accounting" link-type="anchor"/></container>
+                    <container><link text="Reports" url="../Accounting/Reports" link-type="anchor"/></container>
                 </container>
             </row-col></container-row>
             
