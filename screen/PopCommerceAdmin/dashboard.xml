@@ -93,38 +93,32 @@ along with this software (see the LICENSE.md file). If not, see
             <label text="Manage" type="h4"/>
             <container-row><row-col sm="6">
                 <container>
-                    <link url="../Wiki" link-type="anchor">
-                        <image url="/ssstatic/images/Wiki.png" url-type="screen" style="invertible" width="40"/></link>
-                    <container><link text="Wiki/Content" url="../Wiki" link-type="anchor"/></container>
-                </container>
-                <label text="&amp;nbsp;" type="p" encode="false"/>
-                <container>
                     <link url="../Catalog" link-type="anchor">
                         <image url="/ssstatic/images/Catalog.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Catalog" url="../Catalog" link-type="anchor"/></container>
+                </container>
+                <label text="&amp;nbsp;" type="p" encode="false"/>
+                <container>
+                    <link url="../Asset" link-type="anchor">
+                        <image url="/ssstatic/images/Asset.png" url-type="screen" style="invertible" width="40"/></link>
+                    <container><link text="Assets" url="../Asset" link-type="anchor"/></container>
                 </container>
                 <container>
                     <link url="../Facility" link-type="anchor">
                         <image url="/ssstatic/images/Facility.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Facilities" url="../Facility" link-type="anchor"/></container>
                 </container>
+            </row-col><row-col sm="6">
                 <container>
-                    <link url="../Asset" link-type="anchor">
-                        <image url="/ssstatic/images/Asset.png" url-type="screen" style="invertible" width="40"/></link>
-                    <container><link text="Assets" url="../Asset" link-type="anchor"/></container>
+                    <link url="../Wiki" link-type="anchor">
+                        <image url="/ssstatic/images/Wiki.png" url-type="screen" style="invertible" width="40"/></link>
+                    <container><link text="Wiki/Content" url="../Wiki" link-type="anchor"/></container>
                 </container>
                 <label text="&amp;nbsp;" type="p" encode="false"/>
-            </row-col><row-col sm="6">
                 <container>
                     <link url="../Party" link-type="anchor">
                         <image url="/ssstatic/images/Parties.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Parties" url="../Party" link-type="anchor"/></container>
-                </container>
-                <label text="&amp;nbsp;" type="p" encode="false"/>
-                <container>
-                    <link url="../Vendor" link-type="anchor">
-                        <image url="/ssstatic/images/Vendor.png" url-type="screen" style="invertible" width="40"/></link>
-                    <container><link text="Vendors" url="../Vendor" link-type="anchor"/></container>
                 </container>
                 <container>
                     <link url="../Accounting" link-type="anchor">
@@ -133,7 +127,8 @@ along with this software (see the LICENSE.md file). If not, see
                     <container><link text="Reports" url="../Accounting/Reports" link-type="anchor"/></container>
                 </container>
             </row-col></container-row>
-            
+
+            <label text="&amp;nbsp;" type="p" encode="false"/>
             <container style="text-center">
                 <link url="../QuickViewReport" text="Custom Reports" link-type="anchor"/>
                 <label text=" - "/>
