@@ -182,10 +182,9 @@ class PopcAdminScreenTests extends Specification {
                 ["Customer Service Credits (Contra Revenue)", "Net Income"]
 
         // Vendor
-        "Vendor/EditVendor?partyId=ORG_ZIZI_RETAIL" |
+        "Party/EditParty?partyId=ORG_ZIZI_RETAIL" |
                 ['Ziziwork Retail', 'Internal', 'payment.biziwork.retail@test.com']
-        "Vendor/EditUsers?partyId=ORG_ZIZI_RETAIL" | []
-        "Vendor/Accounting/AcctgPreference?partyId=ORG_ZIZI_RETAIL" |
+        "Party/Accounting/AcctgPreference?partyId=ORG_ZIZI_RETAIL" |
                 ['Ziziwork Industries', 'Clone Accounting Settings']
     }
 }
