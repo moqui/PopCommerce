@@ -78,10 +78,6 @@ along with this software (see the LICENSE.md file). If not, see
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Shipment.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
     <artifactGroups artifactGroupId="PopcAdminSupplier" description="POPC Supplier">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Supplier.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminUser" description="POPC User">
-        <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/User.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminVendor" description="POPC Vendor">
-        <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Vendor.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
     <artifactGroups artifactGroupId="PopcAdminWiki" description="POPC Wiki/Content">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Wiki.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
 
@@ -92,8 +88,6 @@ along with this software (see the LICENSE.md file). If not, see
         <authz artifactAuthzId="POPC_ACC_ACC" artifactGroupId="PopcAdminAccounting" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
         <authz artifactAuthzId="POPC_ACC_AST" artifactGroupId="PopcAdminAsset" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
-            <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
-        <authz artifactAuthzId="POPC_ACC_VND" artifactGroupId="PopcAdminVendor" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
         <authz artifactAuthzId="POPC_ACC_PTY" artifactGroupId="PopcAdminParty" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_VIEW">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
