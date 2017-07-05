@@ -43,7 +43,6 @@ along with this software (see the LICENSE.md file). If not, see
     <!-- <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcProduct" fieldNameAlias="productStoreId" fieldValue="POPC_DEFAULT" postQuery="Y"/> -->
     <!-- NOTE: links are for PopcAdmin, for popc ecommerce search screen creates own links like /popc/Product/Detail/${productId} -->
 
-    <!-- ================ -->
     <!-- Search Data Feed -->
     <moqui.entity.feed.DataFeed dataFeedId="PopCommerceSearch" dataFeedTypeEnumId="DTFDTP_RT_PUSH"
             feedName="PopCommerce Search" feedReceiveServiceName="org.moqui.search.SearchServices.index#DataDocuments">
@@ -51,5 +50,13 @@ along with this software (see the LICENSE.md file). If not, see
         <documents dataDocumentId="PopcFacility"/>
         <documents dataDocumentId="PopcRequest"/>
         <documents dataDocumentId="PopcProduct"/>
+    </moqui.entity.feed.DataFeed>
+
+    <!-- Sales Analysis Document and Feed -->
+    <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleSalesOrderItem" newDataDocumentId="PopcSalesOrderItem" newIndexName="popc_sales"/>
+
+    <moqui.entity.feed.DataFeed dataFeedId="PopCommerceSales" dataFeedTypeEnumId="DTFDTP_RT_PUSH"
+            feedName="PopCommerce Sales Data" feedReceiveServiceName="org.moqui.search.SearchServices.index#DataDocuments">
+        <documents dataDocumentId="PopcSalesOrderItem"/>
     </moqui.entity.feed.DataFeed>
 </entity-facade-xml>
