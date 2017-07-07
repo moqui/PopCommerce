@@ -17,9 +17,12 @@ along with this software (see the LICENSE.md file). If not, see
 
     <always-actions>
         <set field="appRoot" value="PopcAdmin"/>
-        <set field="searchIndexName" value="popc"/>
-        <set field="searchProductDocType" value="PopcProduct"/>
-        <set field="searchPartyDocType" value="PopcParty"/>
+
+        <set field="searchIndexName" value="mantle"/>
+        <set field="searchLinkSets" value="PopcAdmin"/>
+        <set field="searchProductDocType" value="MantleProduct"/>
+        <set field="searchPartyDocType" value="MantleParty"/>
+
         <set field="appUserGroupTypeEnumId" value="UgtPopcAdmin"/>
     </always-actions>
 

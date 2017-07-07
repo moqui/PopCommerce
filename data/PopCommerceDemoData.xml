@@ -15,9 +15,6 @@ along with this software (see the LICENSE.md file). If not, see
 <entity-facade-xml type="demo">
     <!-- NOTE: other store/product demo data on Mantle in ZcaProductDemoData.xml -->
 
-    <!-- run index for search -->
-    <org.moqui.search.SearchServices.indexDataFeedDocuments dataFeedId="PopCommerceSearch"/>
-
     <!-- demo store settings for email/etc -->
     <mantle.product.store.ProductStore productStoreId="POPC_DEFAULT" defaultLocale="en_US" defaultCurrencyUomId="USD"
             storeDomain="demo.moqui.org" profileUrlPath="popc/Customer/Profile"/>
@@ -118,4 +115,8 @@ along with this software (see the LICENSE.md file). If not, see
             <groups userGroupId="PopcAdminWarehouse"/>
         </users>
     </parties>
+
+    <!-- run index for search -->
+    <org.moqui.search.SearchServices.indexDataFeedDocuments dataFeedId="MantleSearch"/>
+    <org.moqui.search.SearchServices.indexDataFeedDocuments dataFeedId="PopCommerceSearch"/>
 </entity-facade-xml>
