@@ -32,7 +32,8 @@ along with this software (see the LICENSE.md file). If not, see
 
     <!-- Product for eCommerce Search -->
     <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleProduct" newDataDocumentId="PopcProduct" newIndexName="popc"/>
-    <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcProduct" fieldNameAlias="productStoreId" fieldValue="POPC_DEFAULT" postQuery="Y"/>
+    <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcProduct" conditionSeqId="01"
+            fieldNameAlias="productStoreId" fieldValue="POPC_DEFAULT" postQuery="Y"/>
     <!-- NOTE: popc ecommerce search screen creates own links like /popc/Product/Detail/${productId} -->
 
     <!-- Search Data Feed -->
