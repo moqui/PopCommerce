@@ -95,7 +95,7 @@ class PopcAdminScreenTests extends Specification {
 
         // Supplier
         "Supplier/EditSupplier?partyId=ZiddlemanInc" |
-                ['Ziddleman Incorporated', 'Supplier', '1-702-987-6543', '1350 E. Flamingo Rd. #9876']
+                ['Ziddleman &amp; Sons Suppliers', 'Supplier', '1-702-987-6543', '1350 E. Flamingo Rd. #9876']
 
         // Customer
         "Customer/EditCustomer?partyId=CustJqp" |
