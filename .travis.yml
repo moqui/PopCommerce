@@ -1,6 +1,7 @@
 language: groovy
 
-sudo: false
+# use sudo:true to not use container based infrastructure, for gradle exit value 137 on SIGKILL from Travis issue
+sudo: true
 
 jdk:
   - oraclejdk8
