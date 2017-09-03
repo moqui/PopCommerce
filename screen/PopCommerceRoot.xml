@@ -60,7 +60,7 @@ along with this software (see the LICENSE.md file). If not, see
         html_scripts.add('/libs/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')
         html_stylesheets.add('/libs/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')
         // Drop-down (Select2)
-        html_scripts.add('/js/select2/select2.min.js')
+        html_scripts.add('/js/select2.min.js')
         html_stylesheets.add('/libs/select2/select2.min.css')
         html_stylesheets.add('/libs/select2-bootstrap-theme/select2-bootstrap.min.css')
         // Tree (JSTree)
