@@ -20,7 +20,7 @@ along with this software (see the LICENSE.md file). If not, see
         <set field="filename" from="extraPathNameList.remove(extraPathNameList.size()-1)"/>
         <service-call name="org.moqui.impl.WikiServices.get#WikiPageAttachment" out-map="context"
                       in-map="[wikiSpaceId:wikiSpaceId, pagePath:extraPathNameList?.join('/'), filename:filename]"/>
-        <script>ec.web.sendResourceResponse(attachmentReference.location)</script>
+        <script>ec.web.sendResourceResponse(attachmentReference.location, true)</script>
     </actions><default-response type="none"/></transition>
     <actions>
         <set field="extraPathNameList" from="sri.screenUrlInfo.extraPathNameList"/>
