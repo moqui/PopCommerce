@@ -31,7 +31,8 @@ along with this software (see the LICENSE.md file). If not, see
         <set field="cartOrderId" from="ec.web.sessionAttributes.cartOrderId" set-if-empty="false"/>
         <set field="customerPartyId" from="ec.user.userAccount?.partyId"/>
         <!-- NOTE: if needed set additional parameters for creating an order here, for example: carrierPartyId:'_NA_', shipmentMethodEnumId:'ShMthGround' -->
-        <set field="defaultOrderParameters" from="[orderId:cartOrderId, customerPartyId:customerPartyId, currencyUomId:currencyUomId, productStoreId:productStoreId]"/>
+        <set field="defaultOrderParameters" from="[orderId:cartOrderId, customerPartyId:customerPartyId, currencyUomId:currencyUomId,
+                productStoreId:productStoreId, salesChannelEnumId:'ScWeb']"/>
 
         <!-- <log message="cartOrderId=${cartOrderId}, customerPartyId=${customerPartyId}, vendorPartyId=${vendorPartyId}"/> -->
     </always-actions>
