@@ -201,6 +201,18 @@ along with this software (see the LICENSE.md file). If not, see
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
     </userGroups>
 
+    <!-- Give all POPC Groups access to My Account App -->
+    <artifactGroups artifactGroupId="MY_ACCOUNT">
+        <authz artifactAuthzId="MY_ACCOUNT_PCACC" userGroupId="PopcAdminAccounting" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
+        <authz artifactAuthzId="MY_ACCOUNT_PCCAT" userGroupId="PopcAdminCatalogContent" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
+        <authz artifactAuthzId="MY_ACCOUNT_PCPU" userGroupId="PopcAdminPurchasing" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
+        <authz artifactAuthzId="MY_ACCOUNT_PCPUSUP" userGroupId="PopcAdminPurchasingSup" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
+        <authz artifactAuthzId="MY_ACCOUNT_PCSL" userGroupId="PopcAdminSales" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
+        <authz artifactAuthzId="MY_ACCOUNT_PCSLSUP" userGroupId="PopcAdminSalesSup" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
+        <authz artifactAuthzId="MY_ACCOUNT_PCWH" userGroupId="PopcAdminWarehouse" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
+        <authz artifactAuthzId="MY_ACCOUNT_PCADMIN" userGroupId="POP_COMMERCE_ADMIN" authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
+    </artifactGroups>
+
     <!-- ========== Theme Type and Default Theme for eCommerce ========== -->
 
     <moqui.basic.Enumeration description="POP Commerce Theme Type" enumId="STT_POP_COMMERCE" enumTypeId="ScreenThemeType"/>
