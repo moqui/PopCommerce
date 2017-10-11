@@ -16,16 +16,20 @@ along with this software (see the LICENSE.md file). If not, see
         default-menu-title="Wiki/Content" default-menu-index="21" menu-image="/ssstatic/images/Wiki.png">
 
     <subscreens default-item="WikiSpaces">
-        <subscreens-item name="WikiSpaces" menu-include="false"
+        <subscreens-item name="WikiSpaces" menu-index="1"
                 location="component://SimpleScreens/screen/SimpleScreens/Wiki/WikiSpaces.xml"/>
-        <subscreens-item name="EditWikiSpace" menu-index="1"
+        <subscreens-item name="WikiBlogs" menu-index="2"
+                location="component://SimpleScreens/screen/SimpleScreens/Wiki/WikiBlogs.xml"/>
+        <subscreens-item name="EditWikiSpace" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Wiki/EditWikiSpace.xml"/>
         <subscreens-item name="EditWikiPage" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Wiki/EditWikiPage.xml"/>
+        <subscreens-item name="EditWikiBlog" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Wiki/EditWikiBlog.xml"/>
         <subscreens-item name="wiki" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Wiki/wiki.xml"/>
         <subscreens-item name="WikiCompare" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Wiki/WikiCompare.xml"/>
     </subscreens>
-    <widgets><subscreens-active id="WikiPanel"/></widgets>
+    <widgets><subscreens-panel id="WikiPanel" type="popup"/></widgets>
 </screen>
