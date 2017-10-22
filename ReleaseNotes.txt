@@ -2,21 +2,22 @@
 POP Commerce - Retail and Wholesale ERP and eCommerce - Release Notes
 
 ===========================================================================
-Release 1.2.0 - Not Yet Released
+Release 2.0.0 - 22 Oct 2017
 ===========================================================================
 
-POP Commerce Retail and Wholesale ERP and eCommerce 1.2.0 is a minor
+POP Commerce Retail and Wholesale ERP and eCommerce 2.0.0 is a major
 new feature and bug fix release.
 
-This release is based on Moqui Framework version 2.1.0, mantle-udm 1.2.0,
-mantle-usl 1.2.0, and SimpleScreens 1.2.0. It also uses the
-moqui-elasticsearch 1.0.1 and moqui-fop 1.0.1 tool components.
+This release is based on Moqui Framework version 2.1.0, mantle-udm 2.0.0,
+mantle-usl 2.0.0, and SimpleScreens 2.0.0. It also uses the
+moqui-elasticsearch 1.1.0 and moqui-fop 1.1.0 tool components.
 
 With this release the POP Commerce Admin (ERP) application has sufficient
-functionality for real world use out of the box as a retail/wholesale
-business management and ecommerce administration system. This is thanks to
-a company who decided not just to use POP Commerce but also to contribute
-all generic functionality they needed to the open source project.
+functionality for real world use out of the box as a business management
+and ecommerce administration system for retail, wholesale, and distribution
+companies. This is thanks to a company who decided not just to use POP
+Commerce but also to contribute all generic functionality they needed to
+PopCommerce and related Moqui Ecosystem projects.
 
 The admin app has new screens from SimpleScreens for comprehensive general
 party, request, returns, and wiki/content management.
@@ -33,8 +34,7 @@ With the Mantle integrations for Authorize.NET and Shippo, and various user
 interface changes, the admin app also supports full payment processing and
 shipping/labels processes.
 
-TODO: add list of new screens/etc from SimpleScreens release notes
-
+For additional details see the release notes in SimpleScreens.
 
 ===========================================================================
 Release 1.1.0 - 24 Nov 2016
