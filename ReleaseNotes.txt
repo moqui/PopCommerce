@@ -19,6 +19,11 @@ companies. This is thanks to a company who decided not just to use POP
 Commerce but also to contribute all generic functionality they needed to
 PopCommerce and related Moqui Ecosystem projects.
 
+Some basic stats to show just how much new there is:
+
+- Screens: 153 (last release 71)
+- Forms: 464 (last release 210)
+
 The admin app has new screens from SimpleScreens for comprehensive general
 party, request, returns, and wiki/content management.
 
