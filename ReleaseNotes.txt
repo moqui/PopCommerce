@@ -12,6 +12,9 @@ This release is based on Moqui Framework version 2.1.0, mantle-udm 2.0.0,
 mantle-usl 2.0.0, and SimpleScreens 2.0.0. It also uses the
 moqui-elasticsearch 1.1.0 and moqui-fop 1.1.0 tool components.
 
+This release also supports the optional AuthorizeDotNet and mantle-shippo
+components for payment and shipping integration.
+
 With this release the POP Commerce Admin (ERP) application has sufficient
 functionality for real world use out of the box as a business management
 and ecommerce administration system for retail, wholesale, and distribution
