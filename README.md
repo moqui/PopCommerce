@@ -3,7 +3,7 @@
 [![license](http://img.shields.io/badge/license-CC0%201.0%20Universal-blue.svg)](https://github.com/moqui/PopCommerce/blob/master/LICENSE.md)
 [![build](https://travis-ci.org/moqui/PopCommerce.svg)](https://travis-ci.org/moqui/PopCommerce)
 [![release](http://img.shields.io/github/release/moqui/PopCommerce.svg)](https://github.com/moqui/PopCommerce/releases)
-[![commits since release](http://img.shields.io/github/commits-since/moqui/PopCommerce/v1.1.0.svg)](https://github.com/moqui/PopCommerce/commits/master)
+[![commits since release](http://img.shields.io/github/commits-since/moqui/PopCommerce/v2.0.0.svg)](https://github.com/moqui/PopCommerce/commits/master)
 [![downloads](http://img.shields.io/github/downloads/moqui/PopCommerce/total.svg)](https://github.com/moqui/PopCommerce/releases)
 
 [![LinkedIn Group](https://img.shields.io/badge/linked%20in%20group-moqui-blue.svg)](https://www.linkedin.com/groups/4640689)
@@ -38,8 +38,8 @@ If you don't have gradle or ant installed you can use this command line to run J
 
 ### Build and Run Locally
 
-To get and locally run the latest POP Commerce you'll need JDK 8 or later, and either a git 
-client or you can use the binary download link on GitHub.
+To get and locally run the latest POP Commerce you'll need JDK 8 or later (OpenJDK or Oracle), and either a git client or you can 
+use the binary download link on GitHub.
 
 Java can be downloaded here (make sure to use the Download button under the **JDK** column, NOT the under the JRE column):
 
@@ -99,7 +99,7 @@ Use the button in the lower-left corner of the screen login as John Doe.
 
 ### Setup Commands Quick Reference
 
-Java 8 is recommended: <http://www.oracle.com/technetwork/java/javase/downloads/index.html>
+Java 8 JDK is required (OpenJDK or Oracle): <http://www.oracle.com/technetwork/java/javase/downloads/index.html>
 
 Here are command line steps for initial checkout, setup, and run:
 
