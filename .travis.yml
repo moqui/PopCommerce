@@ -20,7 +20,7 @@ env:
 script:
   - ./gradlew --no-daemon getGit -Pcomponent=PopCommerce
   - ./gradlew --no-daemon load
-  - ./gradlew --no-daemon runtime/component/PopCommerce:test
+  - ./gradlew --no-daemon runtime:component:PopCommerce:test
 
 cache:
   directories:
