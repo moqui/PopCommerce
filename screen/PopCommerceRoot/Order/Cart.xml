@@ -27,6 +27,9 @@ along with this software (see the LICENSE.md file). If not, see
         <if condition="cartOrderId">
             <service-call name="mantle.order.OrderInfoServices.get#OrderDisplayInfo" in-map="[orderId:cartOrderId]" out-map="context"/>
         </if>
+        <entity-find entity-name="moqui.basic.EnumGroupMember" list="productItemTypeEgms" cache="true">
+            <econdition field-name="enumGroupEnumId" value="EngItemsProduct"/></entity-find>
+        <set field="productItemTypes" from="productItemTypeEgms*.enumId"/>
     </actions>
     <widgets>
         <form-list name="CartItems" list="orderItemList" list-entry="orderItem" multi="true" transition="updateCartItems">
@@ -54,7 +57,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <display currency-unit-field="orderHeader.currencyUomId" also-hidden="false"/>
             </default-field></field>
             <field name="quantity">
-                <conditional-field condition="orderItem?.itemTypeEnumId == 'ItemProduct'">
+                <conditional-field condition="orderItem?.itemTypeEnumId in productItemTypes">
                     <text-line size="4"/></conditional-field>
                 <default-field><display also-hidden="false"/></default-field>
             </field>
