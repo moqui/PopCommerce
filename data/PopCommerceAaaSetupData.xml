@@ -12,7 +12,7 @@ You should have received a copy of the CC0 Public Domain Dedication
 along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
-<entity-facade-xml type="seed">
+<entity-facade-xml type="seed-initial">
     <moqui.screen.SubscreensItem screenLocation="component://webroot/screen/webroot.xml"
             subscreenName="popc" menuTitle="POP Commerce" menuIndex="9" menuInclude="N"
             subscreenLocation="component://PopCommerce/screen/PopCommerceRoot.xml"/>
@@ -44,7 +44,7 @@ along with this software (see the LICENSE.md file). If not, see
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
     </artifactGroups>
 
-    <!-- Root screen (no inherit) and dashboard group, for all Aspen user groups -->
+    <!-- Root screen (no inherit) and dashboard group, for all POPC user groups -->
     <artifactGroups artifactGroupId="PopcAdminApp" description="POPC ERP App Access">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="N"/>
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/dashboard.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
