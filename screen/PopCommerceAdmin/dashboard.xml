@@ -49,18 +49,6 @@ along with this software (see the LICENSE.md file). If not, see
                         <image url="/ssstatic/images/Receiving.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Incoming Shipments" url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpIncoming']"/></container>
                 </container>
-                <label text="&amp;nbsp;" type="p" encode="false"/>
-                <container>
-                    <link url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']">
-                        <image url="/ssstatic/images/Inventory.png" url-type="screen" style="invertible" width="40"/></link>
-                    <container><link text="Inventory Assets" url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']"/></container>
-                </container>
-                <container>
-                    <link url="../Return" link-type="anchor">
-                        <image url="/ssstatic/images/Return.png" url-type="screen" style="invertible" width="40"/></link>
-                    <container><link text="Returns" url="../Return" link-type="anchor"/></container>
-                </container>
-                <label text="&amp;nbsp;" type="p" encode="false"/>
             </row-col><row-col sm="6">
                 <container>
                     <link url="../Customer" link-type="anchor">
@@ -77,7 +65,20 @@ along with this software (see the LICENSE.md file). If not, see
                         <image url="/ssstatic/images/Sales.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Sales Orders" url="../Order" link-type="anchor" parameter-map="[orderType:'Sales']"/></container>
                 </container>
-                <label text="&amp;nbsp;" type="p" encode="false"/>
+            </row-col></container-row>
+            <label text="&amp;nbsp;" type="p" encode="false"/>
+            <container-row><row-col sm="6">
+                <container>
+                    <link url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']">
+                        <image url="/ssstatic/images/Inventory.png" url-type="screen" style="invertible" width="40"/></link>
+                    <container><link text="Inventory Assets" url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']"/></container>
+                </container>
+                <container>
+                    <link url="../Return" link-type="anchor">
+                        <image url="/ssstatic/images/Return.png" url-type="screen" style="invertible" width="40"/></link>
+                    <container><link text="Returns" url="../Return" link-type="anchor"/></container>
+                </container>
+            </row-col><row-col sm="6">
                 <container>
                     <link url="../Picking" link-type="anchor">
                         <image url="/ssstatic/images/Picking.png" url-type="screen" style="invertible" width="40"/></link>
@@ -97,7 +98,16 @@ along with this software (see the LICENSE.md file). If not, see
                         <image url="/ssstatic/images/Catalog.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Catalog" url="../Catalog" link-type="anchor"/></container>
                 </container>
-                <label text="&amp;nbsp;" type="p" encode="false"/>
+            </row-col><row-col sm="6">
+                <container>
+                    <link url="../Wiki" link-type="anchor">
+                        <image url="/ssstatic/images/Wiki.png" url-type="screen" style="invertible" width="40"/></link>
+                    <container><link text="Wiki/Content" url="../Wiki/WikiSpaces" link-type="anchor"/></container>
+                    <container><link text="Wiki Blogs" url="../Wiki/WikiBlogs" link-type="anchor"/></container>
+                </container>
+            </row-col></container-row>
+            <label text="&amp;nbsp;" type="p" encode="false"/>
+            <container-row><row-col sm="6">
                 <container>
                     <link url="../Asset" link-type="anchor">
                         <image url="/ssstatic/images/Asset.png" url-type="screen" style="invertible" width="40"/></link>
@@ -109,13 +119,6 @@ along with this software (see the LICENSE.md file). If not, see
                     <container><link text="Facilities" url="../Facility" link-type="anchor"/></container>
                 </container>
             </row-col><row-col sm="6">
-                <container>
-                    <link url="../Wiki" link-type="anchor">
-                        <image url="/ssstatic/images/Wiki.png" url-type="screen" style="invertible" width="40"/></link>
-                    <container><link text="Wiki/Content" url="../Wiki/WikiSpaces" link-type="anchor"/></container>
-                    <container><link text="Wiki Blogs" url="../Wiki/WikiBlogs" link-type="anchor"/></container>
-                </container>
-                <label text="&amp;nbsp;" type="p" encode="false"/>
                 <container>
                     <link url="../Party" link-type="anchor">
                         <image url="/ssstatic/images/Parties.png" url-type="screen" style="invertible" width="40"/></link>
