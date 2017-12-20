@@ -23,12 +23,15 @@ along with this software (see the LICENSE.md file). If not, see
             emailServerId="SYSTEM" bodyScreenLocation="component://SimpleScreens/screen/email/OrderPlaced.xml" webappName="webroot"
             fromAddress="noreply@moqui.org" fromName="POP Commerce Demo" ccAddresses="" bccAddresses="" sendPartial="Y"
             subject="${fromName} Order ${orderId}"/>
+    <mantle.product.store.ProductStoreEmail productStoreId="POPC_DEFAULT" emailTypeEnumId="PsetOrderPlaced"
+            emailTemplateId="PopcOrderPlaced" headerImagePath="images/MoquiLogoSmall.png" detailLinkPath="popc/Customer/OrderDetail"/>
     <moqui.basic.email.EmailTemplate emailTemplateId="PopcShipmentShipped" description="POPC Shipment Shipped"
             emailServerId="SYSTEM" bodyScreenLocation="component://SimpleScreens/screen/email/ShipmentShipped.xml" webappName="webroot"
             fromAddress="noreply@moqui.org" fromName="POP Commerce Demo" ccAddresses="" bccAddresses="" sendPartial="Y"
-            subject="${fromName} Shipment ${shipmentId}"/>
-    <mantle.product.store.ProductStoreEmail productStoreId="POPC_DEFAULT" emailTypeEnumId="PsetOrderPlaced"
-            emailTemplateId="PopcOrderPlaced" headerImagePath="images/MoquiLogoSmall.png" detailLinkPath="popc/Customer/OrderDetail"/>
+            subject="${fromName} Shipment ${shipmentId}">
+        <attachments fileName="Invoice-${invoiceId}.pdf" screenRenderMode="xsl-fo" attachmentCondition="invoiceId"
+                attachmentLocation="component://SimpleScreens/screen/SimpleScreens/Accounting/Invoice/PrintInvoice.xml"/>
+    </moqui.basic.email.EmailTemplate>
     <mantle.product.store.ProductStoreEmail productStoreId="POPC_DEFAULT" emailTypeEnumId="PsetShipmentShipped"
             emailTemplateId="PopcShipmentShipped" headerImagePath="images/MoquiLogoSmall.png" detailLinkPath="popc/Customer/OrderDetail"/>
 
