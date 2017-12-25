@@ -19,17 +19,48 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="quickLookup"><default-response url="../QuickLookup"/></transition>
 
     <widgets>
-        <container-row>
-            <row-col md="6" style="text-center">
-                <form-single name="SearchOptions" transition="search" extends="component://SimpleScreens/screen/SimpleScreens/Search.xml#SearchOptions">
-                    <field name="queryString"><default-field tooltip=""><text-line size="25"/></default-field></field>
-                </form-single>
-            </row-col>
-            <row-col md="6" style="text-center">
-                <form-single name="QuickLookupForm" transition="quickLookup" focus-field=""
-                        extends="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml#QuickLookupForm"/>
-            </row-col>
-        </container-row>
+        <container-row><row-col md="6" style="text-center">
+            <form-single name="SearchOptions" transition="search" extends="component://SimpleScreens/screen/SimpleScreens/Search.xml#SearchOptions">
+                <field name="queryString"><default-field tooltip=""><text-line size="25"/></default-field></field>
+            </form-single>
+        </row-col><row-col md="6" style="text-center">
+            <form-single name="QuickLookupForm" transition="quickLookup" focus-field=""
+                    extends="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml#QuickLookupForm"/>
+        </row-col></container-row>
+
+        <section name="QuickInfoSection"><actions>
+            <entity-find-count entity-name="mantle.order.OrderPart" count-field="orderPlacedCount">
+                <econdition field-name="statusId" operator="in" from="['OrderPlaced', 'OrderProcessing']"/></entity-find-count>
+            <entity-find-count entity-name="mantle.order.OrderPart" count-field="orderApprovedCount">
+                <econdition field-name="statusId" operator="in" from="['OrderApproved', 'OrderSent']"/></entity-find-count>
+            <entity-find-count entity-name="mantle.order.OrderPart" count-field="orderHeldCount">
+                <econdition field-name="statusId" value="OrderHold"/></entity-find-count>
+
+            <entity-find-count entity-name="mantle.request.Request" count-field="requestSubmittedCount">
+                <econdition field-name="statusId" value="ReqSubmitted"/></entity-find-count>
+            <entity-find-count entity-name="mantle.request.Request" count-field="requestInProgressCount">
+                <econdition field-name="statusId" operator="in" from="['ReqReviewed', 'ReqInProgress']"/></entity-find-count>
+        </actions><widgets>
+            <container-row><row-col sm="0" md="1"><label text="&amp;nbsp;" encode="false"/></row-col><row-col sm="5" md="4" style="text-center">
+                <container type="ul" style="list-inline">
+                    <container type="li"><label text="SO" type="h4"/></container>
+                    <container type="li"><link url="../Order" parameter-map="[orderType:'Sales', statusId:'OrderPlaced,OrderProcessing', statusId_op:'in']"
+                            text="Placed" badge="${orderPlacedCount}" btn-type="default"/></container>
+                    <container type="li"><link url="../Order" parameter-map="[orderType:'Sales', statusId:'OrderApproved,OrderSent', statusId_op:'in']"
+                            text="Approved" badge="${orderApprovedCount}" btn-type="default"/></container>
+                    <container type="li"><link url="../Order" parameter-map="[orderType:'Sales', statusId:'OrderHold']"
+                            text="Held" badge="${orderHeldCount}" btn-type="default"/></container>
+                </container>
+            </row-col><row-col sm="2"><label text="&amp;nbsp;" encode="false"/></row-col><row-col sm="5" md="4" style="text-center">
+                <container type="ul" style="list-inline">
+                    <container type="li"><label text="Req" type="h4"/></container>
+                    <container type="li"><link url="../Request" parameter-map="[statusId:'ReqSubmitted']"
+                            text="Submitted" badge="${requestSubmittedCount}" btn-type="default"/></container>
+                    <container type="li"><link url="../Request" parameter-map="[statusId:'ReqReviewed,ReqInProgress', statusId_op:'in']"
+                            text="In Progress" badge="${requestInProgressCount}" btn-type="default"/></container>
+                </container>
+            </row-col><row-col sm="0" md="1"><label text="&amp;nbsp;" encode="false"/></row-col></container-row>
+        </widgets></section>
 
         <container-row><row-col sm="1"><label text="&amp;nbsp;" encode="false"/></row-col><row-col sm="4" style="text-center">
             <label text="Operate" type="h4"/>
