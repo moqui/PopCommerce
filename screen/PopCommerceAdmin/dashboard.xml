@@ -29,17 +29,31 @@ along with this software (see the LICENSE.md file). If not, see
         </row-col></container-row>
 
         <section name="QuickInfoSection"><actions>
-            <entity-find-count entity-name="mantle.order.OrderPart" count-field="orderPlacedCount">
-                <econdition field-name="statusId" operator="in" from="['OrderPlaced', 'OrderProcessing']"/></entity-find-count>
-            <entity-find-count entity-name="mantle.order.OrderPart" count-field="orderApprovedCount">
-                <econdition field-name="statusId" operator="in" from="['OrderApproved', 'OrderSent']"/></entity-find-count>
-            <entity-find-count entity-name="mantle.order.OrderPart" count-field="orderHeldCount">
-                <econdition field-name="statusId" value="OrderHold"/></entity-find-count>
+            <entity-find entity-name="mantle.party.PartyRole" list="orgPartyRoles">
+                <econdition field-name="roleTypeId" value="OrgInternal"/></entity-find>
+            <set field="orgIntPartyIds" from="orgPartyRoles*.partyId"/>
 
-            <entity-find-count entity-name="mantle.request.Request" count-field="requestSubmittedCount">
-                <econdition field-name="statusId" value="ReqSubmitted"/></entity-find-count>
-            <entity-find-count entity-name="mantle.request.Request" count-field="requestInProgressCount">
-                <econdition field-name="statusId" operator="in" from="['ReqReviewed', 'ReqInProgress']"/></entity-find-count>
+            <entity-find-count entity-name="mantle.order.OrderPart" count-field="orderPlacedCount">
+                <econdition field-name="statusId" operator="in" from="['OrderPlaced', 'OrderProcessing']"/>
+                <econdition field-name="vendorPartyId" operator="in" from="orgIntPartyIds"/>
+            </entity-find-count>
+            <entity-find-count entity-name="mantle.order.OrderPart" count-field="orderApprovedCount">
+                <econdition field-name="statusId" operator="in" from="['OrderApproved', 'OrderSent']"/>
+                <econdition field-name="vendorPartyId" operator="in" from="orgIntPartyIds"/>
+            </entity-find-count>
+            <entity-find-count entity-name="mantle.order.OrderPart" count-field="orderHeldCount">
+                <econdition field-name="statusId" value="OrderHold"/>
+                <econdition field-name="vendorPartyId" operator="in" from="orgIntPartyIds"/>
+            </entity-find-count>
+
+            <entity-find-count entity-name="mantle.request.RequestAndParty" count-field="requestSubmittedCount">
+                <econdition field-name="statusId" value="ReqSubmitted"/>
+                <econdition field-name="roleTypeId" value="Customer"/>
+            </entity-find-count>
+            <entity-find-count entity-name="mantle.request.RequestAndParty" count-field="requestInProgressCount">
+                <econdition field-name="statusId" operator="in" from="['ReqReviewed', 'ReqInProgress']"/>
+                <econdition field-name="roleTypeId" value="Customer"/>
+            </entity-find-count>
         </actions><widgets>
             <container-row><row-col sm="0" md="1"><label text="&amp;nbsp;" encode="false"/></row-col><row-col sm="5" md="4" style="text-center">
                 <container type="ul" style="list-inline">
