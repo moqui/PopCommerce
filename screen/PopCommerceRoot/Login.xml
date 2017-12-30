@@ -62,7 +62,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="changePassword" require-session-token="false"><service-call name="org.moqui.impl.UserServices.update#Password"/>
         <default-response url="../Login"/><error-response url="."/></transition>
     <transition name="createAccount" require-session-token="false">
-        <service-call name="mantle.party.PartyServices.create#Account" in-map="context + [roleTypeId:'Customer', userGroupId:null]"/>
+        <service-call name="mantle.party.PartyServices.create#Account" in-map="context + [roleTypeId:'Customer']"/>
         <default-response type="screen-last"/><error-response url="."/>
     </transition>
 
