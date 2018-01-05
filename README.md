@@ -26,7 +26,7 @@ the SimpleScreens project.
 To run POP Commerce you need Moqui Framework, POP Commerce itself, and the components it depends on. Moqui supports a 
 few methods for setup and deployment as described in the documentation here:
 
-<http://www.moqui.org/framework/docs/RunDeploy.html>
+<http://www.moqui.org/docs/framework/Run+and+Deploy>
 
 The easiest way to try POP Commerce is with the binary distribution available on GitHub:
 
