@@ -13,12 +13,12 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <entity-facade-xml type="seed-initial">
-    <moqui.screen.SubscreensItem screenLocation="component://webroot/screen/webroot.xml"
-            subscreenName="popc" menuTitle="POP Commerce" menuIndex="9" menuInclude="N"
-            subscreenLocation="component://PopCommerce/screen/PopCommerceRoot.xml"/>
-    <moqui.screen.SubscreensItem screenLocation="component://webroot/screen/webroot/apps.xml"
-            subscreenName="PopcAdmin" subscreenLocation="component://PopCommerce/screen/PopCommerceAdmin.xml"
-            menuTitle="POPC ERP" menuIndex="9" menuInclude="Y"/>
+    <!-- NOTE: webroot subscreen configuation for popc and PopcAdmin are now in the MoquiConf.xml file instead of DB records
+    <moqui.screen.SubscreensItem screenLocation="component://webroot/screen/webroot.xml" subscreenName="popc" menuTitle="POP Commerce"
+            menuIndex="9" menuInclude="N" subscreenLocation="component://PopCommerce/screen/PopCommerceRoot.xml"/>
+    <moqui.screen.SubscreensItem screenLocation="component://webroot/screen/webroot/apps.xml" subscreenName="PopcAdmin" menuTitle="POPC ERP"
+            menuIndex="9" menuInclude="Y" subscreenLocation="component://PopCommerce/screen/PopCommerceAdmin.xml"/>
+    -->
 
     <!-- ecommerce authz/permission for ALL users -->
     <moqui.security.ArtifactGroup artifactGroupId="POPC" description="POP Commerce App (via root screen)"/>
