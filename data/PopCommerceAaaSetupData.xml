@@ -13,7 +13,7 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <entity-facade-xml type="seed-initial">
-    <!-- NOTE: webroot subscreen configuation for popc and PopcAdmin are now in the MoquiConf.xml file instead of DB records
+    <!-- NOTE: subscreen configuration is now in the MoquiConf.xml file instead of DB records
     <moqui.screen.SubscreensItem screenLocation="component://webroot/screen/webroot.xml" subscreenName="popc" menuTitle="POP Commerce"
             menuIndex="9" menuInclude="N" subscreenLocation="component://PopCommerce/screen/PopCommerceRoot.xml"/>
     <moqui.screen.SubscreensItem screenLocation="component://webroot/screen/webroot/apps.xml" subscreenName="PopcAdmin" menuTitle="POPC ERP"
