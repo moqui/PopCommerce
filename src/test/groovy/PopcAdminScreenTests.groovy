@@ -172,7 +172,7 @@ class PopcAdminScreenTests extends Specification {
         "Accounting/Reports/CashFlowStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100&detail=true" |
                 ["Finished Good Inventory", "111-10"]
         "Accounting/Reports/RetainedEarningsStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100" |
-                ["Net Earnings", "ZIRET Fiscal"]
+                ["Net Earnings", "ZIRET F"]
         "Accounting/Reports/FinancialRatios?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100" |
                 ["Total Assets", "Accounts Receivable"]
 
