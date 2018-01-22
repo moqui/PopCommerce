@@ -179,7 +179,7 @@ class PopcAdminScreenTests extends Specification {
         "Accounting/Reports/PostedAmountSummary?organizationPartyId=ORG_ZIZI_RETAIL&dateRange_poffset=0&dateRange_period=Year" |
                 ["Accounts Payable", "Depreciation - Equipment"]
         "Accounting/Reports/PostedBalanceSummary?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodId=55100" |
-                ["Customer Service Credits (Contra Revenue)", "Net Income"]
+                ["Customer Service Credits (Discounts and Write-downs)", "Net Income"]
 
         // Vendor
         "Party/EditParty?partyId=ORG_ZIZI_RETAIL" |
