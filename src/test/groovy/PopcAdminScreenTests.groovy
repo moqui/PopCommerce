@@ -162,6 +162,8 @@ class PopcAdminScreenTests extends Specification {
         "Accounting/Transaction/EditTransaction?acctgTransId=55700" |
                 ['Joe Public', '430000000', 'Customer Service Credits']
         "Accounting/GlAccount/EditGlAccount?glAccountId=110000000" | ['Cash and Equivalent Asset', 'Ziziwork Industries']
+        "Accounting/OrgSettings/AcctgPreference?partyId=ORG_ZIZI_RETAIL" |
+                ['Ziziwork Industries', 'Clone Accounting Settings']
 
         // Accounting/Reports
         // NOTE: these are designed to handle account masks of ###-###-### or even down to the 5 digit ###-##
@@ -184,7 +186,5 @@ class PopcAdminScreenTests extends Specification {
         // Vendor
         "Party/EditParty?partyId=ORG_ZIZI_RETAIL" |
                 ['Ziziwork Retail', 'Internal', 'payment.biziwork.retail@test.com']
-        "Party/Accounting/AcctgPreference?partyId=ORG_ZIZI_RETAIL" |
-                ['Ziziwork Industries', 'Clone Accounting Settings']
     }
 }
