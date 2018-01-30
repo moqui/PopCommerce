@@ -60,6 +60,10 @@ along with this software (see the LICENSE.md file). If not, see
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Asset.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
     <artifactGroups artifactGroupId="PopcAdminCatalog" description="POPC Catalog">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Catalog.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
+    <artifactGroups artifactGroupId="PopcAdminStore" description="POPC Stores">
+        <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/ProductStore.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
+    <artifactGroups artifactGroupId="PopcAdminStore" description="POPC Stores">
+        <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Promotions.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
     <artifactGroups artifactGroupId="PopcAdminCustomer" description="POPC Customer">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Customer.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
     <artifactGroups artifactGroupId="PopcAdminFacility" description="POPC Facility">
