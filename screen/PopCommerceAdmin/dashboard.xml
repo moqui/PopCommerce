@@ -143,7 +143,6 @@ along with this software (see the LICENSE.md file). If not, see
                         <image url="/ssstatic/images/Catalog.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Catalog" url="../Catalog" link-type="anchor"/></container>
                     <container><link text="Stores" url="../ProductStore" link-type="anchor"/></container>
-                    <container><link text="Promotions" url="../Promotions" link-type="anchor"/></container>
                 </container>
             </row-col><row-col sm="6">
                 <container>

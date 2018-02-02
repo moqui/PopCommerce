@@ -13,12 +13,20 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
-        default-menu-title="Promotions" default-menu-index="21" menu-image="/ssstatic/images/Promotions.png">
+        default-menu-title="Promotions" default-menu-index="23" menu-image="/ssstatic/images/Promotions.png">
+
+    <parameter name="productStoreId" required="true"/>
+
     <subscreens default-item="FindPromotions">
-        <subscreens-item name="FindPromotions" location="component://SimpleScreens/screen/SimpleScreens/Promotions/FindPromotions.xml"/>
-        <subscreens-item name="EditPromotion" location="component://SimpleScreens/screen/SimpleScreens/Promotions/EditPromotion.xml"/>
+        <subscreens-item name="FindPromotions"  menu-include="false"
+                         location="component://SimpleScreens/screen/SimpleScreens/ProductStore/Promotions/FindPromotions.xml"/>
+        <subscreens-item name="EditPromotion" menu-index="1"
+                         location="component://SimpleScreens/screen/SimpleScreens/ProductStore/Promotions/EditPromotion.xml"/>
+        <subscreens-item name="FindPromoCode" menu-index="2"
+                         location="component://PopCommerce/screen/PopCommerceAdmin/PromoCode.xml"/>
     </subscreens>
+
     <widgets>
-        <subscreens-panel id="PromotionsPanel" type="popup"/>
+        <subscreens-panel id="PromotionsPanel" type="tab"/>
     </widgets>
 </screen>
