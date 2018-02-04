@@ -32,6 +32,8 @@ along with this software (see the LICENSE.md file). If not, see
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/TimePeriod.xml"/>
         <subscreens-item name="GlAccount" menu-index="10"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/GlAccount.xml"/>
+        <subscreens-item name="Budget" menu-index="18"
+                location="component://SimpleScreens/screen/SimpleScreens/Accounting/Budget.xml"/>
         <subscreens-item name="Reports" menu-index="20"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/Reports.xml"/>
         <subscreens-item name="OrgSettings" menu-include="false"
