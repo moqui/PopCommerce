@@ -133,8 +133,8 @@ class PopcAdminScreenTests extends Specification {
         "Facility/FacilityCalendar?facilityId=ZIRET_WH" | []
 
         // Asset
-        "Asset/AssetDetail?assetId=55400" | ['DEMO_1_1', 'ORG_ZIZI_RETAIL', 'Current: Available']
-        "Asset/AssetCalendar?assetId=55400" | []
+        "Asset/Asset/AssetDetail?assetId=55400" | ['DEMO_1_1', 'ORG_ZIZI_RETAIL', 'Current: Available']
+        "Asset/Asset/AssetCalendar?assetId=55400" | []
 
         // Accounting/Invoice
         "Accounting/Invoice/FindInvoice?statusId_op=in&statusId=InvoiceReceived,InvoiceApproved&toPartyId=ORG_ZIZI_RETAIL" |
