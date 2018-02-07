@@ -157,6 +157,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <link url="../Asset" link-type="anchor">
                         <image url="/ssstatic/images/Asset.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Assets" url="../Asset" link-type="anchor"/></container>
+                    <container><link text="Manufacturing" url="../Manufacturing" link-type="anchor"/></container>
                 </container>
                 <container>
                     <link url="../Facility" link-type="anchor">
