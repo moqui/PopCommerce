@@ -18,8 +18,8 @@ along with this software (see the LICENSE.md file). If not, see
     <subscreens default-item="FindPaymentGateways">
         <subscreens-item name="FindPaymentGateways" menu-index="1"
                          location="component://SimpleScreens/screen/SimpleScreens/Gateways/Payment/FindPaymentGateways.xml"/>
-        <subscreens-item name="EditPaymentGateway" menu-include="false"
-                         location="component://SimpleScreens/screen/SimpleScreens/Gateways/Payment/EditPaymentGateway.xml"/>
+        <subscreens-item name="EditPaymentGateways" menu-include="false"
+                         location="component://SimpleScreens/screen/SimpleScreens/Gateways/Payment/EditPaymentGateways.xml"/>
         <subscreens-item name="FindShippingGateways" menu-index="1"
                          location="component://SimpleScreens/screen/SimpleScreens/Gateways/Shipping/FindShippingGateway.xml"/>
         <subscreens-item name="EditShippingGateways" menu-include="false"
