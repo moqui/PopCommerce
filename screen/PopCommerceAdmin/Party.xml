@@ -23,6 +23,7 @@ along with this software (see the LICENSE.md file). If not, see
         <subscreens-item name="PartyMessages" location="component://SimpleScreens/screen/SimpleScreens/Party/PartyMessages.xml" menu-index="3"/>
         <subscreens-item name="PartyRelated" location="component://SimpleScreens/screen/SimpleScreens/Party/PartyRelated.xml" menu-index="4"/>
         <subscreens-item name="PartyTimeEntries" location="component://SimpleScreens/screen/SimpleScreens/Party/PartyTimeEntries.xml" menu-index="5"/>
+        <subscreens-item name="PartyAgreements" location="component://SimpleScreens/screen/SimpleScreens/Party/PartyAgreements.xml" menu-index="6"/>
         <subscreens-item name="FinancialInfo" location="component://SimpleScreens/screen/SimpleScreens/Party/FinancialInfo.xml" menu-index="11"/>
 
         <subscreens-item name="PaymentMethod" location="component://SimpleScreens/screen/SimpleScreens/Party/PaymentMethod.xml" menu-include="false"/>
