@@ -13,29 +13,20 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
-        default-menu-index="17" menu-image="/ssstatic/images/Asset.png">
+        default-menu-index="17" default-menu-title="Assets" menu-image="/ssstatic/images/Asset.png">
 
-    <subscreens default-item="FindSummary">
-        <subscreens-item name="FindAsset" menu-include="false"
-                location="component://SimpleScreens/screen/SimpleScreens/Asset/FindAsset.xml"/>
-        <subscreens-item name="FindSummary" menu-include="false"
-                location="component://SimpleScreens/screen/SimpleScreens/Asset/FindSummary.xml"/>
-        <subscreens-item name="SelectAsset" menu-include="false"
-                location="component://SimpleScreens/screen/SimpleScreens/Asset/SelectAsset.xml"/>
+    <subscreens default-item="dashboard">
+        <subscreens-item name="dashboard" menu-title="Dashboard" menu-index="1"
+                location="component://SimpleScreens/screen/SimpleScreens/Asset/dashboard.xml"/>
 
-        <subscreens-item name="AssetDetail" menu-index="1"
-                location="component://SimpleScreens/screen/SimpleScreens/Asset/AssetDetail.xml"/>
-        <subscreens-item name="AssetCalendar" menu-index="2"
-                location="component://SimpleScreens/screen/SimpleScreens/Asset/AssetCalendar.xml"/>
-        <subscreens-item name="MoveAsset" menu-index="4"
-                location="component://SimpleScreens/screen/SimpleScreens/Asset/MoveAsset.xml"/>
-        <subscreens-item name="DetailHistory" menu-index="5"
-                location="component://SimpleScreens/screen/SimpleScreens/Asset/DetailHistory.xml"/>
-
-        <subscreens-item name="EditLots" menu-include="false"
+        <subscreens-item name="Asset" menu-title="Assets" menu-index="2"
+                location="component://SimpleScreens/screen/SimpleScreens/Asset/Asset.xml"/>
+        <subscreens-item name="EditLots" menu-title="Lots" menu-index="4"
                 location="component://SimpleScreens/screen/SimpleScreens/Asset/EditLots.xml"/>
+        <subscreens-item name="Container" menu-title="Containers" menu-index="5"
+                location="component://SimpleScreens/screen/SimpleScreens/Asset/Container.xml"/>
     </subscreens>
     <widgets>
-        <subscreens-panel id="AssetPanel" type="tab"/>
+        <subscreens-panel id="AssetPanel" type="popup"/>
     </widgets>
 </screen>

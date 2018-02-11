@@ -30,6 +30,8 @@ along with this software (see the LICENSE.md file). If not, see
         <subscreens-item name="Search" location="component://SimpleScreens/screen/SimpleScreens/Search.xml" menu-index="2"/>
         <subscreens-item name="QuickLookup" location="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml" menu-index="2"/>
 
+        <subscreens-item name="Manufacturing" location="component://SimpleScreens/screen/SimpleScreens/Manufacturing.xml" menu-index="19"/>
+
         <subscreens-item name="QuickViewReport" menu-title="Custom Reports" menu-index="30"
                 location="component://SimpleScreens/screen/SimpleScreens/SimpleReport/QuickViewReport.xml"/>
         <subscreens-item name="SimpleReport" menu-title="Report Builder" menu-index="31"

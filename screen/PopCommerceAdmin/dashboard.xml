@@ -114,9 +114,9 @@ along with this software (see the LICENSE.md file). If not, see
             <label text="&amp;nbsp;" type="p" encode="false"/>
             <container-row><row-col sm="6">
                 <container>
-                    <link url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']">
+                    <link url="../Asset/Asset/FindSummary" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']">
                         <image url="/ssstatic/images/Inventory.png" url-type="screen" style="invertible" width="40"/></link>
-                    <container><link text="Inventory Assets" url="../Asset" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']"/></container>
+                    <container><link text="Inventory Assets" url="../Asset/Asset/FindSummary" link-type="anchor" parameter-map="[assetTypeEnumId:'AstTpInventory']"/></container>
                 </container>
                 <container>
                     <link url="../Return" link-type="anchor">
@@ -143,6 +143,7 @@ along with this software (see the LICENSE.md file). If not, see
                         <image url="/ssstatic/images/Catalog.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Catalog" url="../Catalog" link-type="anchor"/></container>
                     <container><link text="Stores" url="../ProductStore" link-type="anchor"/></container>
+                    <container><link text="Products" url="../Catalog/Product" link-type="anchor"/></container>
                 </container>
             </row-col><row-col sm="6">
                 <container>
@@ -155,14 +156,10 @@ along with this software (see the LICENSE.md file). If not, see
             <label text="&amp;nbsp;" type="p" encode="false"/>
             <container-row><row-col sm="6">
                 <container>
-                    <link url="../Asset" link-type="anchor">
+                    <link url="../Manufacturing" link-type="anchor">
                         <image url="/ssstatic/images/Asset.png" url-type="screen" style="invertible" width="40"/></link>
+                    <container><link text="Manufacturing" url="../Manufacturing" link-type="anchor"/></container>
                     <container><link text="Assets" url="../Asset" link-type="anchor"/></container>
-                </container>
-                <container>
-                    <link url="../Facility" link-type="anchor">
-                        <image url="/ssstatic/images/Facility.png" url-type="screen" style="invertible" width="40"/></link>
-                    <container><link text="Facilities" url="../Facility" link-type="anchor"/></container>
                 </container>
             </row-col><row-col sm="6">
                 <container>
@@ -170,6 +167,14 @@ along with this software (see the LICENSE.md file). If not, see
                         <image url="/ssstatic/images/Parties.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Parties" url="../Party" link-type="anchor"/></container>
                 </container>
+            </row-col></container-row>
+            <container-row><row-col sm="6">
+                <container>
+                    <link url="../Facility" link-type="anchor">
+                        <image url="/ssstatic/images/Facility.png" url-type="screen" style="invertible" width="40"/></link>
+                    <container><link text="Facilities" url="../Facility" link-type="anchor"/></container>
+                </container>
+            </row-col><row-col sm="6">
                 <container>
                     <link url="../Accounting" link-type="anchor">
                         <image url="/ssstatic/images/Accounting.png" url-type="screen" style="invertible" width="40"/></link>
