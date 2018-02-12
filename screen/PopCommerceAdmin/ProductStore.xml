@@ -24,8 +24,8 @@ along with this software (see the LICENSE.md file). If not, see
                  location="component://PopCommerce/screen/PopCommerceAdmin/Promotions.xml"/>
         <subscreens-item name="FindEmails" menu-index="3"
                  location="component://SimpleScreens/screen/SimpleScreens/ProductStore/FindStoreEmails.xml"/>
-        <subscreens-item name="FindProductCategories" menu-index="4"
-                         location="component://SimpleScreens/screen/SimpleScreens/ProductStore/FindProductStoreCategories.xml"/>
+        <subscreens-item name="FindProductStoreCategory" menu-index="4"
+                 location="component://SimpleScreens/screen/SimpleScreens/ProductStore/FindProductStoreCategory.xml"/>
         <subscreens-item name="FindProductStoreParty" menu-index="5"
                  location="component://SimpleScreens/screen/SimpleScreens/ProductStore/FindProductStoreParty.xml"/>
     </subscreens>
