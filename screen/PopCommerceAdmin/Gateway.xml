@@ -17,13 +17,13 @@ along with this software (see the LICENSE.md file). If not, see
 
     <subscreens default-item="FindPaymentGateway">
         <subscreens-item name="FindPaymentGateway" menu-index="1"
-                         location="component://SimpleScreens/screen/SimpleScreens/Gateways/Payment/FindPaymentGateway.xml"/>
+                         location="component://SimpleScreens/screen/SimpleScreens/Gateway/Payment/FindPaymentGateway.xml"/>
         <subscreens-item name="EditPaymentGateway" menu-include="false"
-                         location="component://SimpleScreens/screen/SimpleScreens/Gateways/Payment/EditPaymentGateway.xml"/>
+                         location="component://SimpleScreens/screen/SimpleScreens/Gateway/Payment/EditPaymentGateway.xml"/>
         <subscreens-item name="FindShippingGateway" menu-index="1"
-                         location="component://SimpleScreens/screen/SimpleScreens/Gateways/Shipping/FindShippingGateway.xml"/>
+                         location="component://SimpleScreens/screen/SimpleScreens/Gateway/Shipping/FindShippingGateway.xml"/>
         <subscreens-item name="EditShippingGateway" menu-include="false"
-                         location="component://SimpleScreens/screen/SimpleScreens/Gateways/Shipping/EditShippingGateway.xml"/>
+                         location="component://SimpleScreens/screen/SimpleScreens/Gateway/Shipping/EditShippingGateway.xml"/>
     </subscreens>
 
     <widgets>
