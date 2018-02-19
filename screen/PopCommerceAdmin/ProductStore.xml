@@ -18,15 +18,15 @@ along with this software (see the LICENSE.md file). If not, see
     <subscreens default-item="FindProductStore">
         <subscreens-item name="FindProductStore"  menu-include="false"
                  location="component://SimpleScreens/screen/SimpleScreens/ProductStore/FindProductStore.xml"/>
-        <subscreens-item name="EditStore" menu-index="1"
-                 location="component://SimpleScreens/screen/SimpleScreens/ProductStore/EditStore.xml"/>
+        <subscreens-item name="EditProductStore" menu-index="1"
+                 location="component://SimpleScreens/screen/SimpleScreens/ProductStore/EditProductStore.xml"/>
         <subscreens-item name="Promotion" menu-index="2"
                  location="component://SimpleScreens/screen/SimpleScreens/ProductStore/Promotion.xml"/>
         <subscreens-item name="FindStoreEmails" menu-index="3"
-                 location="component://SimpleScreens/screen/SimpleScreens/ProductStore/FindStoreEmails.xml"/>
-        <subscreens-item name="FindProductStoreCategory" menu-index="4"
+                 location="component://SimpleScreens/screen/SimpleScreens/ProductStore/FindProductStoreEmails.xml"/>
+        <subscreens-item name="FindStoreCategory" menu-index="4"
                  location="component://SimpleScreens/screen/SimpleScreens/ProductStore/FindProductStoreCategory.xml"/>
-        <subscreens-item name="FindProductStoreParty" menu-index="5"
+        <subscreens-item name="FindStoreParty" menu-index="5"
                  location="component://SimpleScreens/screen/SimpleScreens/ProductStore/FindProductStoreParty.xml"/>
     </subscreens>
 
