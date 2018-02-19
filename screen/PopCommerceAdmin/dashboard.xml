@@ -144,7 +144,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <container><link text="Catalog" url="../Catalog" link-type="anchor"/></container>
                     <container><link text="Stores" url="../ProductStore" link-type="anchor"/></container>
                     <container><link text="Products" url="../Catalog/Product" link-type="anchor"/></container>
-                    <container><link text="Gateways" url="../Gateways" link-type="anchor"/></container>
+                    <container><link text="Gateways" url="../Gateway" link-type="anchor"/></container>
                 </container>
             </row-col><row-col sm="6">
                 <container>
