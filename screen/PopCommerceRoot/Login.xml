@@ -37,7 +37,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <set field="ec.web.sessionAttributes.cartOrderId" from="existingOrderList[0].orderId"/>
 
                     <else>
-                        <!-- no existing open order, if a cartOrderId is in the session, set the logged in user as the customer -->
+                        <!-- no existing open order, if a cartOrderId is in the session set the logged in user as the customer -->
                         <if condition="ec.web.sessionAttributes.cartOrderId">
                             <entity-find entity-name="OrderPart" list="orderPartList">
                                 <econdition field-name="orderId" from="ec.web.sessionAttributes.cartOrderId"/>
@@ -62,6 +62,7 @@ along with this software (see the LICENSE.md file). If not, see
     <transition name="changePassword" require-session-token="false"><service-call name="org.moqui.impl.UserServices.update#Password"/>
         <default-response url="../Login"/><error-response url="."/></transition>
     <transition name="createAccount" require-session-token="false">
+        <!-- TODO: should set as customer on existing cart in session if there is one -->
         <service-call name="mantle.party.PartyServices.create#Account" in-map="context + [roleTypeId:'Customer']"/>
         <default-response type="screen-last"/><error-response url="."/>
     </transition>

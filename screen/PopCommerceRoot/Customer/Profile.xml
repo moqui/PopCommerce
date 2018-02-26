@@ -30,7 +30,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <actions>
         <set field="partyId" from="ec.user.userAccount.partyId"/>
-        <entity-find-one entity-name="PersonAndUserAccount" value-field="personAndUserAccount"/>
+        <entity-find-one entity-name="mantle.party.PersonAndUserAccount" value-field="personAndUserAccount"/>
         <service-call name="mantle.party.ContactServices.get#PrimaryEmailAddress" out-map="primaryEmail"
                 in-map="[partyId:partyId]"/>
 
