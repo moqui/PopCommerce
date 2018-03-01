@@ -28,7 +28,7 @@ along with this software (see the LICENSE.md file). If not, see
                 <field-map field-name="productContentId"/></entity-find-one>
             <if condition="productContent == null"><then>
                 <!-- NOTE: consider returning a default image instead of 404 -->
-                <script>ec.web.response.sendError(404)</script>
+                <script>ec.web.sendError(404, null, null)</script>
             </then><else>
                 <script>ec.web.sendResourceResponse(productContent.contentLocation, true)</script>
             </else></if>
