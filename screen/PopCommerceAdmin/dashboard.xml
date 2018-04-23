@@ -57,7 +57,7 @@ along with this software (see the LICENSE.md file). If not, see
         </actions><widgets>
             <container-row><row-col sm="0" md="1"><label text="&amp;nbsp;" encode="false"/></row-col><row-col sm="5" md="4" style="text-center">
                 <container type="ul" style="list-inline">
-                    <container type="li"><label text="SO" type="h4"/></container>
+                    <container type="li"><label text="Sales Orders" type="h4"/></container>
                     <container type="li"><link url="../Order" parameter-map="[orderType:'Sales', statusId:'OrderPlaced,OrderProcessing', statusId_op:'in']"
                             text="Placed" badge="${orderPlacedCount}" btn-type="default"/></container>
                     <container type="li"><link url="../Order" parameter-map="[orderType:'Sales', statusId:'OrderApproved,OrderSent', statusId_op:'in']"
@@ -67,7 +67,7 @@ along with this software (see the LICENSE.md file). If not, see
                 </container>
             </row-col><row-col sm="2"><label text="&amp;nbsp;" encode="false"/></row-col><row-col sm="5" md="4" style="text-center">
                 <container type="ul" style="list-inline">
-                    <container type="li"><label text="Req" type="h4"/></container>
+                    <container type="li"><label text="Requests" type="h4"/></container>
                     <container type="li"><link url="../Request" parameter-map="[statusId:'ReqSubmitted']"
                             text="Submitted" badge="${requestSubmittedCount}" btn-type="default"/></container>
                     <container type="li"><link url="../Request" parameter-map="[statusId:'ReqReviewed,ReqInProgress', statusId_op:'in']"
