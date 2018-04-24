@@ -15,9 +15,21 @@ along with this software (see the LICENSE.md file). If not, see
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
         default-menu-title="Picking" default-menu-index="14" menu-image="/ssstatic/images/Picking.png">
 
-    <subscreens default-item="FindPicklist"/>
+    <subscreens default-item="FindPicklist">
+        <subscreens-item name="FindPicklist" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Picking/FindPicklist.xml"/>
+        <subscreens-item name="PicklistDetail" menu-index="1"
+                location="component://SimpleScreens/screen/SimpleScreens/Picking/PicklistDetail.xml"/>
+        <subscreens-item name="AddShipment" menu-index="3"
+                location="component://SimpleScreens/screen/SimpleScreens/Picking/AddShipment.xml"/>
+
+        <subscreens-item name="ShipmentLoadPick" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Picking/ShipmentLoadPick.xml"/>
+        <subscreens-item name="ShipmentLoadPickAndPack" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Picking/ShipmentLoadPickAndPack.xml"/>
+    </subscreens>
 
     <widgets>
-        <subscreens-active id="PicklistPanel"/>
+        <subscreens-panel id="PicklistPanel" type="tab"/>
     </widgets>
 </screen>
