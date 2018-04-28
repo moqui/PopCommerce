@@ -20,6 +20,8 @@ along with this software (see the LICENSE.md file). If not, see
                 location="component://SimpleScreens/screen/SimpleScreens/Picking/FindPicklist.xml"/>
         <subscreens-item name="PicklistDetail" menu-index="1"
                 location="component://SimpleScreens/screen/SimpleScreens/Picking/PicklistDetail.xml"/>
+        <subscreens-item name="AddOrder" menu-index="2"
+                location="component://SimpleScreens/screen/SimpleScreens/Picking/AddOrder.xml"/>
         <subscreens-item name="AddShipment" menu-index="3"
                 location="component://SimpleScreens/screen/SimpleScreens/Picking/AddShipment.xml"/>
 
