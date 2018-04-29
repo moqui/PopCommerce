@@ -125,9 +125,9 @@ along with this software (see the LICENSE.md file). If not, see
                 </container>
             </row-col><row-col sm="6">
                 <container>
-                    <link url="../Picking" link-type="anchor">
+                    <link url="../Shipping" link-type="anchor">
                         <image url="/ssstatic/images/Picking.png" url-type="screen" style="invertible" width="40"/></link>
-                    <container><link text="Picking" url="../Picking" link-type="anchor"/></container>
+                    <container><link text="Shipping" url="../Shipping" link-type="anchor"/></container>
                 </container>
                 <container>
                     <link url="../Shipment" link-type="anchor" parameter-map="[parentShipmentType:'ShpTpOutgoing']">
