@@ -24,10 +24,13 @@ along with this software (see the LICENSE.md file). If not, see
                 location="component://SimpleScreens/screen/SimpleScreens/Order/QuickItems.xml"/>
         <subscreens-item name="PrintOrder" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Order/PrintOrder.xml"/>
+
         <subscreens-item name="OrderIssuedInvoiced" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/OrderIssuedInvoiced.xml"/>
         <subscreens-item name="SalesAnalysis" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/SalesAnalysis.xml"/>
+        <subscreens-item name="SalesSummary" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/SalesSummary.xml"/>
     </subscreens>
     <widgets><subscreens-active id="OrderPanel"/></widgets>
 </screen>
