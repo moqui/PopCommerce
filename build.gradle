@@ -30,7 +30,8 @@ dependencies {
 }
 
 // by default the Java plugin runs test on build, change to not do that (only run test if explicit task)
-check.dependsOn.remove(test)
+// no longer workds as of gradle 4.8 or possibly earlier, use clear() instead: check.dependsOn.remove(test)
+check.dependsOn.clear()
 
 test {
     dependsOn cleanTest
