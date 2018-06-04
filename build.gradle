@@ -24,6 +24,10 @@ repositories {
     jcenter()
 }
 
+// Log4J has annotation processors, disable to avoid warning
+tasks.withType(JavaCompile) { options.compilerArgs << "-proc:none" }
+tasks.withType(GroovyCompile) { options.compilerArgs << "-proc:none" }
+
 dependencies {
     compile project(':framework')
     testCompile project(':framework').configurations.testCompile.allDependencies
