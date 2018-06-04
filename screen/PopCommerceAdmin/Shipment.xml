@@ -23,6 +23,8 @@ along with this software (see the LICENSE.md file). If not, see
         <subscreens-item name="PackageTracking" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Shipment/PackageTracking.xml"/>
 
+        <subscreens-item name="ShipmentInsert" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentInsert.xml"/>
         <subscreens-item name="ShipmentPack" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentPack.xml"/>
         <subscreens-item name="ShipmentPick" menu-include="false"
