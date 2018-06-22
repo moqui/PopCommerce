@@ -93,7 +93,7 @@ For the eCommerce application, in your browser go to:
 
 Or for the admin application go to:
 
-<http://localhost:8080/apps/PopcAdmin>
+<http://localhost:8080/vapps/PopcAdmin>
 
 Use the button in the lower-left corner of the screen login as John Doe.
 
@@ -112,8 +112,9 @@ Here are command line steps for initial checkout, setup, and run:
 Here are steps for a basic update (for development with clean out and rebuild of database):
 
     $ cd moqui
-    $ ./gradlew cleanAll gitPullAll load
+    $ ./gradlew cleanAll gitPullAll
+    $ ./gradlew load
     $ java -jar moqui.war
 
 To access the eCommerce app go to something like <http://localhost:8080/popc> in a web browser. To access the admin app 
-go to <http://localhost:8080/PopcAdmin>.
+go to <http://localhost:8080/vapps/PopcAdmin>.
