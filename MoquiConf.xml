@@ -9,6 +9,8 @@
         <screen location="component://webroot/screen/webroot/apps.xml">
             <subscreens-item name="PopcAdmin" menu-title="POPC ERP" menu-index="9"
                     location="component://PopCommerce/screen/PopCommerceAdmin.xml"/>
+            <subscreens-item name="hhwh" menu-title="HH Warehouse" menu-index="20"
+                    location="component://SimpleScreens/screen/BasicHandheld/Warehouse.xml"/>
         </screen>
     </screen-facade>
 </moqui-conf>

@@ -27,13 +27,22 @@ along with this software (see the LICENSE.md file). If not, see
     <moqui.security.ArtifactAuthz artifactAuthzId="POPC_ALL" userGroupId="ALL_USERS" artifactGroupId="POPC"
             authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
 
-    <!-- PopCommerce Admin App Administrators -->
+    <!-- PopCommerce Admin App Administrators User Group -->
     <moqui.basic.Enumeration description="POPC ERP App" enumId="UgtPopcAdmin" enumTypeId="UserGroupType"/>
     <userGroups userGroupId="POP_COMMERCE_ADMIN" description="POPC ERP Administrators" groupTypeEnumId="UgtPopcAdmin">
         <permissions userPermissionId="CARD_NUMBER_EDIT" fromDate="0"/>
         <permissions userPermissionId="ORDER_APPROVE" fromDate="0"/>
         <permissions userPermissionId="FISCAL_REOPEN" fromDate="0"/>
     </userGroups>
+
+    <!-- HH Warehouse App -->
+    <artifactGroups artifactGroupId="POPC_HH_WH" description="HH Warehouse App (via root screen)">
+        <artifacts artifactName="component://SimpleScreens/screen/BasicHandheld/Warehouse.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
+        <authz artifactAuthzId="POPC_HH_WH_ADM" userGroupId="ADMIN"  authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL">
+            <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
+        <authz artifactAuthzId="POPC_HH_WH_PCADM" userGroupId="POP_COMMERCE_ADMIN" authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL">
+            <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
+    </artifactGroups>
 
     <!-- PopCommerce Admin screens admin authz -->
     <artifactGroups artifactGroupId="POP_COMMERCE_ADMIN" description="PopCommerce Admin (via root screen)">
@@ -200,6 +209,9 @@ along with this software (see the LICENSE.md file). If not, see
         <authz artifactAuthzId="POPC_SHIP_CUS" artifactGroupId="PopcAdminCustomer" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_VIEW">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
         <authz artifactAuthzId="POPC_SHIP_SUP" artifactGroupId="PopcAdminSupplier" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_VIEW">
+            <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
+        <!-- HH Warehouse app for Warehouse users -->
+        <authz artifactAuthzId="POPC_SHIP_HHWH" artifactGroupId="POPC_HH_WH" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
     </userGroups>
 
