@@ -91,12 +91,12 @@ class PopCommerceScreenTests extends Specification {
         "Customer/OrderDetail?orderId=55401" | ['$9,000.00', '1-702-234-5678', 'Picker Bot 2000']
 
         // Checkout
-        "Home/addToCart?productId=DEMO_2_1&quantity=10" | []
-        "Order/Cart" | ['Demo Product Two-One', '$121.20']
+        "Home/addToCart?productId=DEMO_1_1&quantity=10" | []
+        "Order/Cart" | ['Demo Product One-One', '$169.90']
         "Order/Checkout" | ['Visa ************1111', '1350 E. Flamingo Rd. #2345', 'Ground Parcel']
         "Order/Checkout/setOrderBillingShippingInfo?paymentMethodId=CustJqpCc&shippingPostalContactMechId=CustJqpAddr&carrierAndShipmentMethod=_NA_:ShMthGround" | []
-        "Order/Review" | ['Joe Q. Public', 'Demo Product Two-One', 'Order Total: $12']
+        "Order/Review" | ['Joe Q. Public', 'Demo Product One-One', 'Order Total: $16']
         "Order/Review/placeOrder" | []
-        "Customer/OrderDetail?orderId=63200" | ['$12', '1-702-234-5678', 'Demo Product Two-One', 'Ground Parcel']
+        "Customer/OrderDetail?orderId=63200" | ['$16', '1-702-234-5678', 'Demo Product One-One', 'Ground Parcel']
     }
 }
