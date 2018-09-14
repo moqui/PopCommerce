@@ -87,6 +87,8 @@ along with this software (see the LICENSE.md file). If not, see
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Return.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
     <artifactGroups artifactGroupId="PopcAdminShipment" description="POPC Shipment">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Shipment.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
+    <artifactGroups artifactGroupId="PopcAdminShipping" description="POPC Shipping">
+        <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Shipping.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
     <artifactGroups artifactGroupId="PopcAdminSupplier" description="POPC Supplier">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Supplier.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
     <artifactGroups artifactGroupId="PopcAdminWiki" description="POPC Wiki/Content">
@@ -197,6 +199,8 @@ along with this software (see the LICENSE.md file). If not, see
         <authz artifactAuthzId="POPC_SHIP_PICK" artifactGroupId="PopcAdminPicking" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
         <authz artifactAuthzId="POPC_SHIP_SHP" artifactGroupId="PopcAdminShipment" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
+            <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
+        <authz artifactAuthzId="POPC_SHIP_SHNG" artifactGroupId="PopcAdminShipping" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
         <authz artifactAuthzId="POPC_SHIP_REQ" artifactGroupId="PopcAdminRequest" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
