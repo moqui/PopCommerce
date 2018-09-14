@@ -22,6 +22,8 @@ along with this software (see the LICENSE.md file). If not, see
                 location="component://SimpleScreens/screen/SimpleScreens/Request/EditRequest.xml"/>
         <subscreens-item name="EditRequestItems" menu-index="2"
                 location="component://SimpleScreens/screen/SimpleScreens/Request/EditRequestItems.xml"/>
+        <subscreens-item name="EditWikiPages" menu-index="4"
+                location="component://SimpleScreens/screen/SimpleScreens/Request/EditWikiPages.xml"/>
     </subscreens>
     <widgets><subscreens-panel id="RequestPanel" type="tab"/></widgets>
 </screen>
