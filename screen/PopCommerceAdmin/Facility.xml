@@ -26,6 +26,11 @@ along with this software (see the LICENSE.md file). If not, see
                 location="component://SimpleScreens/screen/SimpleScreens/Facility/FacilityCalendar.xml"/>
         <subscreens-item name="EditFacilityProducts" menu-index="4"
                 location="component://SimpleScreens/screen/SimpleScreens/Facility/EditFacilityProducts.xml"/>
+
+        <subscreens-item name="BoxTypes" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Facility/BoxTypes.xml"/>
+        <subscreens-item name="PrintBoxTypes" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Facility/PrintBoxTypes.xml"/>
     </subscreens>
     <widgets>
         <subscreens-panel id="FacilityPanel" type="tab"/>

@@ -22,13 +22,9 @@ along with this software (see the LICENSE.md file). If not, see
                 location="component://SimpleScreens/screen/SimpleScreens/Shipping/Picklist.xml"/>
         <subscreens-item name="PickLocationMoves" menu-index="4"
                 location="component://SimpleScreens/screen/SimpleScreens/Shipping/PickLocationMoves.xml"/>
-        <subscreens-item name="BoxTypes" menu-index="8"
-                location="component://SimpleScreens/screen/SimpleScreens/Shipping/BoxTypes.xml"/>
 
         <subscreens-item name="PackShipment" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Shipping/PackShipment.xml"/>
-        <subscreens-item name="PrintBoxTypes" menu-include="false"
-                location="component://SimpleScreens/screen/SimpleScreens/Shipping/PrintBoxTypes.xml"/>
     </subscreens>
 
     <widgets><subscreens-panel id="ShippingPanel" type="popup"/></widgets>
