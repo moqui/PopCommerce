@@ -139,6 +139,35 @@ along with this software (see the LICENSE.md file). If not, see
         </users>
     </parties>
 
+    <!-- demo POPC Admin app users - in user org limited groups -->
+
+    <parties partyId="JohnWhClerical" partyTypeEnumId="PtyPerson">
+        <person firstName="John" middleName="" lastName="WhClerical"/>
+        <roles roleTypeId="Employee"/>
+        <fromRelationships relationshipTypeEnumId="PrtEmployee" fromRoleTypeId="Employee" toPartyId="ORG_ZIZI_RETAIL" toRoleTypeId="OrgInternal"/>
+        <mantle.party.contact.ContactMech contactMechTypeEnumId="CmtEmailAddress" infoString="john.wh.clerical@moqui.org">
+            <mantle.party.contact.PartyContactMech contactMechPurposeId="EmailPrimary"/></mantle.party.contact.ContactMech>
+        <users userId="JohnWhClerical" username="john.wh.clerical" userFullName="John WhClerical"
+                currentPassword="16ac58bbfa332c1c55bd98b53e60720bfa90d394" passwordHashType="SHA"
+                passwordHint="framework name, lowercase" currencyUomId="USD" locale="en_US" timeZone="US/Pacific"
+                emailAddress="john.wh.clerical@moqui.org">
+            <groups userGroupId="PopcWhClericalLtd"/>
+        </users>
+    </parties>
+    <parties partyId="JohnWhGeneral" partyTypeEnumId="PtyPerson">
+        <person firstName="John" middleName="" lastName="WhGeneral"/>
+        <roles roleTypeId="Employee"/>
+        <fromRelationships relationshipTypeEnumId="PrtEmployee" fromRoleTypeId="Employee" toPartyId="ORG_ZIZI_RETAIL" toRoleTypeId="OrgInternal"/>
+        <mantle.party.contact.ContactMech contactMechTypeEnumId="CmtEmailAddress" infoString="john.wh.general@moqui.org">
+            <mantle.party.contact.PartyContactMech contactMechPurposeId="EmailPrimary"/></mantle.party.contact.ContactMech>
+        <users userId="JohnWhGeneral" username="john.wh.general" userFullName="John WhGeneral"
+                currentPassword="16ac58bbfa332c1c55bd98b53e60720bfa90d394" passwordHashType="SHA"
+                passwordHint="framework name, lowercase" currencyUomId="USD" locale="en_US" timeZone="US/Pacific"
+                emailAddress="john.wh.general@moqui.org">
+            <groups userGroupId="PopcWhGeneralLtd"/>
+        </users>
+    </parties>
+
     <!-- run index for search -->
     <org.moqui.search.SearchServices.indexDataFeedDocuments dataFeedId="MantleSearch"/>
     <org.moqui.search.SearchServices.indexDataFeedDocuments dataFeedId="PopCommerceSearch"/>
