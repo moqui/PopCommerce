@@ -25,6 +25,13 @@ along with this software (see the LICENSE.md file). If not, see
 
         <subscreens-item name="PackShipment" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Shipping/PackShipment.xml"/>
+
+        <subscreens-item name="ShipmentPack" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentPack.xml"/>
+        <subscreens-item name="ShipmentByPackage" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentByPackage.xml"/>
+        <subscreens-item name="ShipmentInsert" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentInsert.xml"/>
     </subscreens>
 
     <widgets><subscreens-panel id="ShippingPanel" type="popup"/></widgets>
