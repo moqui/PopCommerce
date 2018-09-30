@@ -24,6 +24,8 @@ along with this software (see the LICENSE.md file). If not, see
         <set field="searchPartyDocType" value="MantleParty"/>
 
         <set field="appUserGroupTypeEnumId" value="UgtPopcAdmin"/>
+
+        <service-call name="mantle.party.PartyServices.setup#UserOrganizationInfo" out-map="context"/>
     </always-actions>
 
     <subscreens default-item="dashboard" always-use-full-path="true">
@@ -39,12 +41,6 @@ along with this software (see the LICENSE.md file). If not, see
         <subscreens-item name="SimpleReport" menu-title="Report Builder" menu-index="31"
                 location="component://SimpleScreens/screen/SimpleScreens/SimpleReport.xml"/>
     </subscreens>
-
-    <pre-actions>
-        <!-- in pre-actions so only runs for screen renders, not for transitions -->
-        <!-- TODO this is good for the MANTLE_ACTIVE_ORG filter, but consider putting in always actions for the MANTLE_USER_ORG filter (somehow) -->
-        <service-call name="mantle.party.PartyServices.setup#UserOrganizationInfo" out-map="context"/>
-    </pre-actions>
 
     <widgets>
         <section name="OrgChooserSection" condition="hideNav != 'true'"><widgets>
