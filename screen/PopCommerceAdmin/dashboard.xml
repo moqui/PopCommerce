@@ -166,6 +166,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <link url="../Party" link-type="anchor">
                         <image url="/ssstatic/images/Parties.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Parties" url="../Party" link-type="anchor"/></container>
+                    <container><link text="Survey" url="../Survey" link-type="anchor"/></container>
                 </container>
             </row-col></container-row>
             <container-row><row-col sm="6">
