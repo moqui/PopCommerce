@@ -85,6 +85,11 @@ along with this software (see the LICENSE.md file). If not, see
                     <container><link text="Suppliers" url="../Supplier" link-type="anchor"/></container>
                 </container>
                 <container>
+                    <link url="../Lead" link-type="anchor">
+                        <image url="/ssstatic/images/Customer.png" url-type="screen" style="invertible" width="40"/></link>
+                    <container><link text="Leads" url="../Lead" link-type="anchor"/></container>
+                </container>
+                <container>
                     <link url="../Order" link-type="anchor" parameter-map="[orderType:'Purchase']">
                         <image url="/ssstatic/images/Purchasing.png" url-type="screen" style="invertible" width="40"/></link>
                     <container><link text="Purchase Orders" url="../Order" link-type="anchor" parameter-map="[orderType:'Purchase']"/></container>
