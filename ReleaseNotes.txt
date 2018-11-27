@@ -12,8 +12,25 @@ This release is based on Moqui Framework version 2.1.1, mantle-udm 2.1.0,
 mantle-usl 2.1.0, and SimpleScreens 2.1.0. It also uses the
 moqui-elasticsearch 1.1.1 and moqui-fop 1.1.1 tool components.
 
+In the last release the POPC ERP (Admin) app had comprehensive
+functionality for the most common business processes but was the first more
+complete version of the app. In this release there are significant
+refinements and fixes as well as lots of new functionality for more
+business scenarios and higher volume usage.
+
 The new functionality in this release is based on new and improved screens
 in SimpleScreens. See the ReleaseNotes.txt file there for more details.
+
+Some basic stats to show app growth (for POPC ERP and ecommerce example
+apps, nearly all new screens and forms in ERP/Admin app):
+
+- Screens: 242 (last release 153)
+- Forms: 703 (last release 464)
+
+NOTE: The ecommerce app in this component is meant only to be an example of
+services to use and such. A real world usable and far more complete and
+customizable ecommerce application is under development in the
+moqui/PopRestStore component.
 
 ===========================================================================
 Release 2.0.0 - 22 Oct 2017
