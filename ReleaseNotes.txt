@@ -10,7 +10,7 @@ new feature and bug fix release.
 
 This release is based on Moqui Framework version 2.1.1, mantle-udm 2.1.0,
 mantle-usl 2.1.0, and SimpleScreens 2.1.0. It also uses the
-moqui-elasticsearch 1.1.1 and moqui-fop 1.1.1 tool components.
+moqui-elasticsearch 1.2.0 and moqui-fop 1.1.1 tool components.
 
 In the last release the POPC ERP (Admin) app had comprehensive
 functionality for the most common business processes but was the first more
