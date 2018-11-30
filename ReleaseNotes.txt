@@ -2,7 +2,7 @@
 POP Commerce - Retail and Wholesale ERP and eCommerce - Release Notes
 
 ===========================================================================
-Release 2.1.0 - Not Yet Released
+Release 2.1.0 - 29 Nov 2018
 ===========================================================================
 
 POP Commerce Retail and Wholesale ERP and eCommerce 2.1.0 is a minor
