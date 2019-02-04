@@ -57,7 +57,7 @@ along with this software (see the LICENSE.md file). If not, see
     </actions>
     <widgets>
         <container-box>
-            <box-header><label text="Choose a Credit Card" type="h5"/></box-header>
+            <box-header title="Choose a Credit Card"/>
             <box-toolbar>
                 <dynamic-dialog id="CreateCreditCardDialog" button-text="Add Credit Card"
                         transition="updatePaymentMethodInfo" width="800"
@@ -85,7 +85,7 @@ along with this software (see the LICENSE.md file). If not, see
         </container-box>
 
         <container-box>
-            <box-header><label text="Choose a Shipping Address" type="h5"/></box-header>
+            <box-header title="Choose a Shipping Address"/>
             <box-toolbar>
                 <dynamic-dialog id="UpdatePostalInfo" button-text="Add Shipping Address"
                         transition="updateContactInfo" width="800"
