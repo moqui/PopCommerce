@@ -78,7 +78,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </actions>
                     <widgets>
                         <container-box>
-                            <box-header><label text="Billing Information" type="h5"/></box-header>
+                            <box-header title="Billing Information"/>
                             <box-toolbar>
                                 <dynamic-dialog id="CreateCreditCardDialog" button-text="Create Credit Card"
                                         transition="updatePaymentMethodInfo" width="800"
@@ -112,7 +112,7 @@ along with this software (see the LICENSE.md file). If not, see
                     </actions>
                     <widgets>
                         <container-box>
-                            <box-header><label text="Shipping Information" type="h5"/></box-header>
+                            <box-header title="Shipping Information"/>
                             <box-toolbar>
                                 <dynamic-dialog id="UpdatePostalInfo" button-text="Add Shipping Info"
                                         transition="updateContactInfo" width="800"

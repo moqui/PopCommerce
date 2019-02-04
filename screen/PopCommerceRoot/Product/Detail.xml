@@ -115,7 +115,7 @@ along with this software (see the LICENSE.md file). If not, see
 
         <container-row><row-col lg="6" md="6">
             <container-box>
-                <box-header><label text="Features" type="h5"/></box-header>
+                <box-header title="Features"/>
                 <box-body>
                     <form-list name="FeaturesForm" list="pfaaList" skip-form="true" skip-header="true">
                         <field name="productFeatureTypeEnumId"><default-field title="Type">
@@ -126,7 +126,7 @@ along with this software (see the LICENSE.md file). If not, see
             </container-box>
         </row-col><row-col lg="6" md="6">
             <container-box>
-                <box-header><label text="Dimensions" type="h5"/></box-header>
+                <box-header title="Dimensions"/>
                 <box-body>
                     <form-list name="DimensionsForm" list="dimensionList" skip-form="true" skip-header="true">
                         <field name="description"><default-field title="Type"><display/></default-field></field>
