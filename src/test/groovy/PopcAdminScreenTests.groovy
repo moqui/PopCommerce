@@ -133,22 +133,22 @@ class PopcAdminScreenTests extends Specification {
         "Facility/FacilityCalendar?facilityId=ZIRET_WH" | []
 
         // Asset
-        "Asset/Asset/AssetDetail?assetId=55400" | ['DEMO_1_1', 'ORG_ZIZI_RETAIL', 'Current: Available']
+        "Asset/Asset/AssetDetail?assetId=55400" | ['DEMO_1_1', 'ORG_ZIZI_RETAIL', 'Available']
         "Asset/Asset/AssetCalendar?assetId=55400" | []
 
         // Accounting/Invoice
         "Accounting/Invoice/FindInvoice?statusId_op=in&statusId=InvoiceReceived,InvoiceApproved&toPartyId=ORG_ZIZI_RETAIL" |
                 ['Ziddleman', 'Ziziwork Retail', 'Sales/Purchase']
-        "Accounting/Invoice/EditInvoice?invoiceId=55100" | ['Current: Approved', 'Unpaid $1,824.25', 'ORG_ZIZI_RETAIL']
+        "Accounting/Invoice/EditInvoice?invoiceId=55100" | ['Approved', 'Unpaid $1,824.25', 'ORG_ZIZI_RETAIL']
         "Accounting/Invoice/EditInvoice?invoiceId=55400" |
-                ['ORG_ZIZI_RETAIL', 'Current: Payment Sent', 'Applied Payments $23,830.00']
+                ['ORG_ZIZI_RETAIL', 'Payment Sent', 'Applied Payments $23,830.00']
         "Accounting/Invoice/EditInvoiceItems?invoiceId=55400" | ['Demo Product One-One', 'Shipping and Handling']
         "Accounting/Invoice/PrintInvoice?invoiceId=55400&renderMode=xsl-fo" |
                 ['1350 E. Flamingo Rd. #9876, Las Vegas, NV 89119-5263', 'Asset - Inventory']
 
         // Accounting/Payment
         "Accounting/Payment/EditPayment?paymentId=55400" |
-                ['ORG_ZIZI_RETAIL', 'Applied $24,000.00', 'Current: Delivered']
+                ['ORG_ZIZI_RETAIL', 'Applied $24,000.00', 'Delivered']
         "Accounting/Payment/PaymentCheck?paymentIds=55400&renderMode=xsl-fo" | ['Ziddleman',
                 'Twenty four thousand and 00/100', 'Picker Bot 2000']
         "Accounting/Payment/PaymentDetail?paymentIds=55400&renderMode=xsl-fo" |
@@ -156,7 +156,7 @@ class PopcAdminScreenTests extends Specification {
 
         // Accounting Other
         "Accounting/FinancialAccount/EditFinancialAccount?finAccountId=55700" |
-                ['Ziziwork Retail', 'Joe Public', 'Current: Active']
+                ['Ziziwork Retail', 'Joe Public', 'Active']
         "Accounting/FinancialAccount/FinancialAccountTrans?finAccountId=55700" |
                 ['Customer Service Credit', 'Ziziwork Retail ']
         "Accounting/Transaction/EditTransaction?acctgTransId=55700" |
