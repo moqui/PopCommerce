@@ -29,16 +29,4 @@ along with this software (see the LICENSE.md file). If not, see
             linkUrl="/apps/PopcAdmin/Customer/EditCustomer?partyId=${partyId}" linkCondition="'Customer' in roles*.roleTypeId"/>
     <moqui.entity.document.DataDocumentLink dataDocumentId="MantleParty" linkSeqId="33" linkSet="PopcAdmin" label="Edit Supplier" urlType="screen"
             linkUrl="/apps/PopcAdmin/Supplier/EditSupplier?partyId=${partyId}" linkCondition="'Supplier' in roles*.roleTypeId"/>
-
-    <!-- Product for eCommerce Search -->
-    <org.moqui.impl.EntityServices.cloneDataDocument dataDocumentId="MantleProduct" newDataDocumentId="PopcProduct" newIndexName="popc"/>
-    <moqui.entity.document.DataDocumentCondition dataDocumentId="PopcProduct" conditionSeqId="01"
-            fieldNameAlias="productStoreId" fieldValue="POPC_DEFAULT" postQuery="Y"/>
-    <!-- NOTE: popc ecommerce search screen creates own links like /popc/Product/Detail/${productId} -->
-
-    <!-- Search Data Feed -->
-    <moqui.entity.feed.DataFeed dataFeedId="PopCommerceSearch" dataFeedTypeEnumId="DTFDTP_RT_PUSH"
-            feedName="PopCommerce Search" feedReceiveServiceName="org.moqui.search.SearchServices.index#DataDocuments">
-        <documents dataDocumentId="PopcProduct"/>
-    </moqui.entity.feed.DataFeed>
 </entity-facade-xml>
