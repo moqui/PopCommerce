@@ -2,6 +2,20 @@
 POP Commerce - Retail and Wholesale ERP and eCommerce - Release Notes
 
 ===========================================================================
+Release 2.1.2 - Not Yet Released
+===========================================================================
+
+POP Commerce Retail and Wholesale ERP and eCommerce 2.1.2 is a patch level
+new feature and bug fix release.
+
+There are only minor changes and fixes in this release. For a complete
+list of changes see:
+
+https://github.com/moqui/PopCommerce/compare/v2.1.1...v2.1.2
+
+Most changes come from screens reused from SimpleScreens.
+
+===========================================================================
 Release 2.1.1 - 23 July 2019
 ===========================================================================
 
