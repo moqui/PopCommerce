@@ -103,6 +103,8 @@ class PopcAdminScreenTests extends Specification {
 
         // Party
         "Party/EditParty?partyId=EX_JOHN_DOE" | ['john.doe@moqui.org', 'John']
+        "Party/PartyEmails?partyId=CustJqp" | ['joe@public.com', 'Order Placed']
+        "Party/FinancialInfo?partyId=CustJqp" | ['ZIRET', 'Invoice Payment', 'Placed', 'Payment Received']
 
         // Catalog
         "Catalog/Category/EditCategory?productCategoryId=DEMO_ONE" | ['Demo Category One']
