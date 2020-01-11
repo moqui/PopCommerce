@@ -30,8 +30,9 @@ along with this software (see the LICENSE.md file). If not, see
     <!-- PopCommerce Admin App Administrators User Group -->
     <moqui.basic.Enumeration description="POPC ERP App" enumId="UgtPopcAdmin" enumTypeId="UserGroupType"/>
     <userGroups userGroupId="POP_COMMERCE_ADMIN" description="POPC ERP Administrators" groupTypeEnumId="UgtPopcAdmin">
-        <permissions userPermissionId="CARD_NUMBER_EDIT" fromDate="0"/>
+        <permissions userPermissionId="INVOICE_APPROVE" fromDate="0"/>
         <permissions userPermissionId="ORDER_APPROVE" fromDate="0"/>
+        <permissions userPermissionId="CARD_NUMBER_EDIT" fromDate="0"/>
         <permissions userPermissionId="FISCAL_REOPEN" fromDate="0"/>
         <authz artifactAuthzId="MY_ACCOUNT_PCADMIN" artifactGroupId="MY_ACCOUNT" authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
     </userGroups>
@@ -114,6 +115,7 @@ along with this software (see the LICENSE.md file). If not, see
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
         <authz artifactAuthzId="POPC_ACC_SHP" artifactGroupId="PopcAdminShipment" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_VIEW">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
+        <!-- maybe? add if wanted for all accountants: <permissions userPermissionId="INVOICE_APPROVE" fromDate="0"/> -->
     </userGroups>
 
     <userGroups userGroupId="PopcAdminCatalogContent" description="POPC Catalog and Content" groupTypeEnumId="UgtPopcAdmin">
@@ -159,6 +161,7 @@ along with this software (see the LICENSE.md file). If not, see
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
         <authz artifactAuthzId="POPC_PURSUP_SHP" artifactGroupId="PopcAdminShipment" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
+        <permissions userPermissionId="INVOICE_APPROVE" fromDate="0"/>
         <permissions userPermissionId="ORDER_APPROVE" fromDate="0"/>
     </userGroups>
 
