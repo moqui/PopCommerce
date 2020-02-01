@@ -55,6 +55,29 @@ along with this software (see the LICENSE.md file). If not, see
     <mantle.product.store.ProductStoreEmail productStoreId="POPC_DEFAULT" emailTypeEnumId="PsetInvoicesPastDue"
             emailTemplateId="PopcInvoicesPastDue" headerImagePath="images/MoquiLogoSmall.png" detailLinkPath=""/>
 
+    <!-- ScreenScheduled report Receivable Summary, empty by default with demo and test data, with noResultsAbort=Y should just generate warning log -->
+    <moqui.screen.ScreenScheduled screenScheduledId="PopcAccRecAging" screenPath="/apps/PopcAdmin/Accounting/Reports/InvoiceAgingDetail"
+            formListFindId="AC_REP_INVAGD_RECSUM" renderMode="csv" noResultsAbort="Y"
+            cronExpression="0 0/30 * * * ?" fromDate="" thruDate="" emailTemplateId="SCREEN_RENDER" userId="EX_JOHN_DOE" userGroupId="ADMIN"
+            emailSubject="Accounts Receivable Aging Summary CSV ${ec.l10n.format(ec.user.nowTimestamp, null)}"
+            saveToLocation="dbresource://mantle/report/accounting/PopcAccRecAging-${ec.l10n.format(ec.user.nowTimestamp, 'yyyy-MM-dd-HH-mm')}.csv"/>
+    <!-- ScreenScheduled report Payable Summary, has results after tests run -->
+    <!-- for testing, commented by default:
+    <moqui.screen.ScreenScheduled screenScheduledId="PopcAccPblAgingCsv" screenPath="/apps/PopcAdmin/Accounting/Reports/InvoiceAgingDetail"
+            formListFindId="AC_REP_INVAGD_PAYSUM" renderMode="csv" noResultsAbort="Y"
+            cronExpression="0 0/30 * * * ?" fromDate="" thruDate="" emailTemplateId="SCREEN_RENDER" userId="EX_JOHN_DOE" userGroupId="ADMIN"
+            emailSubject="Accounts Payable Aging Summary CSV ${ec.l10n.format(ec.user.nowTimestamp, null)}"
+            saveToLocation="dbresource://mantle/report/accounting/PopcAccPblAging-${ec.l10n.format(ec.user.nowTimestamp, 'yyyy-MM-dd-HH-mm')}.csv"/>
+    -->
+    <!-- ScreenScheduled report Payable Summary, has results after tests run -->
+    <!-- for testing, commented by default:
+    <moqui.screen.ScreenScheduled screenScheduledId="PopcAccPblAgingXlsx" screenPath="/apps/PopcAdmin/Accounting/Reports/InvoiceAgingDetail"
+            formListFindId="AC_REP_INVAGD_PAYDET" renderMode="xlsx" noResultsAbort="Y"
+            cronExpression="0 0/30 * * * ?" fromDate="" thruDate="" emailTemplateId="SCREEN_RENDER" userId="EX_JOHN_DOE" userGroupId="ADMIN"
+            emailSubject="Accounts Payable Aging Detail XLSX ${ec.l10n.format(ec.user.nowTimestamp, null)}"
+            saveToLocation="dbresource://mantle/report/accounting/PopcAccPblAging-${ec.l10n.format(ec.user.nowTimestamp, 'yyyy-MM-dd-HH-mm')}.xlsx"/>
+    -->
+
     <!-- demo POPC Admin app users -->
 
     <parties partyId="JohnPopc" partyTypeEnumId="PtyPerson">
