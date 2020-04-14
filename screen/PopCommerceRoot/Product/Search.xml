@@ -31,7 +31,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <actions>
         <if condition="category || keywords">
-            <set field="queryString" from="keywords"/>
+            <set field="queryString" from="elasticQueryAutoWildcard(keywords, false)"/>
             <if condition="category"><set field="queryString" from="(queryString ? queryString + ' AND ' : '') + 'categories.productCategoryId:' + category"/></if>
             <service-call name="org.moqui.search.SearchServices.search#DataDocuments" out-map="context"
                     in-map="[queryString:queryString, indexName:'popc', documentType:'PopcProduct']"/>
