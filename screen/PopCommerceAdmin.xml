@@ -13,7 +13,7 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd"
-        default-menu-title="POPC ERP" menu-image="glyphicon glyphicon-shopping-cart" menu-image-type="icon" server-static="vuet">
+        default-menu-title="POPC ERP" menu-image="fa fa-shopping-cart" menu-image-type="icon" server-static="vuet">
 
     <always-actions>
         <set field="appRoot" value="PopcAdmin"/>
@@ -48,7 +48,7 @@ along with this software (see the LICENSE.md file). If not, see
             <render-mode><text type="html"><![CDATA[
             <div id="active-org-menu" class="nav navbar-right dropdown">
                 <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
-                    <i class="glyphicon glyphicon-globe"></i> ${(activeOrg.pseudoId)!}</a>
+                    <i class="fa fa-globe"></i> ${(activeOrg.pseudoId)!}</a>
                 <ul class="dropdown-menu">
                     <#if activeOrg?has_content>
                         <li><a href="${sri.buildUrl('/apps/setPrefGoLast').url}?preferenceKey=ACTIVE_ORGANIZATION&preferenceValue=">Clear Active Organization</a></li>
