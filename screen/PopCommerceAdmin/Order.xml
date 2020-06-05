@@ -20,8 +20,11 @@ along with this software (see the LICENSE.md file). If not, see
                 location="component://SimpleScreens/screen/SimpleScreens/Order/FindOrder.xml"/>
         <subscreens-item name="OrderDetail" menu-index="1"
                 location="component://SimpleScreens/screen/SimpleScreens/Order/OrderDetail.xml"/>
-        <subscreens-item name="QuickItems" menu-include="false"
+        <subscreens-item name="OrderItems" menu-index="2"
+                location="component://SimpleScreens/screen/SimpleScreens/Order/OrderItems.xml"/>
+        <subscreens-item name="QuickItems" menu-index="3"
                 location="component://SimpleScreens/screen/SimpleScreens/Order/QuickItems.xml"/>
+
         <subscreens-item name="PrintOrder" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Order/PrintOrder.xml"/>
 
@@ -32,5 +35,5 @@ along with this software (see the LICENSE.md file). If not, see
         <subscreens-item name="SalesSummary" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/SalesSummary.xml"/>
     </subscreens>
-    <widgets><subscreens-active id="OrderPanel"/></widgets>
+    <widgets><subscreens-panel id="OrderPanel" type="tab"/></widgets>
 </screen>
