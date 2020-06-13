@@ -18,10 +18,15 @@ along with this software (see the LICENSE.md file). If not, see
     <subscreens default-item="FindShipment">
         <subscreens-item name="FindShipment" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Shipment/FindShipment.xml"/>
-        <subscreens-item name="ShipmentDetail" menu-index="1"
-                location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentDetail.xml"/>
         <subscreens-item name="PackageTracking" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Shipment/PackageTracking.xml"/>
+
+        <subscreens-item name="ShipmentDetail" menu-index="1"
+                location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentDetail.xml"/>
+        <subscreens-item name="ShipmentItems" menu-index="2"
+                location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentItems.xml"/>
+        <subscreens-item name="ShipmentPackages" menu-index="3"
+                location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentPackages.xml"/>
 
         <subscreens-item name="ShipmentInsert" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentInsert.xml"/>
@@ -32,5 +37,5 @@ along with this software (see the LICENSE.md file). If not, see
         <subscreens-item name="ShipmentByPackage" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentByPackage.xml"/>
     </subscreens>
-    <widgets><subscreens-active id="ShipmentPanel"/></widgets>
+    <widgets><subscreens-panel id="ShipmentPanel"/></widgets>
 </screen>
