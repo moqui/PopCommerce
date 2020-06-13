@@ -22,10 +22,14 @@ along with this software (see the LICENSE.md file). If not, see
         <container-row><row-col md="6" style="text-center">
             <form-single name="SearchOptions" transition="search" extends="component://SimpleScreens/screen/SimpleScreens/Search.xml#SearchOptions">
                 <field name="queryString"><default-field tooltip=""><text-line size="25"/></default-field></field>
+                <field-layout><field-row-big justify="center"><field-ref name="documentType"/><field-ref name="queryString"/>
+                    <field-ref name="submitButton"/></field-row-big></field-layout>
             </form-single>
         </row-col><row-col md="6" style="text-center">
             <form-single name="QuickLookupForm" transition="quickLookup" focus-field=""
-                    extends="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml#QuickLookupForm"/>
+                    extends="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml#QuickLookupForm">
+                <field-layout><field-row-big justify="center"><field-ref name="lookupId"/><field-ref name="submitButton"/></field-row-big></field-layout>
+            </form-single>
         </row-col></container-row>
 
         <section name="QuickInfoSection"><actions>
@@ -56,21 +60,21 @@ along with this software (see the LICENSE.md file). If not, see
             </entity-find-count>
         </actions><widgets>
             <container-row><row-col sm="0" md="1"><label text="&amp;nbsp;" encode="false"/></row-col><row-col sm="5" md="4" style="text-center">
-                <container type="ul" style="list-inline">
-                    <container type="li"><label text="Sales Orders" type="h4"/></container>
-                    <container type="li"><link url="../Order" parameter-map="[orderType:'Sales', statusId:'OrderPlaced,OrderProcessing', statusId_op:'in']"
+                <container style="row">
+                    <container style="col"><label text="Sales Orders" type="h4"/></container>
+                    <container style="col q-my-auto"><link url="../Order" parameter-map="[orderType:'Sales', statusId:'OrderPlaced,OrderProcessing', statusId_op:'in']"
                             text="Placed" badge="${orderPlacedCount}" btn-type="default"/></container>
-                    <container type="li"><link url="../Order" parameter-map="[orderType:'Sales', statusId:'OrderApproved,OrderSent', statusId_op:'in']"
+                    <container style="col q-my-auto"><link url="../Order" parameter-map="[orderType:'Sales', statusId:'OrderApproved,OrderSent', statusId_op:'in']"
                             text="Approved" badge="${orderApprovedCount}" btn-type="default"/></container>
-                    <container type="li"><link url="../Order" parameter-map="[orderType:'Sales', statusId:'OrderHold']"
+                    <container style="col q-my-auto"><link url="../Order" parameter-map="[orderType:'Sales', statusId:'OrderHold']"
                             text="Held" badge="${orderHeldCount}" btn-type="default"/></container>
                 </container>
             </row-col><row-col sm="2"><label text="&amp;nbsp;" encode="false"/></row-col><row-col sm="5" md="4" style="text-center">
-                <container type="ul" style="list-inline">
-                    <container type="li"><label text="Requests" type="h4"/></container>
-                    <container type="li"><link url="../Request" parameter-map="[statusId:'ReqSubmitted']"
+                <container style="row">
+                    <container style="col"><label text="Requests" type="h4"/></container>
+                    <container style="col q-my-auto"><link url="../Request" parameter-map="[statusId:'ReqSubmitted']"
                             text="Submitted" badge="${requestSubmittedCount}" btn-type="default"/></container>
-                    <container type="li"><link url="../Request" parameter-map="[statusId:'ReqReviewed,ReqInProgress', statusId_op:'in']"
+                    <container style="col q-my-auto"><link url="../Request" parameter-map="[statusId:'ReqReviewed,ReqInProgress', statusId_op:'in']"
                             text="In Progress" badge="${requestInProgressCount}" btn-type="default"/></container>
                 </container>
             </row-col><row-col sm="0" md="1"><label text="&amp;nbsp;" encode="false"/></row-col></container-row>
