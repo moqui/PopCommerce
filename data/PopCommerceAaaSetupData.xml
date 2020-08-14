@@ -288,9 +288,6 @@ along with this software (see the LICENSE.md file). If not, see
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="50" resourceTypeEnumId="STRT_STYLESHEET"
             resourceValue="/popc/css/PopcDefault.css"/>
 
-    <moqui.screen.ScreenThemeResource screenThemeId="DEFAULT" sequenceNum="135" resourceTypeEnumId="STRT_HEADER_NAVBAR_COMP"
-            resourceValue="/ssstatic/lib/ActiveOrgNav.js"/>
-
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="200" resourceTypeEnumId="STRT_FOOTER_ITEM">
         <resourceValue><![CDATA[<p><a href="http://www.moqui.org/" target="_blank">${ec.l10n.localize('Built on Moqui Framework ${ec.factory.moquiVersion}')}</a></p>]]></resourceValue>
     </moqui.screen.ScreenThemeResource>
