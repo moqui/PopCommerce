@@ -94,6 +94,12 @@ along with this software (see the LICENSE.md file). If not, see
     <artifactGroups artifactGroupId="PopcAdminWiki" description="POPC Wiki/Content">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Wiki.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
 
+    <artifactGroups artifactGroupId="PopcAdminAssetPhysInv" description="POPC Asset Physical Inventory">
+        <artifacts artifactName="component://SimpleScreens/screen/SimpleScreens/Asset/Asset/FindSummary/PhysicalQuantity.xml" artifactTypeEnumId="AT_XML_SCREEN"/>
+        <artifacts artifactName="component://SimpleScreens/screen/SimpleScreens/Asset/Asset/FindSummary/PhysicalChange.xml" artifactTypeEnumId="AT_XML_SCREEN"/>
+        <artifacts artifactName="component://SimpleScreens/screen/SimpleScreens/Asset/Asset/FindSummary.xml/recordChange" artifactTypeEnumId="AT_XML_SCREEN_TRANS"/>
+    </artifactGroups>
+
     <!-- ========== User Groups for POP Commerce Admin App ========== -->
 
     <!-- NOTE: all of these groups use the MANTLE_ACTIVE_ORG filter,
@@ -198,6 +204,7 @@ along with this software (see the LICENSE.md file). If not, see
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
         <authz artifactAuthzId="POPC_SALSUP_AST" artifactGroupId="PopcAdminAsset" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
+        <authz artifactAuthzId="POPC_SALSUP_ASTPI" artifactGroupId="PopcAdminAssetPhysInv" authzTypeEnumId="AUTHZT_DENY" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_SALSUP_CAT" artifactGroupId="PopcAdminCatalog" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
         <authz artifactAuthzId="POPC_SALSUP_SHP" artifactGroupId="PopcAdminShipment" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
@@ -242,6 +249,7 @@ along with this software (see the LICENSE.md file). If not, see
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
         <authz artifactAuthzId="POPC_WHCL_AST" artifactGroupId="PopcAdminAsset" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
+        <authz artifactAuthzId="POPC_WHCL_ASTPI" artifactGroupId="PopcAdminAssetPhysInv" authzTypeEnumId="AUTHZT_DENY" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_WHCL_SHP" artifactGroupId="PopcAdminShipment" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
         <authz artifactAuthzId="POPC_WHCL_SHNG" artifactGroupId="PopcAdminShipping" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">

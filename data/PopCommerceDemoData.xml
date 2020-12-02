@@ -147,6 +147,19 @@ along with this software (see the LICENSE.md file). If not, see
             <groups userGroupId="PopcAdminSales"/>
         </users>
     </parties>
+    <parties partyId="JohnSalesSup" partyTypeEnumId="PtyPerson">
+        <person firstName="John" middleName="" lastName="Sales Supervisor"/>
+        <roles roleTypeId="Employee"/>
+        <fromRelationships relationshipTypeEnumId="PrtEmployee" fromRoleTypeId="Employee" toPartyId="ORG_ZIZI_RETAIL" toRoleTypeId="OrgInternal"/>
+        <mantle.party.contact.ContactMech contactMechTypeEnumId="CmtEmailAddress" infoString="john.sales.sup@moqui.org">
+            <mantle.party.contact.PartyContactMech contactMechPurposeId="EmailPrimary"/></mantle.party.contact.ContactMech>
+        <users userId="JohnSalesSup" username="john.sales.sup" userFullName="John Sales Supervisor"
+                currentPassword="16ac58bbfa332c1c55bd98b53e60720bfa90d394" passwordHashType="SHA"
+                passwordHint="framework name, lowercase" currencyUomId="USD" locale="en_US" timeZone="US/Pacific"
+                emailAddress="john.sales.sup@moqui.org">
+            <groups userGroupId="PopcAdminSalesSup"/>
+        </users>
+    </parties>
 
     <parties partyId="JohnWarehouse" partyTypeEnumId="PtyPerson">
         <person firstName="John" middleName="" lastName="Warehouse"/>
