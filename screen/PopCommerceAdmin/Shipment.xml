@@ -41,7 +41,7 @@ along with this software (see the LICENSE.md file). If not, see
         <entity-find-one entity-name="mantle.shipment.Shipment" value-field="shipment"/>
     </actions>
     <widgets>
-        <label text="${shipmentId} - ${shipment.toPartyId}" type="h3" condition="shipmentId"/>
+        <label text="${shipmentId}: ${shipment.toPartyId}" type="strong" condition="shipmentId"/>
         <subscreens-panel id="ShipmentPanel"/>
     </widgets>
 </screen>
