@@ -38,24 +38,10 @@ along with this software (see the LICENSE.md file). If not, see
     <actions>
         <if condition="orderId">
             <entity-find-one entity-name="mantle.order.OrderPart" value-field="orderPart"/>
-            <entity-find-one entity-name="mantle.party.PartyDetail" value-field="vPartyDetail">
-                <field-map field-name="partyId" from="orderPart.vendorPartyId"/>
-            </entity-find-one>
-            <entity-find-one entity-name="mantle.party.PartyDetail" value-field="cPartyDetail">
-                <field-map field-name="partyId" from="orderPart.customerPartyId"/>
-            </entity-find-one>
-            <if condition="orderPart.customerPartyId == 'Company'">
-                <then>
-                    <set field="displayName" value="${vPartyDetail.partyId}: ${vPartyDetail.organizationName}"/>
-                </then>
-                <else>
-                    <set field="displayName" value="${cPartyDetail.partyId}: ${cPartyDetail.firstName} ${cPartyDetail.lastName}"/>
-                </else>
-            </if>
         </if>
     </actions>
     <widgets>
-        <label text="${orderId} - ${displayName}" type="h3" condition="orderId"/>
+        <label text="OrderNameTemplate" text-map="orderPart" type="strong" condition="orderPart"/>
         <subscreens-panel id="OrderPanel" type="tab"/>
     </widgets>
 </screen>
