@@ -26,25 +26,10 @@ along with this software (see the LICENSE.md file). If not, see
 
     <actions>
         <entity-find-one entity-name="mantle.party.PartyDetail" value-field="partyDetail"/>
-        <if condition="!partyDetail">
-            <then>
-                <set field="displayName" value=" "/>
-            </then>
-            <else>
-                <if condition="!partyDetail.firstName">
-                    <then>
-                        <set field="displayName" value="${partyDetail.organizationName}"/>
-                    </then>
-                    <else>
-                        <set field="displayName" value="${partyDetail.firstName} ${partyDetail.lastName}"/>
-                    </else>
-                </if>
-            </else>
-        </if>
     </actions>
 
     <widgets>
-        <label text="${partyId} - ${displayName}" type="h3" condition="partyId"/>
+        <label text="PartyNameTemplate" text-map="partyDetail" type="strong" condition="partyDetail"/>
         <subscreens-panel id="supplier-panel" type="tab"/>
     </widgets>
 </screen>
