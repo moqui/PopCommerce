@@ -24,5 +24,11 @@ along with this software (see the LICENSE.md file). If not, see
     </subscreens>
 
     <pre-actions><set field="roleTypeId" value="Customer"/></pre-actions>
-    <widgets><subscreens-panel id="CustomerPanel" type="tab"/></widgets>
+    <actions>
+        <entity-find-one entity-name="mantle.party.PartyDetail" value-field="partyDetail"/>
+    </actions>
+    <widgets>
+        <label text="PartyNameTemplate" text-map="partyDetail" type="strong" condition="partyDetail"/>
+        <subscreens-panel id="CustomerPanel" type="tab"/>
+    </widgets>
 </screen>
