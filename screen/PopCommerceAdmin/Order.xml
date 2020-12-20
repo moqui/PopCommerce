@@ -35,13 +35,8 @@ along with this software (see the LICENSE.md file). If not, see
         <subscreens-item name="SalesSummary" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Accounting/Reports/SalesSummary.xml"/>
     </subscreens>
-    <actions>
-        <if condition="orderId">
-            <entity-find-one entity-name="mantle.order.OrderPart" value-field="orderPart"/>
-        </if>
-    </actions>
     <widgets>
-        <label text="OrderNameTemplate" text-map="orderPart" type="strong" condition="orderPart"/>
+        <label text="Order ${orderId}" type="strong" condition="orderId"/>
         <subscreens-panel id="OrderPanel" type="tab"/>
     </widgets>
 </screen>

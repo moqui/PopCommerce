@@ -37,11 +37,8 @@ along with this software (see the LICENSE.md file). If not, see
         <subscreens-item name="ShipmentByPackage" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Shipment/ShipmentByPackage.xml"/>
     </subscreens>
-    <actions>
-        <entity-find-one entity-name="mantle.shipment.Shipment" value-field="shipment"/>
-    </actions>
     <widgets>
-        <label text="${shipmentId}: ${shipment.toPartyId}" type="strong" condition="shipmentId"/>
+        <label text="Shipment ${shipmentId}" type="strong" condition="shipmentId"/>
         <subscreens-panel id="ShipmentPanel"/>
     </widgets>
 </screen>
