@@ -114,7 +114,8 @@ class PopcAdminScreenTests extends Specification {
         "Catalog/Product/EditCategories?productId=DEMO_1_1" | ['Demo Category One', 'Catalog']
         "Catalog/Product/EditAssocs?productId=DEMO_1_1" | []
         "Catalog/Product/EditPrices?productId=DEMO_1_1" | ['ZiddlemanInc', '16.99']
-        "Catalog/Search?queryString=demo one" | ['Demo Product One-One', 'Asset (Good)']
+        // NOTE: DEJ 20201223 commented for now, no elasticsearch running on Moqui Travis setup
+        // "Catalog/Search?queryString=demo one" | ['Demo Product One-One', 'Asset (Good)']
 
         // TODO: Feature and FeatureGroup, need to add demo data
 

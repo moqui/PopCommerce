@@ -83,7 +83,8 @@ class PopCommerceScreenTests extends Specification {
         "Home" | ['Search products', 'Demo Product One-Two']
         "Product/Detail/DEMO_1_1/Demo-Product-One-One" | ['Demo Product One-One', '$16.99', 'Shipping Weight']
         "Product/Category/DEMO_ONE" | ['Demo Product One Unit', '$1.00', 'Add to Cart']
-        "Product/Search?keywords=demo" | ['Demo Product One Unit', '$1.00', 'Demo Category One']
+        // NOTE: DEJ 20201223 commented for now, no elasticsearch running on Moqui Travis setup
+        // "Product/Search?keywords=demo" | ['Demo Product One Unit', '$1.00', 'Demo Category One']
 
         // Customer
         "Customer/Profile" | ['joe@public.com', 'Visa ************1111', '1350 E. Flamingo Rd. #2345']
