@@ -31,6 +31,7 @@ along with this software (see the LICENSE.md file). If not, see
     <subscreens default-item="dashboard" always-use-full-path="true">
         <subscreens-item name="Search" location="component://SimpleScreens/screen/SimpleScreens/Search.xml" menu-index="2"/>
         <subscreens-item name="QuickLookup" location="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml" menu-index="2"/>
+        <subscreens-item name="QuickSearch" location="component://SimpleScreens/screen/SimpleScreens/QuickSearch.xml" menu-index="3"/>
 
         <subscreens-item name="Survey" location="component://SimpleScreens/screen/SimpleScreens/Survey.xml" menu-index="18"/>
         <subscreens-item name="Manufacturing" location="component://SimpleScreens/screen/SimpleScreens/Manufacturing.xml" menu-index="19"/>
