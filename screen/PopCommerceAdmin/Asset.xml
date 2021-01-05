@@ -21,6 +21,8 @@ along with this software (see the LICENSE.md file). If not, see
 
         <subscreens-item name="Asset" menu-title="Assets" menu-index="2"
                 location="component://SimpleScreens/screen/SimpleScreens/Asset/Asset.xml"/>
+        <subscreens-item name="PhysicalInventory" menu-title="Physical Inventory" menu-index="3"
+                location="component://SimpleScreens/screen/SimpleScreens/Asset/PhysicalInventory.xml"/>
         <subscreens-item name="EditLots" menu-title="Lots" menu-index="4"
                 location="component://SimpleScreens/screen/SimpleScreens/Asset/EditLots.xml"/>
         <subscreens-item name="Container" menu-title="Containers" menu-index="5"
