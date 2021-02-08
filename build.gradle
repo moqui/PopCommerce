@@ -18,10 +18,9 @@ sourceCompatibility = '1.8'
 def moquiDir = file(projectDir.absolutePath + '/../../..')
 def frameworkDir = file(moquiDir.absolutePath + '/framework')
 
-// maybe in the future: repositories { mavenCentral() }
 repositories {
     flatDir name: 'localLib', dirs: frameworkDir.absolutePath + '/lib'
-    jcenter()
+    mavenCentral()
 }
 
 // Log4J has annotation processors, disable to avoid warning
