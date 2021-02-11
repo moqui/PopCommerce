@@ -24,6 +24,8 @@ along with this software (see the LICENSE.md file). If not, see
                 location="component://SimpleScreens/screen/SimpleScreens/Wiki/EditWikiSpace.xml"/>
         <subscreens-item name="EditWikiPage" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Wiki/EditWikiPage.xml"/>
+        <subscreens-item name="ViewWikiPage" menu-include="false"
+                location="component://SimpleScreens/screen/SimpleScreens/Wiki/ViewWikiPage.xml"/>
         <subscreens-item name="EditWikiBlog" menu-include="false"
                 location="component://SimpleScreens/screen/SimpleScreens/Wiki/EditWikiBlog.xml"/>
         <subscreens-item name="wiki" menu-include="false"
