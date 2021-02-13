@@ -60,7 +60,7 @@ class PopcAdminScreenTests extends Specification {
 
     def "render POP Commerce Admin screens with no required parameters"() {
         when:
-        Set<String> screensToSkip = new HashSet(['wiki', 'EditWikiPage', 'WikiCommentNested', 'WikiCommentReply', 'FindCustomer', 'FindSupplier', 'SalesSummary'])
+        Set<String> screensToSkip = new HashSet(['wiki', 'ViewWikiPage', 'EditWikiPage', 'WikiCommentNested', 'WikiCommentReply', 'FindCustomer', 'FindSupplier', 'SalesSummary'])
         List<String> screenPaths = screenTest.getNoRequiredParameterPaths(screensToSkip)
         for (String screenPath in screenPaths) {
             ScreenTestRender str = screenTest.render(screenPath, [lastStandalone:"-2"], null)
