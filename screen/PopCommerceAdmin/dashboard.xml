@@ -72,9 +72,9 @@ along with this software (see the LICENSE.md file). If not, see
             </row-col><row-col sm="2"><label text="&amp;nbsp;" encode="false"/></row-col><row-col sm="5" md="4" style="text-center">
                 <container style="row">
                     <container style="col"><label text="Requests" type="h4"/></container>
-                    <container style="col q-my-auto"><link url="../Request" parameter-map="[statusId:'ReqSubmitted']"
+                    <container style="col q-my-auto"><link url="../Request" parameter-map="[statusId:'ReqSubmitted', roleTypeId:'Customer']"
                             text="Submitted" badge="${requestSubmittedCount}" btn-type="default"/></container>
-                    <container style="col q-my-auto"><link url="../Request" parameter-map="[statusId:'ReqReviewed,ReqInProgress', statusId_op:'in']"
+                    <container style="col q-my-auto"><link url="../Request" parameter-map="[statusId:'ReqReviewed,ReqInProgress', statusId_op:'in', roleTypeId:'Customer']"
                             text="In Progress" badge="${requestInProgressCount}" btn-type="default"/></container>
                 </container>
             </row-col><row-col sm="0" md="1"><label text="&amp;nbsp;" encode="false"/></row-col></container-row>
