@@ -57,7 +57,7 @@ along with this software (see the LICENSE.md file). If not, see
     </transition>
     <transition name="logout"><actions><script>ec.user.logoutUser()</script></actions>
         <default-response url="/popc"/><error-response url="."/></transition>
-    <transition name="resetPassword" require-session-token="false"><service-call name="org.moqui.impl.UserServices.reset#Password"/>
+    <transition name="resetPassword" require-session-token="false"><service-call name="org.moqui.impl.UserServices.reset#Password" in-map="[username:username]"/>
         <default-response url="."/></transition>
     <transition name="changePassword" require-session-token="false"><service-call name="org.moqui.impl.UserServices.update#Password"/>
         <default-response url="../Login"/><error-response url="."/></transition>
