@@ -28,8 +28,8 @@ tasks.withType(JavaCompile) { options.compilerArgs << "-proc:none" }
 tasks.withType(GroovyCompile) { options.compilerArgs << "-proc:none" }
 
 dependencies {
-    compile project(':framework')
-    testCompile project(':framework').configurations.testCompile.allDependencies
+    implementation project(':framework')
+    testImplementation project(':framework').configurations.testImplementation.allDependencies
 }
 
 // by default the Java plugin runs test on build, change to not do that (only run test if explicit task)
