@@ -37,6 +37,11 @@ dependencies {
 check.dependsOn.clear()
 
 test {
+    useJUnitPlatform()
+    testLogging { events "passed", "skipped", "failed" }
+    testLogging.showStandardStreams = true; testLogging.showExceptions = true
+    maxParallelForks 1
+
     dependsOn cleanTest
     dependsOn ':runtime:component:mantle-usl:test'
     include '**/PopCommerceSuite.class'
@@ -45,9 +50,6 @@ test {
     systemProperty 'moqui.conf', 'conf/MoquiDevConf.xml'
     systemProperty 'moqui.init.static', 'true'
     maxHeapSize = "512M"
-
-    // show standard out and standard error of the test JVM(s) on the console
-    testLogging.showStandardStreams = true; testLogging.showExceptions = true;
 
     classpath += files(sourceSets.main.output.classesDirs)
     // filter out classpath entries that don't exist (gradle adds a bunch of these), or ElasticSearch JarHell will blow up
