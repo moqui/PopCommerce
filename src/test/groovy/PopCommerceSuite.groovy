@@ -13,16 +13,16 @@
  */
 
 
-import org.junit.AfterClass
-import org.junit.runner.RunWith
-import org.junit.runners.Suite
+import org.junit.jupiter.api.AfterAll
+import org.junit.platform.suite.api.SelectClasses
+import org.junit.platform.suite.api.Suite
 import org.moqui.Moqui
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses([ PopcAdminScreenTests.class, PopCommerceScreenTests.class ])
+@Suite
+@SelectClasses([ PopcAdminScreenTests.class, PopCommerceScreenTests.class ])
 class PopCommerceSuite {
-    @AfterClass
-    public static void destroyMoqui() {
+    @AfterAll
+    static void destroyMoqui() {
         Moqui.destroyActiveExecutionContextFactory();
     }
 }
