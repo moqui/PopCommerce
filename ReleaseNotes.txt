@@ -2,6 +2,24 @@
 POP Commerce - Retail and Wholesale ERP and eCommerce - Release Notes
 
 ===========================================================================
+Release 2.2.0 - 31 May 2022
+===========================================================================
+
+POP Commerce Retail and Wholesale ERP and eCommerce 2.2.0 is a minor
+new feature and bug fix release.
+
+There are only minor changes and fixes in this release. For a complete
+list of changes see:
+
+https://github.com/moqui/PopCommerce/compare/v2.1.2...v2.2.0
+
+Most changes come from screens reused from SimpleScreens.
+
+NOTE: the POPC ERP application may never be removed, but is being replaced
+by the more general Marble ERP application which also includes project and
+task functionality that was originally in HiveMind.
+
+===========================================================================
 Release 2.1.2 - 07 Dec 2019
 ===========================================================================
 
