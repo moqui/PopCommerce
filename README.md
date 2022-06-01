@@ -3,11 +3,12 @@
 [![license](http://img.shields.io/badge/license-CC0%201.0%20Universal-blue.svg)](https://github.com/moqui/PopCommerce/blob/master/LICENSE.md)
 [![build](https://travis-ci.org/moqui/PopCommerce.svg)](https://travis-ci.org/moqui/PopCommerce)
 [![release](http://img.shields.io/github/release/moqui/PopCommerce.svg)](https://github.com/moqui/PopCommerce/releases)
-[![commits since release](http://img.shields.io/github/commits-since/moqui/PopCommerce/v2.1.2.svg)](https://github.com/moqui/PopCommerce/commits/master)
+[![commits since release](http://img.shields.io/github/commits-since/moqui/PopCommerce/v2.2.0.svg)](https://github.com/moqui/PopCommerce/commits/master)
 [![downloads](http://img.shields.io/github/downloads/moqui/PopCommerce/total.svg)](https://github.com/moqui/PopCommerce/releases)
 
+[![Discourse Forum](https://img.shields.io/badge/moqui%20forum-discourse-blue.svg)](https://forum.moqui.org)
+[![Google Group](https://img.shields.io/badge/google%20group-moqui-blue.svg)](https://groups.google.com/d/forum/moqui)
 [![LinkedIn Group](https://img.shields.io/badge/linked%20in%20group-moqui-blue.svg)](https://www.linkedin.com/groups/4640689)
-[![Google Group](https://img.shields.io/badge/google%20group-moqui--applications-blue.svg)](https://groups.google.com/d/forum/moqui-applications)
 [![Stack Overflow](https://img.shields.io/badge/stack%20overflow-moqui-blue.svg)](http://stackoverflow.com/questions/tagged/moqui)
 
 POP Commerce is a simple eCommerce application and an admin app to administer the eCommerce site and manage various 
