@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-This software is in the public domain under CC0 1.0 Universal plus a 
+This software is in the public domain under CC0 1.0 Universal plus a
 Grant of Patent License.
 
 To the extent possible under law, the author(s) have dedicated all
@@ -17,7 +17,8 @@ along with this software (see the LICENSE.md file). If not, see
 
     <!-- demo store settings for email/etc -->
     <mantle.product.store.ProductStore productStoreId="POPC_DEFAULT" defaultLocale="en_US" defaultCurrencyUomId="USD"
-            storeDomain="demo.moqui.org" profileUrlPath="popc/Customer/Profile" productDataDocumentId="PopcProduct"/>
+                                       storeDomain="demo.moqui.org" profileUrlPath="popc/Customer/Profile" productDataDocumentId="PopcProduct"/>
+    <mantle.product.store.ProductStoreDataDocument productStoreId="POPC_DEFAULT" typeEnumId="PsdtProduct" dataDocumentId="PopcProduct"/>
 
     <moqui.basic.email.EmailTemplate emailTemplateId="PopcOrderPlaced" description="POPC Order Placed"
             emailServerId="SYSTEM" bodyScreenLocation="component://SimpleScreens/screen/email/OrderPlaced.xml" webappName="webroot"
