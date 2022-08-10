@@ -35,6 +35,7 @@ class PopCommerceScreenTests extends Specification {
     def setupSpec() {
         ec = Moqui.getExecutionContext()
         ec.user.loginUser("joe@public.com", "moqui")
+        logger.info("Logged in customer user ${ec.user.userId}")
         screenTest = ec.screen.makeTest().baseScreenPath("popc")
 
         ec.entity.tempSetSequencedIdPrimary("mantle.order.OrderHeader", 63200, 10)
@@ -67,7 +68,7 @@ class PopCommerceScreenTests extends Specification {
         for (String containsText in containsTextList) {
             boolean contains = containsText ? str.assertContains(containsText) : true
             if (!contains) {
-                logger.info("In ${screenPath} text [${containsText}] not found:\n${str.output}")
+                logger.warn("In ${screenPath} text [${containsText}] not found:\n${str.output}")
                 containsAll = false
             }
 
