@@ -69,8 +69,9 @@
 
     <moqui.basic.LocalizedMessage original="Payment Methods" locale="zh" localized="付款方法"/>
     <moqui.basic.LocalizedMessage original="Create Credit Card" locale="zh" localized="创建信用卡"/>
+
     <moqui.basic.LocalizedMessage original="Name On Account" locale="zh" localized="账户名"/>
-    <moqui.basic.LocalizedMessage original="Company Name On Account" locale="zh" localized="帐户上的公司名称"/>
+    <moqui.basic.LocalizedMessage original="Company Name On Account" locale="zh" localized="账户上的公司名称"/>
     <moqui.basic.LocalizedMessage original="Card Number" locale="zh" localized="卡号"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="CctVisa" locale="zh" localized="Visa 卡"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="CctMastercard" locale="zh" localized="万事达卡"/>
@@ -112,7 +113,6 @@
     <moqui.basic.LocalizedMessage original="Products" locale="zh" localized="产品"/>
     <moqui.basic.LocalizedMessage original="Search Products" locale="zh" localized="搜索产品"/>
     <moqui.basic.LocalizedMessage original="Categories" locale="zh" localized="目录"/>
-<<<<<<< HEAD
     <moqui.basic.LocalizedMessage original="Feature" locale="zh" localized="特征"/>
     <moqui.basic.LocalizedMessage original="New Feature" locale="zh" localized="新增特征"/>
     <moqui.basic.LocalizedMessage original="Facility Locations" locale="zh" localized="设施位置"/>
@@ -121,10 +121,7 @@
     <moqui.basic.LocalizedMessage original="Move Quantity" locale="zh" localized="移动数量"/>
     <moqui.basic.LocalizedMessage original="Add Location" locale="zh" localized="添加位置"/>
     <moqui.basic.LocalizedMessage original="Features" locale="zh" localized="特征"/>
-    <moqui.basic.LocalizedMessage original="Feature Groups" locale="zh" localized="特征组"/>
-=======
     <moqui.basic.LocalizedMessage original="Feature Groups" locale="zh" localized="特性组"/>
->>>>>>> origin/master
     <moqui.basic.LocalizedMessage original="New Product" locale="zh" localized="新建产品"/>
     <moqui.basic.LocalizedMessage original="Product Type" locale="zh" localized="产品类型"/>
     <moqui.basic.LocalizedMessage original="Product Class" locale="zh" localized="产品分类"/>
@@ -155,13 +152,8 @@
     <moqui.basic.LocalizedMessage original="Assoc. Type" locale="zh" localized="关联类型"/>
     <moqui.basic.LocalizedMessage original="Qty" locale="zh" localized="数量"/>
     <moqui.basic.LocalizedMessage original="Associated From" locale="zh" localized="关联来自"/>
-<<<<<<< HEAD
-    <moqui.basic.LocalizedMessage original="Selectable Features" locale="zh" localized="选择特征"/>
-    <moqui.basic.LocalizedMessage original="Feature Group" locale="zh" localized="特征组"/>
-=======
     <moqui.basic.LocalizedMessage original="Selectable Features" locale="zh" localized="选择特性"/>
     <moqui.basic.LocalizedMessage original="Feature Group" locale="zh" localized="特性组"/>
->>>>>>> origin/master
     <moqui.basic.LocalizedMessage original="Create Variants" locale="zh" localized="创建变体"/>
     <moqui.basic.LocalizedMessage original="Content List" locale="zh" localized="内容列表"/>
     <moqui.basic.LocalizedMessage original="Upload Content" locale="zh" localized="上传内容"/>
@@ -176,15 +168,9 @@
     <moqui.basic.LocalizedMessage original="UOM Dimensions" locale="zh" localized="尺寸单位"/>
     <moqui.basic.LocalizedMessage original="Generate Url Slug" locale="zh" localized="生成网址别名"/>
     <moqui.basic.LocalizedMessage original="Add Other Identification" locale="zh" localized="添加其他标识"/>
-<<<<<<< HEAD
-    <moqui.basic.LocalizedMessage original="Apply New Feature" locale="zh" localized="应用新特征"/>
-    <moqui.basic.LocalizedMessage original="Apply Feature" locale="zh" localized="应用特征"/>
-    <moqui.basic.LocalizedMessage original="Feature Type" locale="zh" localized="特征类型"/>
-=======
     <moqui.basic.LocalizedMessage original="Apply New Feature" locale="zh" localized="应用新特性"/>
     <moqui.basic.LocalizedMessage original="Apply Feature" locale="zh" localized="应用特性"/>
     <moqui.basic.LocalizedMessage original="Feature Type" locale="zh" localized="特性类型"/>
->>>>>>> origin/master
     <moqui.basic.LocalizedMessage original="Abbreviation" locale="zh" localized="简写"/>
     <moqui.basic.LocalizedMessage original="Seq #" locale="zh" localized="序号"/>
     <moqui.basic.LocalizedMessage original="Add Dimension" locale="zh" localized="添加尺寸"/>
@@ -381,11 +367,7 @@
     <moqui.basic.LocalizedMessage original="Shipping Address" locale="zh" localized="发货地址"/>
     <moqui.basic.LocalizedMessage original="Shipment Method" locale="zh" localized="运输方法"/>
     <moqui.basic.LocalizedMessage original="Set Shipping Address and Method" locale="zh" localized="设置发货地址和运输方法"/>
-<<<<<<< HEAD
-    <moqui.basic.LocalizedMessage original="Quick Add Items" locale="zh" localized="快速添加子项"/>
-=======
     <moqui.basic.LocalizedMessage original="Quick Add Items" locale="zh" localized="快速添加条目"/>
->>>>>>> origin/master
     <moqui.basic.LocalizedMessage original="Re-Calc Prices" locale="zh" localized="重新计算价格"/>
     <moqui.basic.LocalizedMessage original="Ship Calc" locale="zh" localized="运输计算"/>
     <moqui.basic.LocalizedMessage original="Tax Calc" locale="zh" localized="税计算"/>
@@ -420,11 +402,7 @@
     <moqui.basic.LocalizedMessage original="Product Store" locale="zh" localized="产品店铺"/>
     <moqui.basic.LocalizedMessage original="Market Segment" locale="zh" localized="细分市场"/>
     <moqui.basic.LocalizedMessage original="Parent Categories" locale="zh" localized="细分市场"/>
-<<<<<<< HEAD
-    <moqui.basic.LocalizedMessage original="Apply Feature Group" locale="zh" localized="应用特征组"/>
-=======
     <moqui.basic.LocalizedMessage original="Apply Feature Group" locale="zh" localized="应用特性组"/>
->>>>>>> origin/master
     <moqui.basic.LocalizedMessage original="Apply" locale="zh" localized="应用"/>
 
     <moqui.basic.LocalizedMessage original="Add Product" locale="zh" localized="添加产品"/>
@@ -696,19 +674,6 @@
     <moqui.basic.LocalizedMessage original="Current Page ${wikiPageId} at ${wikiPage.wikiSpaceId}/${wikiPage.pagePath}" locale="zh" localized="当前页面 ${wikiPageId} 在 ${wikiPage.wikiSpaceId}/${wikiPage.pagePath}"/>
 
     <moqui.basic.LocalizedMessage original="Find Survey" locale="zh" localized="查找调查"/>
-<<<<<<< HEAD
-    <moqui.basic.LocalizedMessage original="Find Product" locale="zh" localized="查找产品"/>
-    <moqui.basic.LocalizedMessage original="Product Owner" locale="zh" localized="产品所有者"/>
-    <moqui.basic.LocalizedMessage original="Amount/UOM" locale="zh" localized="金额/单位"/>
-    <moqui.basic.LocalizedMessage original="Full search string: ${queryString?:''}" locale="zh" localized="完整搜索字符串: ${queryString?:''}"/>
-    <moqui.basic.LocalizedMessage original="Search String Reference" locale="zh" localized="搜索字符串参考"/>
-    <moqui.basic.LocalizedMessage original="Feature ID" locale="zh" localized="特征 ID"/>
-    <moqui.basic.LocalizedMessage original="Abbrev" locale="zh" localized="缩写"/>
-    <moqui.basic.LocalizedMessage original="Find Feature" locale="zh" localized="查找特征"/>
-    <moqui.basic.LocalizedMessage original="Find Feature Group" locale="zh" localized="查找特征组"/>
-    <moqui.basic.LocalizedMessage original="New Feature Group" locale="zh" localized="新增特征组"/>
-    <moqui.basic.LocalizedMessage original="Feature Group ID" locale="zh" localized="特征组 ID"/>
-=======
     <moqui.basic.LocalizedMessage original="Find Product" locale="zh" localized="查找商品"/>
     <moqui.basic.LocalizedMessage original="Product Owner" locale="zh" localized="商品所有者"/>
     <moqui.basic.LocalizedMessage original="Amount/UOM" locale="zh" localized="金额/单位"/>
@@ -720,7 +685,6 @@
     <moqui.basic.LocalizedMessage original="Find Feature Group" locale="zh" localized="查找特性组"/>
     <moqui.basic.LocalizedMessage original="New Feature Group" locale="zh" localized="新增特性组"/>
     <moqui.basic.LocalizedMessage original="Feature Group ID" locale="zh" localized="特性组 ID"/>
->>>>>>> origin/master
     <moqui.basic.LocalizedMessage original="Find Category" locale="zh" localized="查找目录"/>
     <moqui.basic.LocalizedMessage original="New Shipping Gateway" locale="zh" localized="新增运输网关"/>
     <moqui.basic.LocalizedMessage original="Order Rate Service" locale="zh" localized="订单费服务"/>
@@ -931,10 +895,6 @@
     <moqui.basic.LocalizedMessage original="Template" locale="zh" localized="模版"/>
 
     <moqui.basic.LocalizedMessage original="Add Store Category" locale="zh" localized="添加店铺目录"/>
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
     <moqui.basic.LocalizedMessage original="Store Category Type" locale="zh" localized="店铺目录类型"/>
     <moqui.basic.LocalizedMessage original="Product Category" locale="zh" localized="产品目录"/>
     <moqui.basic.LocalizedMessage original="New Store Party" locale="zh" localized="新增店铺当事人"/>
@@ -958,7 +918,6 @@
     <moqui.basic.LocalizedMessage original="Current Search String" locale="zh" localized="当前搜索字符串"/>
     <moqui.basic.LocalizedMessage original="${queryString?:'No Current Search'}" locale="zh" localized="${queryString?:'当前无搜索'}"/>
     <moqui.basic.LocalizedMessage original="None" locale="zh" localized="没有"/>
-<<<<<<< HEAD
     <moqui.basic.LocalizedMessage original="Product Quality" locale="zh" localized="产品质量"/>
     <moqui.basic.LocalizedMessage original="Default Seq #" locale="zh" localized="默认序列 #"/>
     <moqui.basic.LocalizedMessage original="Default Amount" locale="zh" localized="默认金额"/>
@@ -981,8 +940,6 @@
     <moqui.basic.LocalizedMessage original="Markup Shipment Ship Labels" locale="zh" localized="标记货件运输标签"/>
 
     <moqui.basic.LocalizedMessage original="Packaging Type" locale="zh" localized="封装类型"/>
-=======
->>>>>>> origin/master
 
 
     <moqui.basic.LocalizedMessage original="Local Test, Declines Auth and Capture, Approves Release and Refund" locale="zh" localized="本地测试，拒绝授权和捕获，批准发布和退款"/>
@@ -992,7 +949,6 @@
     <moqui.basic.LocalizedMessage original="Create parent periods (years, quarters, etc) then create child periods from parent period screen. " locale="zh" localized="创建父期间（年、季度等），然后从父期间屏幕创建子期间。"/>
 
 
-<<<<<<< HEAD
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="AsResAutoNone" locale="zh" localized="没有自动保留"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="AsResAutoPlaced" locale="zh" localized="已下订单"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="AsResAutoApproved" locale="zh" localized="订单批准"/>
@@ -1013,22 +969,16 @@
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstStorePath" locale="zh" localized="店铺产品列表的基本路径"/>
 
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstTemplateClientAccount" locale="zh" localized="客户帐户页面模板"/>
-=======
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstHomePath" locale="zh" localized="店铺应用程序的基本路径"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstStorePath" locale="zh" localized="店铺产品列表的基本路径"/>
 
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstTemplateClientAccount" locale="zh" localized="客户账户页面模板"/>
->>>>>>> origin/master
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstTemplateClientAddAddress" locale="zh" localized="客户添加地址模板"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstTemplateClientCheckoutHeader" locale="zh" localized="客户结帐头部模板"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstTemplateClientCheckout" locale="zh" localized="客户结帐模板"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstTemplateClientContactInfo" locale="zh" localized="客户联系信息模板"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstTemplateClientCheckoutSuccess" locale="zh" localized="客户结帐成功模板"/>
-<<<<<<< HEAD
-    <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstTemplateClientAccountCreate" locale="zh" localized="客户帐户创建模板"/>
-=======
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstTemplateClientAccountCreate" locale="zh" localized="客户账户创建模板"/>
->>>>>>> origin/master
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstTemplateClientLogin" locale="zh" localized="客户登录页面模板"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstTemplateClientMenu" locale="zh" localized="客户菜单页面模板"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsstTemplateClientOrderDetail" locale="zh" localized="客户订单详情模板"/>
@@ -1178,11 +1128,7 @@
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PfatSelectable" locale="zh" localized="虚拟产品可选"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PfatDistinguishing" locale="zh" localized="区分非标准"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PfatStandard" locale="zh" localized="标准"/>
-<<<<<<< HEAD
-    <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PfatOptional" locale="zh" localized="产品特征可选"/>
-=======
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PfatOptional" locale="zh" localized="产品特性可选"/>
->>>>>>> origin/master
 
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PctCatalog" locale="zh" localized="目录"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PctIndustry" locale="zh" localized="库存"/>
@@ -1195,11 +1141,7 @@
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PctCrossSell" locale="zh" localized="交叉销售"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PctTax" locale="zh" localized="税"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PctGiftCard" locale="zh" localized="礼品卡"/>
-<<<<<<< HEAD
-    <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PctBestSelling" locale="zh" localized="推荐产品"/>
-=======
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PctBestSelling" locale="zh" localized="最畅销"/>
->>>>>>> origin/master
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PctInventoryGroup" locale="zh" localized="库存组"/>
 
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShMthNextDayPri" locale="zh" localized="次日优先"/>
@@ -1311,11 +1253,7 @@
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="AsClsInventoryRaw" locale="zh" localized="库存 - 原材料"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="AsClsInventorySub" locale="zh" localized="库存 - 子组件"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="AsClsInventoryFin" locale="zh" localized="库存 - 成品"/>
-<<<<<<< HEAD
-    <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="AsClsInventoryDig" locale="zh" localized="库存 - 数字产品"/>
-=======
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="AsClsInventoryDig" locale="zh" localized="库存 - 数字商品"/>
->>>>>>> origin/master
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="AsClsWhEquip" locale="zh" localized="仓库设备"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="AsClsMfgEquip" locale="zh" localized="制造设备"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="AsClsBoat" locale="zh" localized="船"/>
@@ -1363,7 +1301,6 @@
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="UT_OTHER_MEASURE" locale="zh" localized="其它"/>
 
 
-<<<<<<< HEAD
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PftAccessory" locale="zh" localized="配饰"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PftAmount" locale="zh" localized="金额"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PftNetWeight" locale="zh" localized="净重"/>
@@ -1392,11 +1329,6 @@
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PftWarranty" locale="zh" localized="保修单"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PftModelYear" locale="zh" localized="车型年"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PftYearMade" locale="zh" localized="制作年份"/>
-
-
-=======
->>>>>>> origin/master
-
 
 
 </entity-facade-xml>
