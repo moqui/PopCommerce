@@ -113,14 +113,14 @@
     <moqui.basic.LocalizedMessage original="Products" locale="zh" localized="产品"/>
     <moqui.basic.LocalizedMessage original="Search Products" locale="zh" localized="搜索产品"/>
     <moqui.basic.LocalizedMessage original="Categories" locale="zh" localized="目录"/>
-    <moqui.basic.LocalizedMessage original="Feature" locale="zh" localized="特征"/>
-    <moqui.basic.LocalizedMessage original="New Feature" locale="zh" localized="新增特征"/>
+    <moqui.basic.LocalizedMessage original="Feature" locale="zh" localized="特性"/>
+    <moqui.basic.LocalizedMessage original="New Feature" locale="zh" localized="新增特性"/>
     <moqui.basic.LocalizedMessage original="Facility Locations" locale="zh" localized="设施位置"/>
     <moqui.basic.LocalizedMessage original="Min Stock" locale="zh" localized="最小库存"/>
     <moqui.basic.LocalizedMessage original="Move Qty" locale="zh" localized="移动数量"/>
     <moqui.basic.LocalizedMessage original="Move Quantity" locale="zh" localized="移动数量"/>
     <moqui.basic.LocalizedMessage original="Add Location" locale="zh" localized="添加位置"/>
-    <moqui.basic.LocalizedMessage original="Features" locale="zh" localized="特征"/>
+    <moqui.basic.LocalizedMessage original="Features" locale="zh" localized="特性"/>
     <moqui.basic.LocalizedMessage original="Feature Groups" locale="zh" localized="特性组"/>
     <moqui.basic.LocalizedMessage original="New Product" locale="zh" localized="新建产品"/>
     <moqui.basic.LocalizedMessage original="Product Type" locale="zh" localized="产品类型"/>
@@ -922,15 +922,15 @@
     <moqui.basic.LocalizedMessage original="Default Seq #" locale="zh" localized="默认序列 #"/>
     <moqui.basic.LocalizedMessage original="Default Amount" locale="zh" localized="默认金额"/>
     <moqui.basic.LocalizedMessage original="Number Specified" locale="zh" localized="指定号码"/>
-    <moqui.basic.LocalizedMessage original="Add To Feature Group" locale="zh" localized="添加到特征组"/>
+    <moqui.basic.LocalizedMessage original="Add To Feature Group" locale="zh" localized="添加到特性组"/>
     <moqui.basic.LocalizedMessage original="Add To Product" locale="zh" localized="添加到产品"/>
     <moqui.basic.LocalizedMessage original="List" locale="zh" localized="列表"/>
     <moqui.basic.LocalizedMessage original="Any Field" locale="zh" localized="任意字段"/>
-    <moqui.basic.LocalizedMessage original="Feature 2" locale="zh" localized="特征 2"/>
+    <moqui.basic.LocalizedMessage original="Feature 2" locale="zh" localized="特性 2"/>
     <moqui.basic.LocalizedMessage original="Add All to Category" locale="zh" localized="添加全部到目录"/>
     <moqui.basic.LocalizedMessage original="Remove All from Category" locale="zh" localized="从目录移除全部"/>
-    <moqui.basic.LocalizedMessage original="Add Feature to All" locale="zh" localized="全部添加特征"/>
-    <moqui.basic.LocalizedMessage original="Remove Feature from All" locale="zh" localized="全部移除特征"/>
+    <moqui.basic.LocalizedMessage original="Add Feature to All" locale="zh" localized="全部添加特性"/>
+    <moqui.basic.LocalizedMessage original="Remove Feature from All" locale="zh" localized="全部移除特性"/>
     <moqui.basic.LocalizedMessage original="Save Changes" locale="zh" localized="保存更改"/>
     <moqui.basic.LocalizedMessage original="Undo Changes" locale="zh" localized="取消更改"/>
     <moqui.basic.LocalizedMessage original="Reset to Default" locale="zh" localized="重置为默认"/>
