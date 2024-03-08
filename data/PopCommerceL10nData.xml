@@ -180,7 +180,7 @@
     <moqui.basic.LocalizedMessage original="Incoming Shipments" locale="zh" localized="在途进货"/>
     <moqui.basic.LocalizedMessage original="Inventory Assets" locale="zh" localized="库存资产"/>
     <moqui.basic.LocalizedMessage original="Sales Orders" locale="zh" localized="销售订单"/>
-    <moqui.basic.LocalizedMessage original="Outgoing Shipments" locale="zh" localized="出货"/>
+    <moqui.basic.LocalizedMessage original="Outgoing Shipments" locale="zh" localized="发货"/>
     <moqui.basic.LocalizedMessage original="Wiki Blogs" locale="zh" localized="维基博客"/>
     <moqui.basic.LocalizedMessage original="Placed" locale="zh" localized="已下达"/>
     <moqui.basic.LocalizedMessage original="Held" locale="zh" localized="已保留"/>
@@ -417,7 +417,7 @@
     <moqui.basic.LocalizedMessage original="Reject Quote Request" locale="zh" localized="拒绝报价请求"/>
     <moqui.basic.LocalizedMessage original="Create Invoice" locale="zh" localized="创建发票"/>
 
-    <moqui.basic.LocalizedMessage original="New Outgoing Shipment" locale="zh" localized="新增出货"/>
+    <moqui.basic.LocalizedMessage original="New Outgoing Shipment" locale="zh" localized="新增发货"/>
     <moqui.basic.LocalizedMessage original="New Incoming Shipment" locale="zh" localized="新增在途进货"/>
     <moqui.basic.LocalizedMessage original="New Transfer Shipment" locale="zh" localized="新增转运"/>
     <moqui.basic.LocalizedMessage original="Package Tracking" locale="zh" localized="包裹追踪"/>
@@ -1070,7 +1070,7 @@
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsdtContent" locale="zh" localized="内容搜索"/>
 
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShpTpIncoming" locale="zh" localized="在途进货"/>
-    <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShpTpOutgoing" locale="zh" localized="在途出货"/>
+    <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShpTpOutgoing" locale="zh" localized="在途发货"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShpTpSalesReturn" locale="zh" localized="销售退货"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShpTpSales" locale="zh" localized="销售运输"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShpTpPurchase" locale="zh" localized="采购运输"/>
