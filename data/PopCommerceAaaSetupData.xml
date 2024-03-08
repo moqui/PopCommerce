@@ -21,15 +21,15 @@ along with this software (see the LICENSE.md file). If not, see
     -->
 
     <!-- ecommerce authz/permission for ALL users -->
-    <moqui.security.ArtifactGroup artifactGroupId="POPC" description="POP Commerce App (via root screen)"/>
+    <moqui.security.ArtifactGroup artifactGroupId="POPC" description="电商APP (通过根屏幕)"/>
     <moqui.security.ArtifactGroupMember artifactGroupId="POPC" artifactName="component://PopCommerce/screen/PopCommerceRoot.xml"
             artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
     <moqui.security.ArtifactAuthz artifactAuthzId="POPC_ALL" userGroupId="ALL_USERS" artifactGroupId="POPC"
             authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL"/>
 
     <!-- PopCommerce Admin App Administrators User Group -->
-    <moqui.basic.Enumeration description="POPC ERP App" enumId="UgtPopcAdmin" enumTypeId="UserGroupType"/>
-    <userGroups userGroupId="POP_COMMERCE_ADMIN" description="POPC ERP Administrators" groupTypeEnumId="UgtPopcAdmin">
+    <moqui.basic.Enumeration description="电商ERP App" enumId="UgtPopcAdmin" enumTypeId="UserGroupType"/>
+    <userGroups userGroupId="POP_COMMERCE_ADMIN" description="电商ERP管理员" groupTypeEnumId="UgtPopcAdmin">
         <permissions userPermissionId="INVOICE_APPROVE" fromDate="0"/>
         <permissions userPermissionId="ORDER_APPROVE" fromDate="0"/>
         <permissions userPermissionId="CARD_NUMBER_EDIT" fromDate="0"/>
@@ -38,7 +38,7 @@ along with this software (see the LICENSE.md file). If not, see
     </userGroups>
 
     <!-- HH Warehouse App -->
-    <artifactGroups artifactGroupId="POPC_HH_WH" description="HH Warehouse App (via root screen)">
+    <artifactGroups artifactGroupId="POPC_HH_WH" description="仓库APP (通过根屏幕)">
         <artifacts artifactName="component://SimpleScreens/screen/BasicHandheld/Warehouse.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
         <authz artifactAuthzId="POPC_HH_WH_ADM" userGroupId="ADMIN"  authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
@@ -47,7 +47,7 @@ along with this software (see the LICENSE.md file). If not, see
     </artifactGroups>
 
     <!-- PopCommerce Admin screens admin authz -->
-    <artifactGroups artifactGroupId="POP_COMMERCE_ADMIN" description="PopCommerce Admin (via root screen)">
+    <artifactGroups artifactGroupId="POP_COMMERCE_ADMIN" description="电商管理 (通过根屏幕)">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
         <authz artifactAuthzId="POP_COMMERCE_ADM_ADM" userGroupId="ADMIN"  authzTypeEnumId="AUTHZT_ALWAYS" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
@@ -56,7 +56,7 @@ along with this software (see the LICENSE.md file). If not, see
     </artifactGroups>
 
     <!-- Root screen (no inherit) and dashboard group, for all POPC user groups -->
-    <artifactGroups artifactGroupId="PopcAdminApp" description="POPC ERP App Access">
+    <artifactGroups artifactGroupId="PopcAdminApp" description="电商ERP APP访问">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="N"/>
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/dashboard.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
         <artifacts artifactName="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
@@ -65,36 +65,36 @@ along with this software (see the LICENSE.md file). If not, see
     </artifactGroups>
 
     <!-- Artifact Groups for Parts of POP Commerce Admin App -->
-    <artifactGroups artifactGroupId="PopcAdminAccounting" description="POPC Accounting">
+    <artifactGroups artifactGroupId="PopcAdminAccounting" description="电商会计">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Accounting.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminAsset" description="POPC Asset">
+    <artifactGroups artifactGroupId="PopcAdminAsset" description="电商资产">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Asset.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminCatalog" description="POPC Catalog">
+    <artifactGroups artifactGroupId="PopcAdminCatalog" description="电商目录">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Catalog.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminStore" description="POPC Stores">
+    <artifactGroups artifactGroupId="PopcAdminStore" description="电商店铺">
         <artifacts artifactName="component://SimpleScreens/screen/SimpleScreens/ProductStore.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminCustomer" description="POPC Customer">
+    <artifactGroups artifactGroupId="PopcAdminCustomer" description="电商客户">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Customer.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminFacility" description="POPC Facility">
+    <artifactGroups artifactGroupId="PopcAdminFacility" description="电商设施">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Facility.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminOrder" description="POPC Order">
+    <artifactGroups artifactGroupId="PopcAdminOrder" description="电商订单">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Order.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminParty" description="POPC Party">
+    <artifactGroups artifactGroupId="PopcAdminParty" description="电商当事人">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Party.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminRequest" description="POPC Request">
+    <artifactGroups artifactGroupId="PopcAdminRequest" description="电商请求">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Request.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminReturn" description="POPC Return">
+    <artifactGroups artifactGroupId="PopcAdminReturn" description="电商退货">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Return.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminShipment" description="POPC Shipment">
+    <artifactGroups artifactGroupId="PopcAdminShipment" description="电商出货">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Shipment.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminShipping" description="POPC Shipping">
+    <artifactGroups artifactGroupId="PopcAdminShipping" description="电商运输">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Shipping.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminSupplier" description="POPC Supplier">
+    <artifactGroups artifactGroupId="PopcAdminSupplier" description="电商供应商">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Supplier.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
-    <artifactGroups artifactGroupId="PopcAdminWiki" description="POPC Wiki/Content">
+    <artifactGroups artifactGroupId="PopcAdminWiki" description="电商维基/内容">
         <artifacts artifactName="component://PopCommerce/screen/PopCommerceAdmin/Wiki.xml" artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/></artifactGroups>
 
-    <artifactGroups artifactGroupId="PopcAdminAssetPhysInv" description="POPC Asset Physical Inventory">
+    <artifactGroups artifactGroupId="PopcAdminAssetPhysInv" description="电商资产实地盘存">
         <artifacts artifactName="component://SimpleScreens/screen/SimpleScreens/Asset/Asset/FindSummary/PhysicalQuantity.xml" artifactTypeEnumId="AT_XML_SCREEN"/>
         <artifacts artifactName="component://SimpleScreens/screen/SimpleScreens/Asset/Asset/FindSummary/PhysicalChange.xml" artifactTypeEnumId="AT_XML_SCREEN"/>
         <artifacts artifactName="component://SimpleScreens/screen/SimpleScreens/Asset/Asset/FindSummary.xml/recordChange" artifactTypeEnumId="AT_XML_SCREEN_TRANS"/>
@@ -105,7 +105,7 @@ along with this software (see the LICENSE.md file). If not, see
     <!-- NOTE: all of these groups use the MANTLE_ACTIVE_ORG filter,
         to constrain users to organizations they are associated with change that to MANTLE_USER_ORG -->
 
-    <userGroups userGroupId="PopcAdminAccounting" description="POPC Accounting" groupTypeEnumId="UgtPopcAdmin">
+    <userGroups userGroupId="PopcAdminAccounting" description="电商会计" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="MY_ACCOUNT_PCACC" artifactGroupId="MY_ACCOUNT" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_ACC_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
@@ -124,7 +124,7 @@ along with this software (see the LICENSE.md file). If not, see
         <!-- maybe? add if wanted for all accountants: <permissions userPermissionId="INVOICE_APPROVE" fromDate="0"/> -->
     </userGroups>
 
-    <userGroups userGroupId="PopcAdminCatalogContent" description="POPC Catalog and Content" groupTypeEnumId="UgtPopcAdmin">
+    <userGroups userGroupId="PopcAdminCatalogContent" description="电商目录和内容" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="MY_ACCOUNT_PCCAT" artifactGroupId="MY_ACCOUNT" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_CATCON_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
@@ -134,7 +134,7 @@ along with this software (see the LICENSE.md file). If not, see
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
     </userGroups>
 
-    <userGroups userGroupId="PopcAdminPurchasing" description="POPC Purchasing" groupTypeEnumId="UgtPopcAdmin">
+    <userGroups userGroupId="PopcAdminPurchasing" description="电商采购" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="MY_ACCOUNT_PCPU" artifactGroupId="MY_ACCOUNT" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_PURCH_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
@@ -151,7 +151,7 @@ along with this software (see the LICENSE.md file). If not, see
         <authz artifactAuthzId="POPC_PURCH_SHP" artifactGroupId="PopcAdminShipment" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_VIEW">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
     </userGroups>
-    <userGroups userGroupId="PopcAdminPurchasingSup" description="POPC Purchasing Supervisors" groupTypeEnumId="UgtPopcAdmin">
+    <userGroups userGroupId="PopcAdminPurchasingSup" description="电商采购主管" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="MY_ACCOUNT_PCPUSUP" artifactGroupId="MY_ACCOUNT" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_PURSUP_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
@@ -171,7 +171,7 @@ along with this software (see the LICENSE.md file). If not, see
         <permissions userPermissionId="ORDER_APPROVE" fromDate="0"/>
     </userGroups>
 
-    <userGroups userGroupId="PopcAdminSales" description="POPC Sales" groupTypeEnumId="UgtPopcAdmin">
+    <userGroups userGroupId="PopcAdminSales" description="电商销售" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="MY_ACCOUNT_PCSL" artifactGroupId="MY_ACCOUNT" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_SALES_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
@@ -190,7 +190,7 @@ along with this software (see the LICENSE.md file). If not, see
         <authz artifactAuthzId="POPC_SALES_SHP" artifactGroupId="PopcAdminShipment" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_VIEW">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
     </userGroups>
-    <userGroups userGroupId="PopcAdminSalesSup" description="POPC Sales Supervisors" groupTypeEnumId="UgtPopcAdmin">
+    <userGroups userGroupId="PopcAdminSalesSup" description="电商销售主管" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="MY_ACCOUNT_PCSLSUP" artifactGroupId="MY_ACCOUNT" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_SALSUP_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
@@ -213,7 +213,7 @@ along with this software (see the LICENSE.md file). If not, see
         <permissions userPermissionId="CARD_NUMBER_EDIT" fromDate="0"/>
     </userGroups>
 
-    <userGroups userGroupId="PopcAdminWarehouse" description="POPC Warehouse" groupTypeEnumId="UgtPopcAdmin">
+    <userGroups userGroupId="PopcAdminWarehouse" description="电商仓库" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="MY_ACCOUNT_PCWH" artifactGroupId="MY_ACCOUNT" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL"/>
         <authz artifactAuthzId="POPC_SHIP_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_ACTIVE_ORG"/></authz>
@@ -242,7 +242,7 @@ along with this software (see the LICENSE.md file). If not, see
 
     <!-- ========== User Org Limited Groups ========== -->
 
-    <userGroups userGroupId="PopcWhClericalLtd" description="POPC Warehouse Clerical - Org Ltd" groupTypeEnumId="UgtPopcAdmin">
+    <userGroups userGroupId="PopcWhClericalLtd" description="电商仓库办事员-组织限制" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="POPC_WHCL_MY_ACCOUNT" artifactGroupId="MY_ACCOUNT" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
         <authz artifactAuthzId="POPC_WHCL_APP" artifactGroupId="PopcAdminApp" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
@@ -267,7 +267,7 @@ along with this software (see the LICENSE.md file). If not, see
         <authz artifactAuthzId="POPC_WHCL_HHWH" artifactGroupId="POPC_HH_WH" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
     </userGroups>
-    <userGroups userGroupId="PopcWhGeneralLtd" description="POPC Warehouse General - Org Ltd" groupTypeEnumId="UgtPopcAdmin">
+    <userGroups userGroupId="PopcWhGeneralLtd" description="电商仓库总经理-组织限制" groupTypeEnumId="UgtPopcAdmin">
         <authz artifactAuthzId="POPC_WHGN_MY_ACCOUNT" artifactGroupId="MY_ACCOUNT" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
             <filters entityFilterSetId="MANTLE_USER_ORG"/></authz>
         <authz artifactAuthzId="POPC_WHGN_HHWH" artifactGroupId="POPC_HH_WH" authzTypeEnumId="AUTHZT_ALLOW" authzActionEnumId="AUTHZA_ALL">
@@ -276,9 +276,9 @@ along with this software (see the LICENSE.md file). If not, see
 
     <!-- ========== Theme Type and Default Theme for eCommerce ========== -->
 
-    <moqui.basic.Enumeration description="POP Commerce Theme Type" enumId="STT_POP_COMMERCE" enumTypeId="ScreenThemeType"/>
+    <moqui.basic.Enumeration description="电商主题类型" enumId="STT_POP_COMMERCE" enumTypeId="ScreenThemeType"/>
     <moqui.screen.ScreenTheme screenThemeId="POPC_DEFAULT" screenThemeTypeEnumId="STT_POP_COMMERCE"
-            description="POP Commerce Default Theme"/>
+            description="电商默认主题"/>
     <!-- NOTE: these default resources are from the Moqui default runtime webroot component -->
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="10" resourceTypeEnumId="STRT_STYLESHEET" resourceValue=""/>
     <moqui.screen.ScreenThemeResource screenThemeId="POPC_DEFAULT" sequenceNum="20" resourceTypeEnumId="STRT_STYLESHEET"
