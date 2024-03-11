@@ -113,14 +113,14 @@
     <moqui.basic.LocalizedMessage original="Products" locale="zh" localized="产品"/>
     <moqui.basic.LocalizedMessage original="Search Products" locale="zh" localized="搜索产品"/>
     <moqui.basic.LocalizedMessage original="Categories" locale="zh" localized="目录"/>
-    <moqui.basic.LocalizedMessage original="Feature" locale="zh" localized="特征"/>
-    <moqui.basic.LocalizedMessage original="New Feature" locale="zh" localized="新增特征"/>
+    <moqui.basic.LocalizedMessage original="Feature" locale="zh" localized="特性"/>
+    <moqui.basic.LocalizedMessage original="New Feature" locale="zh" localized="新增特性"/>
     <moqui.basic.LocalizedMessage original="Facility Locations" locale="zh" localized="设施位置"/>
     <moqui.basic.LocalizedMessage original="Min Stock" locale="zh" localized="最小库存"/>
     <moqui.basic.LocalizedMessage original="Move Qty" locale="zh" localized="移动数量"/>
     <moqui.basic.LocalizedMessage original="Move Quantity" locale="zh" localized="移动数量"/>
     <moqui.basic.LocalizedMessage original="Add Location" locale="zh" localized="添加位置"/>
-    <moqui.basic.LocalizedMessage original="Features" locale="zh" localized="特征"/>
+    <moqui.basic.LocalizedMessage original="Features" locale="zh" localized="特性"/>
     <moqui.basic.LocalizedMessage original="Feature Groups" locale="zh" localized="特性组"/>
     <moqui.basic.LocalizedMessage original="New Product" locale="zh" localized="新建产品"/>
     <moqui.basic.LocalizedMessage original="Product Type" locale="zh" localized="产品类型"/>
@@ -180,7 +180,7 @@
     <moqui.basic.LocalizedMessage original="Incoming Shipments" locale="zh" localized="在途进货"/>
     <moqui.basic.LocalizedMessage original="Inventory Assets" locale="zh" localized="库存资产"/>
     <moqui.basic.LocalizedMessage original="Sales Orders" locale="zh" localized="销售订单"/>
-    <moqui.basic.LocalizedMessage original="Outgoing Shipments" locale="zh" localized="出货"/>
+    <moqui.basic.LocalizedMessage original="Outgoing Shipments" locale="zh" localized="发货"/>
     <moqui.basic.LocalizedMessage original="Wiki Blogs" locale="zh" localized="维基博客"/>
     <moqui.basic.LocalizedMessage original="Placed" locale="zh" localized="已下达"/>
     <moqui.basic.LocalizedMessage original="Held" locale="zh" localized="已保留"/>
@@ -417,7 +417,7 @@
     <moqui.basic.LocalizedMessage original="Reject Quote Request" locale="zh" localized="拒绝报价请求"/>
     <moqui.basic.LocalizedMessage original="Create Invoice" locale="zh" localized="创建发票"/>
 
-    <moqui.basic.LocalizedMessage original="New Outgoing Shipment" locale="zh" localized="新增出货"/>
+    <moqui.basic.LocalizedMessage original="New Outgoing Shipment" locale="zh" localized="新增发货"/>
     <moqui.basic.LocalizedMessage original="New Incoming Shipment" locale="zh" localized="新增在途进货"/>
     <moqui.basic.LocalizedMessage original="New Transfer Shipment" locale="zh" localized="新增转运"/>
     <moqui.basic.LocalizedMessage original="Package Tracking" locale="zh" localized="包裹追踪"/>
@@ -922,15 +922,15 @@
     <moqui.basic.LocalizedMessage original="Default Seq #" locale="zh" localized="默认序列 #"/>
     <moqui.basic.LocalizedMessage original="Default Amount" locale="zh" localized="默认金额"/>
     <moqui.basic.LocalizedMessage original="Number Specified" locale="zh" localized="指定号码"/>
-    <moqui.basic.LocalizedMessage original="Add To Feature Group" locale="zh" localized="添加到特征组"/>
+    <moqui.basic.LocalizedMessage original="Add To Feature Group" locale="zh" localized="添加到特性组"/>
     <moqui.basic.LocalizedMessage original="Add To Product" locale="zh" localized="添加到产品"/>
     <moqui.basic.LocalizedMessage original="List" locale="zh" localized="列表"/>
     <moqui.basic.LocalizedMessage original="Any Field" locale="zh" localized="任意字段"/>
-    <moqui.basic.LocalizedMessage original="Feature 2" locale="zh" localized="特征 2"/>
+    <moqui.basic.LocalizedMessage original="Feature 2" locale="zh" localized="特性 2"/>
     <moqui.basic.LocalizedMessage original="Add All to Category" locale="zh" localized="添加全部到目录"/>
     <moqui.basic.LocalizedMessage original="Remove All from Category" locale="zh" localized="从目录移除全部"/>
-    <moqui.basic.LocalizedMessage original="Add Feature to All" locale="zh" localized="全部添加特征"/>
-    <moqui.basic.LocalizedMessage original="Remove Feature from All" locale="zh" localized="全部移除特征"/>
+    <moqui.basic.LocalizedMessage original="Add Feature to All" locale="zh" localized="全部添加特性"/>
+    <moqui.basic.LocalizedMessage original="Remove Feature from All" locale="zh" localized="全部移除特性"/>
     <moqui.basic.LocalizedMessage original="Save Changes" locale="zh" localized="保存更改"/>
     <moqui.basic.LocalizedMessage original="Undo Changes" locale="zh" localized="取消更改"/>
     <moqui.basic.LocalizedMessage original="Reset to Default" locale="zh" localized="重置为默认"/>
@@ -1070,7 +1070,7 @@
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="PsdtContent" locale="zh" localized="内容搜索"/>
 
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShpTpIncoming" locale="zh" localized="在途进货"/>
-    <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShpTpOutgoing" locale="zh" localized="在途出货"/>
+    <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShpTpOutgoing" locale="zh" localized="在途发货"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShpTpSalesReturn" locale="zh" localized="销售退货"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShpTpSales" locale="zh" localized="销售运输"/>
     <moqui.basic.LocalizedEntityField entityName="moqui.basic.Enumeration" fieldName="description" pkValue="ShpTpPurchase" locale="zh" localized="采购运输"/>
