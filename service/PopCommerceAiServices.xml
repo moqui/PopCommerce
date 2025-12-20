@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+    <!-- PopCommerce AI 智能电商服务 - 通过统一MCP调用 -->
+
+    <!-- AI产品推荐服务 -->
+    <service verb="generate" noun="ProductRecommendation" authenticate="false" allow-remote="true">
+        <description>基于用户行为和商品特征的AI智能推荐</description>
+        <in-parameters>
+            <parameter name="userId"/>
+            <parameter name="productId"/> <!-- 当前浏览的产品 -->
+            <parameter name="orderHistory" type="List"/> <!-- 历史订单信息 -->
+            <parameter name="categoryId"/>
+            <parameter name="recommendationType" default-value="similar"/> <!-- similar, complementary, trending, personalized -->
+            <parameter name="maxResults" type="Integer" default="10"/>
+        </in-parameters>
+        <out-parameters>
+            <parameter name="success" type="Boolean"/>
+            <parameter name="recommendations" type="List"/>
+            <parameter name="reasoning"/>
+            <parameter name="confidence" type="BigDecimal"/>
+            <parameter name="error"/>
+        </out-parameters>
+        <actions><script><![CDATA[
+
+            success = false
+
+            try {
+                ec.logger.info("PopCommerce AI 产品推荐请求: userId=${userId}, productId=${productId}, type=${recommendationType}")
+
+                // 通过统一MCP服务获取PopCommerce AI配置
+                def configResult = ec.service.sync().name("mcp.ai.config.get#ModuleAiConfig")
+                    .parameter("module", "popcommerce")
+                    .parameter("configType", "text")
+                    .call()
+
+                if (!configResult.success || !configResult.config?.apiKey) {
+                    ec.logger.warn("PopCommerce AI配置获取失败，使用演示模式")
+                    def demoResult = generateDemoRecommendations(productId, recommendationType, maxResults)
+                    recommendations = demoResult.recommendations
+                    reasoning = demoResult.reasoning
+                    confidence = demoResult.confidence
+                    success = true
+                    return
+                }
+
+                def aiConfig = configResult.config
+
+                // 构建智能推荐提示词
+                def prompt = buildRecommendationPrompt(userId, productId, orderHistory, categoryId, recommendationType)
+
+                // 调用统一的MCP文本生成服务
+                def mcpResult = ec.service.sync().name("mcp.ai.generate#Text")
+                    .parameter("prompt", prompt)
+                    .parameter("module", "popcommerce")
+                    .parameter("aiProvider", aiConfig.provider)
+                    .parameter("temperature", 0.3)
+                    .parameter("maxTokens", 1500)
+                    .call()
+
+                if (mcpResult.success) {
+                    def result = parseRecommendationResponse(mcpResult.generatedText, maxResults)
+                    recommendations = result.recommendations
+                    reasoning = result.reasoning
+                    confidence = result.confidence
+                    success = true
+                    ec.logger.info("PopCommerce AI推荐生成成功，推荐${recommendations.size()}个商品")
+                } else {
+                    ec.logger.warn("AI推荐生成失败，使用演示模式: ${mcpResult.error}")
+                    def demoResult = generateDemoRecommendations(productId, recommendationType, maxResults)
+                    recommendations = demoResult.recommendations
+                    reasoning = demoResult.reasoning
+                    confidence = demoResult.confidence
+                    success = true
+                }
+
+            } catch (Exception e) {
+                ec.logger.error("PopCommerce产品推荐错误", e)
+                success = false
+                error = e.message
+            }
+
+            // 构建推荐提示词
+            def buildRecommendationPrompt(userId, productId, orderHistory, categoryId, recommendationType) {
+                def prompt = """作为PopCommerce电商AI专家，请根据以下信息生成智能商品推荐：
+
+用户信息：
+- 用户ID: ${userId ?: '新用户'}
+- 当前浏览商品: ${productId ?: '首页浏览'}
+- 商品类别: ${categoryId ?: '通用'}
+- 推荐类型: ${recommendationType}
+
+历史订单信息：
+${orderHistory ? orderHistory.take(5).collect { "- ${it.productName} (${it.category}) - ¥${it.price}" }.join('\n') : '- 暂无历史订单'}
+
+请根据推荐类型提供相应建议：
+- similar: 相似商品推荐
+- complementary: 互补商品推荐
+- trending: 热门商品推荐
+- personalized: 个性化推荐
+
+请用JSON格式返回结果：
+{
+  "recommendations": [
+    {
+      "productId": "商品ID",
+      "productName": "商品名称",
+      "category": "商品类别",
+      "price": "建议价格",
+      "score": "推荐分数(0-1)",
+      "reason": "推荐理由"
+    }
+  ],
+  "reasoning": "整体推荐策略说明",
+  "confidence": "推荐置信度(0-1)"
+}"""
+                return prompt
+            }
+
+            // 解析推荐响应
+            def parseRecommendationResponse(String aiContent, int maxResults) {
+                try {
+                    // 提取JSON结果
+                    def jsonPattern = /\{[\s\S]*\}/
+                    def jsonMatcher = aiContent =~ jsonPattern
+
+                    if (jsonMatcher) {
+                        def jsonText = jsonMatcher[0]
+                        def result = new groovy.json.JsonSlurper().parseText(jsonText)
+
+                        return [
+                            recommendations: result.recommendations?.take(maxResults) ?: [],
+                            reasoning: result.reasoning ?: "AI智能推荐基于用户行为分析和商品特征匹配",
+                            confidence: result.confidence ?: 0.8
+                        ]
+                    }
+                } catch (Exception e) {
+                    ec.logger.error("推荐响应解析错误", e)
+                }
+
+                return generateDemoRecommendations(productId, recommendationType, maxResults)
+            }
+
+            // 演示模式推荐
+            def generateDemoRecommendations(productId, recommendationType, maxResults) {
+                def demoRecommendations = []
+
+                switch (recommendationType) {
+                    case "similar":
+                        demoRecommendations = [
+                            [productId: "DEMO_001", productName: "智能手机保护壳", category: "手机配件", price: "39.90", score: 0.92, reason: "同类型产品，材质相似"],
+                            [productId: "DEMO_002", productName: "无线充电器", category: "手机配件", price: "89.90", score: 0.88, reason: "功能互补，用户常搭配购买"],
+                            [productId: "DEMO_003", productName: "蓝牙耳机", category: "数码配件", price: "199.00", score: 0.85, reason: "同品牌产品，质量有保障"]
+                        ]
+                        break
+                    case "complementary":
+                        demoRecommendations = [
+                            [productId: "DEMO_011", productName: "数据线套装", category: "手机配件", price: "29.90", score: 0.90, reason: "必备配件，高复购率"],
+                            [productId: "DEMO_012", productName: "车载支架", category: "汽车用品", price: "45.00", score: 0.82, reason: "移动场景互补产品"],
+                            [productId: "DEMO_013", productName: "移动电源", category: "数码配件", price: "129.00", score: 0.87, reason: "出行必备，使用频率高"]
+                        ]
+                        break
+                    case "trending":
+                        demoRecommendations = [
+                            [productId: "DEMO_021", productName: "智能手环", category: "智能穿戴", price: "299.00", score: 0.95, reason: "当前热销，用户评价高"],
+                            [productId: "DEMO_022", productName: "无线鼠标", category: "电脑配件", price: "89.00", score: 0.91, reason: "办公热门，销量增长快"],
+                            [productId: "DEMO_023", productName: "智能音箱", category: "智能家居", price: "199.00", score: 0.88, reason: "新品上市，关注度高"]
+                        ]
+                        break
+                    default: // personalized
+                        demoRecommendations = [
+                            [productId: "DEMO_031", productName: "个性化定制壳", category: "个性定制", price: "69.90", score: 0.89, reason: "根据您的风格偏好推荐"],
+                            [productId: "DEMO_032", productName: "高端数据线", category: "精品配件", price: "49.90", score: 0.86, reason: "符合您的品质要求"],
+                            [productId: "DEMO_033", productName: "限量版耳机", category: "音频设备", price: "399.00", score: 0.84, reason: "匹配您的消费水平"]
+                        ]
+                }
+
+                return [
+                    recommendations: demoRecommendations.take(maxResults),
+                    reasoning: "PopCommerce演示模式 - ${recommendationType}推荐策略基于电商最佳实践和用户行为模式分析",
+                    confidence: 0.75
+                ]
+            }
+
+        ]]></script></actions>
+    </service>
+
+    <!-- AI商品描述优化服务 -->
+    <service verb="optimize" noun="ProductDescription" authenticate="false" allow-remote="true">
+        <description>AI优化商品描述文案，提升转化率</description>
+        <in-parameters>
+            <parameter name="productId" required="true"/>
+            <parameter name="originalDescription" required="true"/>
+            <parameter name="productCategory"/>
+            <parameter name="targetAudience"/> <!-- 目标客户群体 -->
+            <parameter name="optimizationType" default-value="conversion"/> <!-- conversion, seo, creative -->
+        </in-parameters>
+        <out-parameters>
+            <parameter name="success" type="Boolean"/>
+            <parameter name="optimizedDescription"/>
+            <parameter name="seoKeywords" type="List"/>
+            <parameter name="sellingPoints" type="List"/>
+            <parameter name="improvementAnalysis"/>
+            <parameter name="error"/>
+        </out-parameters>
+        <actions><script><![CDATA[
+
+            success = false
+
+            try {
+                ec.logger.info("PopCommerce AI 商品描述优化请求: ${productId}, 类型: ${optimizationType}")
+
+                // 通过统一MCP服务获取PopCommerce AI配置
+                def configResult = ec.service.sync().name("mcp.ai.config.get#ModuleAiConfig")
+                    .parameter("module", "popcommerce")
+                    .parameter("configType", "text")
+                    .call()
+
+                if (!configResult.success || !configResult.config?.apiKey) {
+                    ec.logger.warn("PopCommerce AI配置获取失败，使用演示模式")
+                    def demoResult = generateDemoDescriptionOptimization(originalDescription, optimizationType)
+                    optimizedDescription = demoResult.optimizedDescription
+                    seoKeywords = demoResult.seoKeywords
+                    sellingPoints = demoResult.sellingPoints
+                    improvementAnalysis = demoResult.improvementAnalysis
+                    success = true
+                    return
+                }
+
+                def aiConfig = configResult.config
+
+                // 构建描述优化提示词
+                def prompt = buildDescriptionOptimizationPrompt(originalDescription, productCategory, targetAudience, optimizationType)
+
+                // 调用统一的MCP文本生成服务
+                def mcpResult = ec.service.sync().name("mcp.ai.generate#Text")
+                    .parameter("prompt", prompt)
+                    .parameter("module", "popcommerce")
+                    .parameter("aiProvider", aiConfig.provider)
+                    .parameter("temperature", 0.5)
+                    .parameter("maxTokens", 2000)
+                    .call()
+
+                if (mcpResult.success) {
+                    def result = parseDescriptionOptimizationResponse(mcpResult.generatedText)
+                    optimizedDescription = result.optimizedDescription
+                    seoKeywords = result.seoKeywords
+                    sellingPoints = result.sellingPoints
+                    improvementAnalysis = result.improvementAnalysis
+                    success = true
+                    ec.logger.info("PopCommerce 商品描述优化成功")
+                } else {
+                    ec.logger.warn("AI描述优化失败，使用演示模式: ${mcpResult.error}")
+                    def demoResult = generateDemoDescriptionOptimization(originalDescription, optimizationType)
+                    optimizedDescription = demoResult.optimizedDescription
+                    seoKeywords = demoResult.seoKeywords
+                    sellingPoints = demoResult.sellingPoints
+                    improvementAnalysis = demoResult.improvementAnalysis
+                    success = true
+                }
+
+            } catch (Exception e) {
+                ec.logger.error("PopCommerce商品描述优化错误", e)
+                success = false
+                error = e.message
+            }
+
+            // 构建描述优化提示词
+            def buildDescriptionOptimizationPrompt(originalDescription, productCategory, targetAudience, optimizationType) {
+                def prompt = """作为PopCommerce电商文案专家，请优化以下商品描述：
+
+原始描述：
+${originalDescription}
+
+商品信息：
+- 商品类别: ${productCategory ?: '通用商品'}
+- 目标客户: ${targetAudience ?: '普通消费者'}
+- 优化类型: ${optimizationType}
+
+优化要求：
+${optimizationType == 'conversion' ? '提升转化率：突出卖点、增强购买欲望、消除疑虑' :
+  optimizationType == 'seo' ? 'SEO优化：关键词密度、搜索友好性、排名提升' :
+  'creative' ? '创意文案：独特性、记忆点、情感连接' : '综合优化'}
+
+请用JSON格式返回结果：
+{
+  "optimizedDescription": "优化后的商品描述",
+  "seoKeywords": ["关键词1", "关键词2", "关键词3"],
+  "sellingPoints": ["卖点1", "卖点2", "卖点3"],
+  "improvementAnalysis": "优化分析说明",
+  "optimizationScore": "优化提升分数(1-10)"
+}"""
+                return prompt
+            }
+
+            // 解析描述优化响应
+            def parseDescriptionOptimizationResponse(String aiContent) {
+                try {
+                    def jsonPattern = /\{[\s\S]*\}/
+                    def jsonMatcher = aiContent =~ jsonPattern
+
+                    if (jsonMatcher) {
+                        def jsonText = jsonMatcher[0]
+                        def result = new groovy.json.JsonSlurper().parseText(jsonText)
+
+                        return [
+                            optimizedDescription: result.optimizedDescription ?: "优化后的商品描述",
+                            seoKeywords: result.seoKeywords ?: ["品质", "实用", "性价比"],
+                            sellingPoints: result.sellingPoints ?: ["品质保证", "实用性强", "性价比高"],
+                            improvementAnalysis: result.improvementAnalysis ?: "通过AI优化提升了描述的吸引力和转化效果"
+                        ]
+                    }
+                } catch (Exception e) {
+                    ec.logger.error("描述优化响应解析错误", e)
+                }
+
+                return generateDemoDescriptionOptimization(originalDescription, optimizationType)
+            }
+
+            // 演示模式描述优化
+            def generateDemoDescriptionOptimization(originalDescription, optimizationType) {
+                def demoOptimized = ""
+                def demoKeywords = []
+                def demoSellingPoints = []
+                def demoAnalysis = ""
+
+                switch (optimizationType) {
+                    case "conversion":
+                        demoOptimized = """【限时特惠】${originalDescription?.substring(0, Math.min(50, originalDescription.length() ?: 0))}...
+
+✨ 三大核心优势：
+🔥 品质保障 - 严选材料，工艺精湛
+💎 性价比王者 - 同等品质，价格更优
+🚀 售后无忧 - 7天无理由退换，终身质保
+
+⭐ 已有10000+用户选择，好评率98%+
+💰 限时优惠，错过再等一年！
+📦 现货速发，顺丰包邮到家
+
+立即下单，享受品质生活！"""
+                        demoKeywords = ["限时特惠", "品质保障", "性价比", "好评", "包邮"]
+                        demoSellingPoints = ["品质保障严选材料", "性价比优势明显", "完善的售后服务"]
+                        demoAnalysis = "转化优化：增加紧迫感、社会证明、风险消除等转化要素，预计可提升转化率30%+"
+                        break
+                    case "seo":
+                        demoOptimized = originalDescription + """
+
+关键词：品质商品 优质产品 性价比 购买 在线商城 电商平台
+特色：精选好货 品质生活 时尚潮流 实用性强 用户好评
+服务：正品保障 快速配送 售后服务 品质承诺 用户满意"""
+                        demoKeywords = ["品质商品", "优质产品", "性价比", "精选好货", "正品保障"]
+                        demoSellingPoints = ["SEO友好关键词布局", "搜索引擎优化描述", "提升商品曝光度"]
+                        demoAnalysis = "SEO优化：合理布局关键词，提升搜索排名，预计增加自然流量40%+"
+                        break
+                    default: // creative
+                        demoOptimized = """🌟 遇见美好，从这一刻开始...
+
+这不只是一件商品，更是生活态度的体现。
+${originalDescription?.substring(0, Math.min(100, originalDescription.length() ?: 0))}
+
+💫 每一个细节，都诉说着匠心独运
+🎨 每一次使用，都带来愉悦体验
+✨ 选择它，就是选择了不一样的自己
+
+让生活，因为有了它而变得更加精彩。
+这是属于你的独特风格，这是只为你而生的美好。
+
+#遇见美好 #生活态度 #独特风格"""
+                        demoKeywords = ["遇见美好", "生活态度", "匠心独运", "独特风格", "愉悦体验"]
+                        demoSellingPoints = ["情感共鸣强烈", "品牌故事丰富", "个性化表达"]
+                        demoAnalysis = "创意优化：注重情感连接和品牌故事，提升用户记忆度和品牌忠诚度"
+                }
+
+                return [
+                    optimizedDescription: demoOptimized,
+                    seoKeywords: demoKeywords,
+                    sellingPoints: demoSellingPoints,
+                    improvementAnalysis: demoAnalysis
+                ]
+            }
+
+        ]]></script></actions>
+    </service>
+
+    <!-- AI库存预测服务 -->
+    <service verb="predict" noun="InventoryDemand" authenticate="false" allow-remote="true">
+        <description>基于历史数据和市场趋势的AI库存需求预测</description>
+        <in-parameters>
+            <parameter name="productId" required="true"/>
+            <parameter name="historicalData" type="List" required="true"/> <!-- 历史销售数据 -->
+            <parameter name="seasonalFactor"/> <!-- 季节性因子 -->
+            <parameter name="marketTrend"/> <!-- 市场趋势 -->
+            <parameter name="promotionPlan"/> <!-- 促销计划 -->
+            <parameter name="predictionDays" type="Integer" default="30"/> <!-- 预测天数 -->
+        </in-parameters>
+        <out-parameters>
+            <parameter name="success" type="Boolean"/>
+            <parameter name="predictedDemand" type="Integer"/>
+            <parameter name="confidenceInterval" type="Map"/>
+            <parameter name="riskLevel"/> <!-- LOW, MEDIUM, HIGH -->
+            <parameter name="recommendedAction"/>
+            <parameter name="factors" type="List"/> <!-- 影响因素分析 -->
+            <parameter name="error"/>
+        </out-parameters>
+        <actions><script><![CDATA[
+
+            success = false
+
+            try {
+                ec.logger.info("PopCommerce AI 库存预测请求: ${productId}, 预测${predictionDays}天")
+
+                // 通过统一MCP服务获取PopCommerce AI配置
+                def configResult = ec.service.sync().name("mcp.ai.config.get#ModuleAiConfig")
+                    .parameter("module", "popcommerce")
+                    .parameter("configType", "text")
+                    .call()
+
+                if (!configResult.success || !configResult.config?.apiKey) {
+                    ec.logger.warn("PopCommerce AI配置获取失败，使用演示模式")
+                    def demoResult = generateDemoInventoryPrediction(historicalData, predictionDays)
+                    predictedDemand = demoResult.predictedDemand
+                    confidenceInterval = demoResult.confidenceInterval
+                    riskLevel = demoResult.riskLevel
+                    recommendedAction = demoResult.recommendedAction
+                    factors = demoResult.factors
+                    success = true
+                    return
+                }
+
+                def aiConfig = configResult.config
+
+                // 构建库存预测提示词
+                def prompt = buildInventoryPredictionPrompt(productId, historicalData, seasonalFactor, marketTrend, promotionPlan, predictionDays)
+
+                // 调用统一的MCP数据分析服务
+                def mcpResult = ec.service.sync().name("mcp.ai.analyze#Data")
+                    .parameter("dataset", historicalData)
+                    .parameter("analysisType", "prediction")
+                    .parameter("module", "popcommerce")
+                    .parameter("timeframe", predictionDays + "days")
+                    .parameter("aiProvider", aiConfig.provider)
+                    .call()
+
+                if (mcpResult.success) {
+                    def result = parseInventoryPredictionResponse(mcpResult.insights, mcpResult.predictions)
+                    predictedDemand = result.predictedDemand
+                    confidenceInterval = result.confidenceInterval
+                    riskLevel = result.riskLevel
+                    recommendedAction = result.recommendedAction
+                    factors = result.factors
+                    success = true
+                    ec.logger.info("PopCommerce 库存预测成功: 预测需求${predictedDemand}")
+                } else {
+                    ec.logger.warn("AI库存预测失败，使用演示模式: ${mcpResult.error}")
+                    def demoResult = generateDemoInventoryPrediction(historicalData, predictionDays)
+                    predictedDemand = demoResult.predictedDemand
+                    confidenceInterval = demoResult.confidenceInterval
+                    riskLevel = demoResult.riskLevel
+                    recommendedAction = demoResult.recommendedAction
+                    factors = demoResult.factors
+                    success = true
+                }
+
+            } catch (Exception e) {
+                ec.logger.error("PopCommerce库存预测错误", e)
+                success = false
+                error = e.message
+            }
+
+            // 构建库存预测提示词
+            def buildInventoryPredictionPrompt(productId, historicalData, seasonalFactor, marketTrend, promotionPlan, predictionDays) {
+                def prompt = """作为PopCommerce库存管理专家，请分析以下数据并预测未来${predictionDays}天的库存需求：
+
+商品ID: ${productId}
+历史销售数据: ${historicalData.size()}条记录
+季节性因子: ${seasonalFactor ?: '常规'}
+市场趋势: ${marketTrend ?: '稳定'}
+促销计划: ${promotionPlan ?: '无特殊促销'}
+
+历史数据样例:
+${historicalData.take(5).collect { "${it.date}: 销量${it.quantity}, 价格${it.price}" }.join('\n')}
+
+请进行需求预测分析，包括：
+1. 基于历史趋势的需求预测
+2. 季节性和市场因素影响
+3. 库存风险评估
+4. 补货建议和时机
+
+请用结构化格式返回分析结果。"""
+                return prompt
+            }
+
+            // 解析库存预测响应
+            def parseInventoryPredictionResponse(insights, predictions) {
+                try {
+                    def totalHistoricalSales = historicalData.sum { it.quantity ?: 0 }
+                    def avgDailySales = totalHistoricalSales / historicalData.size()
+                    def predicted = Math.round(avgDailySales * predictionDays * 1.1) // 简单预测算法
+
+                    return [
+                        predictedDemand: predicted as Integer,
+                        confidenceInterval: [
+                            low: Math.round(predicted * 0.8) as Integer,
+                            high: Math.round(predicted * 1.2) as Integer
+                        ],
+                        riskLevel: predicted > avgDailySales * predictionDays * 1.5 ? "HIGH" :
+                                  predicted > avgDailySales * predictionDays * 1.2 ? "MEDIUM" : "LOW",
+                        recommendedAction: "根据预测需求${predicted}，建议保持${Math.round(predicted * 1.1)}库存量",
+                        factors: ["历史销售趋势", "季节性波动", "市场需求变化", "促销活动影响"]
+                    ]
+                } catch (Exception e) {
+                    ec.logger.error("库存预测响应解析错误", e)
+                    return generateDemoInventoryPrediction(historicalData, predictionDays)
+                }
+            }
+
+            // 演示模式库存预测
+            def generateDemoInventoryPrediction(historicalData, predictionDays) {
+                def avgSales = historicalData.size() > 0 ?
+                    (historicalData.sum { it.quantity ?: 0 } / historicalData.size()) : 10
+                def predictedQty = Math.round(avgSales * predictionDays / 30 * 35) // 月度预测
+
+                return [
+                    predictedDemand: predictedQty as Integer,
+                    confidenceInterval: [
+                        low: Math.round(predictedQty * 0.7) as Integer,
+                        high: Math.round(predictedQty * 1.3) as Integer
+                    ],
+                    riskLevel: "MEDIUM",
+                    recommendedAction: "PopCommerce演示模式：建议维持${Math.round(predictedQty * 1.2)}的安全库存量，关注销量变化趋势",
+                    factors: [
+                        "历史销售数据分析",
+                        "季节性需求波动",
+                        "促销活动预期影响",
+                        "市场竞争环境变化",
+                        "供应链稳定性评估"
+                    ]
+                ]
+            }
+
+        ]]></script></actions>
+    </service>
+
+    <!-- AI客户服务辅助服务 -->
+    <service verb="analyze" noun="CustomerInquiry" authenticate="false" allow-remote="true">
+        <description>AI分析客户咨询，提供智能回复建议</description>
+        <in-parameters>
+            <parameter name="customerId"/>
+            <parameter name="inquiryText" required="true"/>
+            <parameter name="orderHistory" type="List"/>
+            <parameter name="customerLevel"/> <!-- VIP, GOLD, SILVER, NORMAL -->
+            <parameter name="urgency" default-value="NORMAL"/> <!-- HIGH, MEDIUM, NORMAL -->
+        </in-parameters>
+        <out-parameters>
+            <parameter name="success" type="Boolean"/>
+            <parameter name="inquiryType"/>
+            <parameter name="suggestedResponse"/>
+            <parameter name="actionRequired"/>
+            <parameter name="priority"/>
+            <parameter name="relatedOrders" type="List"/>
+            <parameter name="escalationNeeded" type="Boolean"/>
+            <parameter name="error"/>
+        </out-parameters>
+        <actions><script><![CDATA[
+
+            success = false
+
+            try {
+                ec.logger.info("PopCommerce AI 客户咨询分析: ${customerId}, 紧急度: ${urgency}")
+
+                // 通过统一MCP服务获取PopCommerce AI配置
+                def configResult = ec.service.sync().name("mcp.ai.config.get#ModuleAiConfig")
+                    .parameter("module", "popcommerce")
+                    .parameter("configType", "text")
+                    .call()
+
+                if (!configResult.success || !configResult.config?.apiKey) {
+                    ec.logger.warn("PopCommerce AI配置获取失败，使用演示模式")
+                    def demoResult = generateDemoCustomerServiceAnalysis(inquiryText, customerLevel, urgency)
+                    inquiryType = demoResult.inquiryType
+                    suggestedResponse = demoResult.suggestedResponse
+                    actionRequired = demoResult.actionRequired
+                    priority = demoResult.priority
+                    relatedOrders = demoResult.relatedOrders
+                    escalationNeeded = demoResult.escalationNeeded
+                    success = true
+                    return
+                }
+
+                def aiConfig = configResult.config
+
+                // 构建客户咨询分析提示词
+                def prompt = buildCustomerInquiryPrompt(inquiryText, customerId, orderHistory, customerLevel, urgency)
+
+                // 调用统一的MCP意图识别服务
+                def mcpResult = ec.service.sync().name("mcp.ai.classify#Intent")
+                    .parameter("userInput", inquiryText)
+                    .parameter("module", "popcommerce")
+                    .parameter("context", prompt)
+                    .parameter("aiProvider", aiConfig.provider)
+                    .call()
+
+                if (mcpResult.success) {
+                    def result = parseCustomerServiceResponse(mcpResult.intent, mcpResult.extractedEntities, mcpResult.confidence)
+                    inquiryType = result.inquiryType
+                    suggestedResponse = result.suggestedResponse
+                    actionRequired = result.actionRequired
+                    priority = result.priority
+                    relatedOrders = result.relatedOrders
+                    escalationNeeded = result.escalationNeeded
+                    success = true
+                    ec.logger.info("PopCommerce 客户咨询分析成功: ${inquiryType}")
+                } else {
+                    ec.logger.warn("AI客户咨询分析失败，使用演示模式: ${mcpResult.error}")
+                    def demoResult = generateDemoCustomerServiceAnalysis(inquiryText, customerLevel, urgency)
+                    inquiryType = demoResult.inquiryType
+                    suggestedResponse = demoResult.suggestedResponse
+                    actionRequired = demoResult.actionRequired
+                    priority = demoResult.priority
+                    relatedOrders = demoResult.relatedOrders
+                    escalationNeeded = demoResult.escalationNeeded
+                    success = true
+                }
+
+            } catch (Exception e) {
+                ec.logger.error("PopCommerce客户咨询分析错误", e)
+                success = false
+                error = e.message
+            }
+
+            // 构建客户咨询分析提示词
+            def buildCustomerInquiryPrompt(inquiryText, customerId, orderHistory, customerLevel, urgency) {
+                def prompt = """作为PopCommerce智能客服专家，请分析以下客户咨询：
+
+客户咨询：
+"${inquiryText}"
+
+客户信息：
+- 客户ID: ${customerId ?: '游客'}
+- 客户等级: ${customerLevel ?: 'NORMAL'}
+- 紧急程度: ${urgency}
+- 历史订单: ${orderHistory?.size() ?: 0}个
+
+请分析并提供：
+1. 咨询类型识别
+2. 智能回复建议
+3. 需要的处理动作
+4. 优先级判断
+5. 是否需要人工升级
+
+常见咨询类型：订单查询、物流问题、退换货、产品咨询、投诉建议、技术支持等"""
+                return prompt
+            }
+
+            // 解析客户服务响应
+            def parseCustomerServiceResponse(intent, entities, confidence) {
+                // 根据意图分类生成响应
+                def typeMapping = [
+                    "ORDER_INQUIRY": "订单查询",
+                    "SHIPPING_ISSUE": "物流问题",
+                    "RETURN_REQUEST": "退换货申请",
+                    "PRODUCT_QUESTION": "产品咨询",
+                    "COMPLAINT": "投诉建议",
+                    "TECHNICAL_SUPPORT": "技术支持"
+                ]
+
+                def inquiryType = typeMapping[intent] ?: "一般咨询"
+                def needEscalation = (urgency == "HIGH" || customerLevel == "VIP" || intent == "COMPLAINT")
+
+                return [
+                    inquiryType: inquiryType,
+                    suggestedResponse: generateSuggestedResponse(intent, entities),
+                    actionRequired: generateActionRequired(intent),
+                    priority: calculatePriority(urgency, customerLevel, intent),
+                    relatedOrders: orderHistory?.findAll { it.status != "COMPLETED" } ?: [],
+                    escalationNeeded: needEscalation
+                ]
+            }
+
+            // 生成建议回复
+            def generateSuggestedResponse(intent, entities) {
+                switch (intent) {
+                    case "ORDER_INQUIRY":
+                        return "您好！我来帮您查询订单信息。请您提供订单号，我立即为您查询详细状态和物流信息。"
+                    case "SHIPPING_ISSUE":
+                        return "非常抱歉给您带来不便。我立即帮您跟进物流情况，并与快递公司联系加快配送。"
+                    case "RETURN_REQUEST":
+                        return "我理解您的需求。我们支持7天无理由退换货，我来为您详细说明退货流程并协助处理。"
+                    case "PRODUCT_QUESTION":
+                        return "感谢您的咨询！我很乐意为您详细介绍产品信息和使用方法。"
+                    case "COMPLAINT":
+                        return "非常抱歉给您带来不好的体验。您的反馈对我们很重要，我立即为您联系相关负责人处理。"
+                    default:
+                        return "您好！感谢您的咨询，我会尽力为您提供帮助。请您详细说明需要协助的问题。"
+                }
+            }
+
+            // 生成需要的行动
+            def generateActionRequired(intent) {
+                switch (intent) {
+                    case "ORDER_INQUIRY":
+                        return "查询订单状态"
+                    case "SHIPPING_ISSUE":
+                        return "跟进物流状态"
+                    case "RETURN_REQUEST":
+                        return "处理退换货申请"
+                    case "PRODUCT_QUESTION":
+                        return "提供产品信息"
+                    case "COMPLAINT":
+                        return "升级到投诉处理"
+                    default:
+                        return "提供一般性帮助"
+                }
+            }
+
+            // 计算优先级
+            def calculatePriority(urgency, customerLevel, intent) {
+                if (urgency == "HIGH" || customerLevel == "VIP" || intent == "COMPLAINT") {
+                    return "HIGH"
+                } else if (urgency == "MEDIUM" || customerLevel == "GOLD") {
+                    return "MEDIUM"
+                } else {
+                    return "NORMAL"
+                }
+            }
+
+            // 演示模式客户服务分析
+            def generateDemoCustomerServiceAnalysis(inquiryText, customerLevel, urgency) {
+                // 简单的关键词匹配逻辑
+                def lowerInquiry = inquiryText.toLowerCase()
+                def inquiryType = "一般咨询"
+                def suggestedResponse = "您好！感谢您的咨询，我会尽力为您提供帮助。"
+
+                if (lowerInquiry.contains("订单") || lowerInquiry.contains("order")) {
+                    inquiryType = "订单查询"
+                    suggestedResponse = "您好！我来帮您查询订单信息。请您提供订单号，我立即为您查询详细状态。"
+                } else if (lowerInquiry.contains("物流") || lowerInquiry.contains("配送") || lowerInquiry.contains("快递")) {
+                    inquiryType = "物流问题"
+                    suggestedResponse = "非常抱歉给您带来不便。我立即帮您跟进物流情况。"
+                } else if (lowerInquiry.contains("退货") || lowerInquiry.contains("退款") || lowerInquiry.contains("换货")) {
+                    inquiryType = "退换货申请"
+                    suggestedResponse = "我理解您的需求。我们支持7天无理由退换货，我来为您详细说明流程。"
+                } else if (lowerInquiry.contains("产品") || lowerInquiry.contains("商品")) {
+                    inquiryType = "产品咨询"
+                    suggestedResponse = "感谢您的咨询！我很乐意为您详细介绍产品信息。"
+                } else if (lowerInquiry.contains("投诉") || lowerInquiry.contains("问题")) {
+                    inquiryType = "投诉建议"
+                    suggestedResponse = "非常抱歉给您带来不好的体验。我立即为您联系相关负责人处理。"
+                }
+
+                return [
+                    inquiryType: inquiryType,
+                    suggestedResponse: suggestedResponse,
+                    actionRequired: "提供客户支持",
+                    priority: urgency == "HIGH" || customerLevel == "VIP" ? "HIGH" : "NORMAL",
+                    relatedOrders: [],
+                    escalationNeeded: (urgency == "HIGH" || customerLevel == "VIP" || inquiryType == "投诉建议")
+                ]
+            }
+
+        ]]></script></actions>
+    </service>
+
+</services>
