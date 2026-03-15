@@ -116,7 +116,7 @@ along with this software (see the LICENSE.md file). If not, see
                 ]]></text></render-mode>
 
                 <!-- <link text="" url="/popc/Login/logout" link-type="hidden-form" icon="glyphicon glyphicon-off" style="btn-danger navbar-btn navbar-right"/> -->
-                <label text="Welcome ${ec.user.userAccount?.userFullName}!" style="navbar-text navbar-right"/>
+                <label text="欢迎 ${ec.user.userAccount?.userFullName}!" style="navbar-text navbar-right"/>
             </widgets></section>
 
             <render-mode><text type="html"><![CDATA[

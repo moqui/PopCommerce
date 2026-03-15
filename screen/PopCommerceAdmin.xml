@@ -13,7 +13,7 @@ along with this software (see the LICENSE.md file). If not, see
 <http://creativecommons.org/publicdomain/zero/1.0/>.
 -->
 <screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-3.xsd"
-        default-menu-title="POPC ERP" menu-image="fa fa-shopping-cart" menu-image-type="icon" server-static="vuet,qvt">
+        default-menu-title="POPC ERP" menu-image="fa fa-shopping-cart" menu-image-type="icon">
 
     <always-actions>
         <set field="appRoot" value="PopcAdmin"/>
@@ -23,12 +23,13 @@ along with this software (see the LICENSE.md file). If not, see
         <set field="searchProductDocType" value="MantleProduct"/>
         <set field="searchPartyDocType" value="MantleParty"/>
 
-        <set field="appUserGroupTypeEnumId" value="UgtPopcAdmin"/>
+        <!-- Removed appUserGroupTypeEnumId requirement for compatibility -->
 
         <service-call name="mantle.party.PartyServices.setup#UserOrganizationInfo" out-map="context"/>
     </always-actions>
 
     <subscreens default-item="dashboard" always-use-full-path="true">
+        <subscreens-item name="dashboard" location="component://PopCommerce/screen/PopCommerceAdmin/dashboard.xml" menu-index="1"/>
         <subscreens-item name="Search" location="component://SimpleScreens/screen/SimpleScreens/Search.xml" menu-index="2"/>
         <subscreens-item name="QuickLookup" location="component://SimpleScreens/screen/SimpleScreens/QuickLookup.xml" menu-index="2"/>
         <subscreens-item name="QuickSearch" location="component://SimpleScreens/screen/SimpleScreens/QuickSearch.xml" menu-index="3"/>
@@ -45,23 +46,6 @@ along with this software (see the LICENSE.md file). If not, see
     </subscreens>
 
     <widgets>
-        <section name="OrgChooserSection" condition="hideNav != 'true'"><widgets>
-            <render-mode><text type="html"><![CDATA[
-            <div id="active-org-menu" class="nav navbar-right dropdown">
-                <a id="active-org-menu-link" href="#" class="dropdown-toggle btn btn-default btn-sm navbar-btn" data-toggle="dropdown" title="Organization">
-                    <i class="fa fa-globe"></i> ${(activeOrg.pseudoId)!}</a>
-                <ul class="dropdown-menu">
-                    <#if activeOrg?has_content>
-                        <li><a href="${sri.buildUrl('/apps/setPrefGoLast').url}?preferenceKey=ACTIVE_ORGANIZATION&preferenceValue=">Clear Active Organization</a></li>
-                    </#if>
-                    <#if userOrgList?has_content><#list userOrgList as userOrg>
-                        <li><a href="${sri.buildUrl('/apps/setPrefGoLast').url}?preferenceKey=ACTIVE_ORGANIZATION&preferenceValue=${userOrg.partyId}">${userOrg.pseudoId}: ${userOrg.organizationName}</a></li>
-                    </#list></#if>
-                </ul>
-            </div>
-            <script>$("#navbar-buttons").append($("#active-org-menu")); $('#active-org-menu-link').tooltip({ placement:'bottom', trigger:'hover' });</script>
-            ]]></text></render-mode>
-        </widgets></section>
         <subscreens-panel id="PopCommerceAdminPanel" type="popup" title="POPC ERP"/>
     </widgets>
 </screen>

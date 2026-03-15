@@ -7,9 +7,9 @@
                     location="component://PopCommerce/screen/PopCommerceRoot.xml"/>
         </screen>
         <screen location="component://webroot/screen/webroot/apps.xml">
-            <subscreens-item name="PopcAdmin" menu-title="POPC ERP" menu-index="9"
+            <subscreens-item name="PopcAdmin" menu-title="电商ERP" menu-index="9"
                     location="component://PopCommerce/screen/PopCommerceAdmin.xml"/>
-            <subscreens-item name="hhwh" menu-title="HH Warehouse" menu-index="20"
+            <subscreens-item name="hhwh" menu-title="手持仓库" menu-index="20"
                     location="component://SimpleScreens/screen/BasicHandheld/Warehouse.xml"/>
         </screen>
     </screen-facade>
