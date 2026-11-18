@@ -33,7 +33,7 @@ along with this software (see the LICENSE.md file). If not, see
                     <render-mode><text type="html"><![CDATA[
                        <input id="productRating${review_index}" value="${review.productRating}" type="number" class="rating" data-min=0 data-max=5 data-step=1 data-size="xs" data-stars=5 data-show-clear="false" data-readonly="true">
                        <script>$("#productRating${review_index}").rating();</script>
-                       <span>${review.productReview}</span>
+                       <span>${review.productReview?html}</span>
                        <br/><br/><hr/>
                     ]]></text></render-mode>
                 </widgets></section-iterate>
